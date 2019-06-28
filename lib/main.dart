@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pi/view/tela_perfil_cliente.dart';
 
 void main(){
   runApp(MaterialApp(
-    home: HomePage(),
+    home: TelaPerfilCliente(),
+    debugShowCheckedModeBanner: false,
   ));
 }
 
