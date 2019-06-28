@@ -25,14 +25,14 @@ class _TabAvaliacaoClienteState extends State<TabAvaliacaoCliente> {
     );
   }
 
-  Widget getCard(){
+  Widget getCard() {
     return Card(
       margin: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
       child: SizedBox(
-          height: 120.0,
+          height: 80.0,
           width: double.infinity,
           child: Padding(
-            padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
             child: Row(
               children: <Widget>[
                 CircleAvatar(
@@ -40,28 +40,36 @@ class _TabAvaliacaoClienteState extends State<TabAvaliacaoCliente> {
                   backgroundColor: Colors.transparent,
                   backgroundImage: ExactAssetImage('images/person.png'),
                 ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Maria Antonieta",
-                    style: Theme.of(context).textTheme.subhead,
+                Padding(
+                  padding: const EdgeInsets.only(top: 8, left: 8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Maria Antonieta",
+                        style: Theme.of(context).textTheme.subhead,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.72,
+                        height: 30.0,
+                        child: Text(
+                          "Mussum Ipsum, cacilds vidis litro abertis. A ordem dos tratores não altera o pão duris. Detraxit consequat et quo num tendi nada. Manduma pindureta quium dia nois paga. Suco de cevadiss deixa as pessoas mais interessantis.",
+                          style: TextStyle(fontSize: 12.0),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4.0),
+                      ),
+                      Text(
+                        "100.0",
+                        style: TextStyle(
+                            fontSize: 12.0, fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
-                  Container(
-                    width: 200,
-                    height: 30.0,
-                    child: Text("Mussum Ipsum, cacilds vidis litro abertis. A ordem dos tratores não altera o pão duris. Detraxit consequat et quo num tendi nada. Manduma pindureta quium dia nois paga. Suco de cevadiss deixa as pessoas mais interessantis.",),
-                  ),
-                  Padding(padding: const EdgeInsets.only(top: 8.0),),
-                  Text("100.0"),
-                ],
-              ),
-            ),
-
-
-
+                ),
               ],
             ),
           )),

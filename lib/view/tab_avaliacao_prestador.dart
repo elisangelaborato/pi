@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class TabAgendaCliente extends StatefulWidget {
+class TabAvaliacaoPrestador extends StatefulWidget {
   @override
-  _TabAgendaClienteState createState() => _TabAgendaClienteState();
+  _TabAvaliacaoPrestadorState createState() => _TabAvaliacaoPrestadorState();
 }
 
-class _TabAgendaClienteState extends State<TabAgendaCliente> {
+class _TabAvaliacaoPrestadorState extends State<TabAvaliacaoPrestador> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -35,22 +35,22 @@ class _TabAgendaClienteState extends State<TabAgendaCliente> {
             padding: const EdgeInsets.only(left: 8.0, right: 8.0),
             child: Row(
               children: <Widget>[
-//                CircleAvatar(
-//                  radius: 30.0,
-//                  backgroundColor: Colors.transparent,
-//                  backgroundImage: ExactAssetImage('images/person.png'),
-//                ),
+                CircleAvatar(
+                  radius: 30.0,
+                  backgroundColor: Colors.transparent,
+                  backgroundImage: ExactAssetImage('images/person.png'),
+                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8, left: 8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "01/01/2020 - Prestador Fulano de Tal",
-                        style: Theme.of(context).textTheme.caption,
+                        "Maria Antonieta",
+                        style: Theme.of(context).textTheme.subhead,
                       ),
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.85,
+                        width: MediaQuery.of(context).size.width * 0.72,
                         height: 30.0,
                         child: Text(
                           "Mussum Ipsum, cacilds vidis litro abertis. A ordem dos tratores não altera o pão duris. Detraxit consequat et quo num tendi nada. Manduma pindureta quium dia nois paga. Suco de cevadiss deixa as pessoas mais interessantis.",
