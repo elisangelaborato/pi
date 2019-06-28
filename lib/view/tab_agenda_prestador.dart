@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class TabAgendaCliente extends StatefulWidget {
+class TabAgendaPrestador extends StatefulWidget {
   @override
-  _TabAgendaClienteState createState() => _TabAgendaClienteState();
+  _TabAgendaPrestadorState createState() => _TabAgendaPrestadorState();
 }
 
-class _TabAgendaClienteState extends State<TabAgendaCliente> {
+class _TabAgendaPrestadorState extends State<TabAgendaPrestador> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
