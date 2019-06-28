@@ -34,7 +34,7 @@ class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
             children: [
               ServicosWidget(),
               PrestadoresWidget(),
-              MeusServicosWidget(),
+              MeusServicosTesteLinha(),
             ],
           ),
         ),
@@ -171,15 +171,54 @@ class MeusServicosWidget extends StatelessWidget {
               Text("R\$80,00", style: TextStyle(color: Colors.grey),),
             ],
           ),
-          RaisedButton(
-              onPressed: (){},
-              child: Text("Cancelar"),
+          Column(
+            children: <Widget>[
+            Divider(
+              height: 60,
+            ),
+              RaisedButton(
+                  onPressed: (){},
+                  child: Text("Cancelar"),
+              ),
+            ],
           ),
         ],
       ),
     );
   }
 }
+
+class MeusServicosTesteLinha extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          CircleAvatar(
+            child: Image.network(
+                "https://image.flaticon.com/icons/png/512/10/10003.png"),
+            radius: 35,
+            backgroundColor: Colors.transparent,
+          ),
+         Padding(padding: EdgeInsets.only(left: 80, top: 20),
+         child: Column(
+
+           children: <Widget>[
+             Text("Dia/Hora", style: TextStyle(fontSize: 20),),
+             Text("14/08 - 13:30", style: TextStyle(color: Colors.grey),),
+           ],
+         ) ,
+         ),
+
+
+        ],
+      ),
+    );
+  }
+}
+
 
 class PrestadoresWidget extends StatelessWidget {
   @override

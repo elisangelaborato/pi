@@ -37,6 +37,14 @@ class TelaPrincipalEmpresa extends StatelessWidget {
           ),
         ),
       ),
-    );;
+    );
   }
 }
+
+class ServicosWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
