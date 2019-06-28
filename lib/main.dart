@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'view/tela_principal_cliente.dart';
+import 'view/tela_principal_empresa.dart';
 
 void main(){
   runApp(MaterialApp(
-    home: HomePage(),
+    home: TelaPrincipalEmpresa(),
   ));
 }
 
