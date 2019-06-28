@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'view/tela_principal_cliente.dart';
-import 'view/tela_principal_empresa.dart';
+import 'package:pi/view/tela_perfil_cliente.dart';
 
 void main(){
   runApp(MaterialApp(
-    home: TelaPrincipalEmpresa(),
+    home: TelaPerfilCliente(),
+    debugShowCheckedModeBanner: false,
   ));
 }
 
