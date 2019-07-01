@@ -8,17 +8,54 @@ class TabAgendaCliente extends StatefulWidget {
 class _TabAgendaClienteState extends State<TabAgendaCliente> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        child: new Center(
-          child: new Column(
-            children: <Widget>[
-              getCard(),
-              getCard(),
-              getCard(),
-              getCard(),
-              getCard(),
-            ],
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          child: new Center(
+            child: new Column(
+              children: <Widget>[
+
+                GestureDetector(
+                  child: getCard(),
+                  onTap: () {
+                    print("GestureDetector, onTap acionado");
+                  },
+                ),
+
+                GestureDetector(
+                  child: getCard(),
+                  onTap: () {
+                    print("GestureDetector, onTap acionado");
+                  },
+                ),
+
+                GestureDetector(
+                  child: getCard(),
+                  onTap: () {
+                    print("GestureDetector, onTap acionado");
+                  },
+                ),
+
+                GestureDetector(
+                  child: getCard(),
+                  onTap: () {
+                    print("GestureDetector, onTap acionado");
+                  },
+                ),
+
+                GestureDetector(
+                  child: getCard(),
+                  onTap: () {
+                    print("GestureDetector, onTap acionado");
+                  },
+                ),
+
+              ],
+            ),
           ),
         ),
       ),

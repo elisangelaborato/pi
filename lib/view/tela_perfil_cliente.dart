@@ -92,7 +92,7 @@ class _TelaPerfilClienteState extends State<TelaPerfilCliente> {
                   style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "Cliente Gold",
+                  "Cliente Platinum",
                   style: TextStyle(fontSize: 15.0),
                 ),
                 Text(

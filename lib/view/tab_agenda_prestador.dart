@@ -8,17 +8,52 @@ class TabAgendaPrestador extends StatefulWidget {
 class _TabAgendaPrestadorState extends State<TabAgendaPrestador> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        child: new Center(
-          child: new Column(
-            children: <Widget>[
-              getCard(),
-              getCard(),
-              getCard(),
-              getCard(),
-              getCard(),
-            ],
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          child: new Center(
+            child: new Column(
+              children: <Widget>[
+                GestureDetector(
+                  child: getCard(),
+                  onTap: () {
+                    print("GestureDetector, onTap acionado");
+                  },
+                ),
+
+                GestureDetector(
+                  child: getCard(),
+                  onTap: () {
+                    print("GestureDetector, onTap acionado");
+                  },
+                ),
+
+                GestureDetector(
+                  child: getCard(),
+                  onTap: () {
+                    print("GestureDetector, onTap acionado");
+                  },
+                ),
+
+                GestureDetector(
+                  child: getCard(),
+                  onTap: () {
+                    print("GestureDetector, onTap acionado");
+                  },
+                ),
+
+                GestureDetector(
+                  child: getCard(),
+                  onTap: () {
+                    print("GestureDetector, onTap acionado");
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -46,7 +81,7 @@ class _TabAgendaPrestadorState extends State<TabAgendaPrestador> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "01/01/2020 - Prestador Fulano de Tal",
+                        "01/01/2020 - Cliente Fulano de Tal",
                         style: Theme.of(context).textTheme.caption,
                       ),
                       Container(
