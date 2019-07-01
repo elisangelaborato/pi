@@ -92,7 +92,7 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
                   style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "Prestador Gold",
+                  "Prestador Silver",
                   style: TextStyle(fontSize: 15.0),
                 ),
                 Text(
