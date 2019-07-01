@@ -8,8 +8,7 @@ class CustomDrawer extends StatefulWidget {
 class _CustomDrawerState extends State<CustomDrawer> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: Drawer(
+    return Drawer(
         child: ListView(
             children: <Widget>[
               UserAccountsDrawerHeader(
@@ -42,11 +41,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
               )
             ]
         ),
-      ),
-      appBar: AppBar(
-        title: Text("DRAWER"),
-      ),
     );
-
   }
 }
