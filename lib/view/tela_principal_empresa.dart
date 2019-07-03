@@ -24,7 +24,7 @@ class TelaPrincipalEmpresa extends StatelessWidget {
                 ),
               ],
             ),
-            title: Text('Nome da Empresa'),
+            title: Text('Alguz Serviços A à Z'),
             centerTitle: true,
           ),
           drawer: CustomDrawer(),

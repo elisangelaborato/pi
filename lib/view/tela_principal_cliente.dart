@@ -27,7 +27,7 @@ class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
                 ),
               ],
             ),
-            title: Text('Nome da Empresa'),
+            title: Text('Alguz Serviços A à Z'),
             centerTitle: true,
           ),
           drawer: CustomDrawer(),

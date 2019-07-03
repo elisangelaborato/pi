@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 
-class TelaAgendamentoCliente extends StatefulWidget {
+class TelaAgendamentoPrestador extends StatefulWidget {
   @override
-  _TelaAgendamentoClienteState createState() => _TelaAgendamentoClienteState();
+  _TelaAgendamentoPrestadorState createState() =>
+      _TelaAgendamentoPrestadorState();
 }
 
-class _TelaAgendamentoClienteState extends State<TelaAgendamentoCliente> {
+class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
+
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
-  List<String> _prestadors = <String>['', 'Adamastor', 'Antonieta', 'Benedito', 'Joana',];
+  List<String> _prestadors = <String>[
+    '',
+    'Adamastor',
+    'Antonieta',
+    'Benedito',
+    'Joana',
+  ];
   String _prestador = '';
   List<String> _servicos = <String>['', 'Lavar Carro', 'Podar Arvore', 'Outro'];
   String _servico = '';
@@ -28,9 +36,8 @@ class _TelaAgendamentoClienteState extends State<TelaAgendamentoCliente> {
   }
 
   Future<Null> _selectTime(BuildContext context) async {
-    final TimeOfDay picked = await showTimePicker(
-        context: context,
-        initialTime: selectedTime);
+    final TimeOfDay picked =
+        await showTimePicker(context: context, initialTime: selectedTime);
     if (picked != null && picked != selectedTime)
       setState(() {
         selectedTime = picked;
@@ -46,7 +53,7 @@ class _TelaAgendamentoClienteState extends State<TelaAgendamentoCliente> {
 //      body: SingleChildScrollView(
 //        child: getColumn(),
 //      ),
-    body: getForm(),
+      body: getForm(),
     );
   }
 
@@ -57,13 +64,12 @@ class _TelaAgendamentoClienteState extends State<TelaAgendamentoCliente> {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           children: <Widget>[
-
             FormField(
               builder: (FormFieldState state) {
                 return InputDecorator(
                   decoration: InputDecoration(
                     icon: const Icon(Icons.assignment_ind),
-                    labelText: 'Prestador do Serviço',
+                    labelText: 'Cliente',
                   ),
                   isEmpty: _prestador == '',
                   child: new DropdownButtonHideUnderline(
@@ -88,7 +94,6 @@ class _TelaAgendamentoClienteState extends State<TelaAgendamentoCliente> {
                 );
               },
             ),
-
             FormField(
               builder: (FormFieldState state) {
                 return InputDecorator(
@@ -138,16 +143,18 @@ class _TelaAgendamentoClienteState extends State<TelaAgendamentoCliente> {
               keyboardType: TextInputType.datetime,
             ),
 
+
             Container(
                 padding: const EdgeInsets.only(left: 40.0, top: 20.0),
                 child: RaisedButton(
                   shape: StadiumBorder(),
-                  child: const Text('CONFIRMAR', style: TextStyle(color: Colors.white),),
+                  child: const Text(
+                    'CONFIRMAR',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   color: Theme.of(context).primaryColor,
                   onPressed: () {},
-                ),
-            ),
-
+                )),
           ],
         ));
   }
@@ -157,7 +164,8 @@ class _TelaAgendamentoClienteState extends State<TelaAgendamentoCliente> {
       children: <Widget>[
         Row(
           children: <Widget>[
-            Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}"),
+            Text(
+                "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}"),
             SizedBox(
               height: 20.0,
             ),
@@ -170,7 +178,6 @@ class _TelaAgendamentoClienteState extends State<TelaAgendamentoCliente> {
             ),
           ],
         ),
-
         Row(
           children: <Widget>[
             Text("${selectedTime.hour}:${selectedTime.minute}"),
@@ -186,7 +193,6 @@ class _TelaAgendamentoClienteState extends State<TelaAgendamentoCliente> {
             ),
           ],
         ),
-
         TextField(
           //controller: _nameController,
           decoration: InputDecoration(

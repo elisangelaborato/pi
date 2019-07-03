@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pi/view/tela_agendamento_cliente.dart';
 
 class TabAgendaCliente extends StatefulWidget {
   @override
@@ -10,7 +11,12 @@ class _TabAgendaClienteState extends State<TabAgendaCliente> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TelaAgendamentoCliente()),
+          );
+        },
         child: Icon(Icons.add),
       ),
       body: SingleChildScrollView(

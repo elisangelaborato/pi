@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pi/view/tela_principal_cliente.dart';
+import 'package:pi/view/tela_principal_empresa.dart';
 
 class TelaLogin extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _TelaLoginState extends State<TelaLogin> {
   @override
   void initState() {
     super.initState();
-    selectedRadio = 0;
+    selectedRadio = 1;
   }
 
   setSelectedRadio(int val) {
@@ -27,7 +28,7 @@ class _TelaLoginState extends State<TelaLogin> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Nome Projeto"),
+        title: Text("ALGUZ Serviços de A à Z"),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -105,24 +106,78 @@ class _TelaLoginState extends State<TelaLogin> {
 //                    onPressed: () {},
 //                  )),
 
-              FlatButton(
-                child: Text(
-                  "Entrar",
-                  style: TextStyle(
-                    color: Colors.white,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Radio(
+                    value: 1,
+                    groupValue: selectedRadio,
+                    onChanged: (val) {
+                      print("Radio $val");
+                      setSelectedRadio(val);
+                    },
                   ),
-                ),
-                color: Theme.of(context).primaryColor,
-                onPressed: () {
-                  //ToDo: validar usuario e senha
-                  //ToDo: testar se esta checado para entrar como cliente ou prestador
-                  Navigator.pop(context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TelaPrincipalCliente()),
-                  );
-                },
+                  Text(
+                    "Cliente",
+                    style: TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                  Radio(
+                    value: 2,
+                    groupValue: selectedRadio,
+                    onChanged: (val) {
+                      print("Radio $val");
+                      setSelectedRadio(val);
+                    },
+                  ),
+                  Text(
+                    "Prestador Serviço",
+                    style: TextStyle(
+                      fontSize: 15,
+                    ),
+                  )
+                ],
               ),
+
+              Container(
+                width: double.infinity,
+                child: FlatButton(
+                  shape: StadiumBorder(),
+                  child: Text(
+                    "ENTRAR",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  color: Theme.of(context).primaryColor,
+                  onPressed: () {
+                    //ToDo: validar usuario e senha
+                    Navigator.pop(context);
+                    switch(selectedRadio) {
+                      case 1:
+                        {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TelaPrincipalCliente()),
+                          );
+                          break;
+                        }
+                      case 2:
+                        {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TelaPrincipalEmpresa()),
+                          );
+                          break;
+                        }
+                    }
+                  },
+                ),
+              ),
+
 
               SizedBox(
                 height: 15.0,
@@ -136,7 +191,7 @@ class _TelaLoginState extends State<TelaLogin> {
                     style: TextStyle(color: Colors.grey),
                   ),
                 ),
-                onTap: () { },
+                onTap: () {},
               ),
 
               GestureDetector(
@@ -147,7 +202,7 @@ class _TelaLoginState extends State<TelaLogin> {
                     style: TextStyle(color: Colors.grey),
                   ),
                 ),
-                onTap: () { },
+                onTap: () {},
               ),
 
 //              FlatButton(
@@ -171,46 +226,8 @@ class _TelaLoginState extends State<TelaLogin> {
 //                //padding: EdgeInsets.fromLTRB(20, 15, 20, 10),
 //              ),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Radio(
-                    value: 1,
-                    groupValue: selectedRadio,
-                    activeColor: Colors.blue,
-                    onChanged: (val) {
-                      print("Radio $val");
-                      setSelectedRadio(val);
-                    },
-                  ),
-                  Text(
-                    "Prestador de Serviço",
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Radio(
-                    value: 2,
-                    groupValue: selectedRadio,
-                    activeColor: Colors.blue,
-                    onChanged: (val) {
-                      print("Radio $val");
-                      setSelectedRadio(val);
-                    },
-                  ),
-                  Text(
-                    "Cliente",
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  )
-                ],
-              ),
+
+
             ],
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pi/view/tela_cadastroprestador.dart';
 
 class TabPerfilPrestador extends StatefulWidget {
   @override
@@ -10,7 +11,12 @@ class _TabPerfilPrestadorState extends State<TabPerfilPrestador> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TelaCadastroPrestador()),
+          );
+        },
         child: Icon(Icons.edit),
       ),
       body: SingleChildScrollView(
