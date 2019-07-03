@@ -30,12 +30,13 @@ class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
             title: Text('Nome da Empresa'),
             centerTitle: true,
           ),
-          drawer: CustomDrawer(),//Drawer(),
+          drawer: CustomDrawer(),
           body: TabBarView(
             children: [
               ServicosWidget(),
               PrestadoresWidget(),
-              MeusServicosTesteLinha(),
+              //MeusServicosTesteLinha(),
+              MeusServicosWidget(),
             ],
           ),
         ),
@@ -161,65 +162,40 @@ class MeusServicosWidget extends StatelessWidget {
               Text("Maycon", style: TextStyle(color: Colors.grey),),
             ],
           ),
-          Column(
-            children: <Widget>[
-              Text("Data/Hora", style: TextStyle(fontSize: 20),),
-              Text("14/08 - 13:30", style: TextStyle(color: Colors.grey),),
-              Divider(
-                height: 30,
-              ),
-              Text("Valor", style: TextStyle(fontSize: 20),),
-              Text("R\$80,00", style: TextStyle(color: Colors.grey),),
-            ],
-          ),
-          Column(
-            children: <Widget>[
-            Divider(
-              height: 60,
+
+          Padding(
+            padding: const EdgeInsets.only(left: 50),
+            child: Column(
+              children: <Widget>[
+                Text("Data/Hora", style: TextStyle(fontSize: 20),),
+                Text("14/08 - 13:30", style: TextStyle(color: Colors.grey),),
+                Divider(
+                  height: 30,
+                ),
+                Text("Valor", style: TextStyle(fontSize: 20),),
+                Text("R\$80,00", style: TextStyle(color: Colors.grey),),
+              ],
             ),
-              RaisedButton(
-                  onPressed: (){},
-                  child: Text("Cancelar"),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 50),
+            child: Column(
+              children: <Widget>[
+              Divider(
+                height: 60,
               ),
-            ],
+                RaisedButton(
+                    onPressed: (){},
+                    child: Text("Cancelar"),
+                ),
+              ],
+            ),
           ),
         ],
       ),
     );
   }
 }
-
-class MeusServicosTesteLinha extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          CircleAvatar(
-            child: Image.network(
-                "https://image.flaticon.com/icons/png/512/10/10003.png"),
-            radius: 35,
-            backgroundColor: Colors.transparent,
-          ),
-         Padding(padding: EdgeInsets.only(left: 80, top: 20),
-         child: Column(
-
-           children: <Widget>[
-             Text("Dia/Hora", style: TextStyle(fontSize: 20),),
-             Text("14/08 - 13:30", style: TextStyle(color: Colors.grey),),
-           ],
-         ) ,
-         ),
-
-
-        ],
-      ),
-    );
-  }
-}
-
 
 class PrestadoresWidget extends StatelessWidget {
   @override
