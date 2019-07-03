@@ -27,20 +27,38 @@ class _TelaLoginState extends State<TelaLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("ALGUZ Serviços de A à Z"),
-        centerTitle: true,
-      ),
+//      appBar: AppBar(
+//        title: Text("ALGUZ Serviços de A à Z"),
+//        centerTitle: true,
+//      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(left: 40.0, right: 40.0),
           child: Column(
             children: <Widget>[
+              SizedBox(
+                height: 45.0,
+              ),
               Icon(
                 Icons.account_circle,
                 size: 120.0,
                 color: Colors.blue,
               ),
+              SizedBox(
+                height: 0.0,
+              ),
+              Text(
+                //"Welcome to ${UIData.appName}",
+                "ALGUZ Serviços de A à Z",
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).primaryColor),
+              ),
+              SizedBox(
+                height: 15.0,
+              ),
+
               TextFormField(
                 decoration: const InputDecoration(
                   //icon: const Icon(Icons.person),
@@ -154,7 +172,7 @@ class _TelaLoginState extends State<TelaLogin> {
                   onPressed: () {
                     //ToDo: validar usuario e senha
                     Navigator.pop(context);
-                    switch(selectedRadio) {
+                    switch (selectedRadio) {
                       case 1:
                         {
                           Navigator.push(
@@ -177,7 +195,6 @@ class _TelaLoginState extends State<TelaLogin> {
                   },
                 ),
               ),
-
 
               SizedBox(
                 height: 15.0,
@@ -225,9 +242,6 @@ class _TelaLoginState extends State<TelaLogin> {
 //                onPressed: () {},
 //                //padding: EdgeInsets.fromLTRB(20, 15, 20, 10),
 //              ),
-
-
-
             ],
           ),
         ),
