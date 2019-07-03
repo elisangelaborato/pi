@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pi/view/drawer.dart';
 
 class TelaPrincipalCliente extends StatefulWidget {
   @override
@@ -29,7 +30,7 @@ class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
             title: Text('Nome da Empresa'),
             centerTitle: true,
           ),
-          drawer: Drawer(),
+          drawer: CustomDrawer(),//Drawer(),
           body: TabBarView(
             children: [
               ServicosWidget(),
