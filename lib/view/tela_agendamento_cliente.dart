@@ -6,8 +6,18 @@ class TelaAgendamentoCliente extends StatefulWidget {
 }
 
 class _TelaAgendamentoClienteState extends State<TelaAgendamentoCliente> {
+
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
-  List<String> _prestadors = <String>['', 'Adamastor', 'Antonieta', 'Benedito', 'Joana',];
+  final _textEditingControllerData = TextEditingController();
+  final _textEditingControllerHora = TextEditingController();
+
+  List<String> _prestadors = <String>[
+    '',
+    'Adamastor',
+    'Antonieta',
+    'Benedito',
+    'Joana',
+  ];
   String _prestador = '';
   List<String> _servicos = <String>['', 'Lavar Carro', 'Podar Arvore', 'Outro'];
   String _servico = '';
@@ -24,16 +34,17 @@ class _TelaAgendamentoClienteState extends State<TelaAgendamentoCliente> {
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
+        _textEditingControllerData.text = "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}";
       });
   }
 
   Future<Null> _selectTime(BuildContext context) async {
-    final TimeOfDay picked = await showTimePicker(
-        context: context,
-        initialTime: selectedTime);
+    final TimeOfDay picked =
+        await showTimePicker(context: context, initialTime: selectedTime);
     if (picked != null && picked != selectedTime)
       setState(() {
         selectedTime = picked;
+        _textEditingControllerHora.text = "${selectedTime.hour}:${selectedTime.minute}";
       });
   }
 
@@ -46,7 +57,7 @@ class _TelaAgendamentoClienteState extends State<TelaAgendamentoCliente> {
 //      body: SingleChildScrollView(
 //        child: getColumn(),
 //      ),
-    body: getForm(),
+      body: getForm(),
     );
   }
 
@@ -57,7 +68,6 @@ class _TelaAgendamentoClienteState extends State<TelaAgendamentoCliente> {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           children: <Widget>[
-
             FormField(
               builder: (FormFieldState state) {
                 return InputDecorator(
@@ -120,34 +130,61 @@ class _TelaAgendamentoClienteState extends State<TelaAgendamentoCliente> {
               },
             ),
 
-            TextFormField(
-              decoration: const InputDecoration(
-                icon: const Icon(Icons.calendar_today),
-                hintText: 'Entre com a data do agendamento',
-                labelText: 'Data',
+//            TextFormField(
+//              decoration: const InputDecoration(
+//                icon: const Icon(Icons.calendar_today),
+//                hintText: 'Entre com a data do agendamento',
+//                labelText: 'Data',
+//              ),
+//              keyboardType: TextInputType.datetime,
+//            ),
+
+            InkWell(
+              onTap: () {
+                _selectDate(context);
+              },
+              child: IgnorePointer(
+                child: TextFormField(
+                  controller: _textEditingControllerData,
+                  decoration: const InputDecoration(
+                    icon: const Icon(Icons.calendar_today),
+                    labelText: 'Data',
+                    //hintText: 'Entre com a data do agendamento',
+                  ),
+                  keyboardType: TextInputType.datetime,
+                ),
               ),
-              keyboardType: TextInputType.datetime,
             ),
 
-            TextFormField(
-              decoration: const InputDecoration(
-                icon: const Icon(Icons.access_time),
-                hintText: 'Entre com horário do agendamento',
-                labelText: 'Horário',
+            InkWell(
+              onTap: () {
+                _selectTime(context);
+              },
+              child: IgnorePointer(
+                child: TextFormField(
+                  controller: _textEditingControllerHora,
+                  decoration: const InputDecoration(
+                    icon: const Icon(Icons.access_time),
+                    hintText: 'Entre com horário do agendamento',
+                    labelText: 'Horário',
+                  ),
+                  keyboardType: TextInputType.datetime,
+                ),
               ),
-              keyboardType: TextInputType.datetime,
             ),
 
             Container(
-                padding: const EdgeInsets.only(left: 40.0, top: 20.0),
-                child: RaisedButton(
-                  shape: StadiumBorder(),
-                  child: const Text('CONFIRMAR', style: TextStyle(color: Colors.white),),
-                  color: Theme.of(context).primaryColor,
-                  onPressed: () {},
+              padding: const EdgeInsets.only(left: 40.0, top: 20.0),
+              child: RaisedButton(
+                shape: StadiumBorder(),
+                child: const Text(
+                  'CONFIRMAR',
+                  style: TextStyle(color: Colors.white),
                 ),
+                color: Theme.of(context).primaryColor,
+                onPressed: () {},
+              ),
             ),
-
           ],
         ));
   }
@@ -157,7 +194,8 @@ class _TelaAgendamentoClienteState extends State<TelaAgendamentoCliente> {
       children: <Widget>[
         Row(
           children: <Widget>[
-            Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}"),
+            Text(
+                "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}"),
             SizedBox(
               height: 20.0,
             ),
@@ -170,7 +208,6 @@ class _TelaAgendamentoClienteState extends State<TelaAgendamentoCliente> {
             ),
           ],
         ),
-
         Row(
           children: <Widget>[
             Text("${selectedTime.hour}:${selectedTime.minute}"),
@@ -186,7 +223,6 @@ class _TelaAgendamentoClienteState extends State<TelaAgendamentoCliente> {
             ),
           ],
         ),
-
         TextField(
           //controller: _nameController,
           decoration: InputDecoration(

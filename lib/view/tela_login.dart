@@ -35,6 +35,7 @@ class _TelaLoginState extends State<TelaLogin> {
         child: Padding(
           padding: EdgeInsets.only(left: 40.0, right: 40.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               SizedBox(
                 height: 45.0,
@@ -73,6 +74,7 @@ class _TelaLoginState extends State<TelaLogin> {
                   hintText: 'Digite sua senha',
                   labelText: 'Senha',
                 ),
+                obscureText: true,
                 //keyboardType: TextInputType.emailAddress,
               ),
 

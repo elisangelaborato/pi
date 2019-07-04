@@ -114,6 +114,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
                 hintText: 'Entre com a senha',
                 labelText: 'Senha',
               ),
+              obscureText: true,
               //keyboardType: TextInputType.emailAddress,
             ),
             TextFormField(
@@ -122,6 +123,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
                 hintText: 'Repita a senha',
                 labelText: 'Repitir Senha',
               ),
+              obscureText: true,
               //keyboardType: TextInputType.emailAddress,
             ),
             TextFormField(
