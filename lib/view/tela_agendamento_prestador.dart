@@ -7,8 +7,11 @@ class TelaAgendamentoPrestador extends StatefulWidget {
 }
 
 class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
-
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+
+  final _textEditingControllerData = TextEditingController();
+  final _textEditingControllerHora = TextEditingController();
+
   List<String> _prestadors = <String>[
     '',
     'Adamastor',
@@ -32,6 +35,8 @@ class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
+        _textEditingControllerData.text =
+            "${selectedDate.day.toString().padLeft(2, '0')}/${selectedDate.month.toString().padLeft(2, '0')}/${selectedDate.year.toString().padLeft(4, '0')}";
       });
   }
 
@@ -41,6 +46,8 @@ class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
     if (picked != null && picked != selectedTime)
       setState(() {
         selectedTime = picked;
+        _textEditingControllerHora.text =
+            "${selectedTime.hour.toString().padLeft(2, '0')}:${selectedTime.minute.toString().padLeft(2, '0')}";
       });
   }
 
@@ -124,26 +131,38 @@ class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
                 );
               },
             ),
-
-            TextFormField(
-              decoration: const InputDecoration(
-                icon: const Icon(Icons.calendar_today),
-                hintText: 'Entre com a data do agendamento',
-                labelText: 'Data',
+            InkWell(
+              onTap: () {
+                _selectDate(context);
+              },
+              child: IgnorePointer(
+                child: TextFormField(
+                  controller: _textEditingControllerData,
+                  decoration: const InputDecoration(
+                    icon: const Icon(Icons.calendar_today),
+                    hintText: 'Entre com a data do agendamento',
+                    labelText: 'Data',
+                  ),
+                  keyboardType: TextInputType.datetime,
+                ),
               ),
-              keyboardType: TextInputType.datetime,
             ),
-
-            TextFormField(
-              decoration: const InputDecoration(
-                icon: const Icon(Icons.access_time),
-                hintText: 'Entre com horário do agendamento',
-                labelText: 'Horário',
+            InkWell(
+              onTap: () {
+                _selectTime(context);
+              },
+              child: IgnorePointer(
+                child: TextFormField(
+                  controller: _textEditingControllerHora,
+                  decoration: const InputDecoration(
+                    icon: const Icon(Icons.access_time),
+                    hintText: 'Entre com horário do agendamento',
+                    labelText: 'Horário',
+                  ),
+                  keyboardType: TextInputType.datetime,
+                ),
               ),
-              keyboardType: TextInputType.datetime,
             ),
-
-
             Container(
                 padding: const EdgeInsets.only(left: 40.0, top: 20.0),
                 child: RaisedButton(

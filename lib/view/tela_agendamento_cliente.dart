@@ -34,7 +34,8 @@ class _TelaAgendamentoClienteState extends State<TelaAgendamentoCliente> {
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
-        _textEditingControllerData.text = "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}";
+        //_textEditingControllerData.text = "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}";
+        _textEditingControllerData.text = "${selectedDate.day.toString().padLeft(2,'0')}/${selectedDate.month.toString().padLeft(2,'0')}/${selectedDate.year.toString().padLeft(4,'0')}";
       });
   }
 
@@ -44,7 +45,8 @@ class _TelaAgendamentoClienteState extends State<TelaAgendamentoCliente> {
     if (picked != null && picked != selectedTime)
       setState(() {
         selectedTime = picked;
-        _textEditingControllerHora.text = "${selectedTime.hour}:${selectedTime.minute}";
+        _textEditingControllerHora.text =
+        "${selectedTime.hour.toString().padLeft(2,'0')}:${selectedTime.minute.toString().padLeft(2,'0')}";
       });
   }
 
