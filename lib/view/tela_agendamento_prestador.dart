@@ -55,7 +55,7 @@ class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Novo Agendamento"),
+        title: Text("Agendamento"),
       ),
 //      body: SingleChildScrollView(
 //        child: getColumn(),

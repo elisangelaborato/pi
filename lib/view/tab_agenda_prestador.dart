@@ -27,7 +27,10 @@ class _TabAgendaPrestadorState extends State<TabAgendaPrestador> {
                 GestureDetector(
                   child: getCard(),
                   onTap: () {
-                    print("GestureDetector, onTap acionado");
+//                    Navigator.push(
+//                      context,
+//                      MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+//                    );
                   },
                 ),
 
