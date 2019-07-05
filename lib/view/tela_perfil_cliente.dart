@@ -3,6 +3,8 @@ import 'package:pi/view/tab_agenda_cliente.dart';
 import 'package:pi/view/tab_avaliacao_cliente.dart';
 import 'package:pi/view/tab_perfil_cliente.dart';
 
+import 'drawer.dart';
+
 class TelaPerfilCliente extends StatefulWidget {
   @override
   _TelaPerfilClienteState createState() => _TelaPerfilClienteState();
@@ -18,6 +20,7 @@ class _TelaPerfilClienteState extends State<TelaPerfilCliente> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        drawer: CustomDrawer(),
         appBar: AppBar(
           flexibleSpace: FlexibleSpaceBar(
             centerTitle: true,

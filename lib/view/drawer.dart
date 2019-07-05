@@ -8,7 +8,7 @@ class CustomDrawer extends StatefulWidget {
 class _CustomDrawerState extends State<CustomDrawer> {
   @override
   Widget build(BuildContext context) {
-    return Drawer(
+      return Drawer(
         child: ListView(
             children: <Widget>[
               UserAccountsDrawerHeader(
@@ -30,6 +30,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 title: Text("Editar Perfil"),
                 onTap: (){},
               ),
+              ListTile(
+                leading: Icon(Icons.error),
+                title: Text("Reportar Erro"),
+                onTap: (){},
+              ),
               Divider(
                 color: Colors.black,
 
@@ -38,9 +43,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 leading: Icon(Icons.exit_to_app),
                 title: Text("Sair"),
                 onTap: (){},
-              )
+              ),
+
             ]
         ),
-    );
+      );
   }
 }
