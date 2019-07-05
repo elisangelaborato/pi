@@ -2,46 +2,46 @@ import 'package:flutter/material.dart';
 import 'package:pi/view/tela_perfil_cliente.dart';
 import 'package:pi/view/tela_perfil_prestador.dart';
 
-class CustomDrawer extends StatefulWidget {
+class DrawerPrestador extends StatefulWidget {
   @override
-  _CustomDrawerState createState() => _CustomDrawerState();
+  _DrawerPrestadorState createState() => _DrawerPrestadorState();
 }
 
-class _CustomDrawerState extends State<CustomDrawer> {
+class _DrawerPrestadorState extends State<DrawerPrestador> {
 
   chamarTelaPerfil(){
     //Navigator.pop(context);
     //ToDo: checar se esta como cliente ou como prestador de servicos
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => TelaPerfilCliente()),
-    );
 //    Navigator.push(
 //      context,
-//      MaterialPageRoute(builder: (context) => TelaPerfilPrestador()),
+//      MaterialPageRoute(builder: (context) => TelaPerfilCliente()),
 //    );
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => TelaPerfilPrestador()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(children: <Widget>[
-              UserAccountsDrawerHeader(
-                accountName: Text("Login"),
-                accountEmail: Text("login@gmail.com"),
-                currentAccountPicture: GestureDetector(
-                  child:                 CircleAvatar(
-                    backgroundImage: ExactAssetImage("images/person.png"),
-                  ),
-                  onTap: () {
-                    chamarTelaPerfil();
-                  },
-                ),
+        UserAccountsDrawerHeader(
+          accountName: Text("Login"),
+          accountEmail: Text("login@gmail.com"),
+          currentAccountPicture: GestureDetector(
+            child:                 CircleAvatar(
+              backgroundImage: ExactAssetImage("images/person.png"),
+            ),
+            onTap: () {
+              chamarTelaPerfil();
+            },
+          ),
 
-                onDetailsPressed: () {
-                  chamarTelaPerfil();
-                },
-              ),
+          onDetailsPressed: () {
+            chamarTelaPerfil();
+          },
+        ),
 
         ListTile(
           leading: Icon(Icons.work),

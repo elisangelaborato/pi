@@ -66,11 +66,13 @@ class _TelaLoginState extends State<TelaLogin> {
               ),
               Text(
                 //"Welcome to ${UIData.appName}",
-                "Serviços de A à Z",
+                "SERVIÇOS DE A á Z",
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
-                    color: Theme.of(context).primaryColor),
+                    //color: Theme.of(context).primaryColor,
+                  color: Colors.black,
+                ),
               ),
               SizedBox(
                 height: 15.0,
