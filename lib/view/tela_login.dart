@@ -38,19 +38,35 @@ class _TelaLoginState extends State<TelaLogin> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               SizedBox(
-                height: 45.0,
+                height: 55.0,
               ),
-              Icon(
-                Icons.account_circle,
-                size: 120.0,
-                color: Colors.blue,
-              ),
+
+
+//              Icon(
+//                Icons.account_circle,
+//                size: 120.0,
+//                color: Colors.blue,
+//              ),
+//              CircleAvatar(
+//                child:
+//                Image.asset('images/logo.png'),
+//
+////                Icon(Icons.person, size: 35, color: Theme.of(context).primaryColor,),
+////                      Image.network(
+////                          "https://image.flaticon.com/icons/png/512/10/10003.png"),
+//                radius: 20,
+//                backgroundColor: Colors.transparent,
+//              ),
+
+              Image.asset('images/logo.jpeg'),
+
+
               SizedBox(
                 height: 0.0,
               ),
               Text(
                 //"Welcome to ${UIData.appName}",
-                "ALGUZ Serviços de A à Z",
+                "Serviços de A à Z",
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
