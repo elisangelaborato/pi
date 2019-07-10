@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:pi/view/drawer.dart';
 import 'package:pi/view/tela_agendamento_cliente.dart';
+import 'package:http/http.dart' as http;
 
 class TelaPrincipalCliente extends StatefulWidget {
   @override
@@ -8,6 +11,31 @@ class TelaPrincipalCliente extends StatefulWidget {
 }
 
 class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
+
+//  String _search;
+//  int _offset = 0;
+
+  Future<Map> _getSearch() async {
+    http.Response response;
+    response = await http.get(
+          "http://alguz1.gearhostpreview.com/lista.php?tabela=pessoa");
+//    if (_search == null || _search.isEmpty) {
+//      response = await http.get(
+////          "https://api.giphy.com/v1/gifs/trending?api_key=1BPNGLX9yYpCPb4UkfNWH1dofWdPTX06&limit=20&rating=G");
+//    } else {
+//      response = await http.get(
+//          "https://api.giphy.com/v1/gifs/search?api_key=1BPNGLX9yYpCPb4UkfNWH1dofWdPTX06&q=$_search&limit=19&offset=$_offset&rating=G&lang=en");
+//    }
+    print(response.body);
+    return json.decode(response.body);
+  }
+
+
+  @override
+  void initState() {
+    _getSearch();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
