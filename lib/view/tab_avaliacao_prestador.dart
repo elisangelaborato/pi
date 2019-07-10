@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class TabAvaliacaoCliente extends StatefulWidget {
+class TabAvaliacaoPrestador extends StatefulWidget {
   @override
-  _TabAvaliacaoClienteState createState() => _TabAvaliacaoClienteState();
+  _TabAvaliacaoPrestadorState createState() => _TabAvaliacaoPrestadorState();
 }
 
-class _TabAvaliacaoClienteState extends State<TabAvaliacaoCliente> {
+class _TabAvaliacaoPrestadorState extends State<TabAvaliacaoPrestador> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

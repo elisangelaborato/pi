@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pi/view/tela_agendamento_cliente.dart';
+import 'package:pi/view/tela_agendamento_prestador.dart';
 
-class TabAgendaCliente extends StatefulWidget {
+class TabAgendaPrestador extends StatefulWidget {
   @override
-  _TabAgendaClienteState createState() => _TabAgendaClienteState();
+  _TabAgendaPrestadorState createState() => _TabAgendaPrestadorState();
 }
 
-class _TabAgendaClienteState extends State<TabAgendaCliente> {
+class _TabAgendaPrestadorState extends State<TabAgendaPrestador> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +14,7 @@ class _TabAgendaClienteState extends State<TabAgendaCliente> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => TelaAgendamentoCliente()),
+            MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
           );
         },
         child: Icon(Icons.add),
@@ -24,7 +24,6 @@ class _TabAgendaClienteState extends State<TabAgendaCliente> {
           child: new Center(
             child: new Column(
               children: <Widget>[
-
                 GestureDetector(
                   child: getCard(),
                   onTap: () {
@@ -59,7 +58,6 @@ class _TabAgendaClienteState extends State<TabAgendaCliente> {
                     print("GestureDetector, onTap acionado");
                   },
                 ),
-
               ],
             ),
           ),
@@ -89,7 +87,7 @@ class _TabAgendaClienteState extends State<TabAgendaCliente> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "01/01/2020 - Prestador Fulano de Tal",
+                        "01/01/2020 - Cliente Fulano de Tal",
                         style: Theme.of(context).textTheme.caption,
                       ),
                       Container(

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:pi/view/tab_agenda_cliente.dart';
-import 'package:pi/view/tab_avaliacao_cliente.dart';
-import 'package:pi/view/tab_perfil_cliente.dart';
+import 'package:pi/view/tab_agenda_prestador.dart';
+import 'package:pi/view/tab_avaliacao_prestador.dart';
+import 'package:pi/view/tab_perfil_prestador.dart';
 
 ////80% of screen width
 //double c_width = MediaQuery.of(context).size.width*0.8;
 
-class TelaPerfilCliente extends StatefulWidget {
+class TelaPerfilPrestador extends StatefulWidget {
   @override
-  _TelaPerfilClienteState createState() => _TelaPerfilClienteState();
+  _TelaPerfilPrestadorState createState() => _TelaPerfilPrestadorState();
 }
 
-class _TelaPerfilClienteState extends State<TelaPerfilCliente> {
+class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
   @override
   Widget build(BuildContext context) {
 //    return Scaffold(
@@ -41,19 +41,19 @@ class _TelaPerfilClienteState extends State<TelaPerfilCliente> {
   Widget getTabBar() {
     return TabBar(//controller: tabController,
         tabs: [
-      Tab(text: "Perfil", ), //icon: Icon(Icons.perm_contact_calendar)
-      Tab(text: "Agenda", ), //icon: Icon(Icons.calendar_today)
-      Tab(text: "Avaliações", ), //icon: Icon(Icons.star)
-    ]);
+          Tab(text: "Perfil", ), //icon: Icon(Icons.perm_contact_calendar)
+          Tab(text: "Agenda", ), //icon: Icon(Icons.calendar_today)
+          Tab(text: "Avaliações", ), //icon: Icon(Icons.star)
+        ]);
   }
 
   Widget getTabBarPages() {
     return TabBarView(//controller: tabController,
         children: <Widget>[
-          TabPerfilCliente(),
-          TabAgendaCliente(),
-          TabAvaliacaoCliente(),
-    ]);
+          TabPerfilPrestador(),
+          TabAgendaPrestador(),
+          TabAvaliacaoPrestador(),
+        ]);
   }
 
   Widget getTop() {
@@ -92,7 +92,7 @@ class _TelaPerfilClienteState extends State<TelaPerfilCliente> {
                   style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "Cliente Platinum",
+                  "Prestador Silver",
                   style: TextStyle(fontSize: 15.0),
                 ),
                 Text(

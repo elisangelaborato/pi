@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pi/view/tela_cadastrocliente.dart';
 
 class TabPerfilCliente extends StatefulWidget {
   @override
@@ -8,57 +9,53 @@ class TabPerfilCliente extends StatefulWidget {
 class _TabPerfilClienteState extends State<TabPerfilCliente> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            IconButton(
-              icon: Icon(Icons.edit),
-              onPressed: () {},
-            ),
-          ],
-        ),
-
-        SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  "Sobre mim",
-                  style: TextStyle(fontSize: 18),
-                ),
-                Text(
-                  "Mussum Ipsum, cacilds vidis litro abertis. In elementis mé pra quem é amistosis quis leo. Quem num gosta di mim que vai caçá sua turmis! Detraxit consequat et quo num tendi nada. Não sou faixa preta cumpadi, sou preto inteiris, inteiris.Mussum Ipsum, cacilds vidis litro abertis. In elementis mé pra quem é amistosis quis leo. Quem num gosta di mim que vai caçá sua turmis! Detraxit consequat et quo num tendi nada. Não sou faixa preta cumpadi, sou preto inteiris, inteiris.Mussum Ipsum, cacilds vidis litro abertis. In elementis mé pra quem é amistosis quis leo. Quem num gosta di mim que vai caçá sua turmis!",
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 16.0),
-                ),
-                Text(
-                  "Telefone",
-                  style: TextStyle(fontSize: 18),
-                ),
-                Text(
-                  "19 9 9555 6666",
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 16.0),
-                ),
-                Text(
-                  "Email",
-                  style: TextStyle(fontSize: 18),
-                ),
-                Text(
-                  "pessoa@gmail.com",
-                ),
-              ],
-            ),
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TelaCadastro()),
+          );
+        },
+        child: Icon(Icons.edit),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "Sobre mim",
+                style: TextStyle(fontSize: 18),
+              ),
+              Text(
+                "Mussum Ipsum, cacilds vidis litro abertis. In elementis mé pra quem é amistosis quis leo. Quem num gosta di mim que vai caçá sua turmis! Detraxit consequat et quo num tendi nada. Não sou faixa preta cumpadi, sou preto inteiris, inteiris.Mussum Ipsum, cacilds vidis litro abertis. In elementis mé pra quem é amistosis quis leo. Quem num gosta di mim que vai caçá sua turmis! Detraxit consequat et quo num tendi nada. Não sou faixa preta cumpadi, sou preto inteiris, inteiris.Mussum Ipsum, cacilds vidis litro abertis. In elementis mé pra quem é amistosis quis leo. Quem num gosta di mim que vai caçá sua turmis!",
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 16.0),
+              ),
+              Text(
+                "Telefone",
+                style: TextStyle(fontSize: 18),
+              ),
+              Text(
+                "19 9 9555 6666",
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 16.0),
+              ),
+              Text(
+                "Email",
+                style: TextStyle(fontSize: 18),
+              ),
+              Text(
+                "pessoa@gmail.com",
+              ),
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-
+import 'package:pi/view/tela_principal_cliente.dart';
+import 'package:pi/view/tela_principal_empresa.dart';
 
 class TelaLogin extends StatefulWidget {
   @override
@@ -8,154 +8,246 @@ class TelaLogin extends StatefulWidget {
 }
 
 class _TelaLoginState extends State<TelaLogin> {
-
   bool isSwitched = true;
 
   int selectedRadio;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    selectedRadio = 0;
+    selectedRadio = 1;
   }
 
-  setSelectedRadio(int val){
+  setSelectedRadio(int val) {
     setState(() {
       selectedRadio = val;
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Nome Projeto"),
-        centerTitle: true,
-      ),
+//      appBar: AppBar(
+//        title: Text("ALGUZ Serviços de A à Z"),
+//        centerTitle: true,
+//      ),
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-           Icon(Icons.account_circle,
-             size: 120.0,
-             color: Colors.blue,
-           ),
-            TextFormField(
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(5, 20, 0, 20),
-                labelText: "Login",
-                hintText: "Digite seu Login",
-                labelStyle: TextStyle(
-                    color: Colors.black87,
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold),
+        child: Padding(
+          padding: EdgeInsets.only(left: 40.0, right: 40.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                height: 45.0,
               ),
-            ),
-           TextFormField(
-             decoration: InputDecoration(
-               contentPadding: EdgeInsets.fromLTRB(5, 20, 0, 20),
-               labelText: "Senha",
-               hintText: "Digite sua senha",
-               labelStyle: TextStyle(
-                   color: Colors.black87,
-                   fontSize: 25.0,
-                   fontWeight: FontWeight.bold),
-             ),
-           ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Switch(
-                  value: isSwitched,
-                  onChanged: (value){
-                    setState((){
-                      isSwitched = value;
-                    });
+              Icon(
+                Icons.account_circle,
+                size: 120.0,
+                color: Colors.blue,
+              ),
+              SizedBox(
+                height: 0.0,
+              ),
+              Text(
+                //"Welcome to ${UIData.appName}",
+                "ALGUZ Serviços de A à Z",
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).primaryColor),
+              ),
+              SizedBox(
+                height: 15.0,
+              ),
+
+              TextFormField(
+                decoration: const InputDecoration(
+                  //icon: const Icon(Icons.person),
+                  hintText: 'Digite seu login',
+                  labelText: 'Login',
+                ),
+                //keyboardType: TextInputType.emailAddress,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  //icon: const Icon(Icons.vpn_key),
+                  hintText: 'Digite sua senha',
+                  labelText: 'Senha',
+                ),
+                obscureText: true,
+                //keyboardType: TextInputType.emailAddress,
+              ),
+
+//            TextFormField(
+//              decoration: InputDecoration(
+//                contentPadding: EdgeInsets.fromLTRB(5, 20, 0, 20),
+//                labelText: "Login",
+//                hintText: "Digite seu Login",
+//                labelStyle: TextStyle(
+//                    color: Colors.black87,
+//                    fontSize: 25.0,
+//                    fontWeight: FontWeight.bold),
+//              ),
+//            ),
+//           TextFormField(
+//             decoration: InputDecoration(
+//               contentPadding: EdgeInsets.fromLTRB(5, 20, 0, 20),
+//               labelText: "Senha",
+//               hintText: "Digite sua senha",
+//               labelStyle: TextStyle(
+//                   color: Colors.black87,
+//                   fontSize: 25.0,
+//                   fontWeight: FontWeight.bold),
+//             ),
+//           ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Switch(
+                    value: isSwitched,
+                    onChanged: (value) {
+                      setState(() {
+                        isSwitched = value;
+                      });
+                    },
+                  ),
+                  Padding(
+                    child: Text("Salvar senha"),
+                    padding: EdgeInsets.only(right: 20),
+                  ),
+                ],
+              ),
+//              Container(
+//                  padding: const EdgeInsets.only(left: 40.0, top: 20.0),
+//                  child: RaisedButton(
+//                    child: const Text('Confirmar', style: TextStyle(color: Colors.white),),
+//                    color: Theme.of(context).primaryColor,
+//                    onPressed: () {},
+//                  )),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Radio(
+                    value: 1,
+                    groupValue: selectedRadio,
+                    onChanged: (val) {
+                      print("Radio $val");
+                      setSelectedRadio(val);
+                    },
+                  ),
+                  Text(
+                    "Cliente",
+                    style: TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                  Radio(
+                    value: 2,
+                    groupValue: selectedRadio,
+                    onChanged: (val) {
+                      print("Radio $val");
+                      setSelectedRadio(val);
+                    },
+                  ),
+                  Text(
+                    "Prestador Serviço",
+                    style: TextStyle(
+                      fontSize: 15,
+                    ),
+                  )
+                ],
+              ),
+
+              Container(
+                width: double.infinity,
+                child: FlatButton(
+                  shape: StadiumBorder(),
+                  child: Text(
+                    "ENTRAR",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  color: Theme.of(context).primaryColor,
+                  onPressed: () {
+                    //ToDo: validar usuario e senha
+                    Navigator.pop(context);
+                    switch (selectedRadio) {
+                      case 1:
+                        {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TelaPrincipalCliente()),
+                          );
+                          break;
+                        }
+                      case 2:
+                        {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TelaPrincipalEmpresa()),
+                          );
+                          break;
+                        }
+                    }
                   },
                 ),
-                Padding(
-                  child: Text("Salvar senha"),
-                  padding: EdgeInsets.only(right: 20),
-                ),
-              ],
-            ),
-            FlatButton(
-              child: Text("Entrar",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
               ),
-              color: Colors.grey,
-              onPressed: (){
 
-              },
-            ),
-           FlatButton(
-             child:   Text("Esqueci minha senha",
-               style: TextStyle(
-                   fontWeight: FontWeight.bold,
-                   fontSize: 18,
-                 color: Colors.black
-               ),
-             ),
-             onPressed: (){
+              SizedBox(
+                height: 15.0,
+              ),
 
-             },
-             padding: EdgeInsets.fromLTRB(20, 20, 20, 15),
-           ),
-           FlatButton(
-             child:   Text("Cadastrar-se",
-               style: TextStyle(
-                   fontWeight: FontWeight.bold,
-                   fontSize: 18
-               ),
-             ),
-             onPressed: (){
+              GestureDetector(
+                child: Container(
+                  height: 30.0,
+                  child: Text(
+                    "Esqueci minha senha?",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ),
+                onTap: () {},
+              ),
 
-             },
-             padding: EdgeInsets.fromLTRB(20, 15, 20, 10),
-           ),
-               Row(
-                 mainAxisAlignment: MainAxisAlignment.start,
-                 children: <Widget>[
-                   Radio(
-                     value: 1,
-                     groupValue: selectedRadio,
-                     activeColor: Colors.blue,
-                     onChanged: (val){
-                       print("Radio $val");
-                       setSelectedRadio(val);
-                     },
-                   ),
-                   Text("Prestador de Serviço",
-                     style: TextStyle(
-                         fontSize: 15,
-                     ),
-                   )
-                 ],
-               ),
-               Row(
-                 mainAxisAlignment: MainAxisAlignment.start,
-                 children: <Widget>[
-                   Radio(
-                     value: 2,
-                     groupValue: selectedRadio,
-                     activeColor: Colors.blue,
-                     onChanged: (val){
-                       print("Radio $val");
-                       setSelectedRadio(val);
-                     },
-                   ),
-                   Text("Cliente",
-                     style: TextStyle(
-                     fontSize: 15,
-                   ),)
-                 ],
-               ),
-             ],
-           ),
-           ),
-        );
+              GestureDetector(
+                child: Container(
+                  height: 30.0,
+                  child: Text(
+                    "Cadastrar-se",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ),
+                onTap: () {},
+              ),
 
+//              FlatButton(
+//                child: Text(
+//                  "Esqueci minha senha",
+//                  style: TextStyle(
+//                      fontWeight: FontWeight.bold,
+//                      fontSize: 16,
+//                      color: Colors.black),
+//                ),
+//                onPressed: () {},
+//                //padding: EdgeInsets.fromLTRB(0, 20, 20, 15),
+//              ),
+//
+//              FlatButton(
+//                child: Text(
+//                  "Cadastrar-se",
+//                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+//                ),
+//                onPressed: () {},
+//                //padding: EdgeInsets.fromLTRB(20, 15, 20, 10),
+//              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
