@@ -11,31 +11,6 @@ class TelaPrincipalCliente extends StatefulWidget {
 }
 
 class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
-
-//  String _search;
-//  int _offset = 0;
-
-  Future<Map> _getSearch() async {
-    http.Response response;
-    response = await http.get(
-          "http://alguz1.gearhostpreview.com/lista.php?tabela=pessoa");
-//    if (_search == null || _search.isEmpty) {
-//      response = await http.get(
-////          "https://api.giphy.com/v1/gifs/trending?api_key=1BPNGLX9yYpCPb4UkfNWH1dofWdPTX06&limit=20&rating=G");
-//    } else {
-//      response = await http.get(
-//          "https://api.giphy.com/v1/gifs/search?api_key=1BPNGLX9yYpCPb4UkfNWH1dofWdPTX06&q=$_search&limit=19&offset=$_offset&rating=G&lang=en");
-//    }
-    print(response.body);
-    return json.decode(response.body);
-  }
-
-
-  @override
-  void initState() {
-    _getSearch();
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -87,7 +62,11 @@ class ServicosWidget extends StatelessWidget {
             child:
 //            Image.network(
 //                "http://pontoemcomumseguros.com.br/images/icones/lifeline-in-a-heart-outline.png"),
-            Icon(Icons.healing, size: 40, color: Theme.of(context).primaryColor,),
+                Icon(
+              Icons.healing,
+              size: 40,
+              color: Theme.of(context).primaryColor,
+            ),
             radius: 25,
             backgroundColor: Colors.transparent,
           ),
@@ -104,7 +83,11 @@ class ServicosWidget extends StatelessWidget {
             child:
 //            Image.network(
 //                "https://library.kissclipart.com/20180831/wcw/kissclipart-icone-professor-png-clipart-teacher-computer-icons-be63703f059606a5.png"),
-            Icon(Icons.account_box, size: 40, color: Theme.of(context).primaryColor,),
+                Icon(
+              Icons.account_box,
+              size: 40,
+              color: Theme.of(context).primaryColor,
+            ),
             radius: 25,
             backgroundColor: Colors.transparent,
           ),
@@ -121,7 +104,11 @@ class ServicosWidget extends StatelessWidget {
             child:
 //            Image.network(
 //                "http://download.seaicons.com/icons/icons8/windows-8/512/Transport-Construction-Worker-icon.png"),
-            Icon(Icons.build, size: 40, color: Theme.of(context).primaryColor,),
+                Icon(
+              Icons.build,
+              size: 40,
+              color: Theme.of(context).primaryColor,
+            ),
             radius: 25,
             backgroundColor: Colors.transparent,
           ),
@@ -138,7 +125,11 @@ class ServicosWidget extends StatelessWidget {
             child:
 //            Image.network(
 //                "https://image.flaticon.com/icons/png/512/40/40546.png"),
-            Icon(Icons.ac_unit, size: 40, color: Theme.of(context).primaryColor,),
+                Icon(
+              Icons.ac_unit,
+              size: 40,
+              color: Theme.of(context).primaryColor,
+            ),
             radius: 25,
             backgroundColor: Colors.transparent,
           ),
@@ -155,7 +146,11 @@ class ServicosWidget extends StatelessWidget {
             child:
 //            Image.network(
 //                "https://image.flaticon.com/icons/png/512/34/34100.png"),
-            Icon(Icons.local_cafe, size: 40, color: Theme.of(context).primaryColor,),
+                Icon(
+              Icons.local_cafe,
+              size: 40,
+              color: Theme.of(context).primaryColor,
+            ),
             radius: 25,
             backgroundColor: Colors.transparent,
           ),
@@ -171,7 +166,11 @@ class ServicosWidget extends StatelessWidget {
           leading: CircleAvatar(
             child:
 //            Image.network("https://www.lojsnovi.com.br/img/outro.png"),
-            Icon(Icons.view_comfy, size: 40, color: Theme.of(context).primaryColor,),
+                Icon(
+              Icons.view_comfy,
+              size: 40,
+              color: Theme.of(context).primaryColor,
+            ),
             radius: 25,
             backgroundColor: Colors.transparent,
           ),
@@ -197,7 +196,8 @@ class MeusServicosWidget extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoCliente()),
+                    MaterialPageRoute(
+                        builder: (context) => TelaAgendamentoCliente()),
                   );
                 },
               ),
@@ -206,7 +206,8 @@ class MeusServicosWidget extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoCliente()),
+                    MaterialPageRoute(
+                        builder: (context) => TelaAgendamentoCliente()),
                   );
                 },
               ),
@@ -215,7 +216,8 @@ class MeusServicosWidget extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoCliente()),
+                    MaterialPageRoute(
+                        builder: (context) => TelaAgendamentoCliente()),
                   );
                 },
               ),
@@ -230,7 +232,8 @@ class MeusServicosWidget extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoCliente()),
+                    MaterialPageRoute(
+                        builder: (context) => TelaAgendamentoCliente()),
                   );
                 },
               ),
@@ -298,7 +301,6 @@ class MeusServicosWidget extends StatelessWidget {
           width: double.infinity,
           child: Padding(
             padding: const EdgeInsets.only(left: 12.0, right: 12.0),
-
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -306,7 +308,11 @@ class MeusServicosWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     CircleAvatar(
-                      child: Icon(Icons.person, size: 35, color: Theme.of(context).primaryColor,),
+                      child: Icon(
+                        Icons.person,
+                        size: 35,
+                        color: Theme.of(context).primaryColor,
+                      ),
 //                      Image.network(
 //                          "https://image.flaticon.com/icons/png/512/10/10003.png"),
                       radius: 20,
@@ -314,11 +320,16 @@ class MeusServicosWidget extends StatelessWidget {
                     ),
                     Text(
                       "Cliente",
-                      style: TextStyle(fontSize: 16,),
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
                     ),
                     Text(
                       "Maycon",
-                      style: TextStyle(color: Colors.grey, fontSize: 12,),
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12,
+                      ),
                     ),
                   ],
                 ),
@@ -329,11 +340,16 @@ class MeusServicosWidget extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Data/Hora",
-                        style: TextStyle(fontSize: 16,),
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
                       ),
                       Text(
                         "14/08 - 13:30",
-                        style: TextStyle(color: Colors.grey, fontSize: 12,),
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                        ),
                       ),
                       Divider(
                         height: 4,
@@ -344,7 +360,10 @@ class MeusServicosWidget extends StatelessWidget {
                       ),
                       Text(
                         "R\$80,00",
-                        style: TextStyle(color: Colors.grey, fontSize: 12,),
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                        ),
                       ),
                     ],
                   ),
@@ -360,7 +379,10 @@ class MeusServicosWidget extends StatelessWidget {
                       RaisedButton(
                         onPressed: () {},
                         color: Theme.of(context).primaryColor,
-                        child: Text("CANCELAR", style: TextStyle(color: Colors.white),),
+                        child: Text(
+                          "CANCELAR",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ],
                   ),
@@ -370,145 +392,66 @@ class MeusServicosWidget extends StatelessWidget {
           )),
     );
   }
-
 }
 
 class PrestadoresWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
 
-    return SingleChildScrollView(
-      child: Container(
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              GestureDetector(
-                child: getCard(context),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoCliente()),
-                  );
-                },
-              ),
-              GestureDetector(
-                child: getCard(context),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoCliente()),
-                  );
-                },
-              ),
-              GestureDetector(
-                child: getCard(context),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoCliente()),
-                  );
-                },
-              ),
-              GestureDetector(
-                child: getCard(context),
-                onTap: () {
-                  print("GestureDetector, onTap acionado");
-                },
-              ),
-              GestureDetector(
-                child: getCard(context),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoCliente()),
-                  );
-                },
-              ),
-              GestureDetector(
-                child: getCard(context),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoCliente()),
-                  );
-                },
-              ),
-              GestureDetector(
-                child: getCard(context),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoCliente()),
-                  );
-                },
-              ),
-              GestureDetector(
-                child: getCard(context),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoCliente()),
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-
-//    return Padding(
-//      padding: EdgeInsets.only(top: 10),
-//      child: Row(
-//        children: <Widget>[
-//          Row(
-//            crossAxisAlignment: CrossAxisAlignment.start,
-//            children: <Widget>[
-//              CircleAvatar(
-//                child: Image.network(
-//                    "https://image.flaticon.com/icons/png/512/10/10003.png"),
-//                radius: 35,
-//                backgroundColor: Colors.transparent,
-//              ),
-//              Padding(
-//                padding: EdgeInsets.only(top: 20),
-//                child: Column(
-//                  children: <Widget>[
-//                    Text(
-//                      "Nome",
-//                      style: TextStyle(
-//                        fontSize: 20,
-//                      ),
-//                    ),
-//                    Text(
-//                      "Profissão",
-//                      style: TextStyle(
-//                        color: Colors.grey[500],
-//                      ),
-//                    ),
-//                    Text(
-//                      "89.9",
-//                      style: TextStyle(
-//                        color: Colors.grey[500],
-//                      ),
-//                    ),
-//                  ],
-//                ),
-//              ),
-//              Padding(
-//                  padding: EdgeInsets.only(left: 110, top: 20),
-//                  child: RaisedButton(
-//                    onPressed: () {},
-//                    child: Text("Contratar"),
-//                  )),
-//            ],
-//          ),
-//        ],
-//      ),
-//    );
+  Future<Map> _getPrestadores() async {
+    http.Response response;
+    response = await http
+        .get("http://alguz1.gearhostpreview.com/lista.php?tabela=pessoa");
+    print(response.body);
+    return json.decode(response.body);
   }
 
-  Widget getCard(context) {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Expanded(
+          child: FutureBuilder(
+              future: _getPrestadores(),
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                  case ConnectionState.waiting:
+                    return Container(
+                      width: 200.0,
+                      height: 200.0,
+                      alignment: Alignment.center,
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
+                        strokeWidth: 10.0,
+                      ),
+                    );
+                  default:
+                    if (snapshot.hasError) {
+                      return Container(
+                        color: Colors.redAccent,
+                      );
+                    } else {
+                      //return Container(color: Colors.pinkAccent, height: 50, width: double.infinity,);
+                      return _createCadList(context, snapshot);
+                    }
+                }
+              }),
+        ),
+      ],
+    );
+  }
+
+  Widget _createCadList(context, snapshot) {
+    return ListView.builder(
+      itemCount: snapshot.data["pessoa"].length,
+      itemBuilder: (context, index) {
+        print(snapshot.data["pessoa"].length);
+        print(index);
+        return getCard(context, snapshot, index);
+      },
+    );
+  }
+
+  Widget getCard(context, snapshot, index) {
     return Card(
       margin: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
       child: SizedBox(
@@ -516,7 +459,6 @@ class PrestadoresWidget extends StatelessWidget {
           width: double.infinity,
           child: Padding(
             padding: const EdgeInsets.only(left: 12.0, right: 12.0),
-
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -525,9 +467,9 @@ class PrestadoresWidget extends StatelessWidget {
                   children: <Widget>[
                     CircleAvatar(
                       child:
-                      //Icon(Icons.person, size: 60, color: Theme.of(context).primaryColor,),
-                      Image.network(
-                          "http://images.coveralia.com/autores/thumbs/belchior81574m.jpg"),
+                          //Icon(Icons.person, size: 60, color: Theme.of(context).primaryColor,),
+                          Image.network(
+                              "http://images.coveralia.com/autores/thumbs/belchior81574m.jpg"),
                       radius: 30,
                       backgroundColor: Colors.transparent,
                     ),
@@ -548,8 +490,9 @@ class PrestadoresWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "Leonardo Beraldo",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        snapshot.data["pessoa"][index]["nome"],
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
                       ),
 //                      Text(
 //                        "14/08 - 13:30",
@@ -559,7 +502,10 @@ class PrestadoresWidget extends StatelessWidget {
                         height: 4,
                       ),
                       Text(
-                        "Pedreiro",
+                        (snapshot.data["pessoa"][index]["email"].length <= 15)
+                            ? snapshot.data["pessoa"][index]["email"]
+                            : '${snapshot.data["pessoa"][index]["email"].substring(0, 15)}...'
+                        ,//"Pedreiro",
                         style: TextStyle(fontSize: 14),
                       ),
                       Divider(
@@ -567,7 +513,10 @@ class PrestadoresWidget extends StatelessWidget {
                       ),
                       Text(
                         "100.0",
-                        style: TextStyle(color: Colors.grey, fontSize: 12,),
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                        ),
                       ),
                     ],
                   ),
@@ -583,7 +532,10 @@ class PrestadoresWidget extends StatelessWidget {
                       RaisedButton(
                         onPressed: () {},
                         color: Theme.of(context).primaryColor,
-                        child: Text("CONTRATAR", style: TextStyle(color: Colors.white),),
+                        child: Text(
+                          "CONTRATAR",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ],
                   ),
@@ -593,5 +545,4 @@ class PrestadoresWidget extends StatelessWidget {
           )),
     );
   }
-
 }
