@@ -53,135 +53,183 @@ class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
 }
 
 class ServicosWidget extends StatelessWidget {
+
+  Future<Map> _getDados() async {
+    http.Response response;
+    response = await http
+        .get("http://alguz1.gearhostpreview.com/lista.php?tabela=categoriaservico");
+    print(response.body);
+    return json.decode(response.body);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ListView(
+
+    int icone = 58355;
+
+    return Column(
       children: <Widget>[
-        ListTile(
-          leading: CircleAvatar(
-            child:
-//            Image.network(
-//                "http://pontoemcomumseguros.com.br/images/icones/lifeline-in-a-heart-outline.png"),
-                Icon(
-              Icons.healing,
-              size: 40,
-              color: Theme.of(context).primaryColor,
-            ),
-            radius: 25,
-            backgroundColor: Colors.transparent,
-          ),
-          trailing: Icon(Icons.keyboard_arrow_right),
-          onTap: () {},
-          title: Text("Saúde"),
-        ),
-        Divider(
-          color: Colors.grey[500],
-          height: 0,
-        ),
-        ListTile(
-          leading: CircleAvatar(
-            child:
-//            Image.network(
-//                "https://library.kissclipart.com/20180831/wcw/kissclipart-icone-professor-png-clipart-teacher-computer-icons-be63703f059606a5.png"),
-                Icon(
-              Icons.account_box,
-              size: 40,
-              color: Theme.of(context).primaryColor,
-            ),
-            radius: 25,
-            backgroundColor: Colors.transparent,
-          ),
-          trailing: Icon(Icons.keyboard_arrow_right),
-          onTap: () {},
-          title: Text("Professores"),
-        ),
-        Divider(
-          color: Colors.grey[500],
-          height: 0,
-        ),
-        ListTile(
-          leading: CircleAvatar(
-            child:
-//            Image.network(
-//                "http://download.seaicons.com/icons/icons8/windows-8/512/Transport-Construction-Worker-icon.png"),
-                Icon(
-              Icons.build,
-              size: 40,
-              color: Theme.of(context).primaryColor,
-            ),
-            radius: 25,
-            backgroundColor: Colors.transparent,
-          ),
-          trailing: Icon(Icons.keyboard_arrow_right),
-          onTap: () {},
-          title: Text("Construção/Manutenção"),
-        ),
-        Divider(
-          color: Colors.grey[500],
-          height: 0,
-        ),
-        ListTile(
-          leading: CircleAvatar(
-            child:
-//            Image.network(
-//                "https://image.flaticon.com/icons/png/512/40/40546.png"),
-                Icon(
-              Icons.ac_unit,
-              size: 40,
-              color: Theme.of(context).primaryColor,
-            ),
-            radius: 25,
-            backgroundColor: Colors.transparent,
-          ),
-          trailing: Icon(Icons.keyboard_arrow_right),
-          onTap: () {},
-          title: Text("Beleza/Estética"),
-        ),
-        Divider(
-          color: Colors.grey[500],
-          height: 0,
-        ),
-        ListTile(
-          leading: CircleAvatar(
-            child:
-//            Image.network(
-//                "https://image.flaticon.com/icons/png/512/34/34100.png"),
-                Icon(
-              Icons.local_cafe,
-              size: 40,
-              color: Theme.of(context).primaryColor,
-            ),
-            radius: 25,
-            backgroundColor: Colors.transparent,
-          ),
-          trailing: Icon(Icons.keyboard_arrow_right),
-          onTap: () {},
-          title: Text("Informática"),
-        ),
-        Divider(
-          color: Colors.grey[500],
-          height: 0,
-        ),
-        ListTile(
-          leading: CircleAvatar(
-            child:
-//            Image.network("https://www.lojsnovi.com.br/img/outro.png"),
-                Icon(
-              Icons.view_comfy,
-              size: 40,
-              color: Theme.of(context).primaryColor,
-            ),
-            radius: 25,
-            backgroundColor: Colors.transparent,
-          ),
-          trailing: Icon(Icons.keyboard_arrow_right),
-          onTap: () {},
-          title: Text("Outros"),
+        Expanded(
+          child: FutureBuilder(
+              future: _getDados(),
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                  case ConnectionState.waiting:
+                    return Container(
+                      width: 200.0,
+                      height: 200.0,
+                      alignment: Alignment.center,
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
+                        strokeWidth: 10.0,
+                      ),
+                    );
+                  default:
+                    if (snapshot.hasError) {
+                      return Container(
+                        color: Colors.redAccent,
+                      );
+                    } else {
+                      //ToDo: montar a lista de categorias
+                      return Container(color: Colors.pinkAccent, height: 50, width: double.infinity,);
+                      //return _createCadList(context, snapshot);
+                    }
+                }
+              }),
         ),
       ],
     );
+
+//    return ListView(
+//      children: <Widget>[
+//        ListTile(
+//          leading: CircleAvatar(
+//            child:
+////            Image.network(
+////                "http://pontoemcomumseguros.com.br/images/icones/lifeline-in-a-heart-outline.png"),
+//                Icon(
+//                  IconData(icone, fontFamily: 'MaterialIcons'), //Icons.healing,
+//              size: 40,
+//              color: Theme.of(context).primaryColor,
+//            ),
+//            radius: 25,
+//            backgroundColor: Colors.transparent,
+//          ),
+//          trailing: Icon(Icons.keyboard_arrow_right),
+//          onTap: () {},
+//          title: Text("Saúde"),
+//        ),
+//        Divider(
+//          color: Colors.grey[500],
+//          height: 0,
+//        ),
+//        ListTile(
+//          leading: CircleAvatar(
+//            child:
+////            Image.network(
+////                "https://library.kissclipart.com/20180831/wcw/kissclipart-icone-professor-png-clipart-teacher-computer-icons-be63703f059606a5.png"),
+//                Icon(
+//              Icons.account_box,
+//              size: 40,
+//              color: Theme.of(context).primaryColor,
+//            ),
+//            radius: 25,
+//            backgroundColor: Colors.transparent,
+//          ),
+//          trailing: Icon(Icons.keyboard_arrow_right),
+//          onTap: () {},
+//          title: Text("Professores"),
+//        ),
+//        Divider(
+//          color: Colors.grey[500],
+//          height: 0,
+//        ),
+//        ListTile(
+//          leading: CircleAvatar(
+//            child:
+////            Image.network(
+////                "http://download.seaicons.com/icons/icons8/windows-8/512/Transport-Construction-Worker-icon.png"),
+//                Icon(
+//              Icons.build,
+//              size: 40,
+//              color: Theme.of(context).primaryColor,
+//            ),
+//            radius: 25,
+//            backgroundColor: Colors.transparent,
+//          ),
+//          trailing: Icon(Icons.keyboard_arrow_right),
+//          onTap: () {},
+//          title: Text("Construção/Manutenção"),
+//        ),
+//        Divider(
+//          color: Colors.grey[500],
+//          height: 0,
+//        ),
+//        ListTile(
+//          leading: CircleAvatar(
+//            child:
+////            Image.network(
+////                "https://image.flaticon.com/icons/png/512/40/40546.png"),
+//                Icon(
+//              Icons.ac_unit,
+//              size: 40,
+//              color: Theme.of(context).primaryColor,
+//            ),
+//            radius: 25,
+//            backgroundColor: Colors.transparent,
+//          ),
+//          trailing: Icon(Icons.keyboard_arrow_right),
+//          onTap: () {},
+//          title: Text("Beleza/Estética"),
+//        ),
+//        Divider(
+//          color: Colors.grey[500],
+//          height: 0,
+//        ),
+//        ListTile(
+//          leading: CircleAvatar(
+//            child:
+////            Image.network(
+////                "https://image.flaticon.com/icons/png/512/34/34100.png"),
+//                Icon(
+//              Icons.local_cafe,
+//              size: 40,
+//              color: Theme.of(context).primaryColor,
+//            ),
+//            radius: 25,
+//            backgroundColor: Colors.transparent,
+//          ),
+//          trailing: Icon(Icons.keyboard_arrow_right),
+//          onTap: () {},
+//          title: Text("Informática"),
+//        ),
+//        Divider(
+//          color: Colors.grey[500],
+//          height: 0,
+//        ),
+//        ListTile(
+//          leading: CircleAvatar(
+//            child:
+////            Image.network("https://www.lojsnovi.com.br/img/outro.png"),
+//                Icon(
+//              Icons.view_comfy,
+//              size: 40,
+//              color: Theme.of(context).primaryColor,
+//            ),
+//            radius: 25,
+//            backgroundColor: Colors.transparent,
+//          ),
+//          trailing: Icon(Icons.keyboard_arrow_right),
+//          onTap: () {},
+//          title: Text("Outros"),
+//        ),
+//      ],
+//    );
   }
 }
+
+
 
 class MeusServicosWidget extends StatelessWidget {
   @override
@@ -396,7 +444,7 @@ class MeusServicosWidget extends StatelessWidget {
 
 class PrestadoresWidget extends StatelessWidget {
 
-  Future<Map> _getPrestadores() async {
+  Future<Map> _getDados() async {
     http.Response response;
     response = await http
         .get("http://alguz1.gearhostpreview.com/lista.php?tabela=pessoa");
@@ -410,7 +458,7 @@ class PrestadoresWidget extends StatelessWidget {
       children: <Widget>[
         Expanded(
           child: FutureBuilder(
-              future: _getPrestadores(),
+              future: _getDados(),
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
@@ -467,9 +515,14 @@ class PrestadoresWidget extends StatelessWidget {
                   children: <Widget>[
                     CircleAvatar(
                       child:
-                          //Icon(Icons.person, size: 60, color: Theme.of(context).primaryColor,),
-                          Image.network(
-                              "http://images.coveralia.com/autores/thumbs/belchior81574m.jpg"),
+                      //se imagem nula ou em branco, coloca icone padrao
+                      (snapshot.data["pessoa"][index]["imagem"] == null || snapshot.data["pessoa"][index]["imagem"].length == 0)
+                          ? Icon(Icons.account_circle, size: 60, color: Theme.of(context).primaryColor,)
+                          : Image.network(snapshot.data["pessoa"][index]["imagem"])
+                      ,
+//                          //Icon(Icons.person, size: 60, color: Theme.of(context).primaryColor,),
+//                          Image.network(
+//                              "http://images.coveralia.com/autores/thumbs/belchior81574m.jpg"),
                       radius: 30,
                       backgroundColor: Colors.transparent,
                     ),
