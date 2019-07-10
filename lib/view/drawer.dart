@@ -10,16 +10,16 @@ class CustomDrawer extends StatefulWidget {
 class _CustomDrawerState extends State<CustomDrawer> {
 
   chamarTelaPerfil(){
-    Navigator.pop(context);
+    //Navigator.pop(context);
     //ToDo: checar se esta como cliente ou como prestador de servicos
-//    Navigator.push(
-//      context,
-//      MaterialPageRoute(builder: (context) => TelaPerfilCliente()),
-//    );
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => TelaPerfilPrestador()),
+      MaterialPageRoute(builder: (context) => TelaPerfilCliente()),
     );
+//    Navigator.push(
+//      context,
+//      MaterialPageRoute(builder: (context) => TelaPerfilPrestador()),
+//    );
   }
 
   @override
@@ -48,6 +48,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           title: Text("Tornar-se um prestador"),
           onTap: () {},
         ),
+
         ListTile(
           leading: Icon(Icons.access_time),
           title: Text("Histórico"),
