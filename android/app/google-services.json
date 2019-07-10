@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "69004130626",
+    "firebase_url": "https://alguz-a8a69.firebaseio.com",
+    "project_id": "alguz-a8a69",
+    "storage_bucket": "alguz-a8a69.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69004130626:android:4c07be7488b587de",
+        "android_client_info": {
+          "package_name": "com.pi.pi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69004130626-30nlj69srpgduh84mtpdmlluo6jt40m5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2Hk4AGZniNQIalzSQo3QVb5XSA9O0cEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69004130626-30nlj69srpgduh84mtpdmlluo6jt40m5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
