@@ -3,6 +3,7 @@ import 'package:pi/view/tela_principal_cliente.dart';
 import 'package:pi/view/tela_principal_empresa.dart';
 import 'package:pi/view/tela_cadastrocliente.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
 
 class TelaLogin extends StatefulWidget {
   @override
@@ -11,6 +12,7 @@ class TelaLogin extends StatefulWidget {
 
 class _TelaLoginState extends State<TelaLogin> {
   bool isSwitched = true;
+
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   String _email;
@@ -31,6 +33,9 @@ class _TelaLoginState extends State<TelaLogin> {
 
   @override
   Widget build(BuildContext context) {
+
+    final _senhaController = TextEditingController();
+
     return Scaffold(
       key: _scaffoldKey,
 //      appBar: AppBar(
@@ -93,9 +98,10 @@ class _TelaLoginState extends State<TelaLogin> {
                   hintText: 'Digite seu login',
                   labelText: 'Login',
                 ),
-                //keyboardType: TextInputType.emailAddress,
+                keyboardType: TextInputType.emailAddress,
               ),
               TextFormField(
+                controller: _senhaController,
                 decoration: const InputDecoration(
                   //icon: const Icon(Icons.vpn_key),
                   hintText: 'Digite sua senha',
@@ -200,6 +206,11 @@ class _TelaLoginState extends State<TelaLogin> {
                   color: Theme.of(context).primaryColor,
                   onPressed: () {
                     //ToDo: validar usuario e senha
+
+                    //Login com o Firebase - Necessaria ativação na plataforma
+                    signIn(_email, _senhaController.text);
+
+
                     Navigator.pop(context);
                     switch (selectedRadio) {
                       case 1:
@@ -239,7 +250,7 @@ class _TelaLoginState extends State<TelaLogin> {
                 ),
                 onTap: () {
                   if(_email ==  "" || _email == null){
-                    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Colocar um email para recuperação"),
+                    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Insira um email para recuperação"),
                       backgroundColor: Colors.redAccent, duration: Duration(seconds: 3),));
                   }else{
                     FirebaseAuth.instance.sendPasswordResetEmail(email: _email);
@@ -294,3 +305,14 @@ class _TelaLoginState extends State<TelaLogin> {
     );
   }
 }
+
+
+//Metodo de login com o Firebase, codigo pego do link a seguir
+//https://github.com/tattwei46/flutter_login_demo/blob/master/lib/services/authentication.dart
+Future<String> signIn(String email, String password) async {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  FirebaseUser user = await _firebaseAuth.signInWithEmailAndPassword(
+      email: email, password: password);
+  return user.uid;
+}
+

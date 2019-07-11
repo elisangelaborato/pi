@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
 
 
 class TelaCadastro extends StatefulWidget {
@@ -206,7 +210,15 @@ class _TelaCadastroState extends State<TelaCadastro> {
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
                     //chama a api para cadastro de pessoa
-                    _urlCadastro="http://alguz1.gearhostpreview.com/cadastra_pessoa.php?nome=${_nomeController}&email=${_emailController}&senha=${_senhaController}&cpfcnpj=${_cpfControllerMascara}&telefone=${_telefoneControllerMascara}";
+                    _urlCadastro="http://alguz1.gearhostpreview.com/cadastra_pessoa.php?nome=${_nomeController.text}&email=${_emailController.text}&senha=${_senhaController.text}&cpfcnpj=${_cpfControllerMascara.text}&telefone=${_telefoneControllerMascara.text}";
+                    print(_urlCadastro);
+
+                    //////////*******CRIANDO USUARIO NO FIREBASE - PRECISA HABILITAR - ********/////////////////////
+                    //print(signUp(_emailController.text, _senhaController.text));
+                    /////////******************************////////////////////
+
+
+                    //Cria um registro com todos os dados no banco de dados no gearhost
                     _launchURL(_urlCadastro);
                   }
                 },
@@ -217,10 +229,23 @@ class _TelaCadastroState extends State<TelaCadastro> {
   }
 }
 
+
+//Metodo para criacao de registro de usuario no banco de dados da gearhost
 _launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
+  var response = await http.post(url);
+  if (response.statusCode == 200) {
+    var jsonResponse = convert.jsonDecode(response.body);
+    var itemCount = jsonResponse['totalItems'];
+    print("Number of books about http: $itemCount.");
   } else {
-    throw 'Could not launch $url';
+    print("Request failed with status: ${response.statusCode}.");
   }
+}
+
+//Metodo para criacao de registro de usuario no Firebase
+Future<String> signUp(String email, String password) async {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  FirebaseUser user = await _firebaseAuth.createUserWithEmailAndPassword(
+      email: email, password: password);
+  return user.uid;
 }
