@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pi/view/tela_principal_cliente.dart';
 import 'package:pi/view/tela_principal_empresa.dart';
+import 'package:pi/view/tela_cadastrocliente.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class TelaLogin extends StatefulWidget {
   @override
@@ -9,6 +11,9 @@ class TelaLogin extends StatefulWidget {
 
 class _TelaLoginState extends State<TelaLogin> {
   bool isSwitched = true;
+
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  String _email;
 
   int selectedRadio;
 
@@ -27,6 +32,7 @@ class _TelaLoginState extends State<TelaLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
 //      appBar: AppBar(
 //        title: Text("ALGUZ Serviços de A à Z"),
 //        centerTitle: true,
@@ -78,7 +84,10 @@ class _TelaLoginState extends State<TelaLogin> {
                 height: 15.0,
               ),
 
-              TextFormField(
+              TextField(
+                onChanged: (text){
+                  _email = text;
+                },
                 decoration: const InputDecoration(
                   //icon: const Icon(Icons.person),
                   hintText: 'Digite seu login',
@@ -228,7 +237,17 @@ class _TelaLoginState extends State<TelaLogin> {
                     style: TextStyle(color: Colors.grey),
                   ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  if(_email ==  "" || _email == null){
+                    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Colocar um email para recuperação"),
+                      backgroundColor: Colors.redAccent, duration: Duration(seconds: 3),));
+                  }else{
+                    FirebaseAuth.instance.sendPasswordResetEmail(email: _email);
+                    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Confira no seu email"),
+                      backgroundColor: Colors.greenAccent, duration: Duration(seconds: 3),));
+                  }
+
+                },
               ),
 
               GestureDetector(
@@ -239,7 +258,13 @@ class _TelaLoginState extends State<TelaLogin> {
                     style: TextStyle(color: Colors.grey),
                   ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TelaCadastro()),
+                  );
+                },
               ),
 
 //              FlatButton(

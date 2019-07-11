@@ -147,7 +147,9 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
                   style: TextStyle(color: Colors.white),
                 ),
                 color: Theme.of(context).primaryColor,
-                onPressed: () {},
+                onPressed: () {
+
+                },
               ),
             ),
           ],

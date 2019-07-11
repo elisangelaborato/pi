@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pi/view/tela_perfil_cliente.dart';
 import 'package:pi/view/tela_perfil_prestador.dart';
+import 'package:pi/view/tela_cadastroprestador.dart';
 
 class CustomDrawer extends StatefulWidget {
   @override
@@ -46,7 +47,16 @@ class _CustomDrawerState extends State<CustomDrawer> {
         ListTile(
           leading: Icon(Icons.work),
           title: Text("Tornar-se um prestador"),
-          onTap: () {},
+          onTap: () {
+
+            //////TESTAR SE ESTA COMO PRESTADOR
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => TelaCadastroPrestador()),
+              /////////
+            );
+          },
         ),
 
         ListTile(
