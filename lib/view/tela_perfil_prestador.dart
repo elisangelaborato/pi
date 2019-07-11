@@ -2,21 +2,103 @@ import 'package:flutter/material.dart';
 import 'package:pi/view/tab_agenda_prestador.dart';
 import 'package:pi/view/tab_avaliacao_prestador.dart';
 import 'package:pi/view/tab_perfil_prestador.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 ////80% of screen width
 //double c_width = MediaQuery.of(context).size.width*0.8;
 
 class TelaPerfilPrestador extends StatefulWidget {
+
+  final Map<String, dynamic> pessoa;
+  final int cdgPessoa;
+
+  TelaPerfilPrestador({this.pessoa, this.cdgPessoa});
+
   @override
-  _TelaPerfilPrestadorState createState() => _TelaPerfilPrestadorState();
+  _TelaPerfilPrestadorState createState() => _TelaPerfilPrestadorState(pessoa: pessoa, cdgPessoa: cdgPessoa);
 }
 
 class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
+
+  Map<String, dynamic> pessoa;
+  final int cdgPessoa;
+
+  _TelaPerfilPrestadorState({this.pessoa, this.cdgPessoa});
+
+  Future<Map> _getDados() async {
+    http.Response response;
+    response = await http.get(
+        "http://alguz1.gearhostpreview.com/lista.php?tabela=pessoa");
+    print(response.body);
+    return json.decode(response.body);
+  }
+
+//  Future<Map> _getPessoa(int cdgPessoa) async{
+//    _getDados()
+//        .then( (pessoas) {
+//          pessoa = pessoas[1];
+//          print(pessoas);
+//          print(pessoa);
+//
+//          pessoas.forEach(
+//            (k,v) {
+//              //if (k == "cdgPessoa" && v == cdgPessoa){
+//              print('${k}: ${v}');
+//              //}
+//              v.replaceAll('[', '');
+//              v.replaceAll(']', '');
+//              v.forEach(
+//                  (y, j){
+//                    print('${y}: ${j}');
+//                  }
+//              );
+//          }
+//        );
+//    }
+//    );
+//  }
+
+  Widget setPessoa(){
+    return FutureBuilder(
+        future: _getDados(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+            case ConnectionState.waiting:
+              return Container(
+                width: 200.0,
+                height: 200.0,
+                alignment: Alignment.center,
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
+                  strokeWidth: 10.0,
+                ),
+              );
+            default:
+              if (snapshot.hasError) {
+                return Container(
+                  color: Colors.redAccent,
+                );
+              } else {
+                pessoa = snapshot.data["pessoa"][0];
+                print(pessoa);
+                return Container(color: Colors.pinkAccent, height: 50, width: double.infinity,);
+                //return _createListView(context, snapshot);
+              }
+          }
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
-//    return Scaffold(
-//      body: getTop(),
-//    );
+//    if (pessoa == null) {
+//      //buscar dados pessoa pelo codigo via api
+//      _getPessoa(1);
+//    }
+//    setPessoa();
+  //ToDo: testar colocar o FutureBuilder abaixo e o conteudo abaixo dentro do FutureBuilder
 
     return DefaultTabController(
       length: 3,
@@ -88,7 +170,7 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
                   padding: EdgeInsets.only(top: 8.0),
                 ),
                 Text(
-                  "NOME DA PESSOA",
+                  pessoa["nome"],//"NOME DA PESSOA",
                   style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
                 ),
                 Text(

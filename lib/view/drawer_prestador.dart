@@ -11,14 +11,15 @@ class _DrawerPrestadorState extends State<DrawerPrestador> {
 
   chamarTelaPerfil(){
     //Navigator.pop(context);
-    //ToDo: checar se esta como cliente ou como prestador de servicos
+
 //    Navigator.push(
 //      context,
 //      MaterialPageRoute(builder: (context) => TelaPerfilCliente()),
 //    );
+
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => TelaPerfilPrestador()),
+      MaterialPageRoute(builder: (context) => TelaPerfilPrestador(cdgPessoa: 1,)),
     );
   }
 

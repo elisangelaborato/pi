@@ -1,9 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:pi/view/drawer.dart';
 import 'package:pi/view/tela_agendamento_cliente.dart';
 import 'package:http/http.dart' as http;
+import 'package:pi/view/tela_perfil_prestador.dart';
 
 class TelaPrincipalCliente extends StatefulWidget {
   @override
@@ -56,15 +56,14 @@ class ServicosWidget extends StatelessWidget {
 
   Future<Map> _getDados() async {
     http.Response response;
-    response = await http
-        .get("http://alguz1.gearhostpreview.com/lista.php?tabela=categoriaservico");
+    response = await http.get(
+        "http://alguz1.gearhostpreview.com/lista.php?tabela=categoriaservico");
     print(response.body);
     return json.decode(response.body);
   }
 
   @override
   Widget build(BuildContext context) {
-
     int icone = 58355;
 
     return Column(
@@ -91,145 +90,57 @@ class ServicosWidget extends StatelessWidget {
                         color: Colors.redAccent,
                       );
                     } else {
-                      //ToDo: montar a lista de categorias
-                      return Container(color: Colors.pinkAccent, height: 50, width: double.infinity,);
-                      //return _createCadList(context, snapshot);
+                      //return Container(color: Colors.pinkAccent, height: 50, width: double.infinity,);
+                      return _createListView(context, snapshot);
                     }
                 }
               }),
         ),
       ],
     );
+  }
 
-//    return ListView(
-//      children: <Widget>[
-//        ListTile(
-//          leading: CircleAvatar(
-//            child:
-////            Image.network(
-////                "http://pontoemcomumseguros.com.br/images/icones/lifeline-in-a-heart-outline.png"),
-//                Icon(
-//                  IconData(icone, fontFamily: 'MaterialIcons'), //Icons.healing,
-//              size: 40,
-//              color: Theme.of(context).primaryColor,
-//            ),
-//            radius: 25,
-//            backgroundColor: Colors.transparent,
-//          ),
-//          trailing: Icon(Icons.keyboard_arrow_right),
-//          onTap: () {},
-//          title: Text("Saúde"),
-//        ),
-//        Divider(
-//          color: Colors.grey[500],
-//          height: 0,
-//        ),
-//        ListTile(
-//          leading: CircleAvatar(
-//            child:
-////            Image.network(
-////                "https://library.kissclipart.com/20180831/wcw/kissclipart-icone-professor-png-clipart-teacher-computer-icons-be63703f059606a5.png"),
-//                Icon(
-//              Icons.account_box,
-//              size: 40,
-//              color: Theme.of(context).primaryColor,
-//            ),
-//            radius: 25,
-//            backgroundColor: Colors.transparent,
-//          ),
-//          trailing: Icon(Icons.keyboard_arrow_right),
-//          onTap: () {},
-//          title: Text("Professores"),
-//        ),
-//        Divider(
-//          color: Colors.grey[500],
-//          height: 0,
-//        ),
-//        ListTile(
-//          leading: CircleAvatar(
-//            child:
-////            Image.network(
-////                "http://download.seaicons.com/icons/icons8/windows-8/512/Transport-Construction-Worker-icon.png"),
-//                Icon(
-//              Icons.build,
-//              size: 40,
-//              color: Theme.of(context).primaryColor,
-//            ),
-//            radius: 25,
-//            backgroundColor: Colors.transparent,
-//          ),
-//          trailing: Icon(Icons.keyboard_arrow_right),
-//          onTap: () {},
-//          title: Text("Construção/Manutenção"),
-//        ),
-//        Divider(
-//          color: Colors.grey[500],
-//          height: 0,
-//        ),
-//        ListTile(
-//          leading: CircleAvatar(
-//            child:
-////            Image.network(
-////                "https://image.flaticon.com/icons/png/512/40/40546.png"),
-//                Icon(
-//              Icons.ac_unit,
-//              size: 40,
-//              color: Theme.of(context).primaryColor,
-//            ),
-//            radius: 25,
-//            backgroundColor: Colors.transparent,
-//          ),
-//          trailing: Icon(Icons.keyboard_arrow_right),
-//          onTap: () {},
-//          title: Text("Beleza/Estética"),
-//        ),
-//        Divider(
-//          color: Colors.grey[500],
-//          height: 0,
-//        ),
-//        ListTile(
-//          leading: CircleAvatar(
-//            child:
-////            Image.network(
-////                "https://image.flaticon.com/icons/png/512/34/34100.png"),
-//                Icon(
-//              Icons.local_cafe,
-//              size: 40,
-//              color: Theme.of(context).primaryColor,
-//            ),
-//            radius: 25,
-//            backgroundColor: Colors.transparent,
-//          ),
-//          trailing: Icon(Icons.keyboard_arrow_right),
-//          onTap: () {},
-//          title: Text("Informática"),
-//        ),
-//        Divider(
-//          color: Colors.grey[500],
-//          height: 0,
-//        ),
-//        ListTile(
-//          leading: CircleAvatar(
-//            child:
-////            Image.network("https://www.lojsnovi.com.br/img/outro.png"),
-//                Icon(
-//              Icons.view_comfy,
-//              size: 40,
-//              color: Theme.of(context).primaryColor,
-//            ),
-//            radius: 25,
-//            backgroundColor: Colors.transparent,
-//          ),
-//          trailing: Icon(Icons.keyboard_arrow_right),
-//          onTap: () {},
-//          title: Text("Outros"),
-//        ),
-//      ],
-//    );
+  Widget _createListView(context, snapshot) {
+    return ListView.builder(
+      itemCount: snapshot.data["categoriaservico"].length,
+      itemBuilder: (context, index) {
+        print(snapshot.data["categoriaservico"].length);
+        print(index);
+        return _createTile(context, snapshot, index);
+      },
+    );
+  }
+
+  Widget _createTile(context, snapshot, index) {
+    return Column(
+      children: <Widget>[
+        ListTile(
+          leading: CircleAvatar(
+            child:
+//            Image.network(
+//                "http://pontoemcomumseguros.com.br/images/icones/lifeline-in-a-heart-outline.png"),
+                Icon(
+              IconData(
+                  int.parse(snapshot.data["categoriaservico"][index]["icone"]),
+                  fontFamily: 'MaterialIcons'), //Icons.healing,
+              size: 40,
+              color: Theme.of(context).primaryColor,
+            ),
+            radius: 25,
+            backgroundColor: Colors.transparent,
+          ),
+          trailing: Icon(Icons.keyboard_arrow_right),
+          onTap: () {},
+          title: Text(snapshot.data["categoriaservico"][index]["descricao"]),
+        ),
+        Divider(
+          color: Colors.grey[500],
+          height: 0,
+        ),
+      ],
+    );
   }
 }
-
-
 
 class MeusServicosWidget extends StatelessWidget {
   @override
@@ -291,54 +202,6 @@ class MeusServicosWidget extends StatelessWidget {
       ),
     );
 
-//    return Padding(
-//      padding: const EdgeInsets.only(top: 10),
-//      child: Row(
-//        children: <Widget>[
-//          Column(
-//            children: <Widget>[
-//              CircleAvatar(
-//                child: Image.network(
-//                    "https://image.flaticon.com/icons/png/512/10/10003.png"),
-//                radius: 35,
-//                backgroundColor: Colors.transparent,
-//              ),
-//              Text("Profissional", style: TextStyle(fontSize: 20),),
-//              Text("Maycon", style: TextStyle(color: Colors.grey),),
-//            ],
-//          ),
-//
-//          Padding(
-//            padding: const EdgeInsets.only(left: 50),
-//            child: Column(
-//              children: <Widget>[
-//                Text("Data/Hora", style: TextStyle(fontSize: 20),),
-//                Text("14/08 - 13:30", style: TextStyle(color: Colors.grey),),
-//                Divider(
-//                  height: 30,
-//                ),
-//                Text("Valor", style: TextStyle(fontSize: 20),),
-//                Text("R\$80,00", style: TextStyle(color: Colors.grey),),
-//              ],
-//            ),
-//          ),
-//          Padding(
-//            padding: const EdgeInsets.only(left: 50),
-//            child: Column(
-//              children: <Widget>[
-//              Divider(
-//                height: 60,
-//              ),
-//                RaisedButton(
-//                    onPressed: (){},
-//                    child: Text("Cancelar"),
-//                ),
-//              ],
-//            ),
-//          ),
-//        ],
-//      ),
-//    );
   }
 
   Widget getCard(context) {
@@ -443,7 +306,6 @@ class MeusServicosWidget extends StatelessWidget {
 }
 
 class PrestadoresWidget extends StatelessWidget {
-
   Future<Map> _getDados() async {
     http.Response response;
     response = await http
@@ -515,11 +377,18 @@ class PrestadoresWidget extends StatelessWidget {
                   children: <Widget>[
                     CircleAvatar(
                       child:
-                      //se imagem nula ou em branco, coloca icone padrao
-                      (snapshot.data["pessoa"][index]["imagem"] == null || snapshot.data["pessoa"][index]["imagem"].length == 0)
-                          ? Icon(Icons.account_circle, size: 60, color: Theme.of(context).primaryColor,)
-                          : Image.network(snapshot.data["pessoa"][index]["imagem"])
-                      ,
+                          //se imagem nula ou em branco, coloca icone padrao
+                          (snapshot.data["pessoa"][index]["imagem"] == null ||
+                                  snapshot.data["pessoa"][index]["imagem"]
+                                          .length ==
+                                      0)
+                              ? Icon(
+                                  Icons.account_circle,
+                                  size: 60,
+                                  color: Theme.of(context).primaryColor,
+                                )
+                              : Image.network(
+                                  snapshot.data["pessoa"][index]["imagem"]),
 //                          //Icon(Icons.person, size: 60, color: Theme.of(context).primaryColor,),
 //                          Image.network(
 //                              "http://images.coveralia.com/autores/thumbs/belchior81574m.jpg"),
@@ -557,8 +426,7 @@ class PrestadoresWidget extends StatelessWidget {
                       Text(
                         (snapshot.data["pessoa"][index]["email"].length <= 15)
                             ? snapshot.data["pessoa"][index]["email"]
-                            : '${snapshot.data["pessoa"][index]["email"].substring(0, 15)}...'
-                        ,//"Pedreiro",
+                            : '${snapshot.data["pessoa"][index]["email"].substring(0, 15)}...', //"Pedreiro",
                         style: TextStyle(fontSize: 14),
                       ),
                       Divider(
@@ -583,12 +451,17 @@ class PrestadoresWidget extends StatelessWidget {
                         height: 0,
                       ),
                       RaisedButton(
-                        onPressed: () {},
                         color: Theme.of(context).primaryColor,
                         child: Text(
-                          "CONTRATAR",
+                          "VER PERFIL",
                           style: TextStyle(color: Colors.white),
                         ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => TelaPerfilPrestador(pessoa: snapshot.data["pessoa"][index])),
+                          );
+                        },
                       ),
                     ],
                   ),

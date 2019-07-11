@@ -11,7 +11,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
 
   chamarTelaPerfil(){
     //Navigator.pop(context);
-    //ToDo: checar se esta como cliente ou como prestador de servicos
+
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => TelaPerfilCliente()),
