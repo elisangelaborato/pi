@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
-import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:async';
-
+import 'package:pi/services/autenticacao_firebase.dart';
 
 class TelaCadastro extends StatefulWidget {
   @override
@@ -22,6 +20,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
   final _telefoneControllerMascara= MaskedTextController(mask: '(00) 0 0000-0000');
 
   String _urlCadastro;
+  Auth auth = Auth();
 
   @override
   Widget build(BuildContext context) {
@@ -212,7 +211,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
                     _urlCadastro="http://alguz1.gearhostpreview.com/cadastra_pessoa.php?nome=${_nomeController.text}&email=${_emailController.text}&senha=${_senhaController.text}&cpfcnpj=${_cpfControllerMascara.text}&telefone=${_telefoneControllerMascara.text}";
 
                     //////////*******CRIANDO USUARIO NO FIREBASE - PRECISA HABILITAR - ********/////////////////////
-                    //print(signUp(_emailController.text, _senhaController.text));
+                    //print(auth.signUp(_emailController.text, _senhaController.text));
                     /////////******************************////////////////////
 
 
@@ -241,12 +240,4 @@ _launchURL(String url) async {
   } else {
     print("Request failed with status: ${response.statusCode}.");
   }
-}
-
-//Metodo para criacao de registro de usuario no Firebase
-Future<String> signUp(String email, String password) async {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  FirebaseUser user = await _firebaseAuth.createUserWithEmailAndPassword(
-      email: email, password: password);
-  return user.uid;
 }

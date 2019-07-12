@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pi/services/autenticacao_firebase.dart';
 
 ////////Imports substituidos por rotas no main/////////
 /*import 'package:pi/view/tela_principal_cliente.dart';
@@ -7,7 +8,6 @@ import 'package:pi/view/tela_cadastrocliente.dart';*/
 ///////////*************///////////////////////////
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:async';
 
 class TelaLogin extends StatefulWidget {
   @override
@@ -39,6 +39,8 @@ class _TelaLoginState extends State<TelaLogin> {
   Widget build(BuildContext context) {
 
     final _senhaController = TextEditingController();
+
+    Auth auth = Auth();
 
     return Scaffold(
       key: _scaffoldKey,
@@ -212,8 +214,7 @@ class _TelaLoginState extends State<TelaLogin> {
                     //ToDo: validar usuario e senha
 
                     //Login com o Firebase - Necessaria ativação na plataforma
-                    signIn(_email, _senhaController.text);
-
+                    auth.signIn(_email, _senhaController.text);
 
                     //Navigator.pop(context);
                     switch (selectedRadio) {
@@ -314,14 +315,3 @@ class _TelaLoginState extends State<TelaLogin> {
     );
   }
 }
-
-
-//Metodo de login com o Firebase, codigo pego do link a seguir
-//https://github.com/tattwei46/flutter_login_demo/blob/master/lib/services/authentication.dart
-Future<String> signIn(String email, String password) async {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  FirebaseUser user = await _firebaseAuth.signInWithEmailAndPassword(
-      email: email, password: password);
-  return user.uid;
-}
-
