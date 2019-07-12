@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
@@ -211,7 +210,6 @@ class _TelaCadastroState extends State<TelaCadastro> {
                   if (_formKey.currentState.validate()) {
                     //chama a api para cadastro de pessoa
                     _urlCadastro="http://alguz1.gearhostpreview.com/cadastra_pessoa.php?nome=${_nomeController.text}&email=${_emailController.text}&senha=${_senhaController.text}&cpfcnpj=${_cpfControllerMascara.text}&telefone=${_telefoneControllerMascara.text}";
-                    print(_urlCadastro);
 
                     //////////*******CRIANDO USUARIO NO FIREBASE - PRECISA HABILITAR - ********/////////////////////
                     //print(signUp(_emailController.text, _senhaController.text));
@@ -220,6 +218,9 @@ class _TelaCadastroState extends State<TelaCadastro> {
 
                     //Cria um registro com todos os dados no banco de dados no gearhost
                     _launchURL(_urlCadastro);
+
+                    //se tiver sucesso ao cadastrar ir para a tela principal cliente
+                    Navigator.of(context).pushReplacementNamed('/telaPrincipalCliente');
                   }
                 },
               ),

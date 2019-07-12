@@ -42,7 +42,6 @@ class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
             children: [
               ServicosWidget(),
               PrestadoresWidget(),
-              //MeusServicosTesteLinha(),
               MeusServicosWidget(),
             ],
           ),
@@ -158,6 +157,9 @@ class MeusServicosWidget extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => TelaAgendamentoCliente()),
                   );
+
+                  //nao sei pq issa rota nao funciona
+                 //Navigator.of(context).pushNamed('/telaAgendamentoCliente');
                 },
               ),
               GestureDetector(

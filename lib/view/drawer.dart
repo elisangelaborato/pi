@@ -10,7 +10,7 @@ class CustomDrawer extends StatefulWidget {
 
 class _CustomDrawerState extends State<CustomDrawer> {
 
-  chamarTelaPerfil(){
+  /*chamarTelaPerfil(){
     //Navigator.pop(context);
 
     Navigator.push(
@@ -21,7 +21,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
 //      context,
 //      MaterialPageRoute(builder: (context) => TelaPerfilPrestador()),
 //    );
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +35,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     backgroundImage: ExactAssetImage("images/person.png"),
                   ),
                   onTap: () {
-                    chamarTelaPerfil();
+                    Navigator.of(context).pushNamed('/telaPerfilCliente');
                   },
                 ),
 
                 onDetailsPressed: () {
-                  chamarTelaPerfil();
+                  Navigator.of(context).pushNamed('/telaPerfilCliente');
+                  //chamarTelaPerfil();
                 },
               ),
 
@@ -49,13 +50,15 @@ class _CustomDrawerState extends State<CustomDrawer> {
           title: Text("Tornar-se um prestador"),
           onTap: () {
 
-            //////TESTAR SE ESTA COMO PRESTADOR
-            Navigator.push(
+
+           /* Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => TelaCadastroPrestador()),
-              /////////
-            );
+            );*/
+
+            //////TESTAR SE ESTA COMO PRESTADOR
+           Navigator.of(context).pushNamed('/telaCadastroPrestador');
           },
         ),
 
@@ -75,7 +78,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
         ListTile(
           leading: Icon(Icons.exit_to_app),
           title: Text("Sair"),
-          onTap: () {},
+          onTap: () {
+
+          },
         )
       ]),
     );

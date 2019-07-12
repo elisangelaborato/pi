@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pi/view/tela_principal_cliente.dart';
+
+////////Imports substituidos por rotas no main/////////
+/*import 'package:pi/view/tela_principal_cliente.dart';
 import 'package:pi/view/tela_principal_empresa.dart';
-import 'package:pi/view/tela_cadastrocliente.dart';
+import 'package:pi/view/tela_cadastrocliente.dart';*/
+///////////*************///////////////////////////
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 
@@ -211,24 +215,27 @@ class _TelaLoginState extends State<TelaLogin> {
                     signIn(_email, _senhaController.text);
 
 
-                    Navigator.pop(context);
+                    //Navigator.pop(context);
                     switch (selectedRadio) {
                       case 1:
                         {
-                          Navigator.push(
+                          /*Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => TelaPrincipalCliente()),
-                          );
+                          );*/
+
+                          Navigator.of(context).pushReplacementNamed('/telaPrincipalCliente');
                           break;
                         }
                       case 2:
                         {
-                          Navigator.push(
+                          /*Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => TelaPrincipalEmpresa()),
-                          );
+                          );*/
+                          Navigator.of(context).pushReplacementNamed('/telaPrincipalEmpresa');
                           break;
                         }
                     }
@@ -270,11 +277,13 @@ class _TelaLoginState extends State<TelaLogin> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.push(
+                 /* Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => TelaCadastro()),
-                  );
+                  );*/
+
+                 Navigator.of(context).pushNamed('/telaCadastroCliente');
                 },
               ),
 
