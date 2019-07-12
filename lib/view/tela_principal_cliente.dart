@@ -152,11 +152,11 @@ class MeusServicosWidget extends StatelessWidget {
               GestureDetector(
                 child: getCard(context),
                 onTap: () {
-                  Navigator.push(
+                 /* Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => TelaAgendamentoCliente()),
-                  );
+                  );*/
 
                   //nao sei pq issa rota nao funciona
                  //Navigator.of(context).pushNamed('/telaAgendamentoCliente');

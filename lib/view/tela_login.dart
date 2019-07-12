@@ -214,32 +214,40 @@ class _TelaLoginState extends State<TelaLogin> {
                     //ToDo: validar usuario e senha
 
                     //Login com o Firebase - Necessaria ativação na plataforma
-                    auth.signIn(_email, _senhaController.text);
+
+
+                    auth.signIn(_email, _senhaController.text).then((String uid){
+                      switch (selectedRadio) {
+                        case 1:
+                          {
+                           /* Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TelaPrincipalCliente()),
+                            );*/
+
+                            Navigator.of(context).pushReplacementNamed('/telaPrincipalCliente');
+                            break;
+                          }
+                        case 2:
+                          {
+                           /* Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TelaPrincipalEmpresa()),
+                            );*/
+                            Navigator.of(context).pushReplacementNamed('/telaPrincipalEmpresa');
+                            break;
+                          }
+                      }
+                    }).catchError((e){
+                      print("DENTRO DO CATCH ERROR");
+                      _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("E-mail ou senha invalidos"),
+                        backgroundColor: Colors.redAccent, duration: Duration(seconds: 3),));
+                    });
 
                     //Navigator.pop(context);
-                    switch (selectedRadio) {
-                      case 1:
-                        {
-                          /*Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TelaPrincipalCliente()),
-                          );*/
 
-                          Navigator.of(context).pushReplacementNamed('/telaPrincipalCliente');
-                          break;
-                        }
-                      case 2:
-                        {
-                          /*Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TelaPrincipalEmpresa()),
-                          );*/
-                          Navigator.of(context).pushReplacementNamed('/telaPrincipalEmpresa');
-                          break;
-                        }
-                    }
                   },
                 ),
               ),
@@ -262,7 +270,7 @@ class _TelaLoginState extends State<TelaLogin> {
                       backgroundColor: Colors.redAccent, duration: Duration(seconds: 3),));
                   }else{
                     FirebaseAuth.instance.sendPasswordResetEmail(email: _email);
-                    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("Confira no seu email"),
+                    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("E-mail de recuperação enviado"),
                       backgroundColor: Colors.greenAccent, duration: Duration(seconds: 3),));
                   }
 

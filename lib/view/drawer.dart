@@ -10,7 +10,7 @@ class CustomDrawer extends StatefulWidget {
 
 class _CustomDrawerState extends State<CustomDrawer> {
 
-  /*chamarTelaPerfil(){
+  chamarTelaPerfil(){
     //Navigator.pop(context);
 
     Navigator.push(
@@ -21,7 +21,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
 //      context,
 //      MaterialPageRoute(builder: (context) => TelaPerfilPrestador()),
 //    );
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +35,15 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     backgroundImage: ExactAssetImage("images/person.png"),
                   ),
                   onTap: () {
-                    Navigator.of(context).pushNamed('/telaPerfilCliente');
+                   // Navigator.pushNamed(context, '/telaPerfilCliente');
+                    chamarTelaPerfil();
+
                   },
                 ),
 
                 onDetailsPressed: () {
-                  Navigator.of(context).pushNamed('/telaPerfilCliente');
-                  //chamarTelaPerfil();
+                  //Navigator.pushNamed(context,'/telaPerfilCliente');
+                  chamarTelaPerfil();
                 },
               ),
 
@@ -51,11 +53,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
           onTap: () {
 
 
-           /* Navigator.push(
+            Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => TelaCadastroPrestador()),
-            );*/
+            );
 
             //////TESTAR SE ESTA COMO PRESTADOR
            Navigator.of(context).pushNamed('/telaCadastroPrestador');
