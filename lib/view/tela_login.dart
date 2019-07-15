@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pi/services/autenticacao_firebase.dart';
-
-////////Imports substituidos por rotas no main/////////
-/*import 'package:pi/view/tela_principal_cliente.dart';
-import 'package:pi/view/tela_principal_empresa.dart';
-import 'package:pi/view/tela_cadastrocliente.dart';*/
-///////////*************///////////////////////////
-
 import 'package:firebase_auth/firebase_auth.dart';
 
 class TelaLogin extends StatefulWidget {
@@ -43,10 +36,6 @@ class _TelaLoginState extends State<TelaLogin> {
 
     return Scaffold(
       key: _scaffoldKey,
-//      appBar: AppBar(
-//        title: Text("ALGUZ Serviços de A à Z"),
-//        centerTitle: true,
-//      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(left: 40.0, right: 40.0),
@@ -56,27 +45,7 @@ class _TelaLoginState extends State<TelaLogin> {
               SizedBox(
                 height: 55.0,
               ),
-
-
-//              Icon(
-//                Icons.account_circle,
-//                size: 120.0,
-//                color: Colors.blue,
-//              ),
-//              CircleAvatar(
-//                child:
-//                Image.asset('images/logo.png'),
-//
-////                Icon(Icons.person, size: 35, color: Theme.of(context).primaryColor,),
-////                      Image.network(
-////                          "https://image.flaticon.com/icons/png/512/10/10003.png"),
-//                radius: 20,
-//                backgroundColor: Colors.transparent,
-//              ),
-
               Image.asset('images/logo.jpeg'),
-
-
               SizedBox(
                 height: 0.0,
               ),
@@ -117,40 +86,6 @@ class _TelaLoginState extends State<TelaLogin> {
                 ),
                 obscureText: true,
               ),
-//              TextFormField(
-//                controller: _senhaController,
-//                decoration: const InputDecoration(
-//                  //icon: const Icon(Icons.vpn_key),
-//                  hintText: 'Digite sua senha',
-//                  labelText: 'Senha',
-//                ),
-//                obscureText: true,
-//                //keyboardType: TextInputType.emailAddress,
-//              ),
-
-//            TextFormField(
-//              decoration: InputDecoration(
-//                contentPadding: EdgeInsets.fromLTRB(5, 20, 0, 20),
-//                labelText: "Login",
-//                hintText: "Digite seu Login",
-//                labelStyle: TextStyle(
-//                    color: Colors.black87,
-//                    fontSize: 25.0,
-//                    fontWeight: FontWeight.bold),
-//              ),
-//            ),
-//           TextFormField(
-//             decoration: InputDecoration(
-//               contentPadding: EdgeInsets.fromLTRB(5, 20, 0, 20),
-//               labelText: "Senha",
-//               hintText: "Digite sua senha",
-//               labelStyle: TextStyle(
-//                   color: Colors.black87,
-//                   fontSize: 25.0,
-//                   fontWeight: FontWeight.bold),
-//             ),
-//           ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
@@ -168,14 +103,6 @@ class _TelaLoginState extends State<TelaLogin> {
                   ),
                 ],
               ),
-//              Container(
-//                  padding: const EdgeInsets.only(left: 40.0, top: 20.0),
-//                  child: RaisedButton(
-//                    child: const Text('Confirmar', style: TextStyle(color: Colors.white),),
-//                    color: Theme.of(context).primaryColor,
-//                    onPressed: () {},
-//                  )),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -261,36 +188,9 @@ class _TelaLoginState extends State<TelaLogin> {
                   ),
                 ),
                 onTap: () {
-                 /* Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => TelaCadastro()),
-                  );*/
-
                  Navigator.of(context).pushNamed('/telaCadastroCliente');
                 },
               ),
-
-//              FlatButton(
-//                child: Text(
-//                  "Esqueci minha senha",
-//                  style: TextStyle(
-//                      fontWeight: FontWeight.bold,
-//                      fontSize: 16,
-//                      color: Colors.black),
-//                ),
-//                onPressed: () {},
-//                //padding: EdgeInsets.fromLTRB(0, 20, 20, 15),
-//              ),
-//
-//              FlatButton(
-//                child: Text(
-//                  "Cadastrar-se",
-//                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-//                ),
-//                onPressed: () {},
-//                //padding: EdgeInsets.fromLTRB(20, 15, 20, 10),
-//              ),
             ],
           ),
         ),
@@ -300,41 +200,20 @@ class _TelaLoginState extends State<TelaLogin> {
 
   void _onPressedButtonEntrar(){
     Auth auth = Auth();
-
-    //ToDo: validar usuario e senha
-
     //Login com o Firebase - Necessaria ativação na plataforma
-
     auth.signIn(_email, _senha).then((String uid){
       switch (selectedRadio) {
         case 1:
-          {
-            /* Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => TelaPrincipalCliente()),
-                            );*/
-
             Navigator.of(context).pushReplacementNamed('/telaPrincipalCliente');
             break;
-          }
         case 2:
-          {
-            /* Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => TelaPrincipalEmpresa()),
-                            );*/
             Navigator.of(context).pushReplacementNamed('/telaPrincipalEmpresa');
             break;
-          }
       }
     }).catchError((e){
       print("DENTRO DO CATCH ERROR ${e.toString()}");
       _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("E-mail ou senha invalidos"),
         backgroundColor: Colors.redAccent, duration: Duration(seconds: 3),));
     });
-
-    //Navigator.pop(context);
   }
 }

@@ -2,16 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:pi/view/tab_agenda_cliente.dart';
 import 'package:pi/view/tab_avaliacao_cliente.dart';
 import 'package:pi/view/tab_perfil_cliente.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 ////80% of screen width
 //double c_width = MediaQuery.of(context).size.width*0.8;
 
 class TelaPerfilCliente extends StatefulWidget {
+
+  final Map<String, dynamic> pessoa;
+  final int cdgPessoa;
+
+  TelaPerfilCliente({this.pessoa, this.cdgPessoa});
+
   @override
   _TelaPerfilClienteState createState() => _TelaPerfilClienteState();
 }
 
 class _TelaPerfilClienteState extends State<TelaPerfilCliente> {
+
+  final Map<String, dynamic> pessoa;
+  final int cdgPessoa;
+
+  _TelaPerfilClienteState({this.pessoa, this.cdgPessoa});
+
+  Future<Map> _getDados() async {
+    http.Response response;
+    response = await http.get(
+        "http://alguz1.gearhostpreview.com/lista.php?tabela=pessoa");
+    print(response.body);
+    return json.decode(response.body);
+  }
+
   @override
   Widget build(BuildContext context) {
 //    return Scaffold(

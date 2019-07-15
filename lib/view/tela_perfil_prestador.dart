@@ -26,13 +26,15 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
 
   _TelaPerfilPrestadorState({this.pessoa, this.cdgPessoa});
 
-  Future<Map> _getDados() async {
-    http.Response response;
-    response = await http.get(
-        "http://alguz1.gearhostpreview.com/lista.php?tabela=pessoa");
-    print(response.body);
-    return json.decode(response.body);
-  }
+//  Future<Map> _getDados() async {
+//    http.Response response;
+//    response = await http.get(
+//        "http://alguz1.gearhostpreview.com/lista.php?tabela=pessoa");
+//    print("ZZZZZZZ ${response.body}");
+//    return json.decode(response.body);
+//  }
+
+//{"pessoa":[{"cdgPessoa":"1","nome":"Anderson","email":"anderson_megax@hotmail.com","senha":"senha123","cpfcnpj":"123123123","imagem":null},{"cdgPessoa":"2","nome":"Leonardo","email":"leocberaldo@hotmail.com","senha":"123456","cpfcnpj":"147258369","imagem":"http://images.coveralia.com/autores/thumbs/belchior81574m.jpg"},{"cdgPessoa":"9","nome":"gilberto","email":"gilberto.gilson@gmail.com","senha":"123456","cpfcnpj":"11024533972","imagem":null},{"cdgPessoa":"10","nome":"ma
 
 //  Future<Map> _getPessoa(int cdgPessoa) async{
 //    _getDados()
@@ -59,36 +61,37 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
 //    );
 //  }
 
-  Widget setPessoa(){
-    return FutureBuilder(
-        future: _getDados(),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-            case ConnectionState.waiting:
-              return Container(
-                width: 200.0,
-                height: 200.0,
-                alignment: Alignment.center,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
-                  strokeWidth: 10.0,
-                ),
-              );
-            default:
-              if (snapshot.hasError) {
-                return Container(
-                  color: Colors.redAccent,
-                );
-              } else {
-                pessoa = snapshot.data["pessoa"][0];
-                print(pessoa);
-                return Container(color: Colors.pinkAccent, height: 50, width: double.infinity,);
-                //return _createListView(context, snapshot);
-              }
-          }
-    });
-  }
+//  Widget setPessoa(){
+//    return FutureBuilder(
+//        future: _getDados(),
+//        builder: (context, snapshot) {
+//          switch (snapshot.connectionState) {
+//            case ConnectionState.none:
+//            case ConnectionState.waiting:
+//              return Container(
+//                width: 200.0,
+//                height: 200.0,
+//                alignment: Alignment.center,
+//                child: CircularProgressIndicator(
+//                  valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
+//                  strokeWidth: 10.0,
+//                ),
+//              );
+//            default:
+//              if (snapshot.hasError) {
+//                return Container(
+//                  color: Colors.redAccent,
+//                );
+//              } else {
+//                print("XXXXXXX ${snapshot.data}");
+//                pessoa = snapshot.data["pessoa"][0];
+//                print(pessoa);
+//                return Container(color: Colors.pinkAccent, height: 50, width: double.infinity,);
+//                //return _createListView(context, snapshot);
+//              }
+//          }
+//    });
+//  }
 
 
   @override
@@ -170,7 +173,7 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
                   padding: EdgeInsets.only(top: 8.0),
                 ),
                 Text(
-                  pessoa["nome"],//"NOME DA PESSOA",
+                  "NOME DA PESSOA",//pessoa["nome"] ?? "NOME DA PESSOA",
                   style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
                 ),
                 Text(

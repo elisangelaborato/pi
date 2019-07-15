@@ -45,14 +45,22 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case '/':
       return MaterialPageRoute(builder: (_) => TelaLogin());
+      break;
     case '/telaPrincipalCliente':
       return MaterialPageRoute(builder: (_) => TelaPrincipalCliente());
+      break;
+    case '/telaPrincipalEmpresa':
+      return MaterialPageRoute(builder: (_) => TelaPrincipalEmpresa());
+      break;
     case '/telaPerfilCliente':
       return MaterialPageRoute(builder: (_) => TelaPerfilCliente());
+      break;
     case '/telaCadastroPrestador':
       return MaterialPageRoute(builder: (_) => TelaCadastroPrestador());
+      break;
     case '/telaCadastroCliente':
       return MaterialPageRoute(builder: (_) => TelaCadastro());
+      break;
     default:
       return MaterialPageRoute(
           builder: (_) => Scaffold(
