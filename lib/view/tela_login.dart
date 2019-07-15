@@ -20,6 +20,7 @@ class _TelaLoginState extends State<TelaLogin> {
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   String _email;
+  String _senha;
 
   int selectedRadio;
 
@@ -38,9 +39,7 @@ class _TelaLoginState extends State<TelaLogin> {
   @override
   Widget build(BuildContext context) {
 
-    final _senhaController = TextEditingController();
-
-    Auth auth = Auth();
+    //final _senhaController = TextEditingController();
 
     return Scaffold(
       key: _scaffoldKey,
@@ -106,16 +105,28 @@ class _TelaLoginState extends State<TelaLogin> {
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
-              TextFormField(
-                controller: _senhaController,
+
+              TextField(
+                onChanged: (text){
+                  _senha = text;
+                },
                 decoration: const InputDecoration(
-                  //icon: const Icon(Icons.vpn_key),
+                  //icon: const Icon(Icons.person),
                   hintText: 'Digite sua senha',
                   labelText: 'Senha',
                 ),
                 obscureText: true,
-                //keyboardType: TextInputType.emailAddress,
               ),
+//              TextFormField(
+//                controller: _senhaController,
+//                decoration: const InputDecoration(
+//                  //icon: const Icon(Icons.vpn_key),
+//                  hintText: 'Digite sua senha',
+//                  labelText: 'Senha',
+//                ),
+//                obscureText: true,
+//                //keyboardType: TextInputType.emailAddress,
+//              ),
 
 //            TextFormField(
 //              decoration: InputDecoration(
@@ -211,43 +222,7 @@ class _TelaLoginState extends State<TelaLogin> {
                   ),
                   color: Theme.of(context).primaryColor,
                   onPressed: () {
-                    //ToDo: validar usuario e senha
-
-                    //Login com o Firebase - Necessaria ativação na plataforma
-
-
-                    auth.signIn(_email, _senhaController.text).then((String uid){
-                      switch (selectedRadio) {
-                        case 1:
-                          {
-                           /* Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => TelaPrincipalCliente()),
-                            );*/
-
-                            Navigator.of(context).pushReplacementNamed('/telaPrincipalCliente');
-                            break;
-                          }
-                        case 2:
-                          {
-                           /* Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => TelaPrincipalEmpresa()),
-                            );*/
-                            Navigator.of(context).pushReplacementNamed('/telaPrincipalEmpresa');
-                            break;
-                          }
-                      }
-                    }).catchError((e){
-                      print("DENTRO DO CATCH ERROR");
-                      _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("E-mail ou senha invalidos"),
-                        backgroundColor: Colors.redAccent, duration: Duration(seconds: 3),));
-                    });
-
-                    //Navigator.pop(context);
-
+                    _onPressedButtonEntrar();
                   },
                 ),
               ),
@@ -321,5 +296,45 @@ class _TelaLoginState extends State<TelaLogin> {
         ),
       ),
     );
+  }
+
+  void _onPressedButtonEntrar(){
+    Auth auth = Auth();
+
+    //ToDo: validar usuario e senha
+
+    //Login com o Firebase - Necessaria ativação na plataforma
+
+    auth.signIn(_email, _senha).then((String uid){
+      switch (selectedRadio) {
+        case 1:
+          {
+            /* Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TelaPrincipalCliente()),
+                            );*/
+
+            Navigator.of(context).pushReplacementNamed('/telaPrincipalCliente');
+            break;
+          }
+        case 2:
+          {
+            /* Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TelaPrincipalEmpresa()),
+                            );*/
+            Navigator.of(context).pushReplacementNamed('/telaPrincipalEmpresa');
+            break;
+          }
+      }
+    }).catchError((e){
+      print("DENTRO DO CATCH ERROR ${e.toString()}");
+      _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("E-mail ou senha invalidos"),
+        backgroundColor: Colors.redAccent, duration: Duration(seconds: 3),));
+    });
+
+    //Navigator.pop(context);
   }
 }

@@ -16,9 +16,16 @@ class _TelaCadastroState extends State<TelaCadastro> {
   final _senhaController = TextEditingController();
   final _senhaConfirmController = TextEditingController();
   final _cpfControllerMascara = MaskedTextController(mask: '000.000.000-00');
+  //ToDo: alternar mascara entre cpf e cnpj
+  //final _cnpjControllerMascara = MaskedTextController(mask: '00.000.000/0000-00');
 
   final _telefoneControllerMascara =
       MaskedTextController(mask: '(00) 0 0000-0000');
+
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  //para ativar o autovalidade apenas apos clicar no botao submmit
+  bool _autovalidate = false;
 
   Map<String, dynamic> dados =
       Map(); //variavel para montar os dados que serao inseridos no banco pela API
@@ -27,6 +34,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text("Cliente"),
         centerTitle: false,
@@ -105,7 +113,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
   Widget getForm() {
     return Form(
         key: _formKey,
-        autovalidate: true,
+        autovalidate: _autovalidate,
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           children: <Widget>[
@@ -146,18 +154,30 @@ class _TelaCadastroState extends State<TelaCadastro> {
                   if (value.isEmpty) {
                     return 'Entre com a senha';
                   }
+                  if (value.length < 6) {
+                    return 'Mínimo 6 caracteres';
+                  }
+                  if (value != _senhaConfirmController.text) {
+                    return 'Senha e Repetir Senha são diferentes.';
+                  }
                 }),
             TextFormField(
                 controller: _senhaConfirmController,
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.vpn_key),
                   hintText: 'Repita a senha',
-                  labelText: 'Repitir Senha',
+                  labelText: 'Repetir Senha',
                 ),
                 obscureText: true,
                 validator: (value) {
                   if (value.isEmpty) {
                     return 'Entre com a senha';
+                  }
+                  if (value.length < 6) {
+                    return 'Mínimo 6 caracteres';
+                  }
+                  if (value != _senhaConfirmController.text) {
+                    return 'Senha e Repetir Senha são diferentes';
                   }
                 }
                 //keyboardType: TextInputType.emailAddress,
@@ -202,6 +222,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
                 ),
                 color: Theme.of(context).primaryColor,
                 onPressed: () {
+                  _autovalidate = true;
                   if (_formKey.currentState.validate()) {
                     //montando o Map para interacao com a API
                     dados = {
@@ -213,16 +234,28 @@ class _TelaCadastroState extends State<TelaCadastro> {
                     };
 
                     //////////*******CRIANDO USUARIO NO FIREBASE  ********/////////////////////
-                    print(auth.signUp(
-                        _emailController.text, _senhaController.text));
+//                    print(auth.signUp(
+//                        _emailController.text, _senhaController.text));
+                    auth
+                      .signUp(_emailController.text, _senhaController.text)
+                      .then((value) {
+                        //Cria um registro com todos os dados no banco de dados no gearhost
+                        _launchURL(dados).then( (a) {
+                          //se tiver sucesso ao cadastrar ir para a tela principal cliente
+                          Navigator.of(context)
+                              .pushReplacementNamed('/telaPrincipalCliente');
+                        });
+                      })
+                      .catchError((e) {
+                        print("DENTRO DO CATCH ERROR ${e.toString()}");
+                        _scaffoldKey.currentState.showSnackBar(SnackBar(
+                          content: Text("E-mail ou senha invalidos"),
+                          backgroundColor: Colors.redAccent,
+                          duration: Duration(seconds: 3),
+                        ));
+                    });
                     /////////******************************////////////////////
 
-                    //Cria um registro com todos os dados no banco de dados no gearhost
-                    _launchURL(dados);
-
-                    //se tiver sucesso ao cadastrar ir para a tela principal cliente
-                    Navigator.of(context)
-                        .pushReplacementNamed('/telaPrincipalCliente');
                   }
                 },
               ),
@@ -233,7 +266,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
 }
 
 //Metodo para criacao de registro de usuario no banco de dados da gearhost
-_launchURL(Map<String, dynamic> dados) async {
+Future<Null> _launchURL(Map<String, dynamic> dados) async {
   String url = "http://alguz1.gearhostpreview.com/cadastra_pessoa.php";
   var response = await http.post(url, body: dados);
   if (response.statusCode == 200) {
