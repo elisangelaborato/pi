@@ -26,15 +26,6 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
 
   _TelaPerfilPrestadorState({this.pessoa, this.cdgPessoa});
 
-//  Future<Map> _getDados() async {
-//    http.Response response;
-//    response = await http.get(
-//        "http://alguz1.gearhostpreview.com/lista.php?tabela=pessoa");
-//    print("ZZZZZZZ ${response.body}");
-//    return json.decode(response.body);
-//  }
-
-//{"pessoa":[{"cdgPessoa":"1","nome":"Anderson","email":"anderson_megax@hotmail.com","senha":"senha123","cpfcnpj":"123123123","imagem":null},{"cdgPessoa":"2","nome":"Leonardo","email":"leocberaldo@hotmail.com","senha":"123456","cpfcnpj":"147258369","imagem":"http://images.coveralia.com/autores/thumbs/belchior81574m.jpg"},{"cdgPessoa":"9","nome":"gilberto","email":"gilberto.gilson@gmail.com","senha":"123456","cpfcnpj":"11024533972","imagem":null},{"cdgPessoa":"10","nome":"ma
 
 //  Future<Map> _getPessoa(int cdgPessoa) async{
 //    _getDados()
@@ -94,12 +85,62 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
 //  }
 
 
+  Future<Map> _getDados(String cdgPessoa) async {
+    http.Response response;
+//    response = await http.get(
+//        "http://alguz1.gearhostpreview.com/lista.php?tabela=pessoa");
+    //http://alguz1.gearhostpreview.com/lista.php?tabela=pessoa
+    //http://alguz1.gearhostpreview.com/lista.php?tabela=pessoa&codigo=1&idTabela=cdgPessoa
+    response = await http.get(
+        "http://alguz1.gearhostpreview.com/lista.php?tabela=pessoa&codigo=$cdgPessoa&idTabela=cdgPessoa");
+    print("_getDados response.body: ${response.body}");
+    return json.decode(response.body);
+  }
+
+
+  Future<Map> _getPessoa(String cdgPessoa) async{
+    _getDados(cdgPessoa)
+        .then( (p) {
+      print("$p");
+          //{pessoa: [{cdgPessoa: 1, nome: Anderson, email: anderson_megax@hotmail.com, senha: senha123, cpfcnpj: 123123123, imagem: null}]}
+          pessoa = p;
+      print("ola");
+          print("${p["pessoa"][0]["nome"]}");
+          print("${p["pessoa"][0]["email"]}");
+//          print("${p["pessoa"]["senha"]}");
+//          print("${p["pessoa"]["cpfcnpj"]}");
+//          print("${p["pessoa"]["imagem"]}");
+
+//          pessoa = pessoas[1];
+//          print(pessoas);
+//          print(pessoa);
+//
+//          pessoas.forEach(
+//            (k,v) {
+//              //if (k == "cdgPessoa" && v == cdgPessoa){
+//              print('${k}: ${v}');
+//              //}
+//              v.replaceAll('[', '');
+//              v.replaceAll(']', '');
+//              v.forEach(
+//                  (y, j){
+//                    print('${y}: ${j}');
+//                  }
+//              );
+//          }
+//        );
+    }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-//    if (pessoa == null) {
-//      //buscar dados pessoa pelo codigo via api
-//      _getPessoa(1);
-//    }
+    _getPessoa("1");
+    if (pessoa == null) {
+      //buscar dados pessoa pelo codigo via api
+      _getPessoa("1");
+    }
+
 //    setPessoa();
   //ToDo: testar colocar o FutureBuilder abaixo e o conteudo abaixo dentro do FutureBuilder
 

@@ -17,9 +17,8 @@ class _TelaCadastroState extends State<TelaCadastro> {
   final _emailController = TextEditingController();
   final _senhaController = TextEditingController();
   final _senhaConfirmController = TextEditingController();
-  final _cpfControllerMascara = MaskedTextController(mask: '000.000.000-00');
-  //ToDo: alternar mascara entre cpf e cnpj
-  //final _cnpjControllerMascara = MaskedTextController(mask: '00.000.000/0000-00');
+
+  MaskedTextController _cpfControllerMascara = MaskedTextController(mask: '00.000.000/0000-00');
 
   final _telefoneControllerMascara =
       MaskedTextController(mask: '(00) 0 0000-0000');
@@ -32,6 +31,35 @@ class _TelaCadastroState extends State<TelaCadastro> {
   Map<String, dynamic> dados =
       Map(); //variavel para montar os dados que serao inseridos no banco pela API
   Auth auth = Auth();
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    //trocar mascara para qdo cpf ou cnpj
+    _cpfControllerMascara.beforeChange = (String previous, String next) {
+//      print("before previous $previous");
+//      print("before next $next");
+
+      String texto = next;
+      texto= texto.replaceAll(".", "");
+      texto= texto.replaceAll("-", "");
+      texto= texto.replaceAll("/", "");
+
+      if (texto.length > 11)
+        setState(() {
+          _cpfControllerMascara.updateMask('00.000.000/0000-00');
+        });
+      else
+        setState( () {
+          _cpfControllerMascara.updateMask('000.000.000-00');
+        });
+
+      return true;
+    };
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,6 +153,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
                   hintText: 'Entre com o CPF ou CNPJ',
                   labelText: 'CPF/CNPJ',
                 ),
+
                 validator: (value) {
                   if (value.isEmpty) {
                     return 'Entre com o CPF';
