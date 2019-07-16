@@ -184,14 +184,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
                 onPressed: () {
                   _autovalidate = true;
                   if (_formKey.currentState.validate()) {
-                    //montando o Map para interacao com a API
-                    dados = {
-                      "nome": _nomeController.text,
-                      "email": _emailController.text,
-                      "senha": _senhaController.text,
-                      "cpfcnpj": _cpfControllerMascara.text,
-                      "telefone": _telefoneControllerMascara.text
-                    };
+
 
                     //////////*******CRIANDO USUARIO NO FIREBASE  ********/////////////////////
 //                    print(auth.signUp(
@@ -199,6 +192,15 @@ class _TelaCadastroState extends State<TelaCadastro> {
                     auth
                         .signUp(_emailController.text, _senhaController.text)
                         .then((value) {
+                      //montando o Map para interacao com a API
+                      dados = {
+                        "nome": _nomeController.text,
+                        "email": _emailController.text,
+                        "senha": _senhaController.text,
+                        "cpfcnpj": _cpfControllerMascara.text,
+                        "telefone": _telefoneControllerMascara.text,
+                        "uid": value
+                      };
                       //Cria um registro com todos os dados no banco de dados no gearhost
                       _launchURL(dados).then((a) {
                         //se tiver sucesso ao cadastrar ir para a tela principal cliente

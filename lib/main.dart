@@ -5,39 +5,17 @@ import 'view/tela_cadastrocliente.dart';
 import 'package:pi/view/tela_principal_empresa.dart';
 import 'package:pi/view/tela_cadastroprestador.dart';
 import 'package:pi/view/tela_perfil_cliente.dart';
-import 'package:pi/view/tela_agendamento_cliente.dart';
-import 'package:pi/view/drawer.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'package:pi/model/pessoa_model.dart';
 
 void main() {
-  runApp(MaterialApp(
-    //home: TelaLogin(),
-    debugShowCheckedModeBanner: false,
-
-    onGenerateRoute: generateRoute,
-    initialRoute: '/',
-   /* routes: <String, WidgetBuilder>{
-      //Rota para a tela de login
-      '/': (context) => TelaLogin(),
-      //Rota para a tela principal do cliente
-      '/telaPrincipalCliente': (BuildContext context) => TelaPrincipalCliente(),
-
-      //Rota para tela de cadastro de cliente
-      '/telaCadastroCliente': (BuildContext context) => TelaCadastro(),
-
-      //Rota para tela de perfil do cliente
-      '/telaPerfilCliente': (BuildContext context) => TelaPerfilCliente(),
-
-      //Rota para a tela de agendamento de serviços
-      '/telaAgendamentoCliente': (BuildContext context) =>
-          TelaAgendamentoCliente(),
-
-      //Rota para a tela principal de prestador de serviços
-      '/telaPrincipalEmpresa': (BuildContext context) => TelaPrincipalEmpresa(),
-
-      //Rota pra tela de cadastro de prestador de serviços
-      '/telaCadastroPrestador': (BuildContext context) =>
-          TelaCadastroPrestador()
-    },*/
+  runApp(ScopedModel<PessoaModel>(
+    model: PessoaModel(),
+    child: MaterialApp(
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: generateRoute,
+      initialRoute: '/',
+    ),
   ));
 }
 

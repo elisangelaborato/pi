@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pi/services/autenticacao_firebase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pi/model/pessoa_model.dart';
 
 class TelaLogin extends StatefulWidget {
   @override
@@ -202,6 +203,7 @@ class _TelaLoginState extends State<TelaLogin> {
     Auth auth = Auth();
     //Login com o Firebase - Necessaria ativação na plataforma
     auth.signIn(_email, _senha).then((String uid){
+      PessoaModel.of(context).getDados(uid);
       switch (selectedRadio) {
         case 1:
             Navigator.of(context).pushReplacementNamed('/telaPrincipalCliente');
