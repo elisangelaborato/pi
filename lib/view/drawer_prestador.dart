@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pi/view/tela_cadastro_servico.dart';
+import 'package:pi/view/tela_login.dart';
 import 'package:pi/view/tela_perfil_cliente.dart';
 import 'package:pi/view/tela_perfil_prestador.dart';
 
@@ -27,6 +29,13 @@ class _DrawerPrestadorState extends State<DrawerPrestador> {
     return Drawer(
       child: ListView(children: <Widget>[
         UserAccountsDrawerHeader(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+              const Color(0xff000080),
+              const Color(0xff0000ff),
+              const Color(0xff0086b3),
+            ], begin: Alignment.centerLeft, end: Alignment.centerRight),
+          ),
           accountName: Text("Login"),
           accountEmail: Text("login@gmail.com"),
           currentAccountPicture: GestureDetector(
@@ -50,6 +59,13 @@ class _DrawerPrestadorState extends State<DrawerPrestador> {
 //        ),
 
         ListTile(
+          leading: Icon(Icons.add_box),
+          title: Text("Cadastrar Serviço"),
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TelaCadastroServico()));
+          },
+        ),
+        ListTile(
           leading: Icon(Icons.access_time),
           title: Text("Histórico"),
           onTap: () {},
@@ -59,13 +75,22 @@ class _DrawerPrestadorState extends State<DrawerPrestador> {
           title: Text("Avaliações"),
           onTap: () {},
         ),
+        ListTile(
+          leading: Icon(Icons.settings),
+          title: Text("Configurações"),
+          onTap: () {
+
+          },
+        ),
         Divider(
           color: Colors.black,
         ),
         ListTile(
           leading: Icon(Icons.exit_to_app),
           title: Text("Sair"),
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TelaLogin()));
+          },
         )
       ]),
     );

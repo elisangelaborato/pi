@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:pi/view/drawer_prestador.dart';
 import 'package:pi/view/tela_agendamento_prestador.dart';
 import 'package:pie_chart/pie_chart.dart';
@@ -11,7 +12,16 @@ class TelaPrincipalEmpresa extends StatelessWidget {
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
-          appBar: AppBar(
+          appBar: GradientAppBar(
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [
+                const Color(0xff000080),
+                const Color(0xff0000ff),
+                const Color(0xff0086b3),
+              ],
+            ),
             bottom: TabBar(
               tabs: <Widget>[
                 Tab(
@@ -467,7 +477,7 @@ class ServicosPrestados extends StatelessWidget {
                       ),
                       RaisedButton(
                         onPressed: () {},
-                        color: Colors.redAccent,
+                        color: Colors.blue,
                         child: Text("EXCLUIR", style: TextStyle(color: Colors.white),),
                       ),
                     ],

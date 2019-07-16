@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:pi/view/tela_principal_empresa.dart';
 
 class TelaCadastroServico extends StatefulWidget {
   @override
@@ -15,7 +17,16 @@ class _TelaCadastroServicoState extends State<TelaCadastroServico> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: GradientAppBar(
+        gradient: LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: [
+            const Color(0xff000080),
+            const Color(0xff0000ff),
+            const Color(0xff0086b3),
+          ],
+        ),
         title: Text("Cadastrar Serviços"),
         centerTitle: true,
       ),
@@ -68,7 +79,7 @@ class _TelaCadastroServicoState extends State<TelaCadastroServico> {
                       Icons.edit,
                       color: Colors.blue,
                     ),
-                    hintText: 'Ex: Professore de Inglês, Enfermeira, Pintor...',
+                    hintText: 'Ex: Professor de Inglês, Enfermeira, Pintor...',
                     labelText: 'Nome da Profissão',
                     labelStyle: TextStyle(color: Colors.blue),
                     hintStyle: TextStyle(color: Colors.blue),
@@ -136,15 +147,19 @@ class _TelaCadastroServicoState extends State<TelaCadastroServico> {
             ),
             Container(
               width: 300,
-              padding: EdgeInsets.fromLTRB(120, 50, 0, 0),
+              padding: EdgeInsets.fromLTRB(120, 80, 0, 0),
               child: FlatButton(
-                onPressed: () {},
+                shape: StadiumBorder(),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TelaPrincipalEmpresa()));
+                },
                 child: Text(
                   "Cadastrar-se",
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 color: Colors.blue,
+
               ),
             ),
           ],

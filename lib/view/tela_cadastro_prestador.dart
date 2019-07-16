@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class TelaCadastroPrestador extends StatefulWidget {
   @override
@@ -8,16 +10,30 @@ class TelaCadastroPrestador extends StatefulWidget {
 class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
+  var _maskedTel = new MaskedTextController(mask: '(00)00000-0000');
+
+  var _maskedCep = new MaskedTextController(mask: '00000-000');
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Prestador de Serviços",
+      appBar: GradientAppBar(
+
+        gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              const Color(0xff0086b3),
+              const Color(0xff0000FF),
+              const Color(0xff0086b3),
+            ],
         ),
-        centerTitle: false,
+        title: Text("Prestador de Serviços"),
+        centerTitle: true,
       ),
       body: getForm(),
+
 //      body: SingleChildScrollView(
 //        child: Padding(
 //          padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -88,6 +104,7 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
     );
   }
 
+
   Widget getForm() {
     return Form(
         key: _formKey,
@@ -97,25 +114,11 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
           children: <Widget>[
             TextFormField(
               decoration: const InputDecoration(
-                icon: const Icon(Icons.donut_large),
-                hintText: 'Informe a função',
-                labelText: 'Função',
-              ),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
                 icon: const Icon(Icons.email),
                 hintText: 'Entre com seu CEP',
                 labelText: 'CEP',
               ),
-              //keyboardType: TextInputType.emailAddress,
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                icon: const Icon(Icons.access_time),
-                hintText: 'Entre com horário de funcionamento',
-                labelText: 'Horário de funcionamento',
-              ),
+              controller: _maskedCep,
               //keyboardType: TextInputType.emailAddress,
             ),
             TextFormField(
@@ -124,29 +127,33 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
                 hintText: 'Entre com informações sobre você',
                 labelText: 'Sobre mim',
               ),
+              maxLength: 200,
               //keyboardType: TextInputType.emailAddress,
             ),
             TextFormField(
               decoration: const InputDecoration(
                 icon: const Icon(Icons.phone),
-                hintText: 'Entre com seu telefone',
+                hintText: '(99)99999-9999',
                 labelText: 'Telefone',
               ),
+              controller: _maskedTel,
               //keyboardType: TextInputType.number,
             ),
             SizedBox(
               height: 30.0,
             ),
             Container(
+
               //padding: const EdgeInsets.only(left: 40.0, top: 20.0),
               width: double.infinity,
               child: new RaisedButton(
                 shape: StadiumBorder(),
                 child: const Text(
-                  'CADASTRAR',
+                  'FINALIZAR',
                   style: TextStyle(color: Colors.white),
                 ),
                 color: Theme.of(context).primaryColor,
+
                 onPressed: () {},
               ),
             ),

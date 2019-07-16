@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pi/view/drawer.dart';
 import 'package:pi/view/tela_agendamento_cliente.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class TelaPrincipalCliente extends StatefulWidget {
   @override
@@ -14,7 +15,16 @@ class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
-          appBar: AppBar(
+          appBar: GradientAppBar(
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [
+                const Color(0xff000080),
+                const Color(0xff0000ff),
+                const Color(0xff0086b3),
+              ],
+            ),
             bottom: TabBar(
               tabs: <Widget>[
                 Tab(
@@ -553,7 +563,12 @@ class PrestadoresWidget extends StatelessWidget {
                         height: 0,
                       ),
                       RaisedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => TelaAgendamentoCliente()),
+                          );
+                        },
                         color: Theme.of(context).primaryColor,
                         child: Text("CONTRATAR", style: TextStyle(color: Colors.white),),
                       ),

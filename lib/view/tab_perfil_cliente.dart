@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pi/view/tela_cadastrocliente.dart';
+import 'package:pi/view/tela_cadastro_cliente.dart';
 
 class TabPerfilCliente extends StatefulWidget {
   @override

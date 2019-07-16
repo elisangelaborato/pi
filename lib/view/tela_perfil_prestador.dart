@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pi/view/tab_agenda_prestador.dart';
 import 'package:pi/view/tab_avaliacao_prestador.dart';
 import 'package:pi/view/tab_perfil_prestador.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 ////80% of screen width
 //double c_width = MediaQuery.of(context).size.width*0.8;
@@ -21,7 +22,16 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: AppBar(
+        appBar: GradientAppBar(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              const Color(0xff000080),
+              const Color(0xff0000ff),
+              const Color(0xff0086b3),
+            ],
+          ),
           flexibleSpace: FlexibleSpaceBar(
             centerTitle: true,
             title: Center(
