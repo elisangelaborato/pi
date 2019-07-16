@@ -3,6 +3,7 @@ import 'package:pi/view/tab_agenda_prestador.dart';
 import 'package:pi/view/tab_avaliacao_prestador.dart';
 import 'package:pi/view/tab_perfil_prestador.dart';
 import 'package:http/http.dart' as http;
+import 'package:pi/view/tab_servicos_prestador.dart';
 import 'dart:convert';
 
 import 'package:pi/view/tela_cadastroprestador.dart';
@@ -168,7 +169,7 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
         text: "Perfil",
       ), //icon: Icon(Icons.perm_contact_calendar)
       Tab(
-        text: "Agenda",
+        text: "Serviços",
       ), //icon: Icon(Icons.calendar_today)
       Tab(
         text: "Avaliações",
@@ -180,7 +181,8 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
     return TabBarView(//controller: tabController,
         children: <Widget>[
       TabPerfilPrestador(pessoa, prestador),
-      TabAgendaPrestador(),
+      //TabAgendaPrestador(),
+      TabServicosPrestador(pessoa["pessoa"][0]["cdgPessoa"]),
       TabAvaliacaoPrestador(),
     ]);
   }
