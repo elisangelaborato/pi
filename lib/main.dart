@@ -56,7 +56,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => TelaPerfilCliente());
       break;
     case '/telaCadastroPrestador':
-      return MaterialPageRoute(builder: (_) => TelaCadastroPrestador());
+      return MaterialPageRoute(builder: (_) => TelaCadastroPrestador(""));
       break;
     case '/telaCadastroCliente':
       return MaterialPageRoute(builder: (_) => TelaCadastro());

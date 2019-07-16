@@ -5,20 +5,19 @@ import 'dart:convert' as convert;
 import 'package:pi/services/autenticacao_firebase.dart';
 
 class TelaCadastro extends StatefulWidget {
-
   @override
   _TelaCadastroState createState() => _TelaCadastroState();
 }
 
 class _TelaCadastroState extends State<TelaCadastro> {
-
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   final _nomeController = TextEditingController();
   final _emailController = TextEditingController();
   final _senhaController = TextEditingController();
   final _senhaConfirmController = TextEditingController();
 
-  MaskedTextController _cpfControllerMascara = MaskedTextController(mask: '00.000.000/0000-00');
+  MaskedTextController _cpfControllerMascara =
+      MaskedTextController(mask: '00.000.000/0000-00');
 
   final _telefoneControllerMascara =
       MaskedTextController(mask: '(00) 0 0000-0000');
@@ -29,9 +28,8 @@ class _TelaCadastroState extends State<TelaCadastro> {
   bool _autovalidate = false;
 
   Map<String, dynamic> dados =
-      Map(); //variavel para montar os dados que serao inseridos no banco pela API
+  Map(); //variavel para montar os dados que serao inseridos no banco pela API
   Auth auth = Auth();
-
 
   @override
   void initState() {
@@ -43,22 +41,21 @@ class _TelaCadastroState extends State<TelaCadastro> {
 //      print("before next $next");
 
       String texto = next;
-      texto= texto.replaceAll(".", "");
-      texto= texto.replaceAll("-", "");
-      texto= texto.replaceAll("/", "");
+      texto = texto.replaceAll(".", "");
+      texto = texto.replaceAll("-", "");
+      texto = texto.replaceAll("/", "");
 
       if (texto.length > 11)
         setState(() {
           _cpfControllerMascara.updateMask('00.000.000/0000-00');
         });
       else
-        setState( () {
+        setState(() {
           _cpfControllerMascara.updateMask('000.000.000-00');
         });
 
       return true;
     };
-
   }
 
   @override
@@ -153,7 +150,6 @@ class _TelaCadastroState extends State<TelaCadastro> {
                   hintText: 'Entre com o CPF ou CNPJ',
                   labelText: 'CPF/CNPJ',
                 ),
-
                 validator: (value) {
                   if (value.isEmpty) {
                     return 'Entre com o CPF';
@@ -201,24 +197,27 @@ class _TelaCadastroState extends State<TelaCadastro> {
 //                    print(auth.signUp(
 //                        _emailController.text, _senhaController.text));
                     auth
-                      .signUp(_emailController.text, _senhaController.text)
-                      .then((value) {
-                        //Cria um registro com todos os dados no banco de dados no gearhost
-                        _launchURL(dados).then( (a) {
-                          //se tiver sucesso ao cadastrar ir para a tela principal cliente
-                          Navigator.of(context)
-                              .pushReplacementNamed('/telaPrincipalCliente');
-                        });
-                      })
-                      .catchError((e) {
-                        print("DENTRO DO CATCH ERROR ${e.toString()}");
-                        _scaffoldKey.currentState.showSnackBar(SnackBar(
-                          content: Text("E-mail ou senha invalidos"),
-                          backgroundColor: Colors.redAccent,
-                          duration: Duration(seconds: 3),
-                        ));
+                        .signUp(_emailController.text, _senhaController.text)
+                        .then((value) {
+                      //Cria um registro com todos os dados no banco de dados no gearhost
+                      _launchURL(dados).then((a) {
+                        //se tiver sucesso ao cadastrar ir para a tela principal cliente
+                        Navigator.of(context)
+                            .pushReplacementNamed('/telaPrincipalCliente');
+                      });
+                    }).catchError((e) {
+                      print("DENTRO DO CATCH ERROR ${e.toString()}");
+                      _scaffoldKey.currentState.showSnackBar(SnackBar(
+                        content: Text("E-mail ou senha invalidos"),
+                        backgroundColor: Colors.redAccent,
+                        duration: Duration(seconds: 3),
+                      ));
                     });
                     /////////******************************////////////////////
+
+                    //ToDo: salvar dados para tabela prestador
+                    //ToDo: verificar se eh alteracao de dados para dar update ao invez de insert no banco
+                    //ToDo: verificar se eh alteracao de dados para dar update ao invez de insert no firebase
 
                   }
                 },

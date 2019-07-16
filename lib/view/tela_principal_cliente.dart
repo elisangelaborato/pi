@@ -52,12 +52,11 @@ class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
 }
 
 class ServicosWidget extends StatelessWidget {
-
   Future<Map> _getDados() async {
     http.Response response;
     response = await http.get(
         "http://alguz1.gearhostpreview.com/lista.php?tabela=categoriaservico");
-    print(response.body);
+//    print(response.body);
     return json.decode(response.body);
   }
 
@@ -103,8 +102,8 @@ class ServicosWidget extends StatelessWidget {
     return ListView.builder(
       itemCount: snapshot.data["categoriaservico"].length,
       itemBuilder: (context, index) {
-        print(snapshot.data["categoriaservico"].length);
-        print(index);
+//        print(snapshot.data["categoriaservico"].length);
+//        print(index);
         return _createTile(context, snapshot, index);
       },
     );
@@ -152,14 +151,14 @@ class MeusServicosWidget extends StatelessWidget {
               GestureDetector(
                 child: getCard(context),
                 onTap: () {
-                 /* Navigator.push(
+                  /* Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => TelaAgendamentoCliente()),
                   );*/
 
                   //nao sei pq issa rota nao funciona
-                 //Navigator.of(context).pushNamed('/telaAgendamentoCliente');
+                  //Navigator.of(context).pushNamed('/telaAgendamentoCliente');
                 },
               ),
               GestureDetector(
@@ -185,7 +184,7 @@ class MeusServicosWidget extends StatelessWidget {
               GestureDetector(
                 child: getCard(context),
                 onTap: () {
-                  print("GestureDetector, onTap acionado");
+//                  print("GestureDetector, onTap acionado");
                 },
               ),
               GestureDetector(
@@ -203,7 +202,6 @@ class MeusServicosWidget extends StatelessWidget {
         ),
       ),
     );
-
   }
 
   Widget getCard(context) {
@@ -312,7 +310,7 @@ class PrestadoresWidget extends StatelessWidget {
     http.Response response;
     response = await http
         .get("http://alguz1.gearhostpreview.com/lista.php?tabela=pessoa");
-    print(response.body);
+//    print(response.body);
     return json.decode(response.body);
   }
 
@@ -356,8 +354,8 @@ class PrestadoresWidget extends StatelessWidget {
     return ListView.builder(
       itemCount: snapshot.data["pessoa"].length,
       itemBuilder: (context, index) {
-        print(snapshot.data["pessoa"].length);
-        print(index);
+//        print(snapshot.data["pessoa"].length);
+//        print(index);
         return getCard(context, snapshot, index);
       },
     );
@@ -389,8 +387,22 @@ class PrestadoresWidget extends StatelessWidget {
                                   size: 60,
                                   color: Theme.of(context).primaryColor,
                                 )
-                              : Image.network(
-                                  snapshot.data["pessoa"][index]["imagem"]),
+                              : //Image.network(snapshot.data["pessoa"][index]["imagem"]),
+
+                              //container para deixar imagem circular
+                              Container(
+                                  width: 60.0,
+                                  height: 60.0,
+                                  decoration: new BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: new DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: new NetworkImage(snapshot
+                                          .data["pessoa"][index]["imagem"]),
+                                    ),
+                                  ),
+                                ),
+
 //                          //Icon(Icons.person, size: 60, color: Theme.of(context).primaryColor,),
 //                          Image.network(
 //                              "http://images.coveralia.com/autores/thumbs/belchior81574m.jpg"),
@@ -459,9 +471,20 @@ class PrestadoresWidget extends StatelessWidget {
                           style: TextStyle(color: Colors.white),
                         ),
                         onPressed: () {
+
+//                          print("${snapshot.data["pessoa"][index]}");
+//                          print("${snapshot.data["pessoa"][index]["cdgPessoa"]}");
+
+                          String cdgPessoa = snapshot.data["pessoa"][index]["cdgPessoa"];
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => TelaPerfilPrestador(pessoa: snapshot.data["pessoa"][index])),
+                            MaterialPageRoute(
+                                builder: (context) => TelaPerfilPrestador(
+                                  // nao me acertei em mandar direto o map da pessoa, por hora mando codigo
+                                  //pessoa: snapshot.data["pessoa"][index],
+                                    cdgPessoa: cdgPessoa,
+                                )
+                            ),
                           );
                         },
                       ),

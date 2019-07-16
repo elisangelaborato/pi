@@ -56,7 +56,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => TelaCadastroPrestador()),
+                  builder: (context) => TelaCadastroPrestador("2")),
             );
 
             //////TESTAR SE ESTA COMO PRESTADOR

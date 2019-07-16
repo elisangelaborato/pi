@@ -19,7 +19,7 @@ class _DrawerPrestadorState extends State<DrawerPrestador> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => TelaPerfilPrestador(cdgPessoa: 1,)),
+      MaterialPageRoute(builder: (context) => TelaPerfilPrestador(cdgPessoa: "2",)),
     );
   }
 
