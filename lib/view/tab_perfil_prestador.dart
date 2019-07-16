@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pi/view/tela_cadastroprestador.dart';
+import 'package:pi/view/tela_cadastro_prestador.dart';
 
 class TabPerfilPrestador extends StatefulWidget {
 

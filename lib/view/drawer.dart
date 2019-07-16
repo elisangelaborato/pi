@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pi/view/tela_cadastro_prestador.dart';
 import 'package:pi/view/tela_perfil_cliente.dart';
 import 'package:pi/view/tela_perfil_prestador.dart';
-import 'package:pi/view/tela_cadastroprestador.dart';
+import 'package:pi/view/tela_login.dart';
 
 class CustomDrawer extends StatefulWidget {
   @override
@@ -9,10 +10,9 @@ class CustomDrawer extends StatefulWidget {
 }
 
 class _CustomDrawerState extends State<CustomDrawer> {
-
-  chamarTelaPerfil(){
+  chamarTelaPerfil() {
     //Navigator.pop(context);
-
+    //ToDo: checar se esta como cliente ou como prestador de servicos
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => TelaPerfilCliente()),
@@ -27,43 +27,36 @@ class _CustomDrawerState extends State<CustomDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(children: <Widget>[
-              UserAccountsDrawerHeader(
-                accountName: Text("Login"),
-                accountEmail: Text("login@gmail.com"),
-                currentAccountPicture: GestureDetector(
-                  child:                 CircleAvatar(
-                    backgroundImage: ExactAssetImage("images/person.png"),
-                  ),
-                  onTap: () {
-                   // Navigator.pushNamed(context, '/telaPerfilCliente');
-                    chamarTelaPerfil();
-
-                  },
-                ),
-
-                onDetailsPressed: () {
-                  //Navigator.pushNamed(context,'/telaPerfilCliente');
-                  chamarTelaPerfil();
-                },
-              ),
-
+        UserAccountsDrawerHeader(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+              const Color(0xff000080),
+              const Color(0xff0000ff),
+              const Color(0xff0086b3),
+            ], begin: Alignment.centerLeft, end: Alignment.centerRight),
+          ),
+          accountName: Text("Login"),
+          accountEmail: Text("login@gmail.com"),
+          currentAccountPicture: GestureDetector(
+            child: CircleAvatar(
+              backgroundImage: ExactAssetImage("images/person.png"),
+            ),
+            onTap: () {
+              chamarTelaPerfil();
+            },
+          ),
+          onDetailsPressed: () {
+            chamarTelaPerfil();
+          },
+        ),
         ListTile(
           leading: Icon(Icons.work),
           title: Text("Tornar-se um prestador"),
           onTap: () {
-
-
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => TelaCadastroPrestador("2")),
-            );
-
-            //////TESTAR SE ESTA COMO PRESTADOR
-           Navigator.of(context).pushNamed('/telaCadastroPrestador');
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => TelaCadastroPrestador()));
           },
         ),
-
         ListTile(
           leading: Icon(Icons.access_time),
           title: Text("Histórico"),
@@ -81,7 +74,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           leading: Icon(Icons.exit_to_app),
           title: Text("Sair"),
           onTap: () {
-
+            Navigator.of(context).pushReplacementNamed('/tela_login');
           },
         )
       ]),
