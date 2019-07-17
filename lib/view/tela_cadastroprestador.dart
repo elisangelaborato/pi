@@ -6,6 +6,7 @@ import 'package:pi/services/autenticacao_firebase.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
+import 'package:pi/model/pessoa_model.dart';
 
 class TelaCadastroPrestador extends StatefulWidget {
   final String cdgPessoa;
@@ -69,11 +70,12 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
           _cpfControllerMascara.updateMask('000.000.000-00');
         });
 
+
       return true;
     };
   }
 
-  Future<Map> _getDadosPessoa(String cdgPessoa) async {
+/*  Future<Map> _getDadosPessoa(String cdgPessoa) async {
     http.Response response;
     response = await http.get(
         "http://alguz1.gearhostpreview.com/lista.php?tabela=pessoa&codigo=$cdgPessoa&idTabela=cdgPessoa");
@@ -104,7 +106,7 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
 //    print("333333333 ${prestador}");
 
     return pessoa;
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -117,11 +119,12 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
         ),
         centerTitle: false,
       ),
-      body: _getFutureBuilder(),
+      //body: _getFutureBuilder(),
+      body:  _getForm(),
     );
   }
 
-  Widget _getFutureBuilder() {
+/*  Widget _getFutureBuilder() {
     return FutureBuilder(
         future: _getDados(),
         builder: (context, snapshot) {
@@ -159,9 +162,20 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
               }
           }
         });
-  }
+  }*/
 
   Widget _getForm() {
+
+    _nomeController.text            = PessoaModel.of(context).nome;
+    _emailController.text           = PessoaModel.of(context).email;
+
+    //Realmente é necessario esse campo de senha aqui?
+    //_senhaController.text           = PessoaModel.of(context);
+    //_senhaConfirmController.text    = PessoaModel.of(context);
+
+    _cpfControllerMascara.text      = PessoaModel.of(context).cpfcnpj;
+    _sobreMimController.text        = PessoaModel.of(context).sobreMimPrestador;
+    _telefoneControllerMascara.text = PessoaModel.of(context).telefonePrestador ?? PessoaModel.of(context).telefoneCliente;
     return Form(
         key: _formKey,
         autovalidate: true,
@@ -347,7 +361,7 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
                     //////////*******CRIANDO USUARIO NO FIREBASE  ********/////////////////////
 //                    print(auth.signUp(
 //                        _emailController.text, _senhaController.text));
-                    auth
+                   /* auth
                         .signUp(_emailController.text, _senhaController.text)
                         .then((value) {
                       //Cria um registro com todos os dados no banco de dados no gearhost
@@ -363,7 +377,7 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
                         backgroundColor: Colors.redAccent,
                         duration: Duration(seconds: 3),
                       ));
-                    });
+                    });*/
                     /////////******************************////////////////////
 
                     //ToDo: salvar dados para tabela prestador
@@ -379,6 +393,7 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
   }
 }
 
+/*
 //Metodo para criacao de registro de usuario no banco de dados da gearhost
 Future<Null> _launchURL(Map<String, dynamic> dados) async {
   String url = "http://alguz1.gearhostpreview.com/cadastra_pessoa.php";
@@ -391,3 +406,4 @@ Future<Null> _launchURL(Map<String, dynamic> dados) async {
     print("Request failed with status: ${response.statusCode}.");
   }
 }
+*/

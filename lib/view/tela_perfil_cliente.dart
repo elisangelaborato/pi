@@ -4,6 +4,7 @@ import 'package:pi/view/tab_avaliacao_cliente.dart';
 import 'package:pi/view/tab_perfil_cliente.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:pi/model/pessoa_model.dart';
 
 ////80% of screen width
 //double c_width = MediaQuery.of(context).size.width*0.8;
@@ -26,13 +27,13 @@ class _TelaPerfilClienteState extends State<TelaPerfilCliente> {
 
   _TelaPerfilClienteState({this.pessoa, this.cdgPessoa});
 
-  Future<Map> _getDados() async {
+/*  Future<Map> _getDados() async {
     http.Response response;
     response = await http.get(
         "http://alguz1.gearhostpreview.com/lista.php?tabela=pessoa");
     print(response.body);
     return json.decode(response.body);
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +111,7 @@ class _TelaPerfilClienteState extends State<TelaPerfilCliente> {
                   padding: EdgeInsets.only(top: 8.0),
                 ),
                 Text(
-                  "NOME DA PESSOA",
+                  PessoaModel.of(context).nome,
                   style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
                 ),
                 Text(
@@ -118,7 +119,7 @@ class _TelaPerfilClienteState extends State<TelaPerfilCliente> {
                   style: TextStyle(fontSize: 15.0),
                 ),
                 Text(
-                  "100.0",
+                 PessoaModel.of(context).notaCliente,
                   style: TextStyle(fontSize: 15.0),
                 ),
               ],

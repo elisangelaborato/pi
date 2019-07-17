@@ -185,10 +185,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
                   _autovalidate = true;
                   if (_formKey.currentState.validate()) {
 
-
                     //////////*******CRIANDO USUARIO NO FIREBASE  ********/////////////////////
-//                    print(auth.signUp(
-//                        _emailController.text, _senhaController.text));
                     auth
                         .signUp(_emailController.text, _senhaController.text)
                         .then((value) {

@@ -5,6 +5,7 @@ import 'package:pi/view/tab_perfil_prestador.dart';
 import 'package:http/http.dart' as http;
 import 'package:pi/view/tab_servicos_prestador.dart';
 import 'dart:convert';
+import 'package:pi/model/pessoa_model.dart';
 
 import 'package:pi/view/tela_cadastroprestador.dart';
 

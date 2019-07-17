@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pi/view/tela_cadastrocliente.dart';
+import 'package:pi/model/pessoa_model.dart';
 
 class TabPerfilCliente extends StatefulWidget {
   @override
@@ -30,7 +31,7 @@ class _TabPerfilClienteState extends State<TabPerfilCliente> {
                 style: TextStyle(fontSize: 18),
               ),
               Text(
-                "Mussum Ipsum, cacilds vidis litro abertis. In elementis mé pra quem é amistosis quis leo. Quem num gosta di mim que vai caçá sua turmis! Detraxit consequat et quo num tendi nada. Não sou faixa preta cumpadi, sou preto inteiris, inteiris.Mussum Ipsum, cacilds vidis litro abertis. In elementis mé pra quem é amistosis quis leo. Quem num gosta di mim que vai caçá sua turmis! Detraxit consequat et quo num tendi nada. Não sou faixa preta cumpadi, sou preto inteiris, inteiris.Mussum Ipsum, cacilds vidis litro abertis. In elementis mé pra quem é amistosis quis leo. Quem num gosta di mim que vai caçá sua turmis!",
+                PessoaModel.of(context).sobreMimCliente ?? "Adicione um texto falando um pouco sobre você",
               ),
               Padding(
                 padding: EdgeInsets.only(top: 16.0),
@@ -40,7 +41,7 @@ class _TabPerfilClienteState extends State<TabPerfilCliente> {
                 style: TextStyle(fontSize: 18),
               ),
               Text(
-                "19 9 9555 6666",
+                PessoaModel.of(context).telefoneCliente,
               ),
               Padding(
                 padding: EdgeInsets.only(top: 16.0),
@@ -50,7 +51,7 @@ class _TabPerfilClienteState extends State<TabPerfilCliente> {
                 style: TextStyle(fontSize: 18),
               ),
               Text(
-                "pessoa@gmail.com",
+                PessoaModel.of(context).email,
               ),
             ],
           ),

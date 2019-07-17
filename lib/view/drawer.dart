@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pi/view/tela_perfil_cliente.dart';
 import 'package:pi/view/tela_perfil_prestador.dart';
 import 'package:pi/view/tela_cadastroprestador.dart';
+import 'package:pi/model/pessoa_model.dart';
 
 class CustomDrawer extends StatefulWidget {
   @override
@@ -38,8 +39,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     end: Alignment.center,
                   ),
                 ),
-                accountName: Text("Login"),
-                accountEmail: Text("login@gmail.com"),
+                accountName: Text(PessoaModel.of(context).nome),
+                accountEmail: Text(PessoaModel.of(context).email),
                 currentAccountPicture: GestureDetector(
                   child:                 CircleAvatar(
                     backgroundImage: ExactAssetImage("images/person.png"),
