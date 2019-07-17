@@ -32,8 +32,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                       colors: [
-                        const Color(0xFF000080),
-                        const Color(0xFF3333ff),
+                        Color(0xFF000033),
+                        Color(0xFF000066),
+                        Color(0xFF000080),
+                        Color(0xFF0000b3),
+                        Color(0xFF0000e6),
+                        Color(0xFF0000ff),
                       ],
                     begin: Alignment.centerLeft,
                     end: Alignment.center,
@@ -42,7 +46,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 accountName: Text(PessoaModel.of(context).nome),
                 accountEmail: Text(PessoaModel.of(context).email),
                 currentAccountPicture: GestureDetector(
-                  child:                 CircleAvatar(
+                  child: CircleAvatar(
                     backgroundImage: ExactAssetImage("images/person.png"),
                   ),
                   onTap: () {
@@ -92,7 +96,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
           leading: Icon(Icons.exit_to_app),
           title: Text("Sair"),
           onTap: () {
-            Navigator.of(context).pushNamed('/');
           },
         )
       ]),

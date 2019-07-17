@@ -142,8 +142,12 @@ class _TelaLoginState extends State<TelaLogin> {
               GradientButton(
                 gradient: LinearGradient(
                   colors: [
-                    const Color(0xFF000080),
-                    const Color(0xFF3333ff),
+                    Color(0xFF000033),
+                    Color(0xFF000066),
+                    Color(0xFF000080),
+                    Color(0xFF0000b3),
+                    Color(0xFF0000e6),
+                    Color(0xFF0000ff),
                   ],
                   begin: Alignment.centerLeft,
                   end: Alignment.center,

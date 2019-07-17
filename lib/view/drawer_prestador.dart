@@ -30,8 +30,12 @@ class _DrawerPrestadorState extends State<DrawerPrestador> {
         UserAccountsDrawerHeader(
           decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
+              Color(0xFF000033),
+              Color(0xFF000066),
               Color(0xFF000080),
-              Color(0xFF3333ff),
+              Color(0xFF0000b3),
+              Color(0xFF0000e6),
+              Color(0xFF0000ff),
             ])
           ),
           accountName: Text("Login"),

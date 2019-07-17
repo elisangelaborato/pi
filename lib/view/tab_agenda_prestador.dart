@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:pi/view/tela_agendamento_prestador.dart';
 
 class TabAgendaPrestador extends StatefulWidget {
@@ -10,15 +11,15 @@ class _TabAgendaPrestadorState extends State<TabAgendaPrestador> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
-          );
-        },
-        child: Icon(Icons.add),
-      ),
+//      floatingActionButton: FloatingActionButton(
+//        onPressed: () {
+//          Navigator.push(
+//            context,
+//            MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+//          );
+//        },
+//        child: Icon(Icons.add),
+//      ),
       body: SingleChildScrollView(
         child: Container(
           child: new Center(
@@ -111,7 +112,28 @@ class _TabAgendaPrestadorState extends State<TabAgendaPrestador> {
                         style: TextStyle(
                             fontSize: 12.0, fontWeight: FontWeight.bold),
                       ),
+
                     ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(320, 185, 0, 10),
+                  child:CircularGradientButton(
+                    gradient: LinearGradient(colors: [
+                      Color(0xFF000033),
+                      Color(0xFF000066),
+                      Color(0xFF000080),
+                      Color(0xFF0000b3),
+                      Color(0xFF0000e6),
+                      Color(0xFF0000ff),
+                    ]),
+                    child: Icon(Icons.add),
+                    callback: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+                      );
+                    },
                   ),
                 ),
               ],

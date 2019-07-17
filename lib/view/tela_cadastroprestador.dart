@@ -112,8 +112,14 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GradientAppBar(
-        backgroundColorStart: Color(0xFF000080),
-        backgroundColorEnd: Color(0xFF3333ff),
+    gradient: LinearGradient(colors: [
+    Color(0xFF000033),
+    Color(0xFF000066),
+    Color(0xFF000080),
+    Color(0xFF0000b3),
+    Color(0xFF0000e6),
+    Color(0xFF0000ff),
+    ]),
         title: Text(
           "Prestador de Serviços",
         ),
@@ -321,42 +327,56 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
          GradientButton(
               gradient: LinearGradient(
                 colors: [
-                  const Color(0xFF000080),
-                  const Color(0xFF3333ff),
+                  Color(0xFF000033),
+                  Color(0xFF000066),
+                  Color(0xFF000080),
+                  Color(0xFF0000b3),
+                  Color(0xFF0000e6),
+                  Color(0xFF0000ff),
                 ],
                 begin: Alignment.centerLeft,
                 end: Alignment.center,
               ),
+    increaseWidthBy: 100.0,
               child: Text("Cadastrar", style: TextStyle(fontSize: 20.0),),
               callback: () {
-
-              },
-            increaseWidthBy: 100.0,
+                _autovalidate = true;
+                if (_formKey.currentState.validate()) {
+                  //montando o Map para interacao com a API
+                  dados = {
+                    "nome": _nomeController.text,
+                    "email": _emailController.text,
+                    "senha": _senhaController.text,
+                    "cpfcnpj": _cpfControllerMascara.text,
+                    "telefone": _telefoneControllerMascara.text
+                  };
+              }
+              }
             ),
 
 
 
-            Container(
-              //padding: const EdgeInsets.only(left: 40.0, top: 20.0),
-              width: double.infinity,
-              child: new RaisedButton(
-                shape: StadiumBorder(),
-                child: const Text(
-                  'CADASTRAR',
-                  style: TextStyle(color: Colors.white),
-                ),
-                color: Theme.of(context).primaryColor,
-                onPressed: () {
-                  _autovalidate = true;
-                  if (_formKey.currentState.validate()) {
-                    //montando o Map para interacao com a API
-                    dados = {
-                      "nome": _nomeController.text,
-                      "email": _emailController.text,
-                      "senha": _senhaController.text,
-                      "cpfcnpj": _cpfControllerMascara.text,
-                      "telefone": _telefoneControllerMascara.text
-                    };
+//            Container(
+//              //padding: const EdgeInsets.only(left: 40.0, top: 20.0),
+//              width: double.infinity,
+//              child: new RaisedButton(
+//                shape: StadiumBorder(),
+//                child: const Text(
+//                  'CADASTRAR',
+//                  style: TextStyle(color: Colors.white),
+//                ),
+//                color: Theme.of(context).primaryColor,
+//                onPressed: () {
+//                  _autovalidate = true;
+//                  if (_formKey.currentState.validate()) {
+//                    //montando o Map para interacao com a API
+//                    dados = {
+//                      "nome": _nomeController.text,
+//                      "email": _emailController.text,
+//                      "senha": _senhaController.text,
+//                      "cpfcnpj": _cpfControllerMascara.text,
+//                      "telefone": _telefoneControllerMascara.text
+//                    };
 
                     //////////*******CRIANDO USUARIO NO FIREBASE  ********/////////////////////
 //                    print(auth.signUp(
@@ -384,10 +404,10 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
                     //ToDo: verificar se eh alteracao de dados para dar update ao invez de insert no banco
                     //ToDo: verificar se eh alteracao de dados para dar update ao invez de insert no firebase
 
-                  }
-                },
-              ),
-            ),
+//                  }
+//                },
+//              ),
+//            ),
           ],
         ));
   }

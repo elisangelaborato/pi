@@ -14,8 +14,15 @@ class TelaPrincipalEmpresa extends StatelessWidget {
         length: 3,
         child: Scaffold(
           appBar: GradientAppBar(
-            backgroundColorStart: Color(0xFF000080),
-            backgroundColorEnd: Color(0xFF3333ff),
+            gradient: LinearGradient(colors: [
+              Color(0xFF000033),
+              Color(0xFF000066),
+              Color(0xFF000080),
+              Color(0xFF0000b3),
+              Color(0xFF0000e6),
+              Color(0xFF0000ff),
+            ]),
+
             bottom: TabBar(
               tabs: <Widget>[
                 Tab(
@@ -196,7 +203,7 @@ class ServicosAbertos extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Data/Hora",
-                        style: TextStyle(fontSize: 16,),
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold ),
                       ),
                       Text(
                         "14/08 - 13:30",
@@ -227,7 +234,10 @@ class ServicosAbertos extends StatelessWidget {
                       GradientButton(gradient: LinearGradient(
                         colors: [
                           const Color(0xFFe60000),
-                          const Color(0xFFff8080),
+                          const Color(0xFFe60000),
+                          const Color(0xFFff4d4d),
+                          const Color(0xFFe60000),
+                          const Color(0xFFff1a1a),
                         ],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
@@ -488,7 +498,10 @@ class ServicosPrestados extends StatelessWidget {
                       GradientButton(gradient: LinearGradient(
                         colors: [
                           const Color(0xFFe60000),
-                          const Color(0xFFff8080),
+                          const Color(0xFFe60000),
+                          const Color(0xFFff4d4d),
+                          const Color(0xFFe60000),
+                          const Color(0xFFff1a1a),
                         ],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,

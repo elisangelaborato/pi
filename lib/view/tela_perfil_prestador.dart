@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:pi/view/tab_agenda_prestador.dart';
 import 'package:pi/view/tab_avaliacao_prestador.dart';
 import 'package:pi/view/tab_perfil_prestador.dart';
@@ -142,7 +143,15 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
                   return DefaultTabController(
                     length: 3,
                     child: Scaffold(
-                      appBar: AppBar(
+                      appBar: GradientAppBar(
+                        gradient: LinearGradient(colors: [
+                          Color(0xFF000033),
+                          Color(0xFF000066),
+                          Color(0xFF000080),
+                          Color(0xFF0000b3),
+                          Color(0xFF0000e6),
+                          Color(0xFF0000ff),
+                        ]),
                         flexibleSpace: FlexibleSpaceBar(
                           centerTitle: true,
                           title: Center(

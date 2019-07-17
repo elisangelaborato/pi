@@ -56,11 +56,18 @@ class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GradientAppBar(
-        backgroundColorStart: Color(0xFF000080),
-        backgroundColorEnd: Color(0xFF3333ff),
-        title: Text("Agendamento"),
-      ),
+        appBar: GradientAppBar(
+          title: Text("Agendar"),
+          centerTitle: true,
+          gradient: LinearGradient(colors: [
+            Color(0xFF000033),
+            Color(0xFF000066),
+            Color(0xFF000080),
+            Color(0xFF0000b3),
+            Color(0xFF0000e6),
+            Color(0xFF0000ff),
+          ]),
+        ),
 //      body: SingleChildScrollView(
 //        child: getColumn(),
 //      ),
@@ -172,11 +179,15 @@ class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
               child:GradientButton(
               gradient: LinearGradient(
                 colors: [
-                  const Color(0xFF000080),
-                  const Color(0xFF3333ff),
+                  Color(0xFF000033),
+                  Color(0xFF000066),
+                  Color(0xFF0000ff),
+                  Color(0xFF0000ff),
+                  Color(0xFF000066),
+                  Color(0xFF000066),
                 ],
-                begin: Alignment.centerLeft,
-                end: Alignment.center,
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
               child: Text("CONFIRMAR", style: TextStyle(fontSize: 20.0),),
               callback: () {

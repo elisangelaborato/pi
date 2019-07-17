@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:pi/view/drawer.dart';
 import 'package:pi/view/tela_agendamento_cliente.dart';
 import 'package:http/http.dart' as http;
@@ -19,8 +20,14 @@ class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
         length: 3,
         child: Scaffold(
           appBar: GradientAppBar(
-            backgroundColorStart: Color(0xFF000080),
-            backgroundColorEnd: Color(0xFF3333ff),
+            gradient: LinearGradient(colors: [
+              Color(0xFF000033),
+              Color(0xFF000066),
+              Color(0xFF000080),
+              Color(0xFF0000b3),
+              Color(0xFF0000e6),
+              Color(0xFF0000ff),
+            ]),
             bottom: TabBar(
               tabs: <Widget>[
                 Tab(
@@ -290,13 +297,22 @@ class MeusServicosWidget extends StatelessWidget {
                       Divider(
                         height: 0,
                       ),
-                      RaisedButton(
-                        onPressed: () {},
-                        color: Theme.of(context).primaryColor,
-                        child: Text(
-                          "CANCELAR",
-                          style: TextStyle(color: Colors.white),
+                      GradientButton(
+                        gradient: LinearGradient(
+                          colors: [
+                            const Color(0xFFe60000),
+                            const Color(0xFFe60000),
+                            const Color(0xFFff4d4d),
+                            const Color(0xFFe60000),
+                            const Color(0xFFff1a1a),
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.center,
                         ),
+                        child: Text("CANCELAR", style: TextStyle(fontSize: 15.0),),
+                        callback: () {
+                        },
+                        increaseWidthBy: 30.0,
                       ),
                     ],
                   ),
@@ -467,17 +483,23 @@ class PrestadoresWidget extends StatelessWidget {
                       Divider(
                         height: 0,
                       ),
-                      RaisedButton(
-                        color: Theme.of(context).primaryColor,
-                        child: Text(
-                          "VER PERFIL",
-                          style: TextStyle(color: Colors.white),
+                      GradientButton(
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0xFF000033),
+                            Color(0xFF000066),
+                            Color(0xFF000080),
+                            Color(0xFF0000b3),
+                            Color(0xFF0000e6),
+                            Color(0xFF0000ff),
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.center,
                         ),
-                        onPressed: () {
-
-//                          print("${snapshot.data["pessoa"][index]}");
-//                          print("${snapshot.data["pessoa"][index]["cdgPessoa"]}");
-
+                        child: Text("Ver Perfil",
+                          style: TextStyle(fontSize: 15.0),
+                        ),
+                          callback: () {
                           String cdgPessoa = snapshot.data["pessoa"][index]["cdgPessoa"];
                           Navigator.push(
                             context,
@@ -485,11 +507,12 @@ class PrestadoresWidget extends StatelessWidget {
                                 builder: (context) => TelaPerfilPrestador(
                                   // nao me acertei em mandar direto o map da pessoa, por hora mando codigo
                                   //pessoa: snapshot.data["pessoa"][index],
-                                    cdgPessoa: cdgPessoa,
+                                  cdgPessoa: cdgPessoa,
                                 )
                             ),
                           );
                         },
+                        increaseWidthBy: 50.0,
                       ),
                     ],
                   ),
