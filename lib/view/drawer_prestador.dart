@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pi/model/pessoa_model.dart';
 import 'package:pi/view/tela_perfil_cliente.dart';
 import 'package:pi/view/tela_perfil_prestador.dart';
 
@@ -19,7 +20,7 @@ class _DrawerPrestadorState extends State<DrawerPrestador> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => TelaPerfilPrestador(cdgPessoa: "2",)),
+      MaterialPageRoute(builder: (context) => TelaPerfilPrestador(cdgPessoa: PessoaModel.of(context).cdgPessoa,)),
     );
   }
 

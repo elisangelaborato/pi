@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pi/model/pessoa_model.dart';
 import 'package:pi/view/tela_agendamento_prestador.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:pi/view/tela_cadastro_prestador_servico.dart';
 
 //select categoriaservico.icone cat_icone, categoriaservico.descricao cat_descr,
 //    servico.nome ser_nome, servico.descricao ser_descr,
@@ -68,8 +71,7 @@ class _TabServicosPrestadorState extends State<TabServicosPrestador> {
               } else {
                 print("snap ${snapshot}");
                 print("snap length ${snapshot.data["Custom"].length}");
-                print("snap ser_nome ${snapshot.data["Custom"][0]["ser_nome"]}");
-
+                //print("snap ser_nome ${snapshot.data["Custom"][0]["ser_nome"]}");
 
                 return getScaffold(context, snapshot);
 
@@ -121,76 +123,130 @@ class _TabServicosPrestadorState extends State<TabServicosPrestador> {
 
   Widget getScaffold(context, snapshot){
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
-          );
-        },
-        child: Icon(Icons.calendar_today),
-      ),
-      body: _createListView(context, snapshot),
+      //se a pessoa logada for a mesma do perfil prestador visualizado
+      floatingActionButton: PessoaModel.of(context).cdgPessoa == cdgPessoa
+      // permite adicionar servicos para o prestado
+        ? getFloatingActionButtonAdicionarServico()
+      // senao, permite a pessoa agenar servicos com este prestador
+       :
+        //se lista vazia (prestador nao tem servicos)
+        (snapshot.data["Custom"].length == 0)
+        //nao permite agendar
+        ? null
+        //mostra botao que permite agendar o servico
+        : getFloatingActionButtonAgendarServico(),
+      body:
+      //se a lista de servicos do prestador estiver vazia
+      (snapshot.data["Custom"].length == 0)
+      //monta container em branco
+      ? Container(color: Colors.white,
+      child: Center(
+        child: Text("Lista de serviços esta vazia."),
+      ),)
+      //senao, monta lista com o servicos que este prestador faz
+      : _createListView(context, snapshot)
+      ,
     );
   }
+
+  Widget getFloatingActionButtonAgendarServico(){
+    return FloatingActionButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+        );
+      },
+      child: Icon(Icons.calendar_today),
+    );
+  }
+
+  Widget getFloatingActionButtonAdicionarServico(){
+    return FloatingActionButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => TelaCadastroPrestadorServico()),
+        );
+      },
+      child: Icon(Icons.add),
+    );
+  }  
 
   Widget getCard(context, snapshot, index) {
     return Card(
       margin: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-      child: SizedBox(
-        height: 90.0,
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                CircleAvatar(
-                  child: Icon(
-                    //Icons.healing,
-                    IconData(
-                        int.parse(snapshot.data["Custom"][index]["cat_icone"]),
-                        fontFamily: 'MaterialIcons'
+      child: GestureDetector(
+        onTap: (){
+          //se a pessoa logada for a mesma do perfil prestador visualizado
+          if (PessoaModel.of(context).cdgPessoa == cdgPessoa)
+          // permite adicionar servicos para o prestado
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => TelaCadastroPrestadorServico()),
+            );
+          // senao, permite a pessoa agendar servicos com este prestador
+          else
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+            );
+        },
+        child: SizedBox(
+          height: 90.0,
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  CircleAvatar(
+                    child: Icon(
+                      //Icons.healing,
+                      IconData(
+                          int.parse(snapshot.data["Custom"][index]["cat_icone"]),
+                          fontFamily: 'MaterialIcons'
+                      ),
+                      size: 15,
+                      color: Theme.of(context).primaryColor,
                     ),
-                    size: 15,
-                    color: Theme.of(context).primaryColor,
+                    radius: 15,
+                    backgroundColor: Colors.transparent,
                   ),
-                  radius: 15,
-                  backgroundColor: Colors.transparent,
-                ),
-                Text(
-                  snapshot.data["Custom"][index]["ser_nome"],
-                  style: TextStyle(fontSize: 16),
-                  maxLines: 1,
+                  Text(
+                    snapshot.data["Custom"][index]["ser_nome"],
+                    style: TextStyle(fontSize: 16),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 8.0, right: 4.0),
+                //width: MediaQuery.of(context).size.width * 0.95,
+                height: 30.0,
+                child: Text(snapshot.data["Custom"][index]["ser_descr"],
+                  style: TextStyle(fontSize: 12.0),
                   overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 4.0, right: 4.0),
-              //width: MediaQuery.of(context).size.width * 0.95,
-              height: 30.0,
-              child: Text(snapshot.data["Custom"][index]["ser_descr"],
-                style: TextStyle(fontSize: 12.0),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-              ),
-            ),
-
-
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 8.0, right: 8.0),
-                child: Text(
-                  "R\$ ${snapshot.data["Custom"][index]["serp_preco"]}",
-                  style: TextStyle(
-                      fontSize: 12.0, fontWeight: FontWeight.bold),
+                  maxLines: 2,
                 ),
               ),
-            ),
 
-          ],
+
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 8.0, left: 8.0),
+                  child: Text(
+                    "R\$ ${snapshot.data["Custom"][index]["serp_preco"]}",
+                    style: TextStyle(
+                        fontSize: 12.0, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+
+            ],
+          ),
         ),
       ),
     );

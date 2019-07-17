@@ -210,7 +210,7 @@ class _TelaLoginState extends State<TelaLogin> {
                   ),
                 ),
                 onTap: () {
-                 Navigator.of(context).pushNamed('/telaCadastroCliente');
+                  Navigator.of(context).pushNamed('/telaCadastroCliente');
                 },
               ),
             ],

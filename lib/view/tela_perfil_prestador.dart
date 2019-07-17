@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:pi/view/tab_servicos_prestador.dart';
 import 'dart:convert';
 import 'package:pi/model/pessoa_model.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'package:pi/view/tela_cadastroprestador.dart';
 
@@ -122,8 +123,8 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      TelaCadastroPrestador(pessoa["pessoa"][0]["cdgPessoa"])),
+                                  builder: (context) => TelaCadastroPrestador(
+                                      pessoa["pessoa"][0]["cdgPessoa"])),
                             );
                           }),
                     ),
@@ -225,41 +226,80 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
 //                  backgroundColor: Colors.transparent,
 //                  backgroundImage: ExactAssetImage( pessoa["pessoa"][0]["imagem"] ?? 'images/person.png'),
 //                ),
+                Stack(
+                  children: <Widget>[
 
-                CircleAvatar(
-                  child:
-                      //se imagem nula ou em branco, coloca icone padrao
-                      (pessoa["pessoa"][0]["imagem"] == null ||
-                              pessoa["pessoa"][0]["imagem"].length == 0)
-                          ?
-
-                CircleAvatar(
-                  radius: 55.0,
-                  backgroundColor: Colors.transparent,
-                  backgroundImage: ExactAssetImage( pessoa["pessoa"][0]["imagem"] ?? 'images/person.png'),
-                )
+                    CircleAvatar(
+                      child:
+                          //se imagem nula ou em branco, coloca icone padrao
+                          (pessoa["pessoa"][0]["imagem"] == null ||
+                                  pessoa["pessoa"][0]["imagem"].length == 0)
+                              ? CircleAvatar(
+                                  radius: 55.0,
+                                  backgroundColor: Colors.transparent,
+                                  backgroundImage: ExactAssetImage(
+                                      pessoa["pessoa"][0]["imagem"]
+                                      ??
+                                      'images/person.png'),
+                                )
 //                      Icon(
 //                              Icons.account_circle,
 //                              size: 60,
 //                              color: Theme.of(context).primaryColor,
 //                            )
 
-                          : //Image.network(pessoa["pessoa"][0]["imagem"]),
-                          //container para deixar imagem circular
-                          Container(
-                              width: 120.0,
-                              height: 120.0,
-                              decoration: new BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: new DecorationImage(
+                              : //Image.network(pessoa["pessoa"][0]["imagem"]),
+
+                              //container para deixar imagem circular
+                              Container(
+                                  width: 120.0,
+                                  height: 120.0,
+                                  decoration: new BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: new DecorationImage(
                                       fit: BoxFit.fill,
                                       image: new NetworkImage(
                                           pessoa["pessoa"][0]["imagem"]),
+                                    ),
                                   ),
+                                ),
+
+
+                      radius: 60,
+                      backgroundColor: Colors.transparent,
+                    ),
+
+                    //se pessoa logada for a mesma deste perfil, mostra botao editar foto
+                    Positioned(
+                      right: 0,
+                      bottom: 0,
+                      child: PessoaModel.of(context).cdgPessoa ==
+                              pessoa["pessoa"][0]["cdgPessoa"]
+                          ? FloatingActionButton(
+                              child: Icon(
+                                Icons.edit,
+                                color: Colors.white,
                               ),
-                          ),
-                  radius: 60,
-                  backgroundColor: Colors.transparent,
+                              mini: true,
+                              onPressed: () {
+                                ImagePicker.pickImage(
+                                        source: ImageSource.camera)
+                                    .then((file) {
+                                  if (file == null)
+                                    return;
+                                  else {
+                                    setState(() {
+                                      //ToDo: persistir dados da imagem (upload imagem, etc)
+                                      return PessoaModel.of(context).imagem =
+                                          file.path;
+                                    });
+                                  }
+                                });
+                              },
+                            )
+                          : Container(color: Colors.transparent,),
+                    ),
+                  ],
                 ),
 
                 Padding(
