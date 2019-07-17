@@ -309,9 +309,11 @@ class MeusServicosWidget extends StatelessWidget {
                           begin: Alignment.centerLeft,
                           end: Alignment.center,
                         ),
-                        child: Text("CANCELAR", style: TextStyle(fontSize: 15.0),),
-                        callback: () {
-                        },
+                        child: Text(
+                          "CANCELAR",
+                          style: TextStyle(fontSize: 15.0),
+                        ),
+                        callback: () {},
                         increaseWidthBy: 30.0,
                       ),
                     ],
@@ -496,19 +498,21 @@ class PrestadoresWidget extends StatelessWidget {
                           begin: Alignment.centerLeft,
                           end: Alignment.center,
                         ),
-                        child: Text("Ver Perfil",
+                        child: Text(
+                          "Ver Perfil",
                           style: TextStyle(fontSize: 15.0),
                         ),
-                          callback: () {
-                          String cdgPessoa = snapshot.data["pessoa"][index]["cdgPessoa"];
+                        callback: () {
+                          String cdgPessoa =
+                              snapshot.data["pessoa"][index]["cdgPessoa"];
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => TelaPerfilPrestador(
-                                  // nao me acertei em mandar direto o map da pessoa, por hora mando codigo
-                                  //pessoa: snapshot.data["pessoa"][index],
-                                  cdgPessoa: cdgPessoa,
-                                )
+                                      // nao me acertei em mandar direto o map da pessoa, por hora mando codigo
+                                      //pessoa: snapshot.data["pessoa"][index],
+                                      cdgPessoa: cdgPessoa,
+                                    ),
                             ),
                           );
                         },
