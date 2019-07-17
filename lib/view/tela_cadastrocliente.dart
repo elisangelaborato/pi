@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:pi/services/autenticacao_firebase.dart';
@@ -62,7 +64,15 @@ class _TelaCadastroState extends State<TelaCadastro> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
+      appBar: GradientAppBar(
+        gradient: LinearGradient(colors: [
+          Color(0xFF000033),
+          Color(0xFF000066),
+          Color(0xFF000080),
+          Color(0xFF0000b3),
+          Color(0xFF0000e6),
+          Color(0xFF0000ff),
+        ]),
         title: Text("Cliente"),
         centerTitle: false,
       ),
@@ -104,7 +114,8 @@ class _TelaCadastroState extends State<TelaCadastro> {
                 }),
             TextFormField(
                 controller: _senhaController,
-                decoration: const InputDecoration(
+                decoration: const InputDecoration
+                  (
                   icon: const Icon(Icons.vpn_key),
                   hintText: 'Entre com a senha',
                   labelText: 'Senha',
@@ -174,14 +185,21 @@ class _TelaCadastroState extends State<TelaCadastro> {
             Container(
               //padding: const EdgeInsets.only(left: 40.0, top: 20.0),
               width: double.infinity,
-              child: new RaisedButton(
-                shape: StadiumBorder(),
-                child: const Text(
-                  'CADASTRAR',
-                  style: TextStyle(color: Colors.white),
+              child: new GradientButton(
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xFF000033),
+                    Color(0xFF000066),
+                    Color(0xFF000080),
+                    Color(0xFF0000b3),
+                    Color(0xFF0000e6),
+                    Color(0xFF0000ff),
+                  ],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.center,
                 ),
-                color: Theme.of(context).primaryColor,
-                onPressed: () {
+                child: Text("Cadastrar", style: TextStyle(fontSize: 20.0), textAlign: TextAlign.justify,),
+                callback: () {
                   _autovalidate = true;
                   if (_formKey.currentState.validate()) {
 
@@ -220,6 +238,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
 
                   }
                 },
+                increaseWidthBy: 190.0,
               ),
             ),
           ],

@@ -15,7 +15,7 @@ void main() {
     child: MaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateRoute: generateRoute,
-      initialRoute: '/',
+      initialRoute: '/telaCadastroCliente',
     ),
   ));
 }
