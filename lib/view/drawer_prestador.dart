@@ -28,6 +28,12 @@ class _DrawerPrestadorState extends State<DrawerPrestador> {
     return Drawer(
       child: ListView(children: <Widget>[
         UserAccountsDrawerHeader(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+              Color(0xFF000080),
+              Color(0xFF3333ff),
+            ])
+          ),
           accountName: Text("Login"),
           accountEmail: Text("login@gmail.com"),
           currentAccountPicture: GestureDetector(
@@ -66,7 +72,9 @@ class _DrawerPrestadorState extends State<DrawerPrestador> {
         ListTile(
           leading: Icon(Icons.exit_to_app),
           title: Text("Sair"),
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed('/');
+          },
         )
       ]),
     );

@@ -3,6 +3,8 @@ import 'package:pi/view/drawer_prestador.dart';
 import 'package:pi/view/tela_agendamento_prestador.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:bezier_chart/bezier_chart.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
 
 class TelaPrincipalEmpresa extends StatelessWidget {
   @override
@@ -11,7 +13,9 @@ class TelaPrincipalEmpresa extends StatelessWidget {
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
-          appBar: AppBar(
+          appBar: GradientAppBar(
+            backgroundColorStart: Color(0xFF000080),
+            backgroundColorEnd: Color(0xFF3333ff),
             bottom: TabBar(
               tabs: <Widget>[
                 Tab(
@@ -220,11 +224,27 @@ class ServicosAbertos extends StatelessWidget {
                       Divider(
                         height: 0,
                       ),
-                      RaisedButton(
-                        onPressed: () {},
-                        color: Theme.of(context).primaryColor,
-                        child: Text("CANCELAR", style: TextStyle(color: Colors.white),),
+                      GradientButton(gradient: LinearGradient(
+                        colors: [
+                          const Color(0xFFe60000),
+                          const Color(0xFFff8080),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
+                        child: Text("CANCELAR", style: TextStyle(fontSize: 15.0),),
+                        callback: () {
+
+                        },
+                        increaseWidthBy: 35.0,
+                      ),
+                      
+//                      RaisedButton(
+//                        onPressed: () {},
+//                        color: Theme.of(context).primaryColor,
+//                        child: Text("CANCELAR", style: TextStyle(color: Colors.white),),
+//                      ),
+
                     ],
                   ),
                 ),
@@ -465,11 +485,25 @@ class ServicosPrestados extends StatelessWidget {
                       Divider(
                         height: 0,
                       ),
-                      RaisedButton(
-                        onPressed: () {},
-                        color: Colors.redAccent,
-                        child: Text("EXCLUIR", style: TextStyle(color: Colors.white),),
+                      GradientButton(gradient: LinearGradient(
+                        colors: [
+                          const Color(0xFFe60000),
+                          const Color(0xFFff8080),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
+                        child: Text("EXCLUIR", style: TextStyle(fontSize: 15.0),),
+                        callback: () {
+
+                        },
+                        increaseWidthBy: 22.0,
+                      ),
+//                      RaisedButton(
+//                        onPressed: () {},
+//                        color: Colors.redAccent,
+//                        child: Text("EXCLUIR", style: TextStyle(color: Colors.white),),
+//                      ),
                     ],
                   ),
                 ),

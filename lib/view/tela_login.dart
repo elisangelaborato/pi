@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:pi/services/autenticacao_firebase.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pi/model/pessoa_model.dart';
@@ -138,22 +139,38 @@ class _TelaLoginState extends State<TelaLogin> {
                 ],
               ),
 
-              Container(
-                width: double.infinity,
-                child: FlatButton(
-                  shape: StadiumBorder(),
-                  child: Text(
-                    "ENTRAR",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  color: Theme.of(context).primaryColor,
-                  onPressed: () {
-                    _onPressedButtonEntrar();
-                  },
+              GradientButton(
+                gradient: LinearGradient(
+                  colors: [
+                    const Color(0xFF000080),
+                    const Color(0xFF3333ff),
+                  ],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.center,
                 ),
+                child: Text("ENTRAR", style: TextStyle(fontSize: 20.0),),
+                callback: () {
+                  _onPressedButtonEntrar();
+                },
+                increaseWidthBy: 190.0,
               ),
+
+//              Container(
+//                width: double.infinity,
+//                child: FlatButton(
+//                  shape: StadiumBorder(),
+//                  child: Text(
+//                    "ENTRAR",
+//                    style: TextStyle(
+//                      color: Colors.white,
+//                    ),
+//                  ),
+//                  color: Theme.of(context).primaryColor,
+//                  onPressed: () {
+//                    _onPressedButtonEntrar();
+//                  },
+//                ),
+//              ),
 
               SizedBox(
                 height: 15.0,

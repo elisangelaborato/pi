@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
 
 class TelaAgendamentoPrestador extends StatefulWidget {
   @override
@@ -54,7 +56,9 @@ class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: GradientAppBar(
+        backgroundColorStart: Color(0xFF000080),
+        backgroundColorEnd: Color(0xFF3333ff),
         title: Text("Agendamento"),
       ),
 //      body: SingleChildScrollView(
@@ -163,17 +167,37 @@ class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
                 ),
               ),
             ),
-            Container(
-                padding: const EdgeInsets.only(left: 40.0, top: 20.0),
-                child: RaisedButton(
-                  shape: StadiumBorder(),
-                  child: const Text(
-                    'CONFIRMAR',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  color: Theme.of(context).primaryColor,
-                  onPressed: () {},
-                )),
+            Padding(
+              padding: EdgeInsets.fromLTRB(25, 50, 0, 0),
+              child:GradientButton(
+              gradient: LinearGradient(
+                colors: [
+                  const Color(0xFF000080),
+                  const Color(0xFF3333ff),
+                ],
+                begin: Alignment.centerLeft,
+                end: Alignment.center,
+              ),
+              child: Text("CONFIRMAR", style: TextStyle(fontSize: 20.0),),
+              callback: () {
+
+              },
+              increaseWidthBy: 160.0,
+            ),
+            ),
+
+
+//            Container(
+//                padding: const EdgeInsets.only(left: 40.0, top: 20.0),
+//                child: RaisedButton(
+//                  shape: StadiumBorder(),
+//                  child: const Text(
+//                    'CONFIRMAR',
+//                    style: TextStyle(color: Colors.white),
+//                  ),
+//                  color: Theme.of(context).primaryColor,
+//                  onPressed: () {},
+//                )),
           ],
         ));
   }

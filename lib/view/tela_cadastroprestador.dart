@@ -3,6 +3,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:pi/services/autenticacao_firebase.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:flutter/widgets.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
 
 class TelaCadastroPrestador extends StatefulWidget {
   final String cdgPessoa;
@@ -106,7 +109,9 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: GradientAppBar(
+        backgroundColorStart: Color(0xFF000080),
+        backgroundColorEnd: Color(0xFF3333ff),
         title: Text(
           "Prestador de Serviços",
         ),
@@ -297,6 +302,26 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
             SizedBox(
               height: 30.0,
             ),
+
+
+         GradientButton(
+              gradient: LinearGradient(
+                colors: [
+                  const Color(0xFF000080),
+                  const Color(0xFF3333ff),
+                ],
+                begin: Alignment.centerLeft,
+                end: Alignment.center,
+              ),
+              child: Text("Cadastrar", style: TextStyle(fontSize: 20.0),),
+              callback: () {
+
+              },
+            increaseWidthBy: 100.0,
+            ),
+
+
+
             Container(
               //padding: const EdgeInsets.only(left: 40.0, top: 20.0),
               width: double.infinity,

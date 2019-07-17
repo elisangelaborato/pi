@@ -28,6 +28,16 @@ class _CustomDrawerState extends State<CustomDrawer> {
     return Drawer(
       child: ListView(children: <Widget>[
               UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: [
+                        const Color(0xFF000080),
+                        const Color(0xFF3333ff),
+                      ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.center,
+                  ),
+                ),
                 accountName: Text("Login"),
                 accountEmail: Text("login@gmail.com"),
                 currentAccountPicture: GestureDetector(
@@ -81,7 +91,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           leading: Icon(Icons.exit_to_app),
           title: Text("Sair"),
           onTap: () {
-
+            Navigator.of(context).pushNamed('/');
           },
         )
       ]),

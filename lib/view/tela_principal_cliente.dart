@@ -4,6 +4,7 @@ import 'package:pi/view/drawer.dart';
 import 'package:pi/view/tela_agendamento_cliente.dart';
 import 'package:http/http.dart' as http;
 import 'package:pi/view/tela_perfil_prestador.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class TelaPrincipalCliente extends StatefulWidget {
   @override
@@ -17,7 +18,9 @@ class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
-          appBar: AppBar(
+          appBar: GradientAppBar(
+            backgroundColorStart: Color(0xFF000080),
+            backgroundColorEnd: Color(0xFF3333ff),
             bottom: TabBar(
               tabs: <Widget>[
                 Tab(

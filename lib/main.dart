@@ -7,6 +7,7 @@ import 'package:pi/view/tela_cadastroprestador.dart';
 import 'package:pi/view/tela_perfil_cliente.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:pi/model/pessoa_model.dart';
+import 'package:pi/view/drawer.dart';
 
 void main() {
   runApp(ScopedModel<PessoaModel>(
@@ -38,6 +39,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       break;
     case '/telaCadastroCliente':
       return MaterialPageRoute(builder: (_) => TelaCadastro());
+      break;
+    case '/drawer':
+      return MaterialPageRoute(builder: (_) => CustomDrawer());
       break;
     default:
       return MaterialPageRoute(

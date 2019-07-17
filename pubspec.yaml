@@ -34,7 +34,9 @@ dependencies:
   http: ^0.12.0+2
   url_launcher: ^5.0.5          #Pacote para lançar URL para as APIs
   flutter_masked_text: ^0.8.0   #Pacote para mascara de texto na tela de cadastro de pessoa
-  scoped_model: ^1.0.1          #Pacote para scoped model 
+  scoped_model: ^1.0.1          #Pacote para scoped model
+  gradient_app_bar: ^0.0.1
+  gradient_widgets: ^0.3.0
 
 dev_dependencies:
   flutter_test:
