@@ -520,7 +520,7 @@ class PrestadoresWidget extends StatelessWidget {
                             ),
                           );
                         },
-                        increaseWidthBy: 50.0,
+                        increaseWidthBy: 35.0,
                       ),
                     ],
                   ),

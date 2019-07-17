@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pi/view/tela_cadastro_servico.dart';
 import 'package:pi/view/tela_login.dart';
 import 'view/tela_principal_cliente.dart';
 import 'view/tela_cadastrocliente.dart';
@@ -8,38 +9,18 @@ import 'package:pi/view/tela_perfil_cliente.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:pi/model/pessoa_model.dart';
 import 'package:pi/view/drawer.dart';
-import 'package:pi/model/servicos_model.dart';
 
-
-//void main() {
-//  runApp(ScopedModel<PessoaModel>(
-//    model: PessoaModel(),
-//    child: MaterialApp(
-//      debugShowCheckedModeBanner: false,
-//      onGenerateRoute: generateRoute,
-//      initialRoute: '/telaCadastroCliente',
-//    ),
-//  ));
-//}
-
-void main(){
-  runApp(
-    ScopedModel<PessoaModel>
-      (model: PessoaModel(),
-        child: ScopedModelDescendant<PessoaModel>
-          (builder: (context, child, model){
-          return ScopedModel<ServicosModel>(
-              model: ServicosModel(),
-              child: MaterialApp(
-                debugShowCheckedModeBanner: false,
-                onGenerateRoute: generateRoute,
-                initialRoute: '/',
-              ));
-        })),
-
-
-  );
+void main() {
+  runApp(ScopedModel<PessoaModel>(
+    model: PessoaModel(),
+    child: MaterialApp(
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: generateRoute,
+      initialRoute: '/telaCadastroServico',
+    ),
+  ));
 }
+
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case '/':
@@ -62,6 +43,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       break;
     case '/drawer':
       return MaterialPageRoute(builder: (_) => CustomDrawer());
+      break;
+    case '/telaCadastroServico':
+      return MaterialPageRoute(builder: (_) => TelaCadastroServico());
       break;
     default:
       return MaterialPageRoute(

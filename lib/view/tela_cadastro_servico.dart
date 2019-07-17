@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:pi/view/tela_principal_empresa.dart';
 
 class TelaCadastroServico extends StatefulWidget {
@@ -22,9 +23,12 @@ class _TelaCadastroServicoState extends State<TelaCadastroServico> {
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
           colors: [
-            const Color(0xff000080),
-            const Color(0xff0000ff),
-            const Color(0xff0086b3),
+            Color(0xFF000033),
+            Color(0xFF000066),
+            Color(0xFF000080),
+            Color(0xFF0000b3),
+            Color(0xFF0000e6),
+            Color(0xFF0000ff),
           ],
         ),
         title: Text("Cadastrar Serviços"),
@@ -38,7 +42,7 @@ class _TelaCadastroServicoState extends State<TelaCadastroServico> {
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.fromLTRB(10, 40, 0, 0),
-                  child: Icon(Icons.assignment_ind, color: Colors.blue),
+                  child: Icon(Icons.assignment_ind, color: Colors.grey),
                 ),
                 Container(
                   child: Text(
@@ -46,7 +50,7 @@ class _TelaCadastroServicoState extends State<TelaCadastroServico> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue,
+                      color: Colors.grey,
                     ),
                   ),
                   padding: EdgeInsets.fromLTRB(15, 40, 0, 0),
@@ -69,7 +73,7 @@ class _TelaCadastroServicoState extends State<TelaCadastroServico> {
                 },
                 value: _currentItemSelected,
                 style:
-                TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+                TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
               ),
             ),
             Container(
@@ -77,12 +81,12 @@ class _TelaCadastroServicoState extends State<TelaCadastroServico> {
                   decoration: const InputDecoration(
                     icon: const Icon(
                       Icons.edit,
-                      color: Colors.blue,
+                      color: Colors.grey,
                     ),
                     hintText: 'Ex: Professor de Inglês, Enfermeira, Pintor...',
                     labelText: 'Nome da Profissão',
-                    labelStyle: TextStyle(color: Colors.blue),
-                    hintStyle: TextStyle(color: Colors.blue),
+                    labelStyle: TextStyle(color: Colors.grey),
+                    hintStyle: TextStyle(color: Colors.grey),
                   ),
                   maxLength: 50,
                 ),
@@ -92,12 +96,12 @@ class _TelaCadastroServicoState extends State<TelaCadastroServico> {
                 decoration: const InputDecoration(
                   icon: const Icon(
                     Icons.edit,
-                    color: Colors.blue,
+                    color: Colors.grey,
                   ),
                   hintText: 'Descreva brevemente seu serviço',
                   labelText: 'Descrição do Serviço',
-                  labelStyle: TextStyle(color: Colors.blue),
-                  hintStyle: TextStyle(color: Colors.blue),
+                  labelStyle: TextStyle(color: Colors.grey),
+                  hintStyle: TextStyle(color: Colors.grey),
                 ),
                 maxLength: 200,
               ),
@@ -108,7 +112,7 @@ class _TelaCadastroServicoState extends State<TelaCadastroServico> {
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
-                  child: Icon(Icons.monetization_on, color: Colors.blue),
+                  child: Icon(Icons.monetization_on, color: Colors.grey),
                 ),
                 Padding(
                   child: Text(
@@ -116,7 +120,7 @@ class _TelaCadastroServicoState extends State<TelaCadastroServico> {
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue),
+                        color: Colors.grey),
                   ),
                   padding: EdgeInsets.fromLTRB(15, 0, 10, 0),
                 ),
@@ -127,7 +131,7 @@ class _TelaCadastroServicoState extends State<TelaCadastroServico> {
                       color: Colors.white,
                       boxShadow: [
                         new BoxShadow(
-                          color: Colors.blue,
+                          color: Colors.grey,
                           blurRadius: 10.0,
                           offset: new Offset(2.0, 2.0),
                         ),
@@ -145,22 +149,27 @@ class _TelaCadastroServicoState extends State<TelaCadastroServico> {
                 ),
               ],
             ),
-            Container(
-              width: 300,
-              padding: EdgeInsets.fromLTRB(120, 80, 0, 0),
-              child: FlatButton(
-                shape: StadiumBorder(),
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TelaPrincipalEmpresa()));
-                },
-                child: Text(
-                  "Cadastrar-se",
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                ),
-                color: Colors.blue,
-
+            Padding(
+              padding: EdgeInsets.fromLTRB(10, 50, 0, 0),
+              child: GradientButton(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xFF000033),
+                  Color(0xFF000066),
+                  Color(0xFF000080),
+                  Color(0xFF0000b3),
+                  Color(0xFF0000e6),
+                  Color(0xFF0000ff),
+                ],
+                begin: Alignment.centerLeft,
+                end: Alignment.center,
               ),
+                increaseWidthBy: 190.0,
+              child: Text("Cadastrar-se", style: TextStyle(fontSize: 20.0),),
+              callback: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TelaPrincipalEmpresa()));
+              },
+            ),
             ),
           ],
         ),
