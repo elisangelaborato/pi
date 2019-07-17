@@ -27,6 +27,9 @@ class PessoaModel extends Model {
   String telefonePrestador;
   String ativoPrestador;
 
+  //variaveis de controle
+  bool logado = false;
+
   void getDados(String uid) async {
     String consulta =
         "SELECT * FROM pessoa p INNER JOIN cliente c ON c.cdgPessoa = p.cdgPessoa INNER JOIN prestador pt ON pt.cdgPessoa = p.cdgPessoa WHERE p.uid = '${uid}'";
@@ -35,7 +38,6 @@ class PessoaModel extends Model {
         .get("http://alguz1.gearhostpreview.com/lista.php?sql=${consulta}");
     var dados = json.decode(response.body);
     FromMap(dados);
-    //print(dados);
   }
 
   FromMap(Map dados) {
@@ -58,6 +60,11 @@ class PessoaModel extends Model {
     telefonePrestador   = dados['Custom'][0]['telefonePrestador'];
     ativoPrestador      = dados['Custom'][0]['ativoPrestador'];
 
+    notifyListeners();
+  }
+
+  void Logar (bool a){
+    this.logado = a;
     notifyListeners();
   }
 

@@ -8,18 +8,38 @@ import 'package:pi/view/tela_perfil_cliente.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:pi/model/pessoa_model.dart';
 import 'package:pi/view/drawer.dart';
+import 'package:pi/model/servicos_model.dart';
 
-void main() {
-  runApp(ScopedModel<PessoaModel>(
-    model: PessoaModel(),
-    child: MaterialApp(
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: generateRoute,
-      initialRoute: '/telaCadastroCliente',
-    ),
-  ));
+
+//void main() {
+//  runApp(ScopedModel<PessoaModel>(
+//    model: PessoaModel(),
+//    child: MaterialApp(
+//      debugShowCheckedModeBanner: false,
+//      onGenerateRoute: generateRoute,
+//      initialRoute: '/telaCadastroCliente',
+//    ),
+//  ));
+//}
+
+void main(){
+  runApp(
+    ScopedModel<PessoaModel>
+      (model: PessoaModel(),
+        child: ScopedModelDescendant<PessoaModel>
+          (builder: (context, child, model){
+          return ScopedModel<ServicosModel>(
+              model: ServicosModel(),
+              child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                onGenerateRoute: generateRoute,
+                initialRoute: '/',
+              ));
+        })),
+
+
+  );
 }
-
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case '/':

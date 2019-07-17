@@ -6,6 +6,8 @@ import 'package:pi/view/tela_agendamento_cliente.dart';
 import 'package:http/http.dart' as http;
 import 'package:pi/view/tela_perfil_prestador.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'package:pi/model/servicos_model.dart';
 
 class TelaPrincipalCliente extends StatefulWidget {
   @override
@@ -13,10 +15,16 @@ class TelaPrincipalCliente extends StatefulWidget {
 }
 
 class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
+
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(
+    return
+//      ScopedModelDescendant<ServicosModel>(
+//        builder: (context, child, model)=>
+//      MaterialApp(
+//      home:
+      DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: GradientAppBar(
@@ -56,29 +64,21 @@ class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
             ],
           ),
         ),
-      ),
+//      ),
+//      ),
     );
   }
 }
 
 class ServicosWidget extends StatelessWidget {
-  Future<Map> _getDados() async {
-    http.Response response;
-    response = await http.get(
-        "http://alguz1.gearhostpreview.com/lista.php?tabela=categoriaservico");
-//    print(response.body);
-    return json.decode(response.body);
-  }
-
   @override
   Widget build(BuildContext context) {
     int icone = 58355;
-
     return Column(
       children: <Widget>[
         Expanded(
           child: FutureBuilder(
-              future: _getDados(),
+              future: ServicosModel.of(context).getTiposServicos(),
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
@@ -329,7 +329,7 @@ class PrestadoresWidget extends StatelessWidget {
     http.Response response;
     response = await http
         .get("http://alguz1.gearhostpreview.com/lista.php?tabela=pessoa");
-//    print(response.body);
+    //print(response.body);
     return json.decode(response.body);
   }
 
@@ -339,7 +339,8 @@ class PrestadoresWidget extends StatelessWidget {
       children: <Widget>[
         Expanded(
           child: FutureBuilder(
-              future: _getDados(),
+              future: ServicosModel.of(context).getTopPrestadores(),
+              //future: _getDados(),
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
@@ -371,7 +372,7 @@ class PrestadoresWidget extends StatelessWidget {
 
   Widget _createCadList(context, snapshot) {
     return ListView.builder(
-      itemCount: snapshot.data["pessoa"].length,
+      itemCount: snapshot.data["Custom"].length,
       itemBuilder: (context, index) {
 //        print(snapshot.data["pessoa"].length);
 //        print(index);
@@ -397,16 +398,14 @@ class PrestadoresWidget extends StatelessWidget {
                     CircleAvatar(
                       child:
                           //se imagem nula ou em branco, coloca icone padrao
-                          (snapshot.data["pessoa"][index]["imagem"] == null ||
-                                  snapshot.data["pessoa"][index]["imagem"]
-                                          .length ==
-                                      0)
+                          (snapshot.data["Custom"][index]["imagem"] == null ||
+                                  snapshot.data["Custom"][index]["imagem"].length == 0)
                               ? Icon(
                                   Icons.account_circle,
                                   size: 60,
                                   color: Theme.of(context).primaryColor,
                                 )
-                              : //Image.network(snapshot.data["pessoa"][index]["imagem"]),
+                              : // Image.network(snapshot.data["pessoa"][index]["imagem"]),
 
                               //container para deixar imagem circular
                               Container(
@@ -417,7 +416,7 @@ class PrestadoresWidget extends StatelessWidget {
                                     image: new DecorationImage(
                                       fit: BoxFit.fill,
                                       image: new NetworkImage(snapshot
-                                          .data["pessoa"][index]["imagem"]),
+                                          .data["Custom"][index]["imagem"]),
                                     ),
                                   ),
                                 ),
@@ -445,7 +444,7 @@ class PrestadoresWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        snapshot.data["pessoa"][index]["nome"],
+                        snapshot.data["Custom"][index]["nome"],
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
@@ -457,9 +456,9 @@ class PrestadoresWidget extends StatelessWidget {
                         height: 4,
                       ),
                       Text(
-                        (snapshot.data["pessoa"][index]["email"].length <= 15)
-                            ? snapshot.data["pessoa"][index]["email"]
-                            : '${snapshot.data["pessoa"][index]["email"].substring(0, 15)}...', //"Pedreiro",
+                        (snapshot.data["Custom"][index]["email"].length <= 15)
+                            ? snapshot.data["Custom"][index]["email"]
+                            : '${snapshot.data["Custom"][index]["email"].substring(0, 15)}...', //"Pedreiro",
                         style: TextStyle(fontSize: 14),
                       ),
                       Divider(
@@ -496,11 +495,20 @@ class PrestadoresWidget extends StatelessWidget {
                           begin: Alignment.centerLeft,
                           end: Alignment.center,
                         ),
+
                         child: Text("Ver Perfil",
                           style: TextStyle(fontSize: 15.0),
                         ),
+
                           callback: () {
-                          String cdgPessoa = snapshot.data["pessoa"][index]["cdgPessoa"];
+//                          String cdgPessoa = snapshot.data["pessoa"][index]["cdgPessoa"];
+
+
+//                          print("${snapshot.data["pessoa"][index]}");
+//                          print("${snapshot.data["pessoa"][index]["cdgPessoa"]}");
+
+                          String cdgPessoa = snapshot.data["Custom"][index]["cdgPessoa"];
+
                           Navigator.push(
                             context,
                             MaterialPageRoute(

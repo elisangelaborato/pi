@@ -9,8 +9,10 @@ import 'package:gradient_widgets/gradient_widgets.dart';
 class TelaPrincipalEmpresa extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(
+    return
+//      MaterialApp(
+//      home:
+      DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: GradientAppBar(
@@ -51,7 +53,7 @@ class TelaPrincipalEmpresa extends StatelessWidget {
             ],
           ),
         ),
-      ),
+//      ),
     );
   }
 }

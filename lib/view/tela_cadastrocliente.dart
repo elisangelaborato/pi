@@ -211,7 +211,6 @@ class _TelaCadastroState extends State<TelaCadastro> {
                       dados = {
                         "nome": _nomeController.text,
                         "email": _emailController.text,
-                        "senha": _senhaController.text,
                         "cpfcnpj": _cpfControllerMascara.text,
                         "telefone": _telefoneControllerMascara.text,
                         "uid": value

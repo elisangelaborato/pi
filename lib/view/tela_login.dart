@@ -222,9 +222,10 @@ class _TelaLoginState extends State<TelaLogin> {
 
   void _onPressedButtonEntrar(){
     Auth auth = Auth();
-    //Login com o Firebase - Necessaria ativação na plataforma
+    //Login com o Firebase
     auth.signIn(_email, _senha).then((String uid){
       PessoaModel.of(context).getDados(uid);
+      PessoaModel.of(context).Logar(true);
       switch (selectedRadio) {
         case 1:
             Navigator.of(context).pushReplacementNamed('/telaPrincipalCliente');
