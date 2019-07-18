@@ -36,7 +36,7 @@ class TelaListaPrestadores extends StatelessWidget {
     http.Response response;
     response = await http
         .get("http://alguz1.gearhostpreview.com/lista.php?sql=$sql");
-    print(response.body);
+    //print(response.body);
     return json.decode(response.body);
   }
 
@@ -176,7 +176,7 @@ class TelaListaPrestadores extends StatelessWidget {
                         height: 4,
                       ),
                       Text(
-                        "100.0",
+                        snapshot.data["Custom"][index]["notaPrestador"],
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 12,

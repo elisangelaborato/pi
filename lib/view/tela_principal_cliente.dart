@@ -473,7 +473,7 @@ class PrestadoresWidget extends StatelessWidget {
                         height: 4,
                       ),
                       Text(
-                        "100.0",
+                        snapshot.data["Custom"][index]["notaPrestador"],
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 12,
