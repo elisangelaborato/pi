@@ -52,32 +52,35 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     backgroundImage: ExactAssetImage("images/person.png"),
                   ),
                   onTap: () {
-                   // Navigator.pushNamed(context, '/telaPerfilCliente');
-                    chamarTelaPerfil();
+                    Navigator.pushNamed(context, '/telaPerfilCliente');
+                    //chamarTelaPerfil();
 
                   },
                 ),
 
                 onDetailsPressed: () {
-                  //Navigator.pushNamed(context,'/telaPerfilCliente');
-                  chamarTelaPerfil();
+                  Navigator.pushNamed(context,'/telaPerfilCliente');
+                  //chamarTelaPerfil();
                 },
               ),
 
         ListTile(
           leading: Icon(Icons.work),
-          title: Text("Tornar-se um prestador"),
+          title: Text(PessoaModel.of(context).ativoPrestador == 1 ? "Ir para tela de Prestador": "Tornar-se Prestador"),
           onTap: () {
 
-
-            Navigator.push(
+            if(PessoaModel.of(context).ativoPrestador == 1){
+              Navigator.of(context).pushNamed('/telaPrincipalEmpresa');
+            }else
+              Navigator.of(context).pushNamed('/telaCadastroPrestador');
+           /* Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => TelaCadastroPrestador("2")),
-            );
+            );*/
 
             //////TESTAR SE ESTA COMO PRESTADOR
-           Navigator.of(context).pushNamed('/telaCadastroPrestador');
+
           },
         ),
 
