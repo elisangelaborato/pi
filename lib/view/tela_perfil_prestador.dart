@@ -9,7 +9,7 @@ import 'dart:convert';
 import 'package:pi/model/pessoa_model.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:pi/view/tela_cadastroprestador.dart';
+import 'package:pi/view/tela_cadastro_prestador.dart';
 
 ////80% of screen width
 //double c_width = MediaQuery.of(context).size.width*0.8;

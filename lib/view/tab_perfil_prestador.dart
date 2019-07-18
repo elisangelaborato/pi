@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pi/model/pessoa_model.dart';
-import 'package:pi/view/tela_cadastroprestador.dart';
+import 'package:pi/view/tela_cadastro_prestador.dart';
 
 class TabPerfilPrestador extends StatefulWidget {
   final Map<String, dynamic> pessoa;

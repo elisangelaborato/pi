@@ -155,6 +155,7 @@ class _TelaLoginState extends State<TelaLogin> {
                 child: Text("ENTRAR", style: TextStyle(fontSize: 20.0),),
                 callback: () {
                   _onPressedButtonEntrar();
+//                  Navigator.of(context).pushNamed('/telaPrincipalCliente');
                 },
                 increaseWidthBy: 190.0,
               ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
-import 'package:pi/view/tela_cadastrocliente.dart';
+import 'package:pi/view/tela_cadastro_cliente.dart';
 import 'package:pi/model/pessoa_model.dart';
 
 class TabPerfilCliente extends StatefulWidget {
@@ -12,15 +12,15 @@ class _TabPerfilClienteState extends State<TabPerfilCliente> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
+      body: Container(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: EdgeInsets.fromLTRB(16,16,5,16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
                 "Sobre mim",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Text(
                 PessoaModel.of(context).sobreMimCliente ??
@@ -31,7 +31,7 @@ class _TabPerfilClienteState extends State<TabPerfilCliente> {
               ),
               Text(
                 "Telefone",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Text(
                 PessoaModel.of(context).telefoneCliente,
@@ -41,14 +41,27 @@ class _TabPerfilClienteState extends State<TabPerfilCliente> {
               ),
               Text(
                 "Email",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Text(
                 PessoaModel.of(context).email,
               ),
+              ListTile(
+                leading: GestureDetector(
+                  child: Hero(
+                    tag: 'my-hero-animation-tag',
+                    child: CircleAvatar(
+                      backgroundImage:
+                      AssetImage('res/images/material_design_3.png'),
+                    ),
+                  ),
+                  onTap: () => _showSecondPage(context),
+                ),
+                title: Text('Tap on the photo to view the animation transition.'),
+              ),
               Padding(
-                padding: EdgeInsets.fromLTRB(320, 185, 0, 10),
-                child:CircularGradientButton(
+                padding: EdgeInsets.fromLTRB(300, 130, 0, 10),
+                  child:CircularGradientButton(
                   gradient: LinearGradient(colors: [
                     Color(0xFF000033),
                     Color(0xFF000066),
@@ -72,4 +85,19 @@ class _TabPerfilClienteState extends State<TabPerfilCliente> {
       ),
     );
   }
+  void _showSecondPage(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => Scaffold(
+          body: Center(
+            child: Hero(
+              tag: 'my-hero-animation-tag',
+              child: Image.asset('images/person.png'),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
+
