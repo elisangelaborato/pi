@@ -11,20 +11,23 @@ class TelaListaAgendamentos extends StatelessWidget {
   TelaListaAgendamentos({this.cdgPessoa_cliente, this.cdgPessoa_prestador});
 
   Future<Map> _getDados() async {
+    print("oi");
 
     String where = " ";
-    if (!(cdgPessoa_cliente.isEmpty || cdgPessoa_cliente.trim().length == 0))
-      where = " WHERE cli.cdgPessoa = $cdgPessoa_cliente ";
-    else
-    if (!(cdgPessoa_prestador.isEmpty || cdgPessoa_prestador.trim().length == 0))
-      where = " WHERE prt.cdgPessoa = $cdgPessoa_prestador ";
+    if (cdgPessoa_cliente != null)
+      if (!(cdgPessoa_cliente.isEmpty || cdgPessoa_cliente.trim().length == 0))
+        where = " WHERE cli.cdgPessoa = $cdgPessoa_cliente ";
+
+    if (where.trim()=="" && (cdgPessoa_prestador != null))
+      if (!(cdgPessoa_prestador.isEmpty || cdgPessoa_prestador.trim().length == 0))
+        where = " WHERE prt.cdgPessoa = $cdgPessoa_prestador ";
 
     String sql = "SELECT age.cdgAgendamento, cli.cdgPessoa cli_cdgPessoa, cli.nome cli_nome, cli.imagem cli_image, prt.cdgPessoa prt_cdgPessoa, prt.nome prt_nome, prt.imagem prt_image, ser.nome ser_nome, age.dataAgendamento, age.horaAgendamento, age.situacaoAgendamento, age.preco  FROM agendamento age LEFT JOIN pessoa cli ON cli.cdgPessoa = age.cdgPessoa_cliente LEFT JOIN pessoa prt ON prt.cdgPessoa = age.cdgPessoa_prestador LEFT JOIN servico ser ON ser.cdgServico = age.cdgServico $where ORDER BY age.dataAgendamento, age.horaAgendamento, age.situacaoAgendamento  ";
 
     http.Response response;
     response = await http
         .get("http://alguz1.gearhostpreview.com/lista.php?sql=$sql");
-    print(response.body);
+    //print("${response.body}");
     return json.decode(response.body);
   }
 
