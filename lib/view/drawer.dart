@@ -3,6 +3,7 @@ import 'package:pi/view/tela_perfil_cliente.dart';
 import 'package:pi/view/tela_perfil_prestador.dart';
 import 'package:pi/view/tela_cadastro_prestador.dart';
 import 'package:pi/model/pessoa_model.dart';
+import 'package:pi/model/servicos_model.dart';
 
 class CustomDrawer extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
 
 
 
-  chamarTelaPerfil(){
+ /* chamarTelaPerfil(){
     //Navigator.pop(context);
 
     Navigator.push(
@@ -24,7 +25,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
 //      context,
 //      MaterialPageRoute(builder: (context) => TelaPerfilPrestador()),
 //    );
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -87,12 +88,18 @@ class _CustomDrawerState extends State<CustomDrawer> {
         ListTile(
           leading: Icon(Icons.access_time),
           title: Text("Histórico"),
-          onTap: () {},
+          onTap: () {
+            //PessoaModel.of(context).salvaPessoa();
+
+          },
         ),
         ListTile(
           leading: Icon(Icons.star),
           title: Text("Avaliações"),
-          onTap: () {},
+          onTap: () {
+            //teste insercao de agendamento
+            ServicosModel.of(context).salvaAgendamento("39", "39", "1", "2019-07-18", "08:30", "AGUARDANDO", "20.00");
+          },
         ),
         Divider(
           color: Colors.black,
@@ -101,6 +108,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           leading: Icon(Icons.exit_to_app),
           title: Text("Sair"),
           onTap: () {
+
           },
         )
       ]),

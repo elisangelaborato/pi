@@ -98,6 +98,7 @@ class PessoaModel extends Model {
       "telefoneCliente": telefoneCliente,
       "ativoCliente": ativoCliente
     };
+    _launchURL(map, "cliente", this.cdgPessoa, "cdgPessoa");
   }
 
   void salvaPrestador(
@@ -116,19 +117,21 @@ class PessoaModel extends Model {
       "telefonePrestador": telefonePrestador,
       "ativoPrestador": ativoPrestador
     };
+    _launchURL(map, "prestador", this.cdgPessoa, "cdgPessoa");
   }
 
-   _launchURL(Map<String, dynamic> dados, String tabela, String codigo, String idTablea) async {
-    String url = "http://alguz1.gearhostpreview.com/atualiza.php?codigo=${codigo}&tabela=${tabela}&idTabela=${idTablea}";
+   _launchURL(Map<String, dynamic> dados, String tabela, String codigo, String idTabela) async {
+    String url = "http://alguz1.gearhostpreview.com/atualiza.php?codigo=${codigo}&tabela=${tabela}&idTabela=${idTabela}";
     print(url);
+    print(dados['imagem']);
     var response = await http.post(url, body: dados);
-   /* if (response.statusCode == 200) {
-      //var jsonResponse = convert.jsonDecode(response.body);
-      //var itemCount = jsonResponse['totalItems'];
-      //print("Number of books about http: $itemCount.");
-      //print(jsonResponse);
+    if (response.statusCode == 200) {
+      var jsonResponse = convert.jsonDecode(response.body);
+      var itemCount = jsonResponse['totalItems'];
+      print("Number of books about http: $itemCount.");
+      print(jsonResponse);
     } else {
-     // print("Falha com status: ${response.statusCode}.");
-    }*/
+      print("Falha com status: ${response.statusCode}.");
+    }
   }
 }
