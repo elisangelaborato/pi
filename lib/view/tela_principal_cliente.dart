@@ -4,6 +4,7 @@ import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:pi/view/drawer.dart';
 import 'package:pi/view/tela_agendamento_cliente.dart';
 import 'package:http/http.dart' as http;
+import 'package:pi/view/tela_lista_prestadores.dart';
 import 'package:pi/view/tela_perfil_prestador.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -84,8 +85,6 @@ class ServicosWidget extends StatelessWidget {
                   case ConnectionState.none:
                   case ConnectionState.waiting:
                     return Container(
-                      width: 200.0,
-                      height: 200.0,
                       alignment: Alignment.center,
                       child: CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
@@ -138,7 +137,15 @@ class ServicosWidget extends StatelessWidget {
             backgroundColor: Colors.transparent,
           ),
           trailing: Icon(Icons.keyboard_arrow_right),
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>
+                TelaListaPrestadores(
+                  cdgCategoria: snapshot.data["categoriaservico"][index]["cdgCategoria"],
+                  categoria_descricao: snapshot.data["categoriaservico"][index]["descricao"],
+                ),
+            ),
+            );
+          },
           title: Text(snapshot.data["categoriaservico"][index]["descricao"]),
         ),
         Divider(
@@ -325,6 +332,7 @@ class MeusServicosWidget extends StatelessWidget {
 }
 
 class PrestadoresWidget extends StatelessWidget {
+
   Future<Map> _getDados() async {
     http.Response response;
     response = await http
