@@ -20,7 +20,7 @@ class TelaListaAvaliacoes extends StatelessWidget {
 
     if (where.trim() == "" &&
         (cdgPessoa_prestador != null)) if (!(cdgPessoa_prestador
-            .isEmpty ||
+        .isEmpty ||
         cdgPessoa_prestador.trim().length == 0))
       where += " AND prt.cdgPessoa = $cdgPessoa_prestador ";
 
@@ -29,7 +29,7 @@ class TelaListaAvaliacoes extends StatelessWidget {
 
     http.Response response;
     response =
-        await http.get("http://alguz1.gearhostpreview.com/lista.php?sql=$sql");
+    await http.get("http://alguz1.gearhostpreview.com/lista.php?sql=$sql");
     print(response.body);
     return json.decode(response.body);
   }

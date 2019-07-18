@@ -49,10 +49,11 @@ class _TabPerfilPrestadorState extends State<TabPerfilPrestador> {
             children: <Widget>[
               Text(
                 "Sobre mim",
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
               ),
               Text(
                 prestador["prestador"][0]["sobreMimPrestador"] ?? "",
+                style: TextStyle(fontSize: 14.0, fontStyle: FontStyle.italic),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 12.0),
@@ -69,20 +70,22 @@ class _TabPerfilPrestadorState extends State<TabPerfilPrestador> {
 //                ),
               Text(
                 "Telefone",
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
               ),
               Text(
                 prestador["prestador"][0]["telefonePrestador"] ?? "",
+                style: TextStyle(fontSize: 14.0, ),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 12.0),
               ),
               Text(
                 "Email",
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
               ),
               Text(
                 pessoa["pessoa"][0]["email"] ?? "",
+                style: TextStyle(fontSize: 14.0, ),
               ),
             ],
           ),
