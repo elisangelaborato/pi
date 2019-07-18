@@ -191,6 +191,7 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
   Widget getTabBarPages() {
     return TabBarView(//controller: tabController,
         children: <Widget>[
+
       TabPerfilPrestador(pessoa, prestador),
       //TabAgendaPrestador(),
       TabServicosPrestador(pessoa["pessoa"][0]["cdgPessoa"]),

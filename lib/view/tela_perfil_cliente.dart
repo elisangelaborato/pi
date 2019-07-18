@@ -6,6 +6,7 @@ import 'package:pi/view/tab_perfil_cliente.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:pi/model/pessoa_model.dart';
+import 'package:image_picker/image_picker.dart';
 
 ////80% of screen width
 //double c_width = MediaQuery.of(context).size.width*0.8;
@@ -111,10 +112,89 @@ class _TelaPerfilClienteState extends State<TelaPerfilCliente> {
                 Padding(
                   padding: EdgeInsets.only(top: 32.0),
                 ),
-                CircleAvatar(
-                  radius: 60.0,
-                  backgroundColor: Colors.transparent,
-                  backgroundImage: ExactAssetImage('images/person.png'),
+//                CircleAvatar(
+//                  radius: 60.0,
+//                  backgroundColor: Colors.transparent,
+//                  backgroundImage: ExactAssetImage('images/person.png'),
+//                ),
+                Stack(
+                  children: <Widget>[
+
+                    CircleAvatar(
+                      child:
+                      //se imagem nula ou em branco, coloca icone padrao
+//                      (pessoa["pessoa"][0]["imagem"] == null ||
+//                          pessoa["pessoa"][0]["imagem"].length == 0)
+                        (PessoaModel.of(context).imagem == null ||
+                           PessoaModel.of(context).imagem.length == 0)
+                        ? CircleAvatar(
+                        radius: 55.0,
+                        backgroundColor: Colors.transparent,
+                        backgroundImage: ExactAssetImage(
+                            PessoaModel.of(context).imagem //pessoa["pessoa"][0]["imagem"]
+                                ??
+                                'images/person.png'),
+                      )
+//                      Icon(
+//                              Icons.account_circle,
+//                              size: 60,
+//                              color: Theme.of(context).primaryColor,
+//                            )
+
+                          : //Image.network(pessoa["pessoa"][0]["imagem"]),
+
+                      //container para deixar imagem circular
+                      Container(
+                        width: 120.0,
+                        height: 120.0,
+                        decoration: new BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: new DecorationImage(
+                            fit: BoxFit.fill,
+                            image: new NetworkImage(
+                                //pessoa["pessoa"][0]["imagem"]
+                                PessoaModel.of(context).imagem
+                            ),
+                          ),
+                        ),
+                      ),
+
+
+                      radius: 60,
+                      backgroundColor: Colors.transparent,
+                    ),
+
+                    //se pessoa logada for a mesma deste perfil, mostra botao editar foto
+                    Positioned(
+                      right: 0,
+                      bottom: 0,
+                      child: PessoaModel.of(context).cdgPessoa ==
+                          PessoaModel.of(context).cdgPessoa //pessoa["pessoa"][0]["cdgPessoa"]
+                          ? FloatingActionButton(
+                        child: Icon(
+                          Icons.edit,
+                          color: Colors.white,
+                        ),
+                        mini: true,
+                        onPressed: () {
+                          ImagePicker.pickImage(
+                              source: ImageSource.camera)
+                              .then((file) {
+                            if (file == null)
+                              return;
+                            else {
+                              setState(() {
+                                //ToDo: persistir dados da imagem (upload imagem, etc)
+                                return PessoaModel.of(context).imagem =
+                                    file.path;
+                              });
+                            }
+                          });
+                        },
+                      )
+                          : Container(color: Colors.transparent,),
+                    ),
+                  ],
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 8.0),
@@ -123,10 +203,10 @@ class _TelaPerfilClienteState extends State<TelaPerfilCliente> {
                   PessoaModel.of(context).nome,
                   style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  "Cliente Platinum",
-                  style: TextStyle(fontSize: 15.0),
-                ),
+//                Text(
+//                  "Cliente Platinum",
+//                  style: TextStyle(fontSize: 15.0),
+//                ),
                 Text(
                  PessoaModel.of(context).notaCliente,
                   style: TextStyle(fontSize: 15.0),

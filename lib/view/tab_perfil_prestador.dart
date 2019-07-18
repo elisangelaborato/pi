@@ -28,19 +28,19 @@ class _TabPerfilPrestadorState extends State<TabPerfilPrestador> {
     return Scaffold(
       floatingActionButton:
       PessoaModel.of(context).cdgPessoa == pessoa["pessoa"][0]["cdgPessoa"]
-              ? FloatingActionButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => TelaCadastroPrestador(
-                              pessoa["pessoa"][0]["cdgPessoa"]),
-                      ),
-                    );
-                  },
-                  child: Icon(Icons.edit),
-                )
-              : null,
+          ? FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => TelaCadastroPrestador(
+                  pessoa["pessoa"][0]["cdgPessoa"]),
+            ),
+          );
+        },
+        child: Icon(Icons.edit),
+      )
+          : null,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(16.0),
@@ -52,7 +52,7 @@ class _TabPerfilPrestadorState extends State<TabPerfilPrestador> {
                 style: TextStyle(fontSize: 16),
               ),
               Text(
-                prestador["prestador"][0]["sobreMim"] ?? "",
+                prestador["prestador"][0]["sobreMimPrestador"] ?? "",
               ),
               Padding(
                 padding: EdgeInsets.only(top: 12.0),
@@ -72,7 +72,7 @@ class _TabPerfilPrestadorState extends State<TabPerfilPrestador> {
                 style: TextStyle(fontSize: 16),
               ),
               Text(
-                prestador["prestador"][0]["telefone"] ?? "",
+                prestador["prestador"][0]["telefonePrestador"] ?? "",
               ),
               Padding(
                 padding: EdgeInsets.only(top: 12.0),

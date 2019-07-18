@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pi/model/pessoa_model.dart';
+import 'package:pi/view/tela_lista_agendamentos.dart';
+import 'package:pi/view/tela_lista_avaliacoes.dart';
 import 'package:pi/view/tela_perfil_cliente.dart';
 import 'package:pi/view/tela_perfil_prestador.dart';
 
@@ -64,12 +66,22 @@ class _DrawerPrestadorState extends State<DrawerPrestador> {
         ListTile(
           leading: Icon(Icons.access_time),
           title: Text("Histórico"),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TelaListaAgendamentos( cdgPessoa_prestador: PessoaModel.of(context).cdgPessoa )));
+          },
         ),
         ListTile(
           leading: Icon(Icons.star),
           title: Text("Avaliações"),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TelaListaAvaliacoes( cdgPessoa_prestador: PessoaModel.of(context).cdgPessoa )));
+          },
         ),
         Divider(
           color: Colors.black,
