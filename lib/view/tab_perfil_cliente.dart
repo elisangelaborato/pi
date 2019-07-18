@@ -46,22 +46,11 @@ class _TabPerfilClienteState extends State<TabPerfilCliente> {
               Text(
                 PessoaModel.of(context).email,
               ),
-              ListTile(
-                leading: GestureDetector(
-                  child: Hero(
-                    tag: 'my-hero-animation-tag',
-                    child: CircleAvatar(
-                      backgroundImage:
-                      AssetImage('res/images/material_design_3.png'),
-                    ),
-                  ),
-                  onTap: () => _showSecondPage(context),
-                ),
-                title: Text('Tap on the photo to view the animation transition.'),
-              ),
+
               Padding(
-                padding: EdgeInsets.fromLTRB(300, 130, 0, 10),
+                padding: EdgeInsets.fromLTRB(310, 170, 0, 10),
                   child:CircularGradientButton(
+
                   gradient: LinearGradient(colors: [
                     Color(0xFF000033),
                     Color(0xFF000066),
@@ -69,7 +58,8 @@ class _TabPerfilClienteState extends State<TabPerfilCliente> {
                     Color(0xFF0000b3),
                     Color(0xFF0000e6),
                     Color(0xFF0000ff),
-                  ]),
+                  ]
+                  ),
                   child: Icon(Icons.edit),
                   callback: () {
                     Navigator.push(
@@ -80,20 +70,6 @@ class _TabPerfilClienteState extends State<TabPerfilCliente> {
                 ),
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-  void _showSecondPage(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (ctx) => Scaffold(
-          body: Center(
-            child: Hero(
-              tag: 'my-hero-animation-tag',
-              child: Image.asset('images/person.png'),
-            ),
           ),
         ),
       ),

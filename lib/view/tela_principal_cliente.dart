@@ -29,6 +29,7 @@ class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
         length: 3,
         child: Scaffold(
           appBar: GradientAppBar(
+            elevation: 15,
             gradient: LinearGradient(colors: [
               Color(0xFF000033),
               Color(0xFF000066),
@@ -223,6 +224,8 @@ class MeusServicosWidget extends StatelessWidget {
 
   Widget getCard(context) {
     return Card(
+//      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0),
+//      ),
       margin: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
       child: SizedBox(
           height: 100.0,
@@ -306,16 +309,18 @@ class MeusServicosWidget extends StatelessWidget {
                       ),
                       GradientButton(
                         gradient: LinearGradient(
+
                           colors: [
                             const Color(0xFFe60000),
                             const Color(0xFFe60000),
                             const Color(0xFFff4d4d),
                             const Color(0xFFe60000),
-                            const Color(0xFFff1a1a),
+                            const Color(0xFFe60000),
                           ],
                           begin: Alignment.centerLeft,
-                          end: Alignment.center,
+                          end: Alignment.centerRight,
                         ),
+                        elevation: 15,
                         child: Text("CANCELAR", style: TextStyle(fontSize: 15.0),),
                         callback: () {
                         },
@@ -391,6 +396,7 @@ class PrestadoresWidget extends StatelessWidget {
 
   Widget getCard(context, snapshot, index) {
     return Card(
+      elevation: 10.0,
       margin: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
       child: SizedBox(
           height: 80.0,
@@ -493,21 +499,21 @@ class PrestadoresWidget extends StatelessWidget {
                       GradientButton(
                         gradient: LinearGradient(
                           colors: [
-                            Color(0xFF000033),
-                            Color(0xFF000066),
-                            Color(0xFF000080),
-                            Color(0xFF0000b3),
-                            Color(0xFF0000e6),
-                            Color(0xFF0000ff),
+                            Color(0xFF666666),
+                            Color(0xFF808080),
+                            Color(0xFF808080),
+                            Color(0xFFb3b3b3),
+                            Color(0xFF808080),
+                            Color(0xFF666666),
                           ],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.center,
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
                         ),
 
                         child: Text("Ver Perfil",
                           style: TextStyle(fontSize: 15.0),
                         ),
-
+                        elevation: 20,
                           callback: () {
 //                          String cdgPessoa = snapshot.data["pessoa"][index]["cdgPessoa"];
 

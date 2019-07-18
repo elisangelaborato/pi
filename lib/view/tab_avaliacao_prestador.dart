@@ -6,6 +6,9 @@ class TabAvaliacaoPrestador extends StatefulWidget {
 }
 
 class _TabAvaliacaoPrestadorState extends State<TabAvaliacaoPrestador> {
+
+  static const IconData gradient = IconData(0xe3e9, fontFamily: 'MaterialIcons');
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -27,6 +30,8 @@ class _TabAvaliacaoPrestadorState extends State<TabAvaliacaoPrestador> {
 
   Widget getCard() {
     return Card(
+
+      elevation: 15,
       margin: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
       child: SizedBox(
           height: 80.0,

@@ -27,6 +27,7 @@ class _TabAvaliacaoClienteState extends State<TabAvaliacaoCliente> {
 
   Widget getCard() {
     return Card(
+      elevation: 15,
       margin: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
       child: SizedBox(
           height: 80.0,
