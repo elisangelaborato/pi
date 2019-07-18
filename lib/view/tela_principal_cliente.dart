@@ -528,7 +528,7 @@ class PrestadoresWidget extends StatelessWidget {
                             ),
                           );
                         },
-                        increaseWidthBy: 35.0,
+                        increaseWidthBy: 25.0,
                       ),
                     ],
                   ),

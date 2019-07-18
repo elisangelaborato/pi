@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pi/view/tela_perfil_cliente.dart';
 import 'package:pi/view/tela_perfil_prestador.dart';
-import 'package:pi/view/tela_cadastroprestador.dart';
+import 'package:pi/view/tela_cadastro_prestador.dart';
 import 'package:pi/model/pessoa_model.dart';
 
 class CustomDrawer extends StatefulWidget {
