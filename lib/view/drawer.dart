@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pi/view/tela_lista_agendamentos.dart';
+import 'package:pi/view/tela_lista_avaliacoes.dart';
 import 'package:pi/view/tela_perfil_cliente.dart';
 import 'package:pi/view/tela_perfil_prestador.dart';
 import 'package:pi/view/tela_cadastro_prestador.dart';
@@ -81,16 +82,25 @@ class _CustomDrawerState extends State<CustomDrawer> {
               context,
               MaterialPageRoute(
                   builder: (context) => TelaListaAgendamentos(
-                        cdgPessoa_cliente: "",
-                        cdgPessoa_prestador: "",
-                      )),
+                    cdgPessoa_cliente: "",
+                    cdgPessoa_prestador: "",
+                  )),
             );
           },
         ),
         ListTile(
           leading: Icon(Icons.star),
           title: Text("Avaliações"),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => TelaListaAvaliacoes(
+                    cdgPessoa_cliente: "",
+                    cdgPessoa_prestador: "",
+                  )),
+            );
+          },
         ),
         Divider(
           color: Colors.black,

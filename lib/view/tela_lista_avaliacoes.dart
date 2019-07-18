@@ -3,23 +3,23 @@ import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class TelaListaAgendamentos extends StatelessWidget {
+class TelaListaAvaliacoes extends StatelessWidget {
 
   final String cdgPessoa_cliente;
   final String cdgPessoa_prestador;
 
-  TelaListaAgendamentos({this.cdgPessoa_cliente, this.cdgPessoa_prestador});
+  TelaListaAvaliacoes({this.cdgPessoa_cliente, this.cdgPessoa_prestador});
 
   Future<Map> _getDados() async {
 
-    String where = " ";
+    String where = " WHERE age.situacaoAgendamento = \"EXECUTADO\"  ";
     if (!(cdgPessoa_cliente.isEmpty || cdgPessoa_cliente.trim().length == 0))
-      where = " WHERE cli.cdgPessoa = $cdgPessoa_cliente ";
+      where += " AND cli.cdgPessoa = $cdgPessoa_cliente ";
     else
     if (!(cdgPessoa_prestador.isEmpty || cdgPessoa_prestador.trim().length == 0))
-      where = " WHERE prt.cdgPessoa = $cdgPessoa_prestador ";
+      where += " AND prt.cdgPessoa = $cdgPessoa_prestador ";
 
-    String sql = "SELECT age.cdgAgendamento, cli.cdgPessoa cli_cdgPessoa, cli.nome cli_nome, cli.imagem cli_image, prt.cdgPessoa prt_cdgPessoa, prt.nome prt_nome, prt.imagem prt_image, ser.nome ser_nome, age.dataAgendamento, age.horaAgendamento, age.situacaoAgendamento, age.preco  FROM agendamento age LEFT JOIN pessoa cli ON cli.cdgPessoa = age.cdgPessoa_cliente LEFT JOIN pessoa prt ON prt.cdgPessoa = age.cdgPessoa_prestador LEFT JOIN servico ser ON ser.cdgServico = age.cdgServico $where ORDER BY age.dataAgendamento, age.horaAgendamento, age.situacaoAgendamento  ";
+    String sql = "SELECT age.cdgAgendamento, cli.cdgPessoa cli_cdgPessoa, cli.nome cli_nome, cli.imagem cli_image,  prt.cdgPessoa prt_cdgPessoa, prt.nome prt_nome, prt.imagem prt_image,  ser.nome ser_nome, age.dataAgendamento, age.horaAgendamento, age.situacaoAgendamento, age.preco, age.avaliacaoCliente, age.comentarioCliente, age.avaliacaoPrestador, age.comentarioPrestador FROM agendamento age LEFT JOIN pessoa cli ON cli.cdgPessoa = age.cdgPessoa_cliente LEFT JOIN pessoa prt ON prt.cdgPessoa = age.cdgPessoa_prestador LEFT JOIN servico ser ON ser.cdgServico = age.cdgServico $where ORDER BY age.dataAgendamento, age.horaAgendamento, age.situacaoAgendamento ";
 
     http.Response response;
     response = await http
@@ -32,7 +32,7 @@ class TelaListaAgendamentos extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text( "Histórico"),
+        title: Text( "Avaliações"),
         actions: <Widget>[
           Icon(Icons.search),
         ],
@@ -163,11 +163,11 @@ class TelaListaAgendamentos extends StatelessWidget {
                         height: 4,
                       ),
                       Text(
-                        "Valor",
+                        "Nota",
                         style: TextStyle(fontSize: 16),
                       ),
                       Text(
-                        "R\$ ${snapshot.data["Custom"][index]["preco"]}",
+                        "${snapshot.data["Custom"][index]["avaliacaoPrestador"]}",
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 12,
@@ -185,44 +185,7 @@ class TelaListaAgendamentos extends StatelessWidget {
                         height: 0,
                       ),
 
-                      snapshot.data["Custom"][index]["situacaoAgendamento"] == "AGENDADO"
-                          ?
-                      GradientButton(
-                        gradient: LinearGradient(
-                          colors: [
-                            const Color(0xFFe60000),
-                            const Color(0xFFe60000),
-                            const Color(0xFFff4d4d),
-                            const Color(0xFFe60000),
-                            const Color(0xFFff1a1a),
-                          ],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.center,
-                        ),
-                        child: Text("CANCELAR", style: TextStyle(fontSize: 15.0),),
-                        callback: () {
-                        },
-                        increaseWidthBy: 30.0,
-                      )
-                          :
-                      GradientButton(
-                        gradient: LinearGradient(
-                          colors: [
-                            const Color(0xFFe60000),
-                            const Color(0xFFe60000),
-                            const Color(0xFFff4d4d),
-                            const Color(0xFFe60000),
-                            const Color(0xFFff1a1a),
-                          ],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.center,
-                        ),
-                        child: Text("EXCLUIR", style: TextStyle(fontSize: 15.0),),
-                        callback: () {
-                        },
-                        increaseWidthBy: 30.0,
-                      )
-                      ,
+                      Text("${snapshot.data["Custom"][index]["comentarioPrestador"]}"),
 
                     ],
                   ),
