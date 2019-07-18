@@ -10,10 +10,7 @@ class CustomDrawer extends StatefulWidget {
 }
 
 class _CustomDrawerState extends State<CustomDrawer> {
-
-
-
-  chamarTelaPerfil(){
+  chamarTelaPerfil() {
     //Navigator.pop(context);
 
     Navigator.push(
@@ -30,57 +27,49 @@ class _CustomDrawerState extends State<CustomDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(children: <Widget>[
-              UserAccountsDrawerHeader(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [
-                        Color(0xFF000033),
-                        Color(0xFF000066),
-                        Color(0xFF000080),
-                        Color(0xFF0000b3),
-                        Color(0xFF0000e6),
-                        Color(0xFF0000ff),
-                      ],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.center,
-                  ),
-                ),
-                accountName: Text(PessoaModel.of(context).nome),
-                accountEmail: Text(PessoaModel.of(context).email),
-                currentAccountPicture: GestureDetector(
-                  child: CircleAvatar(
-                    backgroundImage: ExactAssetImage("images/person.png"),
-                  ),
-                  onTap: () {
-                   // Navigator.pushNamed(context, '/telaPerfilCliente');
-                    chamarTelaPerfil();
-
-                  },
-                ),
-
-                onDetailsPressed: () {
-                  //Navigator.pushNamed(context,'/telaPerfilCliente');
-                  chamarTelaPerfil();
-                },
-              ),
-
-        ListTile(
-          leading: Icon(Icons.work),
-          title: Text("Tornar-se um prestador"),
-          onTap: () {
-
-
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => TelaCadastroPrestador("2")),
-            );
-
-            //////TESTAR SE ESTA COMO PRESTADOR
-           Navigator.of(context).pushNamed('/telaCadastroPrestador');
+        UserAccountsDrawerHeader(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFF000033),
+                Color(0xFF000066),
+                Color(0xFF000080),
+                Color(0xFF0000b3),
+                Color(0xFF0000e6),
+                Color(0xFF0000ff),
+              ],
+              begin: Alignment.centerLeft,
+              end: Alignment.center,
+            ),
+          ),
+          accountName: Text(PessoaModel.of(context).nome),
+          accountEmail: Text(PessoaModel.of(context).email),
+          currentAccountPicture: GestureDetector(
+            child: CircleAvatar(
+              backgroundImage: ExactAssetImage("images/person.png"),
+            ),
+            onTap: () {
+              // Navigator.pushNamed(context, '/telaPerfilCliente');
+              chamarTelaPerfil();
+            },
+          ),
+          onDetailsPressed: () {
+            //Navigator.pushNamed(context,'/telaPerfilCliente');
+            chamarTelaPerfil();
           },
         ),
-
+        ListTile(
+          leading: Icon(Icons.work),
+          title: Text(PessoaModel.of(context).ativoPrestador == 0
+              ? "Tornar-se um prestador"
+              : "Ir para tela prestador"),
+          onTap: () {
+            if (PessoaModel.of(context).ativoPrestador == 0) {
+              Navigator.of(context).pushNamed('/telaCadastroPrestador');
+            } else if (PessoaModel.of(context).ativoPrestador == 1) {
+              Navigator.of(context).pushNamed('/telaPrincipalEmpresa');}
+          },
+        ),
         ListTile(
           leading: Icon(Icons.access_time),
           title: Text("Histórico"),
@@ -89,7 +78,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
         ListTile(
           leading: Icon(Icons.star),
           title: Text("Avaliações"),
-          onTap: () {},
+          onTap: () {
+            PessoaModel.of(context).salvaPessoa(nome: "joao");
+          },
         ),
         Divider(
           color: Colors.black,
@@ -97,8 +88,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
         ListTile(
           leading: Icon(Icons.exit_to_app),
           title: Text("Sair"),
-          onTap: () {
-          },
+          onTap: () {},
         )
       ]),
     );
