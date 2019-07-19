@@ -173,7 +173,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           title: Text("Avaliações"),
           onTap: () {
             //teste insercao de agendamento
-            //ServicosModel.of(context).salvaAgendamento("39", "39", "1", "2019-07-18", "08:30", "AGUARDANDO", "20.00");
+            ServicosModel.of(context).salvaAgendamento(39, 38, 1, "2019-07-17", "08:30", "Agendado", 20);
 
             if (PessoaModel.of(context).isLogadoComoCliente()) {
               //ve historico do cliente logado
