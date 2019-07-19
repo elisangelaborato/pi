@@ -4,9 +4,9 @@ import 'dart:convert';
 
 import 'package:pi/card/card_agendamento.dart';
 
-Widget FutureBuilderListaAgendamentos({cdgPessoa_cliente, cdgPessoa_prestador}){
+Widget FutureBuilderListaAgendamentos({cdgPessoa_cliente, cdgPessoa_prestador, situacaoAgendamento}){
   return FutureBuilder(
-      future: _getDados(cdgPessoa_cliente, cdgPessoa_prestador),
+      future: _getDados(cdgPessoa_cliente, cdgPessoa_prestador, situacaoAgendamento),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
@@ -36,8 +36,8 @@ Widget FutureBuilderListaAgendamentos({cdgPessoa_cliente, cdgPessoa_prestador}){
       });
 }
 
-Future<Map> _getDados(cdgPessoa_cliente, cdgPessoa_prestador) async {
-  print("oi");
+Future<Map> _getDados(cdgPessoa_cliente, cdgPessoa_prestador, situacaoAgendamento) async {
+  //print("oi");
 
   String where = " ";
   if (cdgPessoa_cliente != null)
@@ -47,6 +47,13 @@ Future<Map> _getDados(cdgPessoa_cliente, cdgPessoa_prestador) async {
   if (where.trim()=="" && (cdgPessoa_prestador != null))
     if (!(cdgPessoa_prestador.isEmpty || cdgPessoa_prestador.trim().length == 0))
       where = " WHERE prt.cdgPessoa = $cdgPessoa_prestador ";
+
+  if (situacaoAgendamento != null)
+    if (!(situacaoAgendamento.isEmpty || situacaoAgendamento.trim().length == 0))
+      if (where.trim()=="")
+        where = " WHERE situacaoAgendamento = $situacaoAgendamento ";
+      else
+        where += " AND situacaoAgendamento = \"$situacaoAgendamento\" ";
 
   String sql = "SELECT age.cdgAgendamento, cli.cdgPessoa cli_cdgPessoa, cli.nome cli_nome, cli.imagem cli_image, prt.cdgPessoa prt_cdgPessoa, prt.nome prt_nome, prt.imagem prt_image, ser.nome ser_nome, age.dataAgendamento, age.horaAgendamento, age.situacaoAgendamento, age.preco  FROM agendamento age LEFT JOIN pessoa cli ON cli.cdgPessoa = age.cdgPessoa_cliente LEFT JOIN pessoa prt ON prt.cdgPessoa = age.cdgPessoa_prestador LEFT JOIN servico ser ON ser.cdgServico = age.cdgServico $where ORDER BY age.dataAgendamento, age.horaAgendamento, age.situacaoAgendamento  ";
 
