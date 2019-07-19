@@ -522,6 +522,7 @@ class ServicosPrestados extends StatelessWidget {
                           fontSize: 12,
                         ),
                       ),
+                      
                       Divider(
                         height: 4,
                       ),
