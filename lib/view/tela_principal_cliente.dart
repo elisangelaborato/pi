@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
+import 'package:pi/card/card_prestador.dart';
 import 'package:pi/view/drawer.dart';
 import 'package:pi/view/tela_agendamento_cliente.dart';
 import 'package:http/http.dart' as http;
@@ -389,7 +390,7 @@ class PrestadoresWidget extends StatelessWidget {
       itemBuilder: (context, index) {
 //        print(snapshot.data["pessoa"].length);
 //        print(index);
-        return getCard(context, snapshot, index);
+        return CardPrestador(context, snapshot, index);//getCard(context, snapshot, index);
       },
     );
   }
@@ -521,18 +522,18 @@ class PrestadoresWidget extends StatelessWidget {
 //                          print("${snapshot.data["pessoa"][index]}");
 //                          print("${snapshot.data["pessoa"][index]["cdgPessoa"]}");
 
-                          String cdgPessoa = snapshot.data["Custom"][index]["cdgPessoa"];
+                            String cdgPessoa = snapshot.data["Custom"][index]["cdgPessoa"];
 
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TelaPerfilPrestador(
-                                  // nao me acertei em mandar direto o map da pessoa, por hora mando codigo
-                                  //pessoa: snapshot.data["pessoa"][index],
-                                  cdgPessoa: cdgPessoa,
-                                )
-                            ),
-                          );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TelaPerfilPrestador(
+                                    // nao me acertei em mandar direto o map da pessoa, por hora mando codigo
+                                    //pessoa: snapshot.data["pessoa"][index],
+                                    cdgPessoa: cdgPessoa,
+                                  )
+                              ),
+                            );
                         },
                         increaseWidthBy: 25.0,
                       ),

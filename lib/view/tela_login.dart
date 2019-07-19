@@ -230,11 +230,13 @@ class _TelaLoginState extends State<TelaLogin> {
       PessoaModel.of(context).Logar(true);
       switch (selectedRadio) {
         case 1:
-            Navigator.of(context).pushReplacementNamed('/telaPrincipalCliente');
-            break;
+          PessoaModel.of(context).logadoComoCliente(true);
+          Navigator.of(context).pushReplacementNamed('/telaPrincipalCliente');
+          break;
         case 2:
-            Navigator.of(context).pushReplacementNamed('/telaPrincipalEmpresa');
-            break;
+          PessoaModel.of(context).logadoComoPrestadorServicos(true);
+          Navigator.of(context).pushReplacementNamed('/telaPrincipalEmpresa');
+          break;
       }
     }).catchError((e){
       print("DENTRO DO CATCH ERROR ${e.toString()}");
