@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pi/futurebuilder/futurebuilder_lista_agendamentos.dart';
 import 'package:pi/model/pessoa_model.dart';
 import 'package:pi/view/tela_agendamento_prestador.dart';
+import 'package:pi/view/tela_lista_avaliacoes.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:bezier_chart/bezier_chart.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
@@ -14,47 +15,46 @@ class TelaPrincipalEmpresa extends StatelessWidget {
     return
 //      MaterialApp(
 //      home:
-      DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: GradientAppBar(
-            gradient: LinearGradient(colors: [
-              Color(0xFF000033),
-              Color(0xFF000066),
-              Color(0xFF000080),
-              Color(0xFF0000b3),
-              Color(0xFF0000e6),
-              Color(0xFF0000ff),
-            ]),
-
-            bottom: TabBar(
-              tabs: <Widget>[
-                Tab(
-                  text: "Abertos",
-                ),
-                Tab(
-                  text: "Prestados",
-                ),
-                Tab(
-                  text: "Avaliações",
-                ),
-              ],
-            ),
-            title: Text('Alguz Serviços A à Z'),
-            centerTitle: true,
-            actions: <Widget>[
-              Icon(Icons.search),
+        DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: GradientAppBar(
+          gradient: LinearGradient(colors: [
+            Color(0xFF000033),
+            Color(0xFF000066),
+            Color(0xFF000080),
+            Color(0xFF0000b3),
+            Color(0xFF0000e6),
+            Color(0xFF0000ff),
+          ]),
+          bottom: TabBar(
+            tabs: <Widget>[
+              Tab(
+                text: "Abertos",
+              ),
+              Tab(
+                text: "Prestados",
+              ),
+              Tab(
+                text: "Avaliações",
+              ),
             ],
           ),
-          drawer: CustomDrawer(), //DrawerPrestador(),
-          body: TabBarView(
-            children: [
-              ServicosAbertos(),
-              ServicosPrestados(),
-              Avaliacoes(),
-            ],
-          ),
+          title: Text('Alguz Serviços A à Z'),
+          centerTitle: true,
+          actions: <Widget>[
+            Icon(Icons.search),
+          ],
         ),
+        drawer: CustomDrawer(), //DrawerPrestador(),
+        body: TabBarView(
+          children: [
+            ServicosAbertos(),
+            ServicosPrestados(),
+            Avaliacoes(),
+          ],
+        ),
+      ),
 //      ),
     );
   }
@@ -63,7 +63,9 @@ class TelaPrincipalEmpresa extends StatelessWidget {
 class ServicosAbertos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilderListaAgendamentos( cdgPessoa_prestador: PessoaModel.of(context).cdgPessoa, situacaoAgendamento: "AGENDADO" );
+    return FutureBuilderListaAgendamentos(
+        cdgPessoa_prestador: PessoaModel.of(context).cdgPessoa,
+        situacaoAgendamento: "AGENDADO");
 //    return SingleChildScrollView(
 //      child: Container(
 //        child: Center(
@@ -313,7 +315,9 @@ class ServicosAbertos extends StatelessWidget {
 class ServicosPrestados extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilderListaAgendamentos( cdgPessoa_prestador: PessoaModel.of(context).cdgPessoa, situacaoAgendamento: "EXECUTADO" );
+    return FutureBuilderListaAgendamentos(
+        cdgPessoa_prestador: PessoaModel.of(context).cdgPessoa,
+        situacaoAgendamento: "EXECUTADO");
 //    return SingleChildScrollView(
 //      child: Container(
 //        child: Center(
@@ -539,9 +543,20 @@ class Avaliacoes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Container(
+      child: Column(
+        children: <Widget>[
+          Container(
+            child: GestureDetector(
+              onTap: () {
+                print("onTap grafico");
+                //ve historico do prestador logado
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TelaListaAvaliacoes(
+                            cdgPessoa_prestador:
+                                PessoaModel.of(context).cdgPessoa)));
+              },
               child: PieChart(
                 dataMap: RetornaMapDados(), //Required parameter
                 legendFontColor: Colors.blueGrey[900],
@@ -558,11 +573,12 @@ class Avaliacoes extends StatelessWidget {
                 showLegends: true,
               ),
             ),
-            Container(
-              child: Grafico(),
-            )
-          ],
-        ),
+          ),
+          Container(
+            child: Grafico(),
+          )
+        ],
+      ),
     );
   }
 }
@@ -593,7 +609,7 @@ class _GraficoState extends State<Grafico> {
     return Center(
       child: Container(
         color: Colors.red,
-        height: MediaQuery.of(context).size.height / 2,
+        height: MediaQuery.of(context).size.height * 0.49,
         width: MediaQuery.of(context).size.width,
         child: BezierChart(
           fromDate: fromDate,
