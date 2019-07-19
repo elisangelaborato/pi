@@ -25,7 +25,7 @@ class _TabAvaliacaoClienteState extends State<TabAvaliacaoCliente> {
     if (cdgPessoa_cliente != null)
       if (!(cdgPessoa_cliente.isEmpty ||
           cdgPessoa_cliente.trim().length == 0))
-        where += " AND cli.cdgPessoa = $cdgPessoa_cliente ";
+        where += " AND cli.cdgPessoa = $cdgPessoa_cliente "; 
 
     String sql =
         "SELECT age.cdgAgendamento, cli.cdgPessoa cli_cdgPessoa, cli.nome cli_nome, cli.imagem cli_image,  prt.cdgPessoa prt_cdgPessoa, prt.nome prt_nome, prt.imagem prt_image,  ser.nome ser_nome, age.dataAgendamento, age.horaAgendamento, age.situacaoAgendamento, age.preco, age.avaliacaoCliente, age.comentarioCliente, age.avaliacaoPrestador, age.comentarioPrestador FROM agendamento age LEFT JOIN pessoa cli ON cli.cdgPessoa = age.cdgPessoa_cliente LEFT JOIN pessoa prt ON prt.cdgPessoa = age.cdgPessoa_prestador LEFT JOIN servico ser ON ser.cdgServico = age.cdgServico $where ORDER BY age.dataAgendamento, age.horaAgendamento, age.situacaoAgendamento ";

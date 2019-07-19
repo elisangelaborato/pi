@@ -3,6 +3,8 @@ import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:pi/card/card_agendamento.dart';
+
 class TelaListaAgendamentos extends StatelessWidget {
 
   final String cdgPessoa_cliente;
@@ -78,7 +80,7 @@ class TelaListaAgendamentos extends StatelessWidget {
       itemBuilder: (context, index) {
 //        print(snapshot.data["pessoa"].length);
 //        print(index);
-        return getCard(context, snapshot, index);
+        return CardAgendamento(context, snapshot, index);//getCard(context, snapshot, index);
       },
     );
   }
