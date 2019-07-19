@@ -129,10 +129,12 @@ class _TabAgendaPrestadorState extends State<TabAgendaPrestador> {
                     ]),
                     child: Icon(Icons.add),
                     callback: () {
-                      Navigator.push(
+
+                      //////////tem q voltar isso aqui com o codigo do pretador
+                      /*Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
-                      );
+                      );*/
                     },
                   ),
                 ),
