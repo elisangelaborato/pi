@@ -276,12 +276,11 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
                       bottom: 0,
                       child: PessoaModel.of(context).cdgPessoa ==
                               pessoa["pessoa"][0]["cdgPessoa"]
-                          ? FloatingActionButton(
+                          ? FlatButton(
                               child: Icon(
                                 Icons.edit,
-                                color: Colors.white,
+                                color: Theme.of(context).primaryColor,
                               ),
-                              mini: true,
                               onPressed: () {
                                 ImagePicker.pickImage(
                                         source: ImageSource.camera)
