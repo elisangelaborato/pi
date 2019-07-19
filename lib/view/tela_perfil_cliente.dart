@@ -84,7 +84,7 @@ class _TelaPerfilClienteState extends State<TelaPerfilCliente> {
     return TabBarView(//controller: tabController,
         children: <Widget>[
           TabPerfilCliente(), //Container(color: Colors.amber,),
-          TabAgendaCliente(), //Container(color: Colors.red,),
+          TabAgendaCliente(PessoaModel.of(context).cdgPessoa), //Container(color: Colors.red,),
           TabAvaliacaoCliente(PessoaModel.of(context).cdgPessoa), //Container(color: Colors.blue,),
     ]);
   }
@@ -170,12 +170,12 @@ class _TelaPerfilClienteState extends State<TelaPerfilCliente> {
                       bottom: 0,
                       child: PessoaModel.of(context).cdgPessoa ==
                           PessoaModel.of(context).cdgPessoa //pessoa["pessoa"][0]["cdgPessoa"]
-                          ? FloatingActionButton(
+                          ? FlatButton(
                         child: Icon(
                           Icons.edit,
-                          color: Colors.white,
+                          color: Theme.of(context).primaryColor,
                         ),
-                        mini: true,
+                        //mini: true,
                         onPressed: () {
                           ImagePicker.pickImage(
                               source: ImageSource.camera)
@@ -194,6 +194,7 @@ class _TelaPerfilClienteState extends State<TelaPerfilCliente> {
                       )
                           : Container(color: Colors.transparent,),
                     ),
+
                   ],
                 ),
                 Padding(
