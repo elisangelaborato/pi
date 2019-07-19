@@ -117,20 +117,28 @@ class _CustomDrawerState extends State<CustomDrawer> {
         ),
 
         //////TESTAR SE ESTA COMO PRESTADOR
-        PessoaModel.of(context).isLogadoComoCliente()
-            ? ListTile(
+        //PessoaModel.of(context).isLogadoComoCliente() ?
+        ListTile(
                 leading: Icon(Icons.work),
                 title: Text(PessoaModel.of(context).ativoPrestador == 1
-                    ? "Ir para tela de Prestador"
+                    ? PessoaModel.of(context).getModo() ?   "Ir para tela de Cliente" : "Ir para tela de Prestador"
                     : "Tornar-se Prestador"),
                 onTap: () {
                   if (PessoaModel.of(context).ativoPrestador == 1) {
-                    Navigator.of(context).pushNamed('/telaPrincipalEmpresa');
+                    if(!PessoaModel.of(context).getModo()) {
+                      PessoaModel.of(context).logadoComoPrestadorServicos(true);
+                      Navigator.of(context).pushNamed('/telaPrincipalEmpresa');
+                    }
+                    else{
+                      PessoaModel.of(context).logadoComoPrestadorServicos(false);
+                      Navigator.of(context).pushNamed('/telaPrincipalCliente');
+                    }
+
                   } else
                     Navigator.of(context).pushNamed('/telaCadastroPrestador');
                 },
-              )
-            : ListTile(
+              ),
+           /* : ListTile(
                 leading: Icon(Icons.work),
                 title: Text(PessoaModel.of(context).ativoCliente == 1
                     ? "Ir para tela de Cliente"
@@ -141,7 +149,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   } else
                     Navigator.of(context).pushNamed('/telaCadastroCliente');
                 },
-              ),
+              ),*/
 
         ListTile(
           leading: Icon(Icons.access_time),
@@ -165,7 +173,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           cdgPessoa_prestador:
                               PessoaModel.of(context).cdgPessoa)));
             }
-            //PessoaModel.of(context).salvaPessoa();
           },
         ),
         ListTile(
@@ -173,8 +180,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
           title: Text("Avaliações"),
           onTap: () {
             //teste insercao de agendamento
-            ServicosModel.of(context).salvaAgendamento(39, 38, 1, "2019-07-17", "08:30", "Agendado", 20);
-
             if (PessoaModel.of(context).isLogadoComoCliente()) {
               //ve historico do cliente logado
               Navigator.push(
