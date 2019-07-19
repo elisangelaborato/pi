@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pi/futurebuilder/futurebuilder_lista_agendamentos.dart';
+import 'package:pi/model/pessoa_model.dart';
 import 'package:pi/view/tela_agendamento_prestador.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:bezier_chart/bezier_chart.dart';
@@ -61,58 +63,59 @@ class TelaPrincipalEmpresa extends StatelessWidget {
 class ServicosAbertos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              GestureDetector(
-                child: getCard(context),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
-                  );
-                },
-              ),
-              GestureDetector(
-                child: getCard(context),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
-                  );
-                },
-              ),
-              GestureDetector(
-                child: getCard(context),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
-                  );
-                },
-              ),
-              GestureDetector(
-                child: getCard(context),
-                onTap: () {
-                  print("GestureDetector, onTap acionado");
-                },
-              ),
-              GestureDetector(
-                child: getCard(context),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+    return FutureBuilderListaAgendamentos( cdgPessoa_prestador: PessoaModel.of(context).cdgPessoa, situacaoAgendamento: "AGENDADO" );
+//    return SingleChildScrollView(
+//      child: Container(
+//        child: Center(
+//          child: Column(
+//            children: <Widget>[
+//              GestureDetector(
+//                child: getCard(context),
+//                onTap: () {
+//                  Navigator.push(
+//                    context,
+//                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+//                  );
+//                },
+//              ),
+//              GestureDetector(
+//                child: getCard(context),
+//                onTap: () {
+//                  Navigator.push(
+//                    context,
+//                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+//                  );
+//                },
+//              ),
+//              GestureDetector(
+//                child: getCard(context),
+//                onTap: () {
+//                  Navigator.push(
+//                    context,
+//                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+//                  );
+//                },
+//              ),
+//              GestureDetector(
+//                child: getCard(context),
+//                onTap: () {
+//                  print("GestureDetector, onTap acionado");
+//                },
+//              ),
+//              GestureDetector(
+//                child: getCard(context),
+//                onTap: () {
+//                  Navigator.push(
+//                    context,
+//                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+//                  );
+//                },
+//              ),
+//            ],
+//          ),
+//        ),
+//      ),
+//    );
 
 //    return Padding(
 //      padding: const EdgeInsets.only(top: 10),
@@ -166,202 +169,203 @@ class ServicosAbertos extends StatelessWidget {
 //    );
   }
 
-  Widget getCard(context) {
-    return Card(
-      margin: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-      child: SizedBox(
-          height: 100.0,
-          width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 12.0, right: 12.0),
-
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    CircleAvatar(
-                      child: Icon(Icons.person, size: 35, color: Theme.of(context).primaryColor,),
-//                      Image.network(
-//                          "https://image.flaticon.com/icons/png/512/10/10003.png"),
-                      radius: 20,
-                      backgroundColor: Colors.transparent,
-                    ),
-                    Text(
-                      "Cliente",
-                      style: TextStyle(fontSize: 16,),
-                    ),
-                    Text(
-                      "Maycon",
-                      style: TextStyle(color: Colors.grey, fontSize: 12,),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(
-                        "Data/Hora",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold ),
-                      ),
-                      Text(
-                        "14/08 - 13:30",
-                        style: TextStyle(color: Colors.grey, fontSize: 12,),
-                      ),
-                      Divider(
-                        height: 4,
-                      ),
-                      Text(
-                        "Valor",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        "R\$80,00",
-                        style: TextStyle(color: Colors.grey, fontSize: 12,),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Divider(
-                        height: 0,
-                      ),
-                      GradientButton(gradient: LinearGradient(
-                        colors: [
-                          const Color(0xFFe60000),
-                          const Color(0xFFe60000),
-                          const Color(0xFFff4d4d),
-                          const Color(0xFFe60000),
-                          const Color(0xFFff1a1a),
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                        child: Text("CANCELAR", style: TextStyle(fontSize: 15.0),),
-                        callback: () {
-
-                        },
-                        increaseWidthBy: 35.0,
-                      ),
-                      
-//                      RaisedButton(
-//                        onPressed: () {},
-//                        color: Theme.of(context).primaryColor,
-//                        child: Text("CANCELAR", style: TextStyle(color: Colors.white),),
-//                      ),
-
-                    ],
-                  ),
-                ),
-              ],
-            ),
-
+//  Widget getCard(context) {
+//    return Card(
+//      margin: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+//      child: SizedBox(
+//          height: 100.0,
+//          width: double.infinity,
+//          child: Padding(
+//            padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+//
 //            child: Row(
+//              mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //              children: <Widget>[
-////                CircleAvatar(
-////                  radius: 30.0,
-////                  backgroundColor: Colors.transparent,
-////                  backgroundImage: ExactAssetImage('images/person.png'),
-////                ),
+//                Column(
+//                  mainAxisSize: MainAxisSize.min,
+//                  children: <Widget>[
+//                    CircleAvatar(
+//                      child: Icon(Icons.person, size: 35, color: Theme.of(context).primaryColor,),
+////                      Image.network(
+////                          "https://image.flaticon.com/icons/png/512/10/10003.png"),
+//                      radius: 20,
+//                      backgroundColor: Colors.transparent,
+//                    ),
+//                    Text(
+//                      "Cliente",
+//                      style: TextStyle(fontSize: 16,),
+//                    ),
+//                    Text(
+//                      "Maycon",
+//                      style: TextStyle(color: Colors.grey, fontSize: 12,),
+//                    ),
+//                  ],
+//                ),
 //                Padding(
-//                  padding: const EdgeInsets.only(top: 8, left: 8.0),
+//                  padding: const EdgeInsets.only(left: 0),
 //                  child: Column(
-//                    crossAxisAlignment: CrossAxisAlignment.start,
+//                    mainAxisSize: MainAxisSize.min,
 //                    children: <Widget>[
 //                      Text(
-//                        "01/01/2020 - Cliente Fulano de Tal",
-//                        style: Theme.of(context).textTheme.caption,
-//                      ),
-//                      Container(
-//                        width: MediaQuery.of(context).size.width * 0.85,
-//                        height: 30.0,
-//                        child: Text(
-//                          "Mussum Ipsum, cacilds vidis litro abertis. A ordem dos tratores não altera o pão duris. Detraxit consequat et quo num tendi nada. Manduma pindureta quium dia nois paga. Suco de cevadiss deixa as pessoas mais interessantis.",
-//                          style: TextStyle(fontSize: 12.0),
-//                          overflow: TextOverflow.ellipsis,
-//                          maxLines: 2,
-//                        ),
-//                      ),
-//                      Padding(
-//                        padding: const EdgeInsets.only(top: 4.0),
+//                        "Data/Hora",
+//                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold ),
 //                      ),
 //                      Text(
-//                        "100.0",
-//                        style: TextStyle(
-//                            fontSize: 12.0, fontWeight: FontWeight.bold),
+//                        "14/08 - 13:30",
+//                        style: TextStyle(color: Colors.grey, fontSize: 12,),
 //                      ),
+//                      Divider(
+//                        height: 4,
+//                      ),
+//                      Text(
+//                        "Valor",
+//                        style: TextStyle(fontSize: 16),
+//                      ),
+//                      Text(
+//                        "R\$80,00",
+//                        style: TextStyle(color: Colors.grey, fontSize: 12,),
+//                      ),
+//                    ],
+//                  ),
+//                ),
+//                Padding(
+//                  padding: const EdgeInsets.only(left: 0),
+//                  child: Column(
+//                    mainAxisSize: MainAxisSize.min,
+//                    children: <Widget>[
+//                      Divider(
+//                        height: 0,
+//                      ),
+//                      GradientButton(gradient: LinearGradient(
+//                        colors: [
+//                          const Color(0xFFe60000),
+//                          const Color(0xFFe60000),
+//                          const Color(0xFFff4d4d),
+//                          const Color(0xFFe60000),
+//                          const Color(0xFFff1a1a),
+//                        ],
+//                        begin: Alignment.topLeft,
+//                        end: Alignment.bottomRight,
+//                      ),
+//                        child: Text("CANCELAR", style: TextStyle(fontSize: 15.0),),
+//                        callback: () {
+//
+//                        },
+//                        increaseWidthBy: 35.0,
+//                      ),
+//
+////                      RaisedButton(
+////                        onPressed: () {},
+////                        color: Theme.of(context).primaryColor,
+////                        child: Text("CANCELAR", style: TextStyle(color: Colors.white),),
+////                      ),
+//
 //                    ],
 //                  ),
 //                ),
 //              ],
 //            ),
-          )),
-    );
-  }
+//
+////            child: Row(
+////              children: <Widget>[
+//////                CircleAvatar(
+//////                  radius: 30.0,
+//////                  backgroundColor: Colors.transparent,
+//////                  backgroundImage: ExactAssetImage('images/person.png'),
+//////                ),
+////                Padding(
+////                  padding: const EdgeInsets.only(top: 8, left: 8.0),
+////                  child: Column(
+////                    crossAxisAlignment: CrossAxisAlignment.start,
+////                    children: <Widget>[
+////                      Text(
+////                        "01/01/2020 - Cliente Fulano de Tal",
+////                        style: Theme.of(context).textTheme.caption,
+////                      ),
+////                      Container(
+////                        width: MediaQuery.of(context).size.width * 0.85,
+////                        height: 30.0,
+////                        child: Text(
+////                          "Mussum Ipsum, cacilds vidis litro abertis. A ordem dos tratores não altera o pão duris. Detraxit consequat et quo num tendi nada. Manduma pindureta quium dia nois paga. Suco de cevadiss deixa as pessoas mais interessantis.",
+////                          style: TextStyle(fontSize: 12.0),
+////                          overflow: TextOverflow.ellipsis,
+////                          maxLines: 2,
+////                        ),
+////                      ),
+////                      Padding(
+////                        padding: const EdgeInsets.only(top: 4.0),
+////                      ),
+////                      Text(
+////                        "100.0",
+////                        style: TextStyle(
+////                            fontSize: 12.0, fontWeight: FontWeight.bold),
+////                      ),
+////                    ],
+////                  ),
+////                ),
+////              ],
+////            ),
+//          )),
+//    );
+//  }
 }
 
 class ServicosPrestados extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              GestureDetector(
-                child: getCard(context),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
-                  );
-                },
-              ),
-              GestureDetector(
-                child: getCard(context),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
-                  );
-                },
-              ),
-              GestureDetector(
-                child: getCard(context),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
-                  );
-                },
-              ),
-              GestureDetector(
-                child: getCard(context),
-                onTap: () {
-                  print("GestureDetector, onTap acionado");
-                },
-              ),
-              GestureDetector(
-                child: getCard(context),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+    return FutureBuilderListaAgendamentos( cdgPessoa_prestador: PessoaModel.of(context).cdgPessoa, situacaoAgendamento: "EXECUTADO" );
+//    return SingleChildScrollView(
+//      child: Container(
+//        child: Center(
+//          child: Column(
+//            children: <Widget>[
+//              GestureDetector(
+//                child: getCard(context),
+//                onTap: () {
+//                  Navigator.push(
+//                    context,
+//                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+//                  );
+//                },
+//              ),
+//              GestureDetector(
+//                child: getCard(context),
+//                onTap: () {
+//                  Navigator.push(
+//                    context,
+//                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+//                  );
+//                },
+//              ),
+//              GestureDetector(
+//                child: getCard(context),
+//                onTap: () {
+//                  Navigator.push(
+//                    context,
+//                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+//                  );
+//                },
+//              ),
+//              GestureDetector(
+//                child: getCard(context),
+//                onTap: () {
+//                  print("GestureDetector, onTap acionado");
+//                },
+//              ),
+//              GestureDetector(
+//                child: getCard(context),
+//                onTap: () {
+//                  Navigator.push(
+//                    context,
+//                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+//                  );
+//                },
+//              ),
+//            ],
+//          ),
+//        ),
+//      ),
+//    );
 
 //    return Padding(
 //      padding: const EdgeInsets.only(top: 10),
@@ -430,104 +434,104 @@ class ServicosPrestados extends StatelessWidget {
 //    );
   }
 
-  Widget getCard(context) {
-    return Card(
-      margin: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-      child: SizedBox(
-          height: 100.0,
-          width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 12.0, right: 12.0),
-
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    CircleAvatar(
-                      child: Icon(Icons.person, size: 35, color: Theme.of(context).primaryColor,),
-//                      Image.network(
-//                          "https://image.flaticon.com/icons/png/512/10/10003.png"),
-                      radius: 20,
-                      backgroundColor: Colors.transparent,
-                    ),
-                    Text(
-                      "Cliente",
-                      style: TextStyle(fontSize: 16,),
-                    ),
-                    Text(
-                      "Maycon",
-                      style: TextStyle(color: Colors.grey, fontSize: 12,),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(
-                        "Data/Hora",
-                        style: TextStyle(fontSize: 16,),
-                      ),
-                      Text(
-                        "14/08 - 13:30",
-                        style: TextStyle(color: Colors.grey, fontSize: 12,),
-                      ),
-                      Divider(
-                        height: 4,
-                      ),
-                      Text(
-                        "Valor",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text(
-                        "R\$80,00",
-                        style: TextStyle(color: Colors.grey, fontSize: 12,),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Divider(
-                        height: 0,
-                      ),
-                      GradientButton(gradient: LinearGradient(
-                        colors: [
-                          const Color(0xFFe60000),
-                          const Color(0xFFe60000),
-                          const Color(0xFFff4d4d),
-                          const Color(0xFFe60000),
-                          const Color(0xFFff1a1a),
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                        child: Text("EXCLUIR", style: TextStyle(fontSize: 15.0),),
-                        callback: () {
-
-                        },
-                        increaseWidthBy: 22.0,
-                      ),
-//                      RaisedButton(
-//                        onPressed: () {},
-//                        color: Colors.redAccent,
-//                        child: Text("EXCLUIR", style: TextStyle(color: Colors.white),),
+//  Widget getCard(context) {
+//    return Card(
+//      margin: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+//      child: SizedBox(
+//          height: 100.0,
+//          width: double.infinity,
+//          child: Padding(
+//            padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+//
+//            child: Row(
+//              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//              children: <Widget>[
+//                Column(
+//                  mainAxisSize: MainAxisSize.min,
+//                  children: <Widget>[
+//                    CircleAvatar(
+//                      child: Icon(Icons.person, size: 35, color: Theme.of(context).primaryColor,),
+////                      Image.network(
+////                          "https://image.flaticon.com/icons/png/512/10/10003.png"),
+//                      radius: 20,
+//                      backgroundColor: Colors.transparent,
+//                    ),
+//                    Text(
+//                      "Cliente",
+//                      style: TextStyle(fontSize: 16,),
+//                    ),
+//                    Text(
+//                      "Maycon",
+//                      style: TextStyle(color: Colors.grey, fontSize: 12,),
+//                    ),
+//                  ],
+//                ),
+//                Padding(
+//                  padding: const EdgeInsets.only(left: 0),
+//                  child: Column(
+//                    mainAxisSize: MainAxisSize.min,
+//                    children: <Widget>[
+//                      Text(
+//                        "Data/Hora",
+//                        style: TextStyle(fontSize: 16,),
 //                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-
-          )),
-    );
-  }
+//                      Text(
+//                        "14/08 - 13:30",
+//                        style: TextStyle(color: Colors.grey, fontSize: 12,),
+//                      ),
+//                      Divider(
+//                        height: 4,
+//                      ),
+//                      Text(
+//                        "Valor",
+//                        style: TextStyle(fontSize: 16),
+//                      ),
+//                      Text(
+//                        "R\$80,00",
+//                        style: TextStyle(color: Colors.grey, fontSize: 12,),
+//                      ),
+//                    ],
+//                  ),
+//                ),
+//                Padding(
+//                  padding: const EdgeInsets.only(left: 0),
+//                  child: Column(
+//                    mainAxisSize: MainAxisSize.min,
+//                    children: <Widget>[
+//                      Divider(
+//                        height: 0,
+//                      ),
+//                      GradientButton(gradient: LinearGradient(
+//                        colors: [
+//                          const Color(0xFFe60000),
+//                          const Color(0xFFe60000),
+//                          const Color(0xFFff4d4d),
+//                          const Color(0xFFe60000),
+//                          const Color(0xFFff1a1a),
+//                        ],
+//                        begin: Alignment.topLeft,
+//                        end: Alignment.bottomRight,
+//                      ),
+//                        child: Text("EXCLUIR", style: TextStyle(fontSize: 15.0),),
+//                        callback: () {
+//
+//                        },
+//                        increaseWidthBy: 22.0,
+//                      ),
+////                      RaisedButton(
+////                        onPressed: () {},
+////                        color: Colors.redAccent,
+////                        child: Text("EXCLUIR", style: TextStyle(color: Colors.white),),
+////                      ),
+//                    ],
+//                  ),
+//                ),
+//              ],
+//            ),
+//
+//          )),
+//    );
+//  }
 
 }
 
