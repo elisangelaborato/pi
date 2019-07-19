@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
+import 'package:pi/model/servicos_model.dart';
 import 'package:pi/view/tela_principal_empresa.dart';
 
 class TelaCadastroServico extends StatefulWidget {
@@ -10,10 +11,30 @@ class TelaCadastroServico extends StatefulWidget {
 }
 
 class _TelaCadastroServicoState extends State<TelaCadastroServico> {
+
   var _categoria = ['Saúde', 'Professores', 'Manuntenção'];
   var _currentItemSelected = 'Saúde';
   MoneyMaskedTextController _maskedMoney = MoneyMaskedTextController(
       leftSymbol: "R\$ ", decimalSeparator: ',', thousandSeparator: '.');
+
+//  Future<Map> getNomesCategorias() async {
+//    return await ServicosModel.of(context).getTiposServicos();
+//  }
+
+  @override
+  void initState() {
+    super.initState();
+
+//    getNomesCategorias().then( (m) {
+//      print( m);
+////      _categoria.clear();
+////      m.forEach( (k,v) {
+////
+////        //_categoria.add(value);
+////      });
+//
+//    });
+  }
 
   @override
   Widget build(BuildContext context) {
