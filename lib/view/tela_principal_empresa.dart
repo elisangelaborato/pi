@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pi/view/drawer_prestador.dart';
 import 'package:pi/view/tela_agendamento_prestador.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:bezier_chart/bezier_chart.dart';

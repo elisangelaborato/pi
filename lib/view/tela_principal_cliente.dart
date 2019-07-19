@@ -159,6 +159,9 @@ class ServicosWidget extends StatelessWidget {
 }
 
 class MeusServicosWidget extends StatelessWidget {
+
+
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -390,153 +393,153 @@ class PrestadoresWidget extends StatelessWidget {
     );
   }
 
-  Widget getCard(context, snapshot, index) {
-    return Card(
-      margin: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-      child: SizedBox(
-          height: 80.0,
-          width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 12.0, right: 12.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    CircleAvatar(
-                      child:
-                          //se imagem nula ou em branco, coloca icone padrao
-                          (snapshot.data["Custom"][index]["imagem"] == null ||
-                                  snapshot.data["Custom"][index]["imagem"].length == 0)
-                              ? Icon(
-                                  Icons.account_circle,
-                                  size: 60,
-                                  color: Theme.of(context).primaryColor,
-                                )
-                              : // Image.network(snapshot.data["pessoa"][index]["imagem"]),
-
-                              //container para deixar imagem circular
-                              Container(
-                                  width: 60.0,
-                                  height: 60.0,
-                                  decoration: new BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: new DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: new NetworkImage(snapshot
-                                          .data["Custom"][index]["imagem"]),
-                                    ),
-                                  ),
-                                ),
-
-//                          //Icon(Icons.person, size: 60, color: Theme.of(context).primaryColor,),
-//                          Image.network(
-//                              "http://images.coveralia.com/autores/thumbs/belchior81574m.jpg"),
-                      radius: 30,
-                      backgroundColor: Colors.transparent,
-                    ),
-//                    Text(
-//                      "Cliente",
-//                      style: TextStyle(fontSize: 16,),
+//  Widget getCard(context, snapshot, index) {
+//    return Card(
+//      margin: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+//      child: SizedBox(
+//          height: 80.0,
+//          width: double.infinity,
+//          child: Padding(
+//            padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+//            child: Row(
+//              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//              children: <Widget>[
+//                Column(
+//                  mainAxisSize: MainAxisSize.min,
+//                  children: <Widget>[
+//                    CircleAvatar(
+//                      child:
+//                          //se imagem nula ou em branco, coloca icone padrao
+//                          (snapshot.data["Custom"][index]["imagem"] == null ||
+//                                  snapshot.data["Custom"][index]["imagem"].length == 0)
+//                              ? Icon(
+//                                  Icons.account_circle,
+//                                  size: 60,
+//                                  color: Theme.of(context).primaryColor,
+//                                )
+//                              : // Image.network(snapshot.data["pessoa"][index]["imagem"]),
+//
+//                              //container para deixar imagem circular
+//                              Container(
+//                                  width: 60.0,
+//                                  height: 60.0,
+//                                  decoration: new BoxDecoration(
+//                                    shape: BoxShape.circle,
+//                                    image: new DecorationImage(
+//                                      fit: BoxFit.fill,
+//                                      image: new NetworkImage(snapshot
+//                                          .data["Custom"][index]["imagem"]),
+//                                    ),
+//                                  ),
+//                                ),
+//
+////                          //Icon(Icons.person, size: 60, color: Theme.of(context).primaryColor,),
+////                          Image.network(
+////                              "http://images.coveralia.com/autores/thumbs/belchior81574m.jpg"),
+//                      radius: 30,
+//                      backgroundColor: Colors.transparent,
 //                    ),
-//                    Text(
-//                      "Maycon",
-//                      style: TextStyle(color: Colors.grey, fontSize: 12,),
-//                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        snapshot.data["Custom"][index]["nome"],
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
+////                    Text(
+////                      "Cliente",
+////                      style: TextStyle(fontSize: 16,),
+////                    ),
+////                    Text(
+////                      "Maycon",
+////                      style: TextStyle(color: Colors.grey, fontSize: 12,),
+////                    ),
+//                  ],
+//                ),
+//                Padding(
+//                  padding: const EdgeInsets.only(left: 0),
+//                  child: Column(
+//                    mainAxisSize: MainAxisSize.min,
+//                    crossAxisAlignment: CrossAxisAlignment.start,
+//                    children: <Widget>[
 //                      Text(
-//                        "14/08 - 13:30",
-//                        style: TextStyle(color: Colors.grey, fontSize: 12,),
+//                        snapshot.data["Custom"][index]["nome"],
+//                        style: TextStyle(
+//                            fontSize: 16, fontWeight: FontWeight.bold),
 //                      ),
-                      Divider(
-                        height: 4,
-                      ),
-                      Text(
-                        (snapshot.data["Custom"][index]["email"].length <= 15)
-                            ? snapshot.data["Custom"][index]["email"]
-                            : '${snapshot.data["Custom"][index]["email"].substring(0, 15)}...', //"Pedreiro",
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      Divider(
-                        height: 4,
-                      ),
-                      Text(
-                        snapshot.data["Custom"][index]["notaPrestador"],
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Divider(
-                        height: 0,
-                      ),
-                      GradientButton(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color(0xFF000033),
-                            Color(0xFF000066),
-                            Color(0xFF000080),
-                            Color(0xFF0000b3),
-                            Color(0xFF0000e6),
-                            Color(0xFF0000ff),
-                          ],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.center,
-                        ),
-
-                        child: Text("Ver Perfil",
-                          style: TextStyle(fontSize: 15.0),
-                        ),
-
-                          callback: () {
-//                          String cdgPessoa = snapshot.data["pessoa"][index]["cdgPessoa"];
-
-
-//                          print("${snapshot.data["pessoa"][index]}");
-//                          print("${snapshot.data["pessoa"][index]["cdgPessoa"]}");
-
-                            String cdgPessoa = snapshot.data["Custom"][index]["cdgPessoa"];
-
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => TelaPerfilPrestador(
-                                    // nao me acertei em mandar direto o map da pessoa, por hora mando codigo
-                                    //pessoa: snapshot.data["pessoa"][index],
-                                    cdgPessoa: cdgPessoa,
-                                  )
-                              ),
-                            );
-                        },
-                        increaseWidthBy: 25.0,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          )),
-    );
-  }
+////                      Text(
+////                        "14/08 - 13:30",
+////                        style: TextStyle(color: Colors.grey, fontSize: 12,),
+////                      ),
+//                      Divider(
+//                        height: 4,
+//                      ),
+//                      Text(
+//                        (snapshot.data["Custom"][index]["email"].length <= 15)
+//                            ? snapshot.data["Custom"][index]["email"]
+//                            : '${snapshot.data["Custom"][index]["email"].substring(0, 15)}...', //"Pedreiro",
+//                        style: TextStyle(fontSize: 14),
+//                      ),
+//                      Divider(
+//                        height: 4,
+//                      ),
+//                      Text(
+//                        snapshot.data["Custom"][index]["notaPrestador"],
+//                        style: TextStyle(
+//                          color: Colors.grey,
+//                          fontSize: 12,
+//                        ),
+//                      ),
+//                    ],
+//                  ),
+//                ),
+//                Padding(
+//                  padding: const EdgeInsets.only(left: 0),
+//                  child: Column(
+//                    mainAxisSize: MainAxisSize.min,
+//                    children: <Widget>[
+//                      Divider(
+//                        height: 0,
+//                      ),
+//                      GradientButton(
+//                        gradient: LinearGradient(
+//                          colors: [
+//                            Color(0xFF000033),
+//                            Color(0xFF000066),
+//                            Color(0xFF000080),
+//                            Color(0xFF0000b3),
+//                            Color(0xFF0000e6),
+//                            Color(0xFF0000ff),
+//                          ],
+//                          begin: Alignment.centerLeft,
+//                          end: Alignment.center,
+//                        ),
+//
+//                        child: Text("Ver Perfil",
+//                          style: TextStyle(fontSize: 15.0),
+//                        ),
+//
+//                          callback: () {
+////                          String cdgPessoa = snapshot.data["pessoa"][index]["cdgPessoa"];
+//
+//
+////                          print("${snapshot.data["pessoa"][index]}");
+////                          print("${snapshot.data["pessoa"][index]["cdgPessoa"]}");
+//
+//                            String cdgPessoa = snapshot.data["Custom"][index]["cdgPessoa"];
+//
+//                            Navigator.push(
+//                              context,
+//                              MaterialPageRoute(
+//                                  builder: (context) => TelaPerfilPrestador(
+//                                    // nao me acertei em mandar direto o map da pessoa, por hora mando codigo
+//                                    //pessoa: snapshot.data["pessoa"][index],
+//                                    cdgPessoa: cdgPessoa,
+//                                  )
+//                              ),
+//                            );
+//                        },
+//                        increaseWidthBy: 25.0,
+//                      ),
+//                    ],
+//                  ),
+//                ),
+//              ],
+//            ),
+//          )),
+//    );
+//  }
 }
