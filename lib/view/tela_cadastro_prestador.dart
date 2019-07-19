@@ -213,46 +213,46 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
                     return 'Entre com o e-mail';
                   }
                 }),
-            TextFormField(
-                controller: _senhaController,
-                decoration: const InputDecoration(
-                  icon: const Icon(Icons.vpn_key),
-                  hintText: 'Entre com a senha',
-                  labelText: 'Senha',
-                ),
-                obscureText: true,
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Entre com a senha';
-                  }
-                  if (value.length < 6) {
-                    return 'Mínimo 6 caracteres';
-                  }
-                  if (value != _senhaConfirmController.text) {
-                    return 'Senha e Repetir Senha são diferentes.';
-                  }
-                }),
-            TextFormField(
-                controller: _senhaConfirmController,
-                decoration: const InputDecoration(
-                  icon: const Icon(Icons.vpn_key),
-                  hintText: 'Repita a senha',
-                  labelText: 'Repetir Senha',
-                ),
-                obscureText: true,
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Entre com a senha';
-                  }
-                  if (value.length < 6) {
-                    return 'Mínimo 6 caracteres';
-                  }
-                  if (value != _senhaConfirmController.text) {
-                    return 'Senha e Repetir Senha são diferentes';
-                  }
-                }
-                //keyboardType: TextInputType.emailAddress,
-                ),
+//            TextFormField(
+//                controller: _senhaController,
+//                decoration: const InputDecoration(
+//                  icon: const Icon(Icons.vpn_key),
+//                  hintText: 'Entre com a senha',
+//                  labelText: 'Senha',
+//                ),
+//                obscureText: true,
+//                validator: (value) {
+//                  if (value.isEmpty) {
+//                    return 'Entre com a senha';
+//                  }
+//                  if (value.length < 6) {
+//                    return 'Mínimo 6 caracteres';
+//                  }
+//                  if (value != _senhaConfirmController.text) {
+//                    return 'Senha e Repetir Senha são diferentes.';
+//                  }
+//                }),
+//            TextFormField(
+//                controller: _senhaConfirmController,
+//                decoration: const InputDecoration(
+//                  icon: const Icon(Icons.vpn_key),
+//                  hintText: 'Repita a senha',
+//                  labelText: 'Repetir Senha',
+//                ),
+//                obscureText: true,
+//                validator: (value) {
+//                  if (value.isEmpty) {
+//                    return 'Entre com a senha';
+//                  }
+//                  if (value.length < 6) {
+//                    return 'Mínimo 6 caracteres';
+//                  }
+//                  if (value != _senhaConfirmController.text) {
+//                    return 'Senha e Repetir Senha são diferentes';
+//                  }
+//                }
+//                //keyboardType: TextInputType.emailAddress,
+//                ),
             TextFormField(
                 controller: _cpfControllerMascara,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
@@ -303,11 +303,13 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
 //              //keyboardType: TextInputType.emailAddress,
 //            ),
             TextFormField(
+              maxLength: 200,
               controller: _sobreMimController,
               decoration: const InputDecoration(
                 icon: const Icon(Icons.list),
                 hintText: 'Entre com informações sobre você',
                 labelText: 'Sobre mim',
+
               ),
               //keyboardType: TextInputType.emailAddress,
             ),

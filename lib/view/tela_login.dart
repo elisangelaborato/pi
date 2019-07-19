@@ -31,6 +31,7 @@ class _TelaLoginState extends State<TelaLogin> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
 
@@ -70,6 +71,7 @@ class _TelaLoginState extends State<TelaLogin> {
                   _email = text;
                 },
                 decoration: const InputDecoration(
+
                   //icon: const Icon(Icons.person),
                   hintText: 'Digite seu login',
                   labelText: 'Login',

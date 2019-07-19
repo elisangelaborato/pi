@@ -3,13 +3,17 @@ import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 
 class TelaAgendamentoPrestador extends StatefulWidget {
+  String cdgPessoa;
+  TelaAgendamentoPrestador(this.cdgPessoa);
   @override
   _TelaAgendamentoPrestadorState createState() =>
-      _TelaAgendamentoPrestadorState();
+      _TelaAgendamentoPrestadorState(cdgPessoa);
 }
 
 class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+String cdgPessoa;
+  _TelaAgendamentoPrestadorState(this.cdgPessoa);
 
   final _textEditingControllerData = TextEditingController();
   final _textEditingControllerHora = TextEditingController();
@@ -55,6 +59,7 @@ class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
 
   @override
   Widget build(BuildContext context) {
+    print("Printando o cdgPessoa desse prestador"+cdgPessoa);
     return Scaffold(
         appBar: GradientAppBar(
           title: Text("Agendar"),

@@ -6,6 +6,7 @@ import 'dart:convert';
 
 import 'package:pi/view/tela_cadastro_servico.dart';
 
+
 //select categoriaservico.icone cat_icone, categoriaservico.descricao cat_descr,
 //    servico.nome ser_nome, servico.descricao ser_descr,
 //    prestadorservico.preco serp_preco
@@ -154,7 +155,7 @@ class _TabServicosPrestadorState extends State<TabServicosPrestador> {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+          MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador(cdgPessoa)),
         );
       },
       child: Icon(Icons.calendar_today),
@@ -189,7 +190,7 @@ class _TabServicosPrestadorState extends State<TabServicosPrestador> {
           else
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+              MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador(cdgPessoa)),
             );
         },
         child: SizedBox(
