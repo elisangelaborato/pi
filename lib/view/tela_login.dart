@@ -155,6 +155,7 @@ class _TelaLoginState extends State<TelaLogin> {
                 child: Text("ENTRAR", style: TextStyle(fontSize: 20.0),),
                 callback: () {
                   _onPressedButtonEntrar();
+//                  Navigator.of(context).pushNamed('/telaPrincipalCliente');
                 },
                 increaseWidthBy: 190.0,
               ),
@@ -222,16 +223,19 @@ class _TelaLoginState extends State<TelaLogin> {
 
   void _onPressedButtonEntrar(){
     Auth auth = Auth();
-    //Login com o Firebase - Necessaria ativação na plataforma
+    //Login com o Firebase
     auth.signIn(_email, _senha).then((String uid){
       PessoaModel.of(context).getDados(uid);
+      PessoaModel.of(context).Logar(true);
       switch (selectedRadio) {
         case 1:
-            Navigator.of(context).pushReplacementNamed('/telaPrincipalCliente');
-            break;
+          PessoaModel.of(context).logadoComoCliente(true);
+          Navigator.of(context).pushReplacementNamed('/telaPrincipalCliente');
+          break;
         case 2:
-            Navigator.of(context).pushReplacementNamed('/telaPrincipalEmpresa');
-            break;
+          PessoaModel.of(context).logadoComoPrestadorServicos(true);
+          Navigator.of(context).pushReplacementNamed('/telaPrincipalEmpresa');
+          break;
       }
     }).catchError((e){
       print("DENTRO DO CATCH ERROR ${e.toString()}");

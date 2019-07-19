@@ -1,11 +1,15 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
+import 'package:pi/card/card_prestador.dart';
 import 'package:pi/view/drawer.dart';
 import 'package:pi/view/tela_agendamento_cliente.dart';
 import 'package:http/http.dart' as http;
+import 'package:pi/view/tela_lista_prestadores.dart';
 import 'package:pi/view/tela_perfil_prestador.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'package:pi/model/servicos_model.dart';
 
 class TelaPrincipalCliente extends StatefulWidget {
   @override
@@ -13,10 +17,16 @@ class TelaPrincipalCliente extends StatefulWidget {
 }
 
 class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
+
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(
+    return
+//      ScopedModelDescendant<ServicosModel>(
+//        builder: (context, child, model)=>
+//      MaterialApp(
+//      home:
+      DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: GradientAppBar(
@@ -56,36 +66,26 @@ class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
             ],
           ),
         ),
-      ),
+//      ),
+//      ),
     );
   }
 }
 
 class ServicosWidget extends StatelessWidget {
-  Future<Map> _getDados() async {
-    http.Response response;
-    response = await http.get(
-        "http://alguz1.gearhostpreview.com/lista.php?tabela=categoriaservico");
-//    print(response.body);
-    return json.decode(response.body);
-  }
-
   @override
   Widget build(BuildContext context) {
     int icone = 58355;
-
     return Column(
       children: <Widget>[
         Expanded(
           child: FutureBuilder(
-              future: _getDados(),
+              future: ServicosModel.of(context).getTiposServicos(),
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
                   case ConnectionState.waiting:
                     return Container(
-                      width: 200.0,
-                      height: 200.0,
                       alignment: Alignment.center,
                       child: CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
@@ -138,7 +138,15 @@ class ServicosWidget extends StatelessWidget {
             backgroundColor: Colors.transparent,
           ),
           trailing: Icon(Icons.keyboard_arrow_right),
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>
+                TelaListaPrestadores(
+                  cdgCategoria: snapshot.data["categoriaservico"][index]["cdgCategoria"],
+                  categoria_descricao: snapshot.data["categoriaservico"][index]["descricao"],
+                ),
+            ),
+            );
+          },
           title: Text(snapshot.data["categoriaservico"][index]["descricao"]),
         ),
         Divider(
@@ -309,11 +317,9 @@ class MeusServicosWidget extends StatelessWidget {
                           begin: Alignment.centerLeft,
                           end: Alignment.center,
                         ),
-                        child: Text(
-                          "CANCELAR",
-                          style: TextStyle(fontSize: 15.0),
-                        ),
-                        callback: () {},
+                        child: Text("CANCELAR", style: TextStyle(fontSize: 15.0),),
+                        callback: () {
+                        },
                         increaseWidthBy: 30.0,
                       ),
                     ],
@@ -327,11 +333,12 @@ class MeusServicosWidget extends StatelessWidget {
 }
 
 class PrestadoresWidget extends StatelessWidget {
+
   Future<Map> _getDados() async {
     http.Response response;
     response = await http
         .get("http://alguz1.gearhostpreview.com/lista.php?tabela=pessoa");
-//    print(response.body);
+    //print(response.body);
     return json.decode(response.body);
   }
 
@@ -341,7 +348,8 @@ class PrestadoresWidget extends StatelessWidget {
       children: <Widget>[
         Expanded(
           child: FutureBuilder(
-              future: _getDados(),
+              future: ServicosModel.of(context).getTopPrestadores(),
+              //future: _getDados(),
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
@@ -373,11 +381,11 @@ class PrestadoresWidget extends StatelessWidget {
 
   Widget _createCadList(context, snapshot) {
     return ListView.builder(
-      itemCount: snapshot.data["pessoa"].length,
+      itemCount: snapshot.data["Custom"].length,
       itemBuilder: (context, index) {
 //        print(snapshot.data["pessoa"].length);
 //        print(index);
-        return getCard(context, snapshot, index);
+        return CardPrestador(context, snapshot, index);//getCard(context, snapshot, index);
       },
     );
   }
@@ -399,16 +407,14 @@ class PrestadoresWidget extends StatelessWidget {
                     CircleAvatar(
                       child:
                           //se imagem nula ou em branco, coloca icone padrao
-                          (snapshot.data["pessoa"][index]["imagem"] == null ||
-                                  snapshot.data["pessoa"][index]["imagem"]
-                                          .length ==
-                                      0)
+                          (snapshot.data["Custom"][index]["imagem"] == null ||
+                                  snapshot.data["Custom"][index]["imagem"].length == 0)
                               ? Icon(
                                   Icons.account_circle,
                                   size: 60,
                                   color: Theme.of(context).primaryColor,
                                 )
-                              : //Image.network(snapshot.data["pessoa"][index]["imagem"]),
+                              : // Image.network(snapshot.data["pessoa"][index]["imagem"]),
 
                               //container para deixar imagem circular
                               Container(
@@ -419,7 +425,7 @@ class PrestadoresWidget extends StatelessWidget {
                                     image: new DecorationImage(
                                       fit: BoxFit.fill,
                                       image: new NetworkImage(snapshot
-                                          .data["pessoa"][index]["imagem"]),
+                                          .data["Custom"][index]["imagem"]),
                                     ),
                                   ),
                                 ),
@@ -447,7 +453,7 @@ class PrestadoresWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        snapshot.data["pessoa"][index]["nome"],
+                        snapshot.data["Custom"][index]["nome"],
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
@@ -459,16 +465,16 @@ class PrestadoresWidget extends StatelessWidget {
                         height: 4,
                       ),
                       Text(
-                        (snapshot.data["pessoa"][index]["email"].length <= 15)
-                            ? snapshot.data["pessoa"][index]["email"]
-                            : '${snapshot.data["pessoa"][index]["email"].substring(0, 15)}...', //"Pedreiro",
+                        (snapshot.data["Custom"][index]["email"].length <= 15)
+                            ? snapshot.data["Custom"][index]["email"]
+                            : '${snapshot.data["Custom"][index]["email"].substring(0, 15)}...', //"Pedreiro",
                         style: TextStyle(fontSize: 14),
                       ),
                       Divider(
                         height: 4,
                       ),
                       Text(
-                        "100.0",
+                        snapshot.data["Custom"][index]["notaPrestador"],
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 12,
@@ -498,25 +504,32 @@ class PrestadoresWidget extends StatelessWidget {
                           begin: Alignment.centerLeft,
                           end: Alignment.center,
                         ),
-                        child: Text(
-                          "Ver Perfil",
+
+                        child: Text("Ver Perfil",
                           style: TextStyle(fontSize: 15.0),
                         ),
-                        callback: () {
-                          String cdgPessoa =
-                              snapshot.data["pessoa"][index]["cdgPessoa"];
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TelaPerfilPrestador(
-                                      // nao me acertei em mandar direto o map da pessoa, por hora mando codigo
-                                      //pessoa: snapshot.data["pessoa"][index],
-                                      cdgPessoa: cdgPessoa,
-                                    ),
-                            ),
-                          );
+
+                          callback: () {
+//                          String cdgPessoa = snapshot.data["pessoa"][index]["cdgPessoa"];
+
+
+//                          print("${snapshot.data["pessoa"][index]}");
+//                          print("${snapshot.data["pessoa"][index]["cdgPessoa"]}");
+
+                            String cdgPessoa = snapshot.data["Custom"][index]["cdgPessoa"];
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TelaPerfilPrestador(
+                                    // nao me acertei em mandar direto o map da pessoa, por hora mando codigo
+                                    //pessoa: snapshot.data["pessoa"][index],
+                                    cdgPessoa: cdgPessoa,
+                                  )
+                              ),
+                            );
                         },
-                        increaseWidthBy: 50.0,
+                        increaseWidthBy: 25.0,
                       ),
                     ],
                   ),

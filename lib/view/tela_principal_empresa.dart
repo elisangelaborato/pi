@@ -5,12 +5,15 @@ import 'package:pie_chart/pie_chart.dart';
 import 'package:bezier_chart/bezier_chart.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
+import 'package:pi/view/drawer.dart';
 
 class TelaPrincipalEmpresa extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(
+    return
+//      MaterialApp(
+//      home:
+      DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: GradientAppBar(
@@ -42,7 +45,7 @@ class TelaPrincipalEmpresa extends StatelessWidget {
               Icon(Icons.search),
             ],
           ),
-          drawer: DrawerPrestador(),
+          drawer: CustomDrawer(), //DrawerPrestador(),
           body: TabBarView(
             children: [
               ServicosAbertos(),
@@ -51,7 +54,7 @@ class TelaPrincipalEmpresa extends StatelessWidget {
             ],
           ),
         ),
-      ),
+//      ),
     );
   }
 }

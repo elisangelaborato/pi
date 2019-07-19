@@ -9,7 +9,7 @@ import 'dart:convert';
 import 'package:pi/model/pessoa_model.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:pi/view/tela_cadastroprestador.dart';
+import 'package:pi/view/tela_cadastro_prestador.dart';
 
 ////80% of screen width
 //double c_width = MediaQuery.of(context).size.width*0.8;
@@ -191,10 +191,11 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
   Widget getTabBarPages() {
     return TabBarView(//controller: tabController,
         children: <Widget>[
+
       TabPerfilPrestador(pessoa, prestador),
       //TabAgendaPrestador(),
       TabServicosPrestador(pessoa["pessoa"][0]["cdgPessoa"]),
-      TabAvaliacaoPrestador(),
+      TabAvaliacaoPrestador(pessoa["pessoa"][0]["cdgPessoa"]),
     ]);
   }
 
@@ -307,15 +308,15 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
                 ),
                 Text(
                   pessoa["pessoa"][0]["nome"] ?? "NOME DA PESSOA",
-                  style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w500),
                 ),
                 Text(
                   "Prestador Serviços",
-                  style: TextStyle(fontSize: 15.0),
+                  style: TextStyle(fontSize: 14.0),
                 ),
                 Text(
                   prestador["prestador"][0]["nota"] ?? "0",
-                  style: TextStyle(fontSize: 15.0),
+                  style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w500),
                 ),
               ],
             ),

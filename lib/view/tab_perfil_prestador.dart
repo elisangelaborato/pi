@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pi/model/pessoa_model.dart';
-import 'package:pi/view/tela_cadastroprestador.dart';
+import 'package:pi/view/tela_cadastro_prestador.dart';
 
 class TabPerfilPrestador extends StatefulWidget {
   final Map<String, dynamic> pessoa;
@@ -21,34 +21,26 @@ class _TabPerfilPrestadorState extends State<TabPerfilPrestador> {
 
   @override
   Widget build(BuildContext context) {
-    print("xxx $pessoa");
-    print("xxx $prestador");
-    print("xxx ${PessoaModel.of(context).cdgPessoa}");
+//    print("xxx $pessoa");
+//    print("xxx $prestador");
+//    print("xxx ${PessoaModel.of(context).cdgPessoa}");
 
     return Scaffold(
       floatingActionButton:
       PessoaModel.of(context).cdgPessoa == pessoa["pessoa"][0]["cdgPessoa"]
-              ? FloatingActionButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => TelaCadastroPrestador(
-                            pessoa["pessoa"][0]["cdgPessoa"]
-                          ),
-                      ),
-
-//                        Navigator.push(
-//                          context,
-//                          MaterialPageRoute(
-//                              builder: (context) => TelaCadastroPrestador("2")),
-//                        );
-
-                    );
-                  },
-                  child: Icon(Icons.edit),
-                )
-              : null,
+          ? FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => TelaCadastroPrestador(
+                  pessoa["pessoa"][0]["cdgPessoa"]),
+            ),
+          );
+        },
+        child: Icon(Icons.edit),
+      )
+          : null,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(16.0),
@@ -57,10 +49,11 @@ class _TabPerfilPrestadorState extends State<TabPerfilPrestador> {
             children: <Widget>[
               Text(
                 "Sobre mim",
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
               ),
               Text(
-                prestador["prestador"][0]["sobreMim"] ?? "",
+                prestador["prestador"][0]["sobreMimPrestador"] ?? "",
+                style: TextStyle(fontSize: 14.0, fontStyle: FontStyle.italic),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 12.0),
@@ -77,20 +70,22 @@ class _TabPerfilPrestadorState extends State<TabPerfilPrestador> {
 //                ),
               Text(
                 "Telefone",
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
               ),
               Text(
-                prestador["prestador"][0]["telefone"] ?? "",
+                prestador["prestador"][0]["telefonePrestador"] ?? "",
+                style: TextStyle(fontSize: 14.0, ),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 12.0),
               ),
               Text(
                 "Email",
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
               ),
               Text(
                 pessoa["pessoa"][0]["email"] ?? "",
+                style: TextStyle(fontSize: 14.0, ),
               ),
             ],
           ),
