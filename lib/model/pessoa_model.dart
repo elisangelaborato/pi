@@ -30,6 +30,21 @@ class PessoaModel extends Model {
   //variaveis de controle
   bool logado = false;
 
+  bool _logadoComoCliente = false;
+  bool _logadoComoPrestadorServicos = false;
+
+  void logadoComoCliente(bool valor){
+    _logadoComoCliente = valor;
+    _logadoComoPrestadorServicos = !valor;
+  }
+
+  void logadoComoPrestadorServicos(bool valor){
+    _logadoComoPrestadorServicos = valor;
+    _logadoComoCliente = !valor;
+  }
+
+  bool isLogadoComoCliente() => _logadoComoCliente;
+
   void getDados(String uid) async {
     String consulta =
         "SELECT * FROM pessoa p INNER JOIN cliente c ON c.cdgPessoa = p.cdgPessoa INNER JOIN prestador pt ON pt.cdgPessoa = p.cdgPessoa WHERE p.uid = '${uid}'";
