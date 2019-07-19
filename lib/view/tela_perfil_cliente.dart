@@ -84,7 +84,7 @@ class _TelaPerfilClienteState extends State<TelaPerfilCliente> {
     return TabBarView(//controller: tabController,
         children: <Widget>[
           TabPerfilCliente(), //Container(color: Colors.amber,),
-          TabAgendaCliente(), //Container(color: Colors.red,),
+          TabAgendaCliente(PessoaModel.of(context).cdgPessoa), //Container(color: Colors.red,),
           TabAvaliacaoCliente(PessoaModel.of(context).cdgPessoa), //Container(color: Colors.blue,),
     ]);
   }
