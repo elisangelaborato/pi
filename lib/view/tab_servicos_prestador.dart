@@ -154,7 +154,7 @@ class _TabServicosPrestadorState extends State<TabServicosPrestador> {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+          MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador(cdgPessoa)),
         );
       },
       child: Icon(Icons.calendar_today),
@@ -189,7 +189,7 @@ class _TabServicosPrestadorState extends State<TabServicosPrestador> {
           else
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+              MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador(cdgPessoa)),
             );
         },
         child: SizedBox(
