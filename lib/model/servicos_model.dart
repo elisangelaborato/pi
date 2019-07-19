@@ -74,11 +74,11 @@ class ServicosModel extends Model{
     var response = await http.post(url, body: dados);
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);
-      var itemCount = jsonResponse['totalItems'];
-      print("Number of books about http: $itemCount.");
-      print(jsonResponse);
+      //var itemCount = jsonResponse['totalItems'];
+      //print("Number of books about http: $itemCount.");
+      //print(jsonResponse);
     } else {
-      print("Falha com status: ${response.statusCode}.");
+      //print("Falha com status: ${response.statusCode}.");
     }
   }
 }

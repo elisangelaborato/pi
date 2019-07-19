@@ -89,8 +89,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
           leading: Icon(Icons.access_time),
           title: Text("Histórico"),
           onTap: () {
-            //PessoaModel.of(context).salvaPessoa();
-
           },
         ),
         ListTile(
@@ -98,7 +96,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           title: Text("Avaliações"),
           onTap: () {
             //teste insercao de agendamento
-            ServicosModel.of(context).salvaAgendamento("39", "39", "1", "2019-07-18", "08:30", "AGUARDANDO", "20.00");
+            //ServicosModel.of(context).salvaAgendamento("39", "38", "1", "2019-07-18", "08:30", "AGUARDANDO", "20");
           },
         ),
         Divider(
