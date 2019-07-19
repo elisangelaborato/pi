@@ -128,7 +128,7 @@ class _TelaCadastroServicoState extends State<TelaCadastroServico> {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
-                      color: Colors.white,
+                      color: Colors.grey[300],
                       boxShadow: [
                         new BoxShadow(
                           color: Colors.grey,

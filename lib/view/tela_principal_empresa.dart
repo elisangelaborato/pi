@@ -169,6 +169,7 @@ class ServicosAbertos extends StatelessWidget {
 
   Widget getCard(context) {
     return Card(
+      elevation: 15.0,
       margin: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
       child: SizedBox(
           height: 100.0,
@@ -433,6 +434,7 @@ class ServicosPrestados extends StatelessWidget {
 
   Widget getCard(context) {
     return Card(
+      elevation: 15.0,
       margin: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
       child: SizedBox(
           height: 100.0,

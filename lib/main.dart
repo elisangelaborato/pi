@@ -25,7 +25,7 @@ void main(){
                 theme: ThemeData(primaryColor: Color(0xFF000080)),
                 debugShowCheckedModeBanner: false,
                 onGenerateRoute: generateRoute,
-                initialRoute: '/',
+                initialRoute: '/telaPrincipalEmpresa',
               ));
         })),
   );
@@ -56,12 +56,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case '/telaCadastroServico':
       return MaterialPageRoute(builder: (_) => TelaCadastroServico());
       break;
-    case '/tabAvaliacaoCliente':
-      return MaterialPageRoute(builder: (_) => TabAvaliacaoCliente());
-      break;
-    case '/tabAvaliacaoPrestador':
-      return MaterialPageRoute(builder: (_) => TabAvaliacaoPrestador());
-      break;
+//    case '/tabAvaliacaoCliente':
+//      return MaterialPageRoute(builder: (_) => TabAvaliacaoCliente());
+//      break;
+//    case '/tabAvaliacaoPrestador':
+//      return MaterialPageRoute(builder: (_) => TabAvaliacaoPrestador());
+//      break;
     default:
       return MaterialPageRoute(
           builder: (_) => Scaffold(

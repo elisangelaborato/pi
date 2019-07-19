@@ -4,7 +4,8 @@ import 'package:pi/view/tela_agendamento_prestador.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:pi/view/tela_cadastro_prestador_servico.dart';
+import 'package:pi/view/tela_cadastro_servico.dart';
+
 
 //select categoriaservico.icone cat_icone, categoriaservico.descricao cat_descr,
 //    servico.nome ser_nome, servico.descricao ser_descr,
@@ -166,7 +167,7 @@ class _TabServicosPrestadorState extends State<TabServicosPrestador> {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => TelaCadastroPrestadorServico()),
+          MaterialPageRoute(builder: (context) => TelaCadastroServico()),
         );
       },
       child: Icon(Icons.add),
@@ -183,7 +184,7 @@ class _TabServicosPrestadorState extends State<TabServicosPrestador> {
           // permite adicionar servicos para o prestado
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => TelaCadastroPrestadorServico()),
+              MaterialPageRoute(builder: (context) => TelaCadastroServico()),
             );
           // senao, permite a pessoa agendar servicos com este prestador
           else

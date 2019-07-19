@@ -87,6 +87,14 @@ class ServicosWidget extends StatelessWidget {
                   case ConnectionState.none:
                   case ConnectionState.waiting:
                     return Container(
+//                      decoration: BoxDecoration(
+//                        boxShadow: [
+//                          new BoxShadow(
+//                            color: Colors.red,
+//                            offset: Offset(20, 15),
+//                          )
+//                        ],
+//                      ),
                       alignment: Alignment.center,
                       child: CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
@@ -225,6 +233,7 @@ class MeusServicosWidget extends StatelessWidget {
 
   Widget getCard(context) {
     return Card(
+      elevation: 10.0,
 //      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0),
 //      ),
       margin: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
@@ -360,6 +369,8 @@ class PrestadoresWidget extends StatelessWidget {
                   case ConnectionState.none:
                   case ConnectionState.waiting:
                     return Container(
+                      decoration: BoxDecoration(
+                      ),
                       width: 200.0,
                       height: 200.0,
                       alignment: Alignment.center,
