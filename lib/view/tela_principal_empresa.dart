@@ -5,6 +5,9 @@ import 'package:bezier_chart/bezier_chart.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:pi/view/drawer.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
 
 class TelaPrincipalEmpresa extends StatelessWidget {
   @override
@@ -12,47 +15,51 @@ class TelaPrincipalEmpresa extends StatelessWidget {
     return
 //      MaterialApp(
 //      home:
-      DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: GradientAppBar(
-            gradient: LinearGradient(colors: [
-              Color(0xFF000033),
-              Color(0xFF000066),
-              Color(0xFF000080),
-              Color(0xFF0000b3),
-              Color(0xFF0000e6),
-              Color(0xFF0000ff),
-            ]),
-
-            bottom: TabBar(
-              tabs: <Widget>[
-                Tab(
-                  text: "Abertos",
-                ),
-                Tab(
-                  text: "Prestados",
-                ),
-                Tab(
-                  text: "Avaliações",
-                ),
-              ],
+        DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: GradientAppBar(
+          gradient: LinearGradient(colors: [
+            Color(0xFF000033),
+            Color(0xFF000066),
+            Color(0xFF000080),
+            Color(0xFF0000b3),
+            Color(0xFF0000e6),
+            Color(0xFF0000ff),
+          ]),
+          bottom: TabBar(
+            tabs: <Widget>[
+              Tab(
+                text: "Abertos",
+              ),
+              Tab(
+                text: "Prestados",
+              ),
+              Tab(
+                text: "Avaliações",
+              ),
+            ],
+          ),
+          title: Text('Alguz Serviços A à Z'),
+          centerTitle: true,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(context: context, delegate: DataSearch());
+              },
             ),
-            title: Text('Alguz Serviços A à Z'),
-            centerTitle: true,
-            actions: <Widget>[
-              Icon(Icons.search),
-            ],
-          ),
-          drawer: CustomDrawer(), //DrawerPrestador(),
-          body: TabBarView(
-            children: [
-              ServicosAbertos(),
-              ServicosPrestados(),
-              Avaliacoes(),
-            ],
-          ),
+          ],
         ),
+        drawer: CustomDrawer(), //DrawerPrestador(),
+        body: TabBarView(
+          children: [
+            ServicosAbertos(),
+            ServicosPrestados(),
+            Avaliacoes(),
+          ],
+        ),
+      ),
 //      ),
     );
   }
@@ -71,7 +78,8 @@ class ServicosAbertos extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+                    MaterialPageRoute(
+                        builder: (context) => TelaAgendamentoPrestador()),
                   );
                 },
               ),
@@ -80,7 +88,8 @@ class ServicosAbertos extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+                    MaterialPageRoute(
+                        builder: (context) => TelaAgendamentoPrestador()),
                   );
                 },
               ),
@@ -89,7 +98,8 @@ class ServicosAbertos extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+                    MaterialPageRoute(
+                        builder: (context) => TelaAgendamentoPrestador()),
                   );
                 },
               ),
@@ -104,7 +114,8 @@ class ServicosAbertos extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+                    MaterialPageRoute(
+                        builder: (context) => TelaAgendamentoPrestador()),
                   );
                 },
               ),
@@ -183,7 +194,11 @@ class ServicosAbertos extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     CircleAvatar(
-                      child: Icon(Icons.person, size: 35, color: Theme.of(context).primaryColor,),
+                      child: Icon(
+                        Icons.person,
+                        size: 35,
+                        color: Theme.of(context).primaryColor,
+                      ),
 //                      Image.network(
 //                          "https://image.flaticon.com/icons/png/512/10/10003.png"),
                       radius: 20,
@@ -191,11 +206,16 @@ class ServicosAbertos extends StatelessWidget {
                     ),
                     Text(
                       "Cliente",
-                      style: TextStyle(fontSize: 16,),
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
                     ),
                     Text(
                       "Maycon",
-                      style: TextStyle(color: Colors.grey, fontSize: 12,),
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12,
+                      ),
                     ),
                   ],
                 ),
@@ -206,11 +226,15 @@ class ServicosAbertos extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Data/Hora",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold ),
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         "14/08 - 13:30",
-                        style: TextStyle(color: Colors.grey, fontSize: 12,),
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                        ),
                       ),
                       Divider(
                         height: 4,
@@ -221,7 +245,10 @@ class ServicosAbertos extends StatelessWidget {
                       ),
                       Text(
                         "R\$80,00",
-                        style: TextStyle(color: Colors.grey, fontSize: 12,),
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                        ),
                       ),
                     ],
                   ),
@@ -234,30 +261,31 @@ class ServicosAbertos extends StatelessWidget {
                       Divider(
                         height: 0,
                       ),
-                      GradientButton(gradient: LinearGradient(
-                        colors: [
-                          const Color(0xFFe60000),
-                          const Color(0xFFe60000),
-                          const Color(0xFFff4d4d),
-                          const Color(0xFFe60000),
-                          const Color(0xFFff1a1a),
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                        child: Text("CANCELAR", style: TextStyle(fontSize: 15.0),),
-                        callback: () {
-
-                        },
+                      GradientButton(
+                        gradient: LinearGradient(
+                          colors: [
+                            const Color(0xFFe60000),
+                            const Color(0xFFe60000),
+                            const Color(0xFFff4d4d),
+                            const Color(0xFFe60000),
+                            const Color(0xFFff1a1a),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        child: Text(
+                          "CANCELAR",
+                          style: TextStyle(fontSize: 15.0),
+                        ),
+                        callback: () {},
                         increaseWidthBy: 35.0,
                       ),
-                      
+
 //                      RaisedButton(
 //                        onPressed: () {},
 //                        color: Theme.of(context).primaryColor,
 //                        child: Text("CANCELAR", style: TextStyle(color: Colors.white),),
 //                      ),
-
                     ],
                   ),
                 ),
@@ -321,7 +349,8 @@ class ServicosPrestados extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+                    MaterialPageRoute(
+                        builder: (context) => TelaAgendamentoPrestador()),
                   );
                 },
               ),
@@ -330,7 +359,8 @@ class ServicosPrestados extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+                    MaterialPageRoute(
+                        builder: (context) => TelaAgendamentoPrestador()),
                   );
                 },
               ),
@@ -339,7 +369,8 @@ class ServicosPrestados extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+                    MaterialPageRoute(
+                        builder: (context) => TelaAgendamentoPrestador()),
                   );
                 },
               ),
@@ -354,7 +385,8 @@ class ServicosPrestados extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+                    MaterialPageRoute(
+                        builder: (context) => TelaAgendamentoPrestador()),
                   );
                 },
               ),
@@ -440,7 +472,6 @@ class ServicosPrestados extends StatelessWidget {
           width: double.infinity,
           child: Padding(
             padding: const EdgeInsets.only(left: 12.0, right: 12.0),
-
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -448,7 +479,11 @@ class ServicosPrestados extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     CircleAvatar(
-                      child: Icon(Icons.person, size: 35, color: Theme.of(context).primaryColor,),
+                      child: Icon(
+                        Icons.person,
+                        size: 35,
+                        color: Theme.of(context).primaryColor,
+                      ),
 //                      Image.network(
 //                          "https://image.flaticon.com/icons/png/512/10/10003.png"),
                       radius: 20,
@@ -456,11 +491,16 @@ class ServicosPrestados extends StatelessWidget {
                     ),
                     Text(
                       "Cliente",
-                      style: TextStyle(fontSize: 16,),
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
                     ),
                     Text(
                       "Maycon",
-                      style: TextStyle(color: Colors.grey, fontSize: 12,),
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12,
+                      ),
                     ),
                   ],
                 ),
@@ -471,11 +511,16 @@ class ServicosPrestados extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Data/Hora",
-                        style: TextStyle(fontSize: 16,),
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
                       ),
                       Text(
                         "14/08 - 13:30",
-                        style: TextStyle(color: Colors.grey, fontSize: 12,),
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                        ),
                       ),
                       Divider(
                         height: 4,
@@ -486,7 +531,10 @@ class ServicosPrestados extends StatelessWidget {
                       ),
                       Text(
                         "R\$80,00",
-                        style: TextStyle(color: Colors.grey, fontSize: 12,),
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                        ),
                       ),
                     ],
                   ),
@@ -499,21 +547,23 @@ class ServicosPrestados extends StatelessWidget {
                       Divider(
                         height: 0,
                       ),
-                      GradientButton(gradient: LinearGradient(
-                        colors: [
-                          const Color(0xFFe60000),
-                          const Color(0xFFe60000),
-                          const Color(0xFFff4d4d),
-                          const Color(0xFFe60000),
-                          const Color(0xFFff1a1a),
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                        child: Text("EXCLUIR", style: TextStyle(fontSize: 15.0),),
-                        callback: () {
-
-                        },
+                      GradientButton(
+                        gradient: LinearGradient(
+                          colors: [
+                            const Color(0xFFe60000),
+                            const Color(0xFFe60000),
+                            const Color(0xFFff4d4d),
+                            const Color(0xFFe60000),
+                            const Color(0xFFff1a1a),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        child: Text(
+                          "EXCLUIR",
+                          style: TextStyle(fontSize: 15.0),
+                        ),
+                        callback: () {},
                         increaseWidthBy: 22.0,
                       ),
 //                      RaisedButton(
@@ -526,41 +576,39 @@ class ServicosPrestados extends StatelessWidget {
                 ),
               ],
             ),
-
           )),
     );
   }
-
 }
 
 class Avaliacoes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Container(
-              child: PieChart(
-                dataMap: RetornaMapDados(), //Required parameter
-                legendFontColor: Colors.blueGrey[900],
-                legendFontSize: 14.0,
-                legendFontWeight: FontWeight.w500,
-                animationDuration: Duration(milliseconds: 800),
-                chartLegendSpacing: 32.0,
-                chartRadius: MediaQuery.of(context).size.width / 2.7,
-                showChartValuesInPercentage: true,
-                showChartValues: true,
-                showChartValuesOutside: true,
-                chartValuesColor: Colors.blueGrey[900].withOpacity(0.9),
-                //colorList: colorList, lista de cores do exempo, nao ta funcionando
-                showLegends: true,
-              ),
+      child: Column(
+        children: <Widget>[
+          Container(
+            child: PieChart(
+              dataMap: RetornaMapDados(), //Required parameter
+              legendFontColor: Colors.blueGrey[900],
+              legendFontSize: 14.0,
+              legendFontWeight: FontWeight.w500,
+              animationDuration: Duration(milliseconds: 800),
+              chartLegendSpacing: 32.0,
+              chartRadius: MediaQuery.of(context).size.width / 2.7,
+              showChartValuesInPercentage: true,
+              showChartValues: true,
+              showChartValuesOutside: true,
+              chartValuesColor: Colors.blueGrey[900].withOpacity(0.9),
+              //colorList: colorList, lista de cores do exempo, nao ta funcionando
+              showLegends: true,
             ),
-            Container(
-              child: Grafico(),
-            )
-          ],
-        ),
+          ),
+          Container(
+            child: Grafico(),
+          )
+        ],
+      ),
     );
   }
 }
@@ -623,6 +671,71 @@ class _GraficoState extends State<Grafico> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class DataSearch extends SearchDelegate<String> {
+  final profissoes = ["Beleza", "Saúde", "Professores"];
+
+  final pesquisarecente = ["Saúde"];
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    // TODO: implement buildActions
+    return [
+      IconButton(
+        icon: Icon(Icons.search),
+        onPressed: () {
+          query = "";
+        },
+      )
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    // TODO: implement buildLeading
+    return IconButton(
+      icon: AnimatedIcon(
+        icon: AnimatedIcons.menu_arrow,
+        progress: transitionAnimation,
+      ),
+      onPressed: () {
+        close(context, null);
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // TODO: implement buildResults
+    //retornar a lista da profissão pesquisada
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // TODO: implement buildSuggestions
+    final suggestionList = query.isEmpty
+        ? pesquisarecente
+        : profissoes.where((p) => p.startsWith(query)).toList();
+
+    return ListView.builder(
+      itemBuilder: (context, index) => ListTile(
+        onTap: (){
+          showResults(context);
+        },
+            leading: Icon(Icons.work),
+            title: RichText(text: TextSpan(
+              text: suggestionList[index].substring(0, query.length),
+              style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              children: [TextSpan(
+                text: suggestionList[index].substring(query.length),
+                style: TextStyle(color: Colors.grey),
+              )]
+            )),
+          ),
+      itemCount: suggestionList.length,
     );
   }
 }
