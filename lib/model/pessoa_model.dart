@@ -33,6 +33,11 @@ class PessoaModel extends Model {
   bool _logadoComoCliente = false;
   bool _logadoComoPrestadorServicos = false;
 
+  getModo(){
+    return _logadoComoPrestadorServicos;
+
+  }
+
   void logadoComoCliente(bool valor){
     _logadoComoCliente = valor;
     _logadoComoPrestadorServicos = !valor;
