@@ -14,7 +14,7 @@ import 'package:image_picker/image_picker.dart';
 class TelaPerfilCliente extends StatefulWidget {
 
   final Map<String, dynamic> pessoa;
-  final int cdgPessoa;
+  final String cdgPessoa;
 
   TelaPerfilCliente({this.pessoa, this.cdgPessoa});
 
@@ -25,7 +25,7 @@ class TelaPerfilCliente extends StatefulWidget {
 class _TelaPerfilClienteState extends State<TelaPerfilCliente> {
 
   final Map<String, dynamic> pessoa;
-  final int cdgPessoa;
+  final String cdgPessoa;
 
   _TelaPerfilClienteState({this.pessoa, this.cdgPessoa});
 
@@ -83,9 +83,9 @@ class _TelaPerfilClienteState extends State<TelaPerfilCliente> {
   Widget getTabBarPages() {
     return TabBarView(//controller: tabController,
         children: <Widget>[
-          TabPerfilCliente(),
-          TabAgendaCliente(),
-          TabAvaliacaoCliente(),
+          TabPerfilCliente(), //Container(color: Colors.amber,),
+          TabAgendaCliente(), //Container(color: Colors.red,),
+          TabAvaliacaoCliente(PessoaModel.of(context).cdgPessoa), //Container(color: Colors.blue,),
     ]);
   }
 

@@ -23,8 +23,8 @@ class _TabAvaliacaoPrestadorState extends State<TabAvaliacaoPrestador> {
     String where = " WHERE age.situacaoAgendamento = \"EXECUTADO\"  ";
     if (cdgPessoa_prestador != null)
       if (!(cdgPessoa_prestador.isEmpty ||
-        cdgPessoa_prestador.trim().length == 0))
-      where += " AND prt.cdgPessoa = $cdgPessoa_prestador ";
+          cdgPessoa_prestador.trim().length == 0))
+        where += " AND prt.cdgPessoa = $cdgPessoa_prestador ";
 
     String sql =
         "SELECT age.cdgAgendamento, cli.cdgPessoa cli_cdgPessoa, cli.nome cli_nome, cli.imagem cli_image,  prt.cdgPessoa prt_cdgPessoa, prt.nome prt_nome, prt.imagem prt_image,  ser.nome ser_nome, age.dataAgendamento, age.horaAgendamento, age.situacaoAgendamento, age.preco, age.avaliacaoCliente, age.comentarioCliente, age.avaliacaoPrestador, age.comentarioPrestador FROM agendamento age LEFT JOIN pessoa cli ON cli.cdgPessoa = age.cdgPessoa_cliente LEFT JOIN pessoa prt ON prt.cdgPessoa = age.cdgPessoa_prestador LEFT JOIN servico ser ON ser.cdgServico = age.cdgServico $where ORDER BY age.dataAgendamento, age.horaAgendamento, age.situacaoAgendamento ";

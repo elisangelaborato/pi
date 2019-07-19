@@ -80,15 +80,25 @@ class _CustomDrawerState extends State<CustomDrawer> {
               backgroundColor: Colors.transparent,
             ),
             onTap: () {
-              if (PessoaModel.of(context).isLogadoComoCliente())
-                Navigator.pushNamed(context, '/telaPerfilCliente');
+              if (PessoaModel.of(context).isLogadoComoCliente()) {
+                //Navigator.pushNamed(context, '/telaPerfilCliente');
+                print("chamar  perfil cliente");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          TelaPerfilCliente(
+
+                          )),
+                );
+              }
               else
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => TelaPerfilPrestador(
-                            cdgPessoa: PessoaModel.of(context).cdgPessoa,
-                          )),
+                        cdgPessoa: PessoaModel.of(context).cdgPessoa,
+                      )),
                 );
             },
           ),

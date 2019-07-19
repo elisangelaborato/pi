@@ -21,9 +21,9 @@ class _TabPerfilPrestadorState extends State<TabPerfilPrestador> {
 
   @override
   Widget build(BuildContext context) {
-    print("xxx $pessoa");
-    print("xxx $prestador");
-    print("xxx ${PessoaModel.of(context).cdgPessoa}");
+//    print("xxx $pessoa");
+//    print("xxx $prestador");
+//    print("xxx ${PessoaModel.of(context).cdgPessoa}");
 
     return Scaffold(
       floatingActionButton:
