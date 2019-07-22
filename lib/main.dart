@@ -12,6 +12,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:pi/model/pessoa_model.dart';
 import 'package:pi/view/drawer.dart';
 import 'package:pi/model/servicos_model.dart';
+import 'package:pi/view/tela_perfil_prestador.dart';
 
 void main(){
   runApp(
@@ -57,6 +58,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case '/telaCadastroServico':
       return MaterialPageRoute(builder: (_) => TelaCadastroServico());
       break;
+    case '/telaPerfilPrestador':
+      return MaterialPageRoute(builder: (_) => TelaPerfilPrestador());
 //    case '/tabAvaliacaoCliente':
 //      return MaterialPageRoute(builder: (_) => TabAvaliacaoCliente());
 //      break;
