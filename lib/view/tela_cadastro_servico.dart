@@ -4,6 +4,7 @@ import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:pi/model/servicos_model.dart';
 import 'package:pi/view/tela_principal_empresa.dart';
+import 'package:pi/model/servicos_model.dart';
 
 class TelaCadastroServico extends StatefulWidget {
   @override
@@ -12,28 +13,23 @@ class TelaCadastroServico extends StatefulWidget {
 
 class _TelaCadastroServicoState extends State<TelaCadastroServico> {
 
-  var _categoria = ['Saúde', 'Professores', 'Manuntenção'];
-  var _currentItemSelected = 'Saúde';
+  List<String> _categoria = ['Saúde', 'Professores', 'Manuntenção'];
+  String _currentItemSelected = 'Saúde';
   MoneyMaskedTextController _maskedMoney = MoneyMaskedTextController(
       leftSymbol: "R\$ ", decimalSeparator: ',', thousandSeparator: '.');
 
-//  Future<Map> getNomesCategorias() async {
-//    return await ServicosModel.of(context).getTiposServicos();
-//  }
+  Future setarCategorias() async {
+    _categoria.clear();
+    ServicosModel.of(context).getTiposServicos().then( (v) {
+      v["categoriaservico"].forEach( (c) {
+        _categoria.add(v["descricao"]);
+      });
+    });
+  }
 
   @override
   void initState() {
-    super.initState();
-
-//    getNomesCategorias().then( (m) {
-//      print( m);
-////      _categoria.clear();
-////      m.forEach( (k,v) {
-////
-////        //_categoria.add(value);
-////      });
-//
-//    });
+    //setarCategorias();
   }
 
   @override
@@ -80,22 +76,64 @@ class _TelaCadastroServicoState extends State<TelaCadastroServico> {
             ),
             Container(
               padding: const EdgeInsets.only(left: 50.0),
-              child: DropdownButton<String>(
-                items: _categoria.map((String dropDownStringItem) {
-                  return DropdownMenuItem<String>(
-                    value: dropDownStringItem,
-                    child: Text(dropDownStringItem),
-                  );
-                }).toList(),
-                onChanged: (String newValeuSelected) {
-                  setState(() {
-                    this._currentItemSelected = newValeuSelected;
-                  });
-                },
-                value: _currentItemSelected,
-                style:
-                TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
-              ),
+              child: FutureBuilder(
+                  future: setarCategorias(),
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                      case ConnectionState.waiting:
+                        return Container(
+                          alignment: Alignment.center,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
+                            strokeWidth: 10.0,
+                          ),
+                        );
+                      default:
+                        if (snapshot.hasError) {
+                          return Container(
+                            color: Colors.redAccent,
+                          );
+                        } else {
+                          //return Container(color: Colors.pinkAccent, height: 50, width: double.infinity,);
+                          return DropdownButton<String>(
+                            items: _categoria.map((String dropDownStringItem) {
+                              return DropdownMenuItem<String>(
+                                value: dropDownStringItem,
+                                child: Text(dropDownStringItem),
+                              );
+                            }).toList(),
+                            onChanged: (String newValeuSelected) {
+                              setState(() {
+                                this._currentItemSelected = newValeuSelected;
+                              });
+                            },
+                            value: _currentItemSelected,
+                            style:
+                            TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+                          );
+                        }
+                    }
+                  }),
+
+
+//              child: DropdownButton<String>(
+//                items: _categoria.map((String dropDownStringItem) {
+//                  return DropdownMenuItem<String>(
+//                    value: dropDownStringItem,
+//                    child: Text(dropDownStringItem),
+//                  );
+//                }).toList(),
+//                onChanged: (String newValeuSelected) {
+//                  setState(() {
+//                    this._currentItemSelected = newValeuSelected;
+//                  });
+//                },
+//                value: _currentItemSelected,
+//                style:
+//                TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+//              ),
+//
             ),
             Container(
                 child: TextFormField(
@@ -186,7 +224,7 @@ class _TelaCadastroServicoState extends State<TelaCadastroServico> {
                 end: Alignment.center,
               ),
                 increaseWidthBy: 190.0,
-              child: Text("Cadastrar-se", style: TextStyle(fontSize: 20.0),),
+              child: Text("Cadastrar", style: TextStyle(fontSize: 20.0),),
               callback: () {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TelaPrincipalEmpresa()));
               },
