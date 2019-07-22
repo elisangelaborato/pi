@@ -12,6 +12,7 @@ import 'package:pi/view/tela_perfil_prestador.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:pi/model/servicos_model.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TelaPrincipalCliente extends StatefulWidget {
   @override
@@ -133,41 +134,101 @@ class ServicosWidget extends StatelessWidget {
   }
 
   Widget _createTile(context, snapshot, index) {
-    return Column(
-      children: <Widget>[
-        ListTile(
-          leading: CircleAvatar(
-            child:
-//            Image.network(
-//                "http://pontoemcomumseguros.com.br/images/icones/lifeline-in-a-heart-outline.png"),
-                Icon(
-              IconData(
-                  int.parse(snapshot.data["categoriaservico"][index]["icone"]),
-                  fontFamily: 'MaterialIcons'), //Icons.healing,
-              size: 40,
-              color: Theme.of(context).primaryColor,
+    return Container(
+      height: 100,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+              Color(0xFF000033),
+              Color(0xFF000066),
+              Color(0xFF000080),
+              Color(0xFF0000b3),
+              Color(0xFF0000e6),
+              Color(0xFF0000ff),
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment(1.0, 1.0),
             ),
-            radius: 25,
-            backgroundColor: Colors.transparent,
           ),
-          trailing: Icon(Icons.keyboard_arrow_right),
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>
-                TelaListaPrestadores(
-                  cdgCategoria: snapshot.data["categoriaservico"][index]["cdgCategoria"],
-                  categoria_descricao: snapshot.data["categoriaservico"][index]["descricao"],
-                ),
-            ),
-            );
-          },
-          title: Text(snapshot.data["categoriaservico"][index]["descricao"]),
+child: Stack(
+  children: <Widget>[
+    Opacity(
+      opacity: 0.3,
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: NetworkImage(snapshot.data["categoriaservico"][index]["image"]),
+          fit: BoxFit.fill,)
         ),
-        Divider(
-          color: Colors.grey[500],
-          height: 0,
-        ),
+      ),
+    ),
+    Column(
+mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                child: Text(snapshot.data["categoriaservico"][index]["descricao"], style: TextStyle(color: Colors.white, fontSize: 16),),
+              ),
+              SizedBox(width: 10,),
+              Container(
+                child: Icon(
+                  IconData(
+                      int.parse(snapshot.data["categoriaservico"][index]["icone"]),
+                      fontFamily: 'MaterialIcons'), //Icons.healing,
+                  color: Colors.white,),
+              ),
+//              SizedBox(width:10),
+//              Container(
+//                child: Text("Health", style: TextStyle(color: Colors.white, fontSize: 20,),),
+//              ),
+            ],
+          ),
+        )
       ],
-    );
+        )
+  ],
+),
+        );
+
+//    return Column(
+//      children: <Widget>[
+//        ListTile(
+//          leading: CircleAvatar(
+//            child:
+////            Image.network(
+////                "http://pontoemcomumseguros.com.br/images/icones/lifeline-in-a-heart-outline.png"),
+//                Icon(
+//              IconData(
+//                  int.parse(snapshot.data["categoriaservico"][index]["icone"]),
+//                  fontFamily: 'MaterialIcons'), //Icons.healing,
+//              size: 40,
+//              color: Theme.of(context).primaryColor,
+//            ),
+//            radius: 25,
+//            backgroundColor: Colors.transparent,
+//          ),
+//          trailing: Icon(Icons.keyboard_arrow_right),
+//          onTap: () {
+//            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>
+//                TelaListaPrestadores(
+//                  cdgCategoria: snapshot.data["categoriaservico"][index]["cdgCategoria"],
+//                  categoria_descricao: snapshot.data["categoriaservico"][index]["descricao"],
+//                ),
+//            ),
+//            );
+//          },
+//          title: Text(snapshot.data["categoriaservico"][index]["descricao"]),
+//        ),
+//        Divider(
+//          color: Colors.grey[500],
+//          height: 0,
+//        ),
+//      ],
+//    );
+
+
   }
 }
 
