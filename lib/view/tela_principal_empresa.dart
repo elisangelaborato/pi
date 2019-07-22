@@ -8,6 +8,9 @@ import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:pi/view/drawer.dart';
 
 class TelaPrincipalEmpresa extends StatelessWidget {
+
+  var _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return
@@ -16,6 +19,7 @@ class TelaPrincipalEmpresa extends StatelessWidget {
         DefaultTabController(
       length: 3,
       child: Scaffold(
+        key: _scaffoldKey,
         appBar: GradientAppBar(
           gradient: LinearGradient(colors: [
             Color(0xFF000033),
@@ -52,7 +56,7 @@ class TelaPrincipalEmpresa extends StatelessWidget {
         drawer: CustomDrawer(), //DrawerPrestador(),
         body: TabBarView(
           children: [
-            ServicosAbertos(),
+            ServicosAbertos(scaffoldKey: _scaffoldKey,),
             ServicosPrestados(),
             Avaliacoes(),
           ],
@@ -64,11 +68,17 @@ class TelaPrincipalEmpresa extends StatelessWidget {
 }
 
 class ServicosAbertos extends StatelessWidget {
+
+  final GlobalKey<ScaffoldState> scaffoldKey;
+
+  ServicosAbertos({Key key, this.scaffoldKey}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilderListaAgendamentos(
       cdgPessoa_prestador: PessoaModel.of(context).cdgPessoa,
       situacaoAgendamento: "AGENDADO",
+      scaffoldKey:  scaffoldKey
     );
   }
 }

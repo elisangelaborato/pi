@@ -25,7 +25,7 @@ void main(){
                 theme: ThemeData(primaryColor: Color(0xFF000080)),
                 debugShowCheckedModeBanner: false,
                 onGenerateRoute: generateRoute,
-                initialRoute: '/telaPrincipalEmpresa',
+                initialRoute: '/',
               ));
         })),
   );
