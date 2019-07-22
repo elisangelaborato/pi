@@ -26,7 +26,8 @@ class ServicosModel extends Model{
         await setTipoServicos();
         print("DADOS = NULL");
       }
-      print("Retornando os dados");
+    print("Retornando os dados");
+    print(tiposServicos);
 
     return tiposServicos;
   }
