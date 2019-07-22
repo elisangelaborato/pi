@@ -20,6 +20,7 @@ class TelaPrincipalCliente extends StatefulWidget {
 
 class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
 
+  var _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
       DefaultTabController(
         length: 3,
         child: Scaffold(
+          key: _scaffoldKey,
           appBar: GradientAppBar(
             elevation: 15,
             gradient: LinearGradient(colors: [
@@ -65,7 +67,7 @@ class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
             children: [
               ServicosWidget(),
               PrestadoresWidget(),
-              MeusServicosWidget(),
+              MeusServicosWidget(_scaffoldKey),
             ],
           ),
         ),
@@ -170,9 +172,14 @@ class ServicosWidget extends StatelessWidget {
 }
 
 class MeusServicosWidget extends StatelessWidget {
+
+  var _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  MeusServicosWidget(this._scaffoldKey);
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilderListaAgendamentos(cdgPessoa_cliente: PessoaModel.of(context).cdgPessoa);
+    return FutureBuilderListaAgendamentos(cdgPessoa_cliente: PessoaModel.of(context).cdgPessoa, scaffoldKey: _scaffoldKey);
   }
 }
 

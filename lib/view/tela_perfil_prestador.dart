@@ -138,7 +138,7 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
                   print(
                       "${prestador["prestador"]}"); //pessoa["pessoa"][0]["nome"]
                   print("${prestador["prestador"][0]}");
-                  print("${prestador["prestador"][0]["nota"]}");
+                  print("${prestador["prestador"][0]["notaPrestador"]}");
                   print("${pessoa["pessoa"][0]["imagem"]}");
 
                   return DefaultTabController(
@@ -314,7 +314,7 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
                   style: TextStyle(fontSize: 14.0),
                 ),
                 Text(
-                  prestador["prestador"][0]["nota"] ?? "0",
+                  prestador["prestador"][0]["notaPrestador"] ?? "0",
                   style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w500),
                 ),
               ],

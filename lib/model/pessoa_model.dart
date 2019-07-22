@@ -139,24 +139,23 @@ class PessoaModel extends Model {
     if (telefonePrestador == null) telefonePrestador = this.telefonePrestador;
     if (ativoPrestador == null) ativoPrestador = this.ativoPrestador;
 
+    print("Ativo prestador"+ativoPrestador.toString());
+
     Map<String, dynamic> map = {
       "sobreMimPrestador": sobreMimPrestador,
       "notaPrestador": notaPrestador,
       "telefonePrestador": telefonePrestador,
-      "ativoPrestador": ativoPrestador
+      "ativoPrestador": ativoPrestador.toString()
     };
     _launchURL(map, "prestador", this.cdgPessoa, "cdgPessoa");
   }
 
    _launchURL(Map<String, dynamic> dados, String tabela, String codigo, String idTabela) async {
-    String url = "http://alguz1.gearhostpreview.com/atualiza.php?codigo=${codigo}&tabela=${tabela}&idTabela=${idTabela}";
+    String url = "http://alguz1.gearhostpreview.com/atualiza.php?tabela=${tabela}&idTabela=${idTabela}&codigo=${codigo}";
     print(url);
-    print(dados['imagem']);
     var response = await http.post(url, body: dados);
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);
-      var itemCount = jsonResponse['totalItems'];
-      print("Number of books about http: $itemCount.");
       print(jsonResponse);
     } else {
       print("Falha com status: ${response.statusCode}.");
