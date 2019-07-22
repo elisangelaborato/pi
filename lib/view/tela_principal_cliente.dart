@@ -60,7 +60,12 @@ class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
             title: Text('Alguz Serviços A à Z'),
             centerTitle: true,
             actions: <Widget>[
-              Icon(Icons.search),
+              IconButton(
+                icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(context: context, delegate: DataSearch());
+              },
+              ),
             ],
           ),
           drawer: CustomDrawer(),
@@ -138,13 +143,14 @@ class ServicosWidget extends StatelessWidget {
       height: 100,
           decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
-              Color(0xFF000033),
-              Color(0xFF000066),
-              Color(0xFF000080),
-              Color(0xFF0000b3),
-              Color(0xFF0000e6),
-              Color(0xFF0000ff),
-            ],
+              snapshot.data["categoriaservico"][index]["cor"],
+],
+//              Color(0xFF000033),
+//              Color(0xFF000066),
+//              Color(0xFF000080),
+//              Color(0xFF0000b3),
+//              Color(0xFF0000e6),
+//              Color(0xFF0000ff),
             begin: Alignment.centerLeft,
             end: Alignment(1.0, 1.0),
             ),
@@ -452,6 +458,74 @@ class PrestadoresWidget extends StatelessWidget {
               ],
             ),
           )),
+    );
+  }
+  }
+class DataSearch extends SearchDelegate<String> {
+  final profissoes = ["Saúde", "Professores", "Construção/Manuntenção", "Beleza/Estética", "Informática", "Outros"];
+
+  final pesquisarecente = [];
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    // TODO: implement buildActions
+    return [
+      IconButton(
+        icon: Icon(Icons.search),
+        onPressed: () {
+          query = "";
+        },
+      )
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    // TODO: implement buildLeading
+    return IconButton(
+      icon: AnimatedIcon(
+        icon: AnimatedIcons.menu_arrow,
+        progress: transitionAnimation,
+      ),
+      onPressed: () {
+        close(context, null);
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // TODO: implement buildResults
+    //retornar a lista da profissão pesquisada
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // TODO: implement buildSuggestions
+    final suggestionList = profissoes;
+//    query.isEmpty
+//        ? pesquisarecente
+//        : profissoes.where((p) => p.startsWith(query)).toList();
+
+    return ListView.builder(
+      itemBuilder: (context, index) =>
+          ListTile(
+            onTap: () {
+              showResults(context);
+            },
+            leading: Icon(Icons.work),
+            title: RichText(text: TextSpan(
+                text: suggestionList[index].substring(0, query.length),
+                style: TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.bold),
+                children: [TextSpan(
+                  text: suggestionList[index].substring(query.length),
+                  style: TextStyle(color: Colors.grey),
+                )
+                ]
+            )),
+          ),
+      itemCount: suggestionList.length,
     );
   }
 }

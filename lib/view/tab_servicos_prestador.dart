@@ -171,6 +171,7 @@ class _TabServicosPrestadorState extends State<TabServicosPrestador> {
         );
       },
       child: Icon(Icons.add),
+      backgroundColor: Color(0xFFff0000),
     );
   }  
 
