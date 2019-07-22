@@ -1,7 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PessoaModel extends Model {
   static PessoaModel of(BuildContext context) =>
@@ -62,6 +68,7 @@ class PessoaModel extends Model {
 
   FromMap(Map dados) {
     //dados da tabela de pessoa
+    uid = dados['Custom'][0]['uid'];
     cdgPessoa = dados['Custom'][0]['cdgPessoa'];
     nome = dados['Custom'][0]['nome'];
     email = dados['Custom'][0]['email'];
@@ -100,6 +107,7 @@ class PessoaModel extends Model {
     };
 
     _launchURL(map, "pessoa", this.cdgPessoa, "cdgPessoa");
+    notifyListeners();
   }
 
   void salvaCliente(
@@ -153,5 +161,16 @@ class PessoaModel extends Model {
     } else {
       print("Falha com status: ${response.statusCode}.");
     }
+  }
+
+  Future salvarFoto (File imgFile) async {
+
+    StorageUploadTask task = FirebaseStorage.instance.ref().child(uid).putFile(imgFile);
+    StorageTaskSnapshot taskSnapshot = await task.onComplete;
+    String url = await taskSnapshot.ref.getDownloadURL();
+
+    salvaPessoa(imagem: url);
+    imagem = url;
+    notifyListeners();
   }
 }
