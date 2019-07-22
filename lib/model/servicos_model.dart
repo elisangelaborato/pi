@@ -51,7 +51,7 @@ class ServicosModel extends Model{
     return topPrestadores;
 }
 
- void salvaAgendamento(int cdgPessoa_cliente, int cdgPessoa_prestador, int cdgServico, String dataAgendamento, String horaAgendamento, String situacaoAgendamento, int preco){
+ void salvaAgendamento(String cdgPessoa_cliente, String cdgPessoa_prestador, int cdgServico, String dataAgendamento, String horaAgendamento, String situacaoAgendamento, int preco){
 
 
   /* Map<String, dynamic> map = {
@@ -66,6 +66,25 @@ class ServicosModel extends Model{
    String url = "cadastra_agendamento.php?cdgPessoa_cliente=${cdgPessoa_cliente}&cdgPessoa_prestador=${cdgPessoa_prestador}&cdgServico=${cdgServico}";*/
     String urlget = "cadastra_agendamento.php?cdgPessoa_cliente=${cdgPessoa_cliente}&cdgPessoa_prestador=${cdgPessoa_prestador}&cdgServico=${cdgServico}&dataAgendamento=${dataAgendamento}&horaAgendamento=${horaAgendamento}&situacaoAgendamento=${situacaoAgendamento}&preco=${preco}";
    _launchURL(urlget);
+ }
+
+ Future<List<String>> getListaServicos(String cdgPessoa) async {
+    String complementoURL = "lista.php?sql=SELECT * FROM servico s INNER JOIN prestadorservico ps ON s.cdgServico = ps.cdgServico INNER JOIN prestador p ON p.cdgPessoa = ps.cdgPessoa WHERE p.cdgPessoa = ${cdgPessoa}";
+    String url = "http://alguz1.gearhostpreview.com/${complementoURL}";
+    print(url);
+    List c = List();
+    var response = await http.post(url);
+    var jsonResponse = convert.jsonDecode(response.body);
+    print(jsonResponse['Custom'].length);
+
+    for(int a = 0; a < jsonResponse['Custom'].length; a++  ){
+        c.add( jsonResponse['Custom'][a]['cdgPessoa']);
+    }
+
+    print(">>>>>>>>>>>>>>");
+    print(c);
+    //print(jsonResponse['Custom'][0]['cdgPessoa']);
+    return c;
  }
 
   _launchURL(String complementoURL) async {
