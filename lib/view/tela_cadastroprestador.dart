@@ -48,7 +48,7 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
               TextField(
                 decoration: InputDecoration(
                   labelText: "CEP",
-                  labelStyle: TextStyle(fontSize: 20.0, color: Colors.red),
+                  labelStyle: TextStyle(fontSize: 20.0, color: Colors.red[800]),
                 ),
               ),
               SizedBox(
@@ -57,7 +57,7 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
               TextField(
                 decoration: InputDecoration(
                   labelText: "Sobre mim",
-                  labelStyle: TextStyle(fontSize: 20.0, color: Colors.red),
+                  labelStyle: TextStyle(fontSize: 20.0, color: Colors.red[800]),
                 ),
               ),
               SizedBox(
@@ -66,7 +66,7 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
               TextField(
                 decoration: InputDecoration(
                   labelText: "Telefone",
-                  labelStyle: TextStyle(fontSize: 20.0, color: Colors.red),
+                  labelStyle: TextStyle(fontSize: 20.0, color: Colors.red[800]),
                 ),
               ),
               SizedBox (height: 10.0,),
@@ -75,7 +75,7 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
                 children: <Widget>[
 
                   Text("          Manhã   Tarde",
-                    style: TextStyle(fontSize: 14.0, color: Colors.red),
+                    style: TextStyle(fontSize: 14.0, color: Colors.red[800]),
                   ),
                 ],
               ),
@@ -152,49 +152,49 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
                         ),
                         Text(
                           "Segunda Feira",
-                          style: TextStyle(fontSize: 17.0, color: Colors.red),
+                          style: TextStyle(fontSize: 17.0, color: Colors.red[800]),
                         ),
                         SizedBox(
                           height: 30.0,
                         ),
                         Text(
                           "Terça Feira",
-                          style: TextStyle(fontSize: 17.0, color: Colors.red),
+                          style: TextStyle(fontSize: 17.0, color: Colors.red[800]),
                         ),
                         SizedBox(
                           height: 28.0,
                         ),
                         Text(
                           "Quarta Feira",
-                          style: TextStyle(fontSize: 17.0, color: Colors.red),
+                          style: TextStyle(fontSize: 17.0, color: Colors.red[800]),
                         ),
                         SizedBox(
                           height: 28.0,
                         ),
                         Text(
                           "Quinta Feira",
-                          style: TextStyle(fontSize: 17.0, color: Colors.red),
+                          style: TextStyle(fontSize: 17.0, color: Colors.red[800]),
                         ),
                         SizedBox(
                           height: 28.0,
                         ),
                         Text(
                           "Sexta Feira",
-                          style: TextStyle(fontSize: 17.0, color: Colors.red),
+                          style: TextStyle(fontSize: 17.0, color: Colors.red[800]),
                         ),
                         SizedBox(
                           height: 28.0,
                         ),
                         Text(
                           "Sabado",
-                          style: TextStyle(fontSize: 17.0, color: Colors.red),
+                          style: TextStyle(fontSize: 17.0, color: Colors.red[800]),
                         ),
                         SizedBox(
                           height: 28.0,
                         ),
                         Text(
                           "Domingo",
-                          style: TextStyle(fontSize: 17.0, color: Colors.red),
+                          style: TextStyle(fontSize: 17.0, color: Colors.red[800]),
                         ),
                       ],
                     ),
@@ -329,7 +329,7 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
               RaisedButton(
                 padding: EdgeInsets.only(
                     top: 08.0, left: 08.0, right: 08.0, bottom: 08.0),
-                color: Colors.red,
+                color: Colors.red[800],
                 child: Text(
                   "Cadastrar",
                   style: TextStyle(fontSize: 25.0),

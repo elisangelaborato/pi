@@ -138,9 +138,9 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
       Color(0xFFb30000),
       Color(0xFFcc0000),
       Color(0xFFe60000),
-      Color(0xFFff1a1a),
-      Color(0xFFff1a1a),
       Color(0xFFe60000),
+      Color(0xFFff0000),
+      Color(0xFFff0000),
     ]),
         title: Text(
           "Prestador de Serviços",
@@ -419,49 +419,49 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
                       ),
                       Text(
                         "Segunda Feira",
-                        style: TextStyle(fontSize: 17.0, color: Colors.blue),
+                        style: TextStyle(fontSize: 17.0, color: Colors.red[800]),
                       ),
                       SizedBox(
                         height: 30.0,
                       ),
                       Text(
                         "Terça Feira",
-                        style: TextStyle(fontSize: 17.0, color: Colors.blue),
+                        style: TextStyle(fontSize: 17.0, color: Colors.red[800]),
                       ),
                       SizedBox(
                         height: 28.0,
                       ),
                       Text(
                         "Quarta Feira",
-                        style: TextStyle(fontSize: 17.0, color: Colors.blue),
+                        style: TextStyle(fontSize: 17.0, color: Colors.red[800]),
                       ),
                       SizedBox(
                         height: 28.0,
                       ),
                       Text(
                         "Quinta Feira",
-                        style: TextStyle(fontSize: 17.0, color: Colors.blue),
+                        style: TextStyle(fontSize: 17.0, color: Colors.red[800]),
                       ),
                       SizedBox(
                         height: 28.0,
                       ),
                       Text(
                         "Sexta Feira",
-                        style: TextStyle(fontSize: 17.0, color: Colors.blue),
+                        style: TextStyle(fontSize: 17.0, color: Colors.red[800]),
                       ),
                       SizedBox(
                         height: 28.0,
                       ),
                       Text(
                         "Sabado",
-                        style: TextStyle(fontSize: 17.0, color: Colors.blue),
+                        style: TextStyle(fontSize: 17.0, color: Colors.red[800]),
                       ),
                       SizedBox(
                         height: 28.0,
                       ),
                       Text(
                         "Domingo",
-                        style: TextStyle(fontSize: 17.0, color: Colors.blue),
+                        style: TextStyle(fontSize: 17.0, color: Colors.red[800]),
                       ),
                     ],
                   ),

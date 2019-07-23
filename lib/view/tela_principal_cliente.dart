@@ -126,6 +126,14 @@ class ServicosWidget extends StatelessWidget {
     );
   }
 
+
+
+  }
+
+
+
+
+
   Widget _createListView(context, snapshot) {
     return ListView.builder(
       itemCount: snapshot.data["categoriaservico"].length,
@@ -263,7 +271,6 @@ class ServicosWidget extends StatelessWidget {
 //      ],
 //    );
   }
-}
 
 class MeusServicosWidget extends StatelessWidget {
   var _scaffoldKey = GlobalKey<ScaffoldState>();

@@ -79,12 +79,12 @@ String preco;
           title: Text("Agendar"),
           centerTitle: true,
           gradient: LinearGradient(colors: [
-            Color(0xFF000033),
-            Color(0xFF000066),
-            Color(0xFF000080),
-            Color(0xFF0000b3),
-            Color(0xFF0000e6),
-            Color(0xFF0000ff),
+            Color(0xFFb30000),
+            Color(0xFFcc0000),
+            Color(0xFFe60000),
+            Color(0xFFe60000),
+            Color(0xFFff0000),
+            Color(0xFFff0000),
           ]),
         ),
 //      body: SingleChildScrollView(

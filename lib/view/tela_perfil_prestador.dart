@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:pi/view/tab_agenda_prestador.dart';
@@ -75,6 +77,44 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
 //    );
   }
 
+  File _image;
+
+  void getImage(bool isCamera) async {
+    File image;
+    if (isCamera) {
+      image =
+      await ImagePicker.pickImage(source: ImageSource.camera).then((file) {
+        if (file == null)
+          return;
+        else {
+          setState(() {
+            //ToDo: persistir dados da imagem (upload imagem, etc)
+            PessoaModel.of(context).salvarFoto(file);
+            //PessoaModel.of(context).imagem = retornoUrl.toString();
+          });
+        }
+      });
+    } else {
+      image = await ImagePicker.pickImage(source: ImageSource.gallery).then((file) {
+        if (file == null) {
+          return;
+        } else {
+          setState(() {
+            //ToDo: persistir dados da imagem (upload imagem, etc)
+            // PessoaModel.of(context).imagem = retornoUrl.toString();
+            PessoaModel.of(context).salvarFoto(file);
+            print("HSVDUHSADVBAOILK");
+          });
+        }
+      });
+    }
+    setState(() {
+      print("HAHAHAHAHA");
+      print(image);
+      _image = image;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -149,9 +189,9 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
                           Color(0xFFb30000),
                           Color(0xFFcc0000),
                           Color(0xFFe60000),
-                          Color(0xFFff1a1a),
-                          Color(0xFFff1a1a),
                           Color(0xFFe60000),
+                          Color(0xFFff0000),
+                          Color(0xFFff0000),
                         ]),
                         flexibleSpace: FlexibleSpaceBar(
                           centerTitle: true,
@@ -279,22 +319,23 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
                           ? FlatButton(
                               child: Icon(
                                 Icons.edit,
-                                color: Colors.red,
+                                color: Colors.red[800],
                               ),
                               onPressed: () {
-                                ImagePicker.pickImage(
-                                        source: ImageSource.camera)
-                                    .then((file) {
-                                  if (file == null)
-                                    return;
-                                  else {
-                                    setState(() {
-                                      //ToDo: persistir dados da imagem (upload imagem, etc)
-                                      return PessoaModel.of(context).imagem =
-                                          file.path;
-                                    });
-                                  }
-                                });
+                                _mostraOpcoes(context);
+//                                ImagePicker.pickImage(
+//                                        source: ImageSource.camera)
+//                                    .then((file) {
+//                                  if (file == null)
+//                                    return;
+//                                  else {
+//                                    setState(() {
+//                                      //ToDo: persistir dados da imagem (upload imagem, etc)
+//                                      return PessoaModel.of(context).imagem =
+//                                          file.path;
+//                                    });
+//                                  }
+//                                });
                               },
                             )
                           : Container(color: Colors.transparent,),
@@ -323,5 +364,53 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
         ),
       ],
     );
+  }
+  _mostraOpcoes(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return BottomSheet(
+              onClosing: () {},
+              builder: (context) {
+                return Container(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: FlatButton(
+                              onPressed: () {
+                                setState(() {
+                                  getImage(false);
+                                  Navigator.pop(context);
+                                });
+
+                              },
+                              child: Text(
+                                "Galeria",
+                                style: TextStyle(
+                                    color: Color(0xFFcc0000), fontSize: 20.0),
+                              )),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: FlatButton(
+                              onPressed: () {
+                                setState(() {
+                                  getImage(true);
+                                  Navigator.pop(context);
+                                });
+                              },
+                              child: Text(
+                                "Camera",
+                                style: TextStyle(
+                                    color: Color(0xFFcc0000), fontSize: 20.0),
+                              )),
+                        ),
+                      ]),
+                );
+              });
+        });
   }
 }

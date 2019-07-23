@@ -25,9 +25,9 @@ class TelaPrincipalEmpresa extends StatelessWidget {
             Color(0xFFb30000),
             Color(0xFFcc0000),
             Color(0xFFe60000),
-            Color(0xFFff1a1a),
-            Color(0xFFff1a1a),
             Color(0xFFe60000),
+            Color(0xFFff0000),
+            Color(0xFFff0000),
           ]),
           bottom: TabBar(
             tabs: <Widget>[
@@ -164,7 +164,7 @@ class _GraficoState extends State<Grafico> {
     return Center(
       child: Container(
         padding: EdgeInsets.all(4.0),
-        color: Colors.red,
+        color: Colors.red[800],
         height: MediaQuery.of(context).size.height * 0.47,
         width: MediaQuery.of(context).size.width,
         child: BezierChart(
@@ -192,7 +192,7 @@ class _GraficoState extends State<Grafico> {
             verticalIndicatorColor: Colors.black26,
             showVerticalIndicator: true,
             verticalIndicatorFixedPosition: false,
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.red[800],
             footerHeight: 30.0,
           ),
         ),

@@ -123,9 +123,9 @@ class _TabAgendaPrestadorState extends State<TabAgendaPrestador> {
                       Color(0xFFb30000),
                       Color(0xFFcc0000),
                       Color(0xFFe60000),
-                      Color(0xFFff1a1a),
-                      Color(0xFFff1a1a),
                       Color(0xFFe60000),
+                      Color(0xFFff0000),
+                      Color(0xFFff0000),
                     ]),
                     child: Icon(Icons.add),
                     callback: () {
