@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
@@ -6,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:pi/services/autenticacao_firebase.dart';
 import 'package:pi/model/pessoa_model.dart';
+import 'package:pi/view/tela_principal_cliente.dart';
 
 class TelaCadastro extends StatefulWidget {
   @override
@@ -224,8 +227,13 @@ class _TelaCadastroState extends State<TelaCadastro> {
                         };
                         //Cria um registro com todos os dados no banco de dados no gearhost
                         _launchURL(dados).then((a) {
+                          PessoaModel.of(context).getDados(uid);
+                          PessoaModel.of(context).Logar(true);
+                          PessoaModel.of(context).logadoComoCliente(true);
+                          PessoaModel.of(context).logadoComoPrestadorServicos(false);
                           //se tiver sucesso ao cadastrar ir para a tela principal cliente
-                          Navigator.of(context).pushReplacementNamed('/telaPrincipalCliente');
+                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>TelaPrincipalCliente()));
+//                          Navigator.of(context).pushReplacementNamed('/telaPrincipalCliente');
                         });
                       }).catchError((e) {
                         print("DENTRO DO CATCH ERROR ${e.toString()}");
@@ -268,10 +276,9 @@ Future<Null> _launchURL(Map<String, dynamic> dados) async {
   String url = "http://alguz1.gearhostpreview.com/cadastra_pessoa.php";
   var response = await http.post(url, body: dados);
   if (response.statusCode == 200) {
-    var jsonResponse = convert.jsonDecode(response.body);
-    var itemCount = jsonResponse['totalItems'];
-    print("Number of books about http: $itemCount.");
+    print("200");
   } else {
     print("Request failed with status: ${response.statusCode}.");
+    print("Request failed with body: ${response.body}.");
   }
 }
