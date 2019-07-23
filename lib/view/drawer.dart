@@ -15,7 +15,6 @@ class CustomDrawer extends StatefulWidget {
 class _CustomDrawerState extends State<CustomDrawer> {
   /* chamarTelaPerfil(){
     //Navigator.pop(context);
-
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => TelaPerfilCliente()),
@@ -28,18 +27,78 @@ class _CustomDrawerState extends State<CustomDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    if (PessoaModel.of(context).isLogadoComoCliente()) {
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: PessoaModel.of(context).isLogadoComoCliente()
+              ? [
+            Color(0xFF000033),
+            Color(0xFF000066),
+            Color(0xFF000080),
+            Color(0xFF0000b3),
+            Color(0xFF0000e6),
+            Color(0xFF0000ff),
+          ]
+              : [
+            Color(0xFFb30000),
+            Color(0xFFcc0000),
+            Color(0xFFe60000),
+            Color(0xFFff1a1a),
+            Color(0xFFff1a1a),
+            Color(0xFFe60000),
+          ],
+          begin: Alignment.centerLeft,
+          end: Alignment.center,
+        ),
+      );
+    } else {
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: PessoaModel.of(context).isLogadoComoCliente()
+              ? [
+            Color(0xFF000033),
+            Color(0xFF000066),
+            Color(0xFF000080),
+            Color(0xFF0000b3),
+            Color(0xFF0000e6),
+            Color(0xFF0000ff),
+          ]
+              : [
+            Color(0xFFb30000),
+            Color(0xFFcc0000),
+            Color(0xFFe60000),
+            Color(0xFFff1a1a),
+            Color(0xFFff1a1a),
+            Color(0xFFe60000),
+          ],
+          begin: Alignment.centerLeft,
+          end: Alignment.center,
+        ),
+      );
+    }
+
     return Drawer(
+
       child: ListView(children: <Widget>[
         UserAccountsDrawerHeader(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [
+              colors: PessoaModel.of(context).isLogadoComoCliente()
+                  ? [
                 Color(0xFF000033),
                 Color(0xFF000066),
                 Color(0xFF000080),
                 Color(0xFF0000b3),
                 Color(0xFF0000e6),
                 Color(0xFF0000ff),
+              ]
+                  : [
+                Color(0xFFb30000),
+                Color(0xFFcc0000),
+                Color(0xFFe60000),
+                Color(0xFFff1a1a),
+                Color(0xFFff1a1a),
+                Color(0xFFe60000),
               ],
               begin: Alignment.centerLeft,
               end: Alignment.center,
@@ -50,32 +109,32 @@ class _CustomDrawerState extends State<CustomDrawer> {
           currentAccountPicture: GestureDetector(
             child: CircleAvatar(
               child:
-                  //se imagem nula ou em branco, coloca icone padrao
-                  (PessoaModel.of(context).imagem == null ||
-                          PessoaModel.of(context).imagem.length == 0)
-                      ? CircleAvatar(
-                          radius: 55.0,
-                          backgroundColor: Colors.transparent,
-                          backgroundImage: ExactAssetImage(
-                              PessoaModel.of(context)
-                                      .imagem //pessoa["pessoa"][0]["imagem"]
-                                  ??
-                                  'images/person.png'),
-                        )
-                      :
-                      //container para deixar imagem circular
-                      Container(
-                          width: 120.0,
-                          height: 120.0,
-                          decoration: new BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: new DecorationImage(
-                              fit: BoxFit.fill,
-                              image: new NetworkImage(
-                                  PessoaModel.of(context).imagem),
-                            ),
-                          ),
-                        ),
+              //se imagem nula ou em branco, coloca icone padrao
+              (PessoaModel.of(context).imagem == null ||
+                  PessoaModel.of(context).imagem.length == 0)
+                  ? CircleAvatar(
+                radius: 55.0,
+                backgroundColor: Colors.transparent,
+                backgroundImage: ExactAssetImage(
+                    PessoaModel.of(context)
+                        .imagem //pessoa["pessoa"][0]["imagem"]
+                        ??
+                        'images/person.png'),
+              )
+                  :
+              //container para deixar imagem circular
+              Container(
+                width: 120.0,
+                height: 120.0,
+                decoration: new BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: new DecorationImage(
+                    fit: BoxFit.fill,
+                    image: new NetworkImage(
+                        PessoaModel.of(context).imagem),
+                  ),
+                ),
+              ),
               radius: 60,
               backgroundColor: Colors.transparent,
             ),
@@ -110,8 +169,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => TelaPerfilPrestador(
-                          cdgPessoa: PessoaModel.of(context).cdgPessoa,
-                        )),
+                      cdgPessoa: PessoaModel.of(context).cdgPessoa,
+                    )),
               );
           },
         ),
@@ -119,26 +178,26 @@ class _CustomDrawerState extends State<CustomDrawer> {
         //////TESTAR SE ESTA COMO PRESTADOR
         //PessoaModel.of(context).isLogadoComoCliente() ?
         ListTile(
-                leading: Icon(Icons.work),
-                title: Text(PessoaModel.of(context).ativoPrestador == 1
-                    ? PessoaModel.of(context).getModo() ?   "Ir para tela de Cliente" : "Ir para tela de Prestador"
-                    : "Tornar-se Prestador"),
-                onTap: () {
-                  if (PessoaModel.of(context).ativoPrestador == 1) {
-                    if(!PessoaModel.of(context).getModo()) {
-                      PessoaModel.of(context).logadoComoPrestadorServicos(true);
-                      Navigator.of(context).pushNamed('/telaPrincipalEmpresa');
-                    }
-                    else{
-                      PessoaModel.of(context).logadoComoPrestadorServicos(false);
-                      Navigator.of(context).pushNamed('/telaPrincipalCliente');
-                    }
+          leading: Icon(Icons.work),
+          title: Text(PessoaModel.of(context).ativoPrestador == 1
+              ? PessoaModel.of(context).getModo() ?   "Ir para tela de Cliente" : "Ir para tela de Prestador"
+              : "Tornar-se Prestador"),
+          onTap: () {
+            if (PessoaModel.of(context).ativoPrestador == 1) {
+              if(!PessoaModel.of(context).getModo()) {
+                PessoaModel.of(context).logadoComoPrestadorServicos(true);
+                Navigator.of(context).pushNamed('/telaPrincipalEmpresa');
+              }
+              else{
+                PessoaModel.of(context).logadoComoPrestadorServicos(false);
+                Navigator.of(context).pushNamed('/telaPrincipalCliente');
+              }
 
-                  } else
-                    Navigator.of(context).pushNamed('/telaCadastroPrestador');
-                },
-              ),
-           /* : ListTile(
+            } else
+              Navigator.of(context).pushNamed('/telaCadastroPrestador');
+          },
+        ),
+        /* : ListTile(
                 leading: Icon(Icons.work),
                 title: Text(PessoaModel.of(context).ativoCliente == 1
                     ? "Ir para tela de Cliente"
@@ -162,9 +221,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => TelaListaAgendamentos(
-                            cdgPessoa_cliente:
-                                PessoaModel.of(context).cdgPessoa,
-                          )));
+                        cdgPessoa_cliente:
+                        PessoaModel.of(context).cdgPessoa,
+                      )));
             } else {
               //ve historico do prestador logado
               Navigator.push(
@@ -172,7 +231,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   MaterialPageRoute(
                       builder: (context) => TelaListaAgendamentos(
                           cdgPessoa_prestador:
-                              PessoaModel.of(context).cdgPessoa)));
+                          PessoaModel.of(context).cdgPessoa)));
             }
           },
         ),
@@ -187,9 +246,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => TelaListaAvaliacoes(
-                            cdgPessoa_cliente:
-                                PessoaModel.of(context).cdgPessoa,
-                          )));
+                        cdgPessoa_cliente:
+                        PessoaModel.of(context).cdgPessoa,
+                      )));
             } else {
               //ve historico do prestador logado
               Navigator.push(
@@ -197,7 +256,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   MaterialPageRoute(
                       builder: (context) => TelaListaAvaliacoes(
                           cdgPessoa_prestador:
-                              PessoaModel.of(context).cdgPessoa)));
+                          PessoaModel.of(context).cdgPessoa)));
             }
           },
         ),

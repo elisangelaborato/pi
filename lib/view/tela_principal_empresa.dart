@@ -22,12 +22,12 @@ class TelaPrincipalEmpresa extends StatelessWidget {
         key: _scaffoldKey,
         appBar: GradientAppBar(
           gradient: LinearGradient(colors: [
-            Color(0xFF000033),
-            Color(0xFF000066),
-            Color(0xFF000080),
-            Color(0xFF0000b3),
-            Color(0xFF0000e6),
-            Color(0xFF0000ff),
+            Color(0xFFb30000),
+            Color(0xFFcc0000),
+            Color(0xFFe60000),
+            Color(0xFFff1a1a),
+            Color(0xFFff1a1a),
+            Color(0xFFe60000),
           ]),
           bottom: TabBar(
             tabs: <Widget>[
@@ -71,14 +71,14 @@ class ServicosAbertos extends StatelessWidget {
 
   final GlobalKey<ScaffoldState> scaffoldKey;
 
-  ServicosAbertos({Key key, this.scaffoldKey}) : super(key: key);
+  ServicosAbertos({this.scaffoldKey});
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilderListaAgendamentos(
       cdgPessoa_prestador: PessoaModel.of(context).cdgPessoa,
       situacaoAgendamento: "AGENDADO",
-      scaffoldKey:  scaffoldKey
+        scaffoldKey:  scaffoldKey
     );
   }
 }

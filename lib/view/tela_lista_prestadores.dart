@@ -48,12 +48,12 @@ class TelaListaPrestadores extends StatelessWidget {
       appBar: GradientAppBar(
         gradient: LinearGradient(
           colors: [
-            Color(0xFF000033),
-            Color(0xFF000066),
-            Color(0xFF000080),
-            Color(0xFF0000b3),
-            Color(0xFF0000e6),
-            Color(0xFF0000ff),
+            Color(0xFFb30000),
+            Color(0xFFcc0000),
+            Color(0xFFe60000),
+            Color(0xFFff1a1a),
+            Color(0xFFff1a1a),
+            Color(0xFFe60000),
           ],
         ),
         title: Text( categoria_descricao ?? "Prestadores de Serviços"),

@@ -97,6 +97,7 @@ class _TelaCadastroServicoState extends State<TelaCadastroServico> {
                         } else {
                           //return Container(color: Colors.pinkAccent, height: 50, width: double.infinity,);
                           return DropdownButton<String>(
+                            isExpanded: true,
                             items: _categoria.map((String dropDownStringItem) {
                               return DropdownMenuItem<String>(
                                 value: dropDownStringItem,

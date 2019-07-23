@@ -146,12 +146,12 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
                     child: Scaffold(
                       appBar: GradientAppBar(
                         gradient: LinearGradient(colors: [
-                          Color(0xFF000033),
-                          Color(0xFF000066),
-                          Color(0xFF000080),
-                          Color(0xFF0000b3),
-                          Color(0xFF0000e6),
-                          Color(0xFF0000ff),
+                          Color(0xFFb30000),
+                          Color(0xFFcc0000),
+                          Color(0xFFe60000),
+                          Color(0xFFff1a1a),
+                          Color(0xFFff1a1a),
+                          Color(0xFFe60000),
                         ]),
                         flexibleSpace: FlexibleSpaceBar(
                           centerTitle: true,
@@ -279,7 +279,7 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
                           ? FlatButton(
                               child: Icon(
                                 Icons.edit,
-                                color: Theme.of(context).primaryColor,
+                                color: Colors.red,
                               ),
                               onPressed: () {
                                 ImagePicker.pickImage(
