@@ -20,7 +20,6 @@ class TelaPrincipalCliente extends StatefulWidget {
 }
 
 class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
-
   var _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -30,53 +29,53 @@ class _TelaPrincipalClienteState extends State<TelaPrincipalCliente> {
 //        builder: (context, child, model)=>
 //      MaterialApp(
 //      home:
-      DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          key: _scaffoldKey,
-          appBar: GradientAppBar(
-            elevation: 15,
-            gradient: LinearGradient(colors: [
-              Color(0xFF000033),
-              Color(0xFF000066),
-              Color(0xFF000080),
-              Color(0xFF0000b3),
-              Color(0xFF0000e6),
-              Color(0xFF0000ff),
-            ]),
-            bottom: TabBar(
-              tabs: <Widget>[
-                Tab(
-                  text: "Serviços",
-                ),
-                Tab(
-                  text: "Prestadores",
-                ),
-                Tab(
-                  text: "Contratados",
-                ),
-              ],
-            ),
-            title: Text('Alguz Serviços A à Z'),
-            centerTitle: true,
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.search),
-              onPressed: () {
-                showSearch(context: context, delegate: DataSearch());
-              },
+        DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        key: _scaffoldKey,
+        appBar: GradientAppBar(
+          elevation: 15,
+          gradient: LinearGradient(colors: [
+            Color(0xFF000033),
+            Color(0xFF000066),
+            Color(0xFF000080),
+            Color(0xFF0000b3),
+            Color(0xFF0000e6),
+            Color(0xFF0000ff),
+          ]),
+          bottom: TabBar(
+            tabs: <Widget>[
+              Tab(
+                text: "Serviços",
+              ),
+              Tab(
+                text: "Prestadores",
+              ),
+              Tab(
+                text: "Contratados",
               ),
             ],
           ),
-          drawer: CustomDrawer(),
-          body: TabBarView(
-            children: [
-              ServicosWidget(),
-              PrestadoresWidget(),
-              MeusServicosWidget(_scaffoldKey),
-            ],
-          ),
+          title: Text('Alguz Serviços A à Z'),
+          centerTitle: true,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(context: context, delegate: DataSearch());
+              },
+            ),
+          ],
         ),
+        drawer: CustomDrawer(),
+        body: TabBarView(
+          children: [
+            ServicosWidget(),
+            PrestadoresWidget(),
+            MeusServicosWidget(_scaffoldKey),
+          ],
+        ),
+      ),
 //      ),
 //      ),
     );
@@ -141,19 +140,17 @@ class ServicosWidget extends StatelessWidget {
   Widget _createTile(context, snapshot, index) {
     return Container(
       height: 100,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors:
-            (index % 2 == 0)
-            ?
-            [
-              Colors.indigo[200],
-              Colors.indigo[900],
-            ]
-            :
-            [
-              Colors.red[200],
-              Colors.red[900],
-            ],
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: (index % 2 == 0)
+              ? [
+                  Colors.indigo[200],
+                  Colors.indigo[900],
+                ]
+              : [
+                  Colors.red[200],
+                  Colors.red[900],
+                ],
 //snapshot.data["categoriaservico"][index]["cor"],
 //              Color(0xFF000033),
 //              Color(0xFF000066),
@@ -161,52 +158,74 @@ class ServicosWidget extends StatelessWidget {
 //              Color(0xFF0000b3),
 //              Color(0xFF0000e6),
 //              Color(0xFF0000ff),
-            begin: Alignment.centerLeft,
-            end: Alignment(1.0, 1.0),
-            ),
-          ),
-child: Stack(
-  children: <Widget>[
-    Opacity(
-      opacity: 0.3,
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: NetworkImage(snapshot.data["categoriaservico"][index]["image"]),
-          fit: BoxFit.fill,)
+          begin: Alignment.centerLeft,
+          end: Alignment(1.0, 1.0),
         ),
       ),
-    ),
-    Column(
-mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                child: Text(snapshot.data["categoriaservico"][index]["descricao"], style: TextStyle(color: Colors.white, fontSize: 16),),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => TelaListaPrestadores(
+                    cdgCategoria: snapshot.data["categoriaservico"][index]
+                        ["cdgCategoria"],
+                    categoria_descricao: snapshot.data["categoriaservico"]
+                        [index]["descricao"],
+                  ),
+            ),
+          );
+        },
+        child: Stack(
+          children: <Widget>[
+            Opacity(
+              opacity: 0.3,
+              child: Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                  image: NetworkImage(
+                      snapshot.data["categoriaservico"][index]["image"]),
+                  fit: BoxFit.fill,
+                )),
               ),
-              SizedBox(width: 10,),
-              Container(
-                child: Icon(
-                  IconData(
-                      int.parse(snapshot.data["categoriaservico"][index]["icone"]),
-                      fontFamily: 'MaterialIcons'), //Icons.healing,
-                  color: Colors.white,),
-              ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        child: Text(
+                          snapshot.data["categoriaservico"][index]["descricao"],
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        child: Icon(
+                          IconData(
+                              int.parse(snapshot.data["categoriaservico"][index]
+                                  ["icone"]),
+                              fontFamily: 'MaterialIcons'), //Icons.healing,
+                          color: Colors.white,
+                        ),
+                      ),
 //              SizedBox(width:10),
 //              Container(
 //                child: Text("Health", style: TextStyle(color: Colors.white, fontSize: 20,),),
 //              ),
-            ],
-          ),
-        )
-      ],
-        )
-  ],
-),
-        );
+                    ],
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
+      ),
+    );
 
 //    return Column(
 //      children: <Widget>[
@@ -243,25 +262,23 @@ mainAxisAlignment: MainAxisAlignment.center,
 //        ),
 //      ],
 //    );
-
-
   }
 }
 
 class MeusServicosWidget extends StatelessWidget {
-
   var _scaffoldKey = GlobalKey<ScaffoldState>();
 
   MeusServicosWidget(this._scaffoldKey);
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilderListaAgendamentos(cdgPessoa_cliente: PessoaModel.of(context).cdgPessoa, scaffoldKey: _scaffoldKey);
+    return FutureBuilderListaAgendamentos(
+        cdgPessoa_cliente: PessoaModel.of(context).cdgPessoa,
+        scaffoldKey: _scaffoldKey);
   }
 }
 
 class PrestadoresWidget extends StatelessWidget {
-
   Future<Map> _getDados() async {
     http.Response response;
     response = await http
@@ -283,8 +300,7 @@ class PrestadoresWidget extends StatelessWidget {
                   case ConnectionState.none:
                   case ConnectionState.waiting:
                     return Container(
-                      decoration: BoxDecoration(
-                      ),
+                      decoration: BoxDecoration(),
                       width: 200.0,
                       height: 200.0,
                       alignment: Alignment.center,
@@ -315,7 +331,8 @@ class PrestadoresWidget extends StatelessWidget {
       itemBuilder: (context, index) {
 //        print(snapshot.data["pessoa"].length);
 //        print(index);
-        return CardPrestador(context, snapshot, index);//getCard(context, snapshot, index);
+        return CardPrestador(
+            context, snapshot, index); //getCard(context, snapshot, index);
       },
     );
   }
@@ -339,7 +356,9 @@ class PrestadoresWidget extends StatelessWidget {
                       child:
                           //se imagem nula ou em branco, coloca icone padrao
                           (snapshot.data["Custom"][index]["imagem"] == null ||
-                                  snapshot.data["Custom"][index]["imagem"].length == 0)
+                                  snapshot.data["Custom"][index]["imagem"]
+                                          .length ==
+                                      0)
                               ? Icon(
                                   Icons.account_circle,
                                   size: 60,
@@ -435,30 +454,29 @@ class PrestadoresWidget extends StatelessWidget {
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
-
-                        child: Text("Ver Perfil",
+                        child: Text(
+                          "Ver Perfil",
                           style: TextStyle(fontSize: 15.0),
                         ),
                         elevation: 20,
-                          callback: () {
+                        callback: () {
 //                          String cdgPessoa = snapshot.data["pessoa"][index]["cdgPessoa"];
-
 
 //                          print("${snapshot.data["pessoa"][index]}");
 //                          print("${snapshot.data["pessoa"][index]["cdgPessoa"]}");
 
-                            String cdgPessoa = snapshot.data["Custom"][index]["cdgPessoa"];
+                          String cdgPessoa =
+                              snapshot.data["Custom"][index]["cdgPessoa"];
 
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => TelaPerfilPrestador(
-                                    // nao me acertei em mandar direto o map da pessoa, por hora mando codigo
-                                    //pessoa: snapshot.data["pessoa"][index],
-                                    cdgPessoa: cdgPessoa,
-                                  )
-                              ),
-                            );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TelaPerfilPrestador(
+                                      // nao me acertei em mandar direto o map da pessoa, por hora mando codigo
+                                      //pessoa: snapshot.data["pessoa"][index],
+                                      cdgPessoa: cdgPessoa,
+                                    )),
+                          );
                         },
                         increaseWidthBy: 25.0,
                       ),
@@ -470,10 +488,17 @@ class PrestadoresWidget extends StatelessWidget {
           )),
     );
   }
-  }
+}
 
 class DataSearch extends SearchDelegate<String> {
-  final profissoes = ["Saúde", "Professores", "Construção/Manuntenção", "Beleza/Estética", "Informática", "Outros"];
+  final profissoes = [
+    "Saúde",
+    "Professores",
+    "Construção/Manuntenção",
+    "Beleza/Estética",
+    "Informática",
+    "Outros"
+  ];
 
   final pesquisarecente = [];
 
@@ -519,22 +544,22 @@ class DataSearch extends SearchDelegate<String> {
 //        : profissoes.where((p) => p.startsWith(query)).toList();
 
     return ListView.builder(
-      itemBuilder: (context, index) =>
-          ListTile(
+      itemBuilder: (context, index) => ListTile(
             onTap: () {
               showResults(context);
             },
             leading: Icon(Icons.work),
-            title: RichText(text: TextSpan(
-                text: suggestionList[index].substring(0, query.length),
-                style: TextStyle(
-                    color: Colors.black, fontWeight: FontWeight.bold),
-                children: [TextSpan(
-                  text: suggestionList[index].substring(query.length),
-                  style: TextStyle(color: Colors.grey),
-                )
-                ]
-            )),
+            title: RichText(
+                text: TextSpan(
+                    text: suggestionList[index].substring(0, query.length),
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                    children: [
+                  TextSpan(
+                    text: suggestionList[index].substring(query.length),
+                    style: TextStyle(color: Colors.grey),
+                  )
+                ])),
           ),
       itemCount: suggestionList.length,
     );
