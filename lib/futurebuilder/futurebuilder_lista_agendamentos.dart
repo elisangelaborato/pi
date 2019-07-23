@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:pi/card/card_agendamento.dart';
 
 Widget FutureBuilderListaAgendamentos(
-    {cdgPessoa_cliente, cdgPessoa_prestador, situacaoAgendamento, @required GlobalKey<ScaffoldState> scaffoldKey}) {
+    {cdgPessoa_cliente, cdgPessoa_prestador, situacaoAgendamento, scaffoldKey}) {
   return FutureBuilder(
       future: _getDados(
           cdgPessoa_cliente, cdgPessoa_prestador, situacaoAgendamento),

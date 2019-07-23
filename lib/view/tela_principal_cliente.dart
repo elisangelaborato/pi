@@ -142,9 +142,19 @@ class ServicosWidget extends StatelessWidget {
     return Container(
       height: 100,
           decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              snapshot.data["categoriaservico"][index]["cor"],
-],
+            gradient: LinearGradient(colors:
+            (index % 2 == 0)
+            ?
+            [
+              Colors.indigo[200],
+              Colors.indigo[900],
+            ]
+            :
+            [
+              Colors.red[200],
+              Colors.red[900],
+            ],
+//snapshot.data["categoriaservico"][index]["cor"],
 //              Color(0xFF000033),
 //              Color(0xFF000066),
 //              Color(0xFF000080),
@@ -461,6 +471,7 @@ class PrestadoresWidget extends StatelessWidget {
     );
   }
   }
+
 class DataSearch extends SearchDelegate<String> {
   final profissoes = ["Saúde", "Professores", "Construção/Manuntenção", "Beleza/Estética", "Informática", "Outros"];
 

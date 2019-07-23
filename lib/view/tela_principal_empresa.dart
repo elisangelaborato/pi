@@ -71,14 +71,14 @@ class ServicosAbertos extends StatelessWidget {
 
   final GlobalKey<ScaffoldState> scaffoldKey;
 
-  ServicosAbertos({Key key, this.scaffoldKey}) : super(key: key);
+  ServicosAbertos({this.scaffoldKey});
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilderListaAgendamentos(
       cdgPessoa_prestador: PessoaModel.of(context).cdgPessoa,
       situacaoAgendamento: "AGENDADO",
-      scaffoldKey:  scaffoldKey
+        scaffoldKey:  scaffoldKey
     );
   }
 }
