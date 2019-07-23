@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
+import 'package:intl/intl.dart';
+import 'package:pi/model/servicos_model.dart';
+import 'package:pi/model/pessoa_model.dart';
 
 class TelaAgendamentoPrestador extends StatefulWidget {
   String cdgPessoa;
-  TelaAgendamentoPrestador(this.cdgPessoa);
+  String cdgServico;
+  String nomeServico;
+  String preco;
+  TelaAgendamentoPrestador(this.cdgPessoa, this.cdgServico, this.nomeServico, this.preco);
   @override
   _TelaAgendamentoPrestadorState createState() =>
-      _TelaAgendamentoPrestadorState(cdgPessoa);
+      _TelaAgendamentoPrestadorState(cdgPessoa, cdgServico, nomeServico, preco);
 }
 
 class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 String cdgPessoa;
-  _TelaAgendamentoPrestadorState(this.cdgPessoa);
+String cdgServico;
+String nomeServico;
+String preco;
+  _TelaAgendamentoPrestadorState(this.cdgPessoa, this.cdgServico, this.nomeServico, this.preco);
 
   final _textEditingControllerData = TextEditingController();
   final _textEditingControllerHora = TextEditingController();
@@ -62,7 +71,9 @@ String cdgPessoa;
 
   @override
   Widget build(BuildContext context) {
-    print("Printando o cdgPessoa desse prestador"+cdgPessoa);
+    print("Printando o cdgPessoa desse prestador "+cdgPessoa);
+    print("Printando o cdgServico desse prestador "+cdgServico);
+    DateFormat('yyy-mm-dd');
     return Scaffold(
         appBar: GradientAppBar(
           title: Text("Agendar"),
@@ -90,7 +101,7 @@ String cdgPessoa;
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           children: <Widget>[
-            FormField(
+            /*FormField(
               builder: (FormFieldState state) {
                 return InputDecorator(
                   decoration: InputDecoration(
@@ -119,8 +130,8 @@ String cdgPessoa;
                   ),
                 );
               },
-            ),
-            FormField(
+            ),*/
+  /*          FormField(
               builder: (FormFieldState state) {
                 return InputDecorator(
                   decoration: InputDecoration(
@@ -149,7 +160,9 @@ String cdgPessoa;
                   ),
                 );
               },
-            ),
+            ),*/
+  Text("Servico: "+nomeServico, style: TextStyle(fontSize: 25),),
+            Text("Preco: "+preco, style: TextStyle(fontSize: 25),),
             InkWell(
               onTap: () {
                 _selectDate(context);
@@ -200,6 +213,10 @@ String cdgPessoa;
               child: Text("CONFIRMAR", style: TextStyle(fontSize: 20.0),),
               callback: () {
 
+
+                ServicosModel.of(context).salvaAgendamento(PessoaModel.of(context).cdgPessoa, cdgPessoa, cdgServico, _textEditingControllerData.text
+                    , _textEditingControllerHora.text, "AGENDADO", int.parse(preco));
+                Navigator.of(context).pop();
               },
               increaseWidthBy: 160.0,
             ),
