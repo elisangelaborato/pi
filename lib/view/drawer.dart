@@ -267,6 +267,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
           leading: Icon(Icons.exit_to_app),
           title: Text("Sair"),
           onTap: () {
+            PessoaModel.of(context).logado = false;
+            PessoaModel.of(context).logadoComoCliente(false);
+            PessoaModel.of(context).logadoComoPrestadorServicos(false);
             Navigator.of(context).pushNamed('/');
           },
         )

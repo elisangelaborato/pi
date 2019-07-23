@@ -103,7 +103,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
                 }),
             TextFormField(
                 controller: _emailController,
-                enabled: PessoaModel.of(context).logado == false ? false: true,
+                enabled: PessoaModel.of(context).logado == false ? true: false,
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.email),
                   hintText: 'Entre com seu endereço de email',
