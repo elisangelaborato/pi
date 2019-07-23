@@ -62,14 +62,14 @@ void getImage(bool isCamera) async {
             //ToDo: persistir dados da imagem (upload imagem, etc)
            // PessoaModel.of(context).imagem = retornoUrl.toString();
             PessoaModel.of(context).salvarFoto(file);
-            print("HSVDUHSADVBAOILK");
+            //print("HSVDUHSADVBAOILK");
           });
         }
       });
     }
     setState(() {
-      print("HAHAHAHAHA");
-      print(image);
+      //print("HAHAHAHAHA");
+      //print(image);
       _image = image;
     });
   }

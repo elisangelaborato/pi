@@ -96,7 +96,8 @@ class _TelaCadastroServicoState extends State<TelaCadastroServico> {
                           );
                         } else {
                           //return Container(color: Colors.pinkAccent, height: 50, width: double.infinity,);
-                          return DropdownButton<String>(
+                          return Text("");
+                          /*DropdownButton<String>(
                             isExpanded: true,
                             items: _categoria.map((String dropDownStringItem) {
                               return DropdownMenuItem<String>(
@@ -112,7 +113,7 @@ class _TelaCadastroServicoState extends State<TelaCadastroServico> {
                             value: _currentItemSelected,
                             style:
                             TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
-                          );
+                          );*/
                         }
                     }
                   }),

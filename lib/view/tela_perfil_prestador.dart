@@ -239,6 +239,7 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
     ]);
   }
 
+
   Widget getTop() {
     return Stack(
       children: <Widget>[
@@ -365,6 +366,8 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
       ],
     );
   }
+
+
   _mostraOpcoes(BuildContext context) {
     showModalBottomSheet(
         context: context,

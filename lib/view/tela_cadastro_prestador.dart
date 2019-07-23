@@ -636,6 +636,11 @@ class _TelaCadastroPrestadorState extends State<TelaCadastroPrestador> {
                    PessoaModel.of(context).salvaPrestador(ativoPrestador: ativoPrestador, sobreMimPrestador: _sobreMimPrestadorController.text, telefonePrestador: _telefoneControllerMascara.text);
                    _launchURL(dados, urlComplemento: url);
                    PessoaModel.of(context).ativoPrestador = 1;
+                   PessoaModel.of(context).notifyListeners();
+                   PessoaModel.of(context).logadoComoPrestadorServicos(true);
+                   PessoaModel.of(context).logadoComoCliente(false);
+
+
                    PessoaModel.of(context).telefonePrestador = _telefoneControllerMascara.text;
                    PessoaModel.of(context).sobreMimPrestador = _sobreMimPrestadorController.text;
                    Navigator.of(context).pushNamed('/telaPrincipalEmpresa');
