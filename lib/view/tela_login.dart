@@ -31,6 +31,7 @@ class _TelaLoginState extends State<TelaLogin> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
 
@@ -70,6 +71,7 @@ class _TelaLoginState extends State<TelaLogin> {
                   _email = text;
                 },
                 decoration: const InputDecoration(
+
                   //icon: const Icon(Icons.person),
                   hintText: 'Digite seu login',
                   labelText: 'Login',
@@ -227,6 +229,9 @@ class _TelaLoginState extends State<TelaLogin> {
     auth.signIn(_email, _senha).then((String uid){
       PessoaModel.of(context).getDados(uid);
       PessoaModel.of(context).Logar(true);
+      PessoaModel.of(context).logadoComoCliente(true);
+      PessoaModel.of(context).logadoComoPrestadorServicos(false);
+
       switch (selectedRadio) {
         case 1:
           PessoaModel.of(context).logadoComoCliente(true);

@@ -120,19 +120,21 @@ class _TabAgendaPrestadorState extends State<TabAgendaPrestador> {
                   padding: EdgeInsets.fromLTRB(320, 185, 0, 10),
                   child:CircularGradientButton(
                     gradient: LinearGradient(colors: [
-                      Color(0xFF000033),
-                      Color(0xFF000066),
-                      Color(0xFF000080),
-                      Color(0xFF0000b3),
-                      Color(0xFF0000e6),
-                      Color(0xFF0000ff),
+                      Color(0xFFb30000),
+                      Color(0xFFcc0000),
+                      Color(0xFFe60000),
+                      Color(0xFFe60000),
+                      Color(0xFFff0000),
+                      Color(0xFFff0000),
                     ]),
                     child: Icon(Icons.add),
                     callback: () {
-                      Navigator.push(
+
+                      //////////tem q voltar isso aqui com o codigo do pretador
+                      /*Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
-                      );
+                      );*/
                     },
                   ),
                 ),

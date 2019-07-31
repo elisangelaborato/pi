@@ -4,7 +4,8 @@ import 'package:pi/view/tela_agendamento_prestador.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:pi/view/tela_cadastro_prestador_servico.dart';
+import 'package:pi/view/tela_cadastro_servico.dart';
+
 
 //select categoriaservico.icone cat_icone, categoriaservico.descricao cat_descr,
 //    servico.nome ser_nome, servico.descricao ser_descr,
@@ -34,7 +35,7 @@ class _TabServicosPrestadorState extends State<TabServicosPrestador> {
   Future<Map> _getDadosApi(String cdgPessoa) async {
     http.Response response;
     response = await http.get(
-        "http://alguz1.gearhostpreview.com/lista.php?sql=select categoriaservico.icone cat_icone, categoriaservico.descricao cat_descr, servico.nome ser_nome, servico.descricao ser_descr, prestadorservico.preco serp_preco from prestadorservico left join servico on servico.cdgServico = prestadorservico.cdgServico left join categoriaservico on servico.cdgCategoria = categoriaservico.cdgCategoria where prestadorservico.cdgPessoa = $cdgPessoa");
+        "http://alguz1.gearhostpreview.com/lista.php?sql=select categoriaservico.icone cat_icone, categoriaservico.descricao cat_descr, servico.nome ser_nome, servico.descricao ser_descr, prestadorservico.preco serp_preco, prestadorservico.cdgServico cdgServico from prestadorservico left join servico on servico.cdgServico = prestadorservico.cdgServico left join categoriaservico on servico.cdgCategoria = categoriaservico.cdgCategoria where prestadorservico.cdgPessoa = $cdgPessoa");
     print("${response.body}");
     return json.decode(response.body);
   }
@@ -152,10 +153,10 @@ class _TabServicosPrestadorState extends State<TabServicosPrestador> {
   Widget getFloatingActionButtonAgendarServico(){
     return FloatingActionButton(
       onPressed: () {
-        Navigator.push(
+       /* Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
-        );
+          MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador(cdgPessoa)),
+        );*/
       },
       child: Icon(Icons.calendar_today),
     );
@@ -166,10 +167,11 @@ class _TabServicosPrestadorState extends State<TabServicosPrestador> {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => TelaCadastroPrestadorServico()),
+          MaterialPageRoute(builder: (context) => TelaCadastroServico()),
         );
       },
       child: Icon(Icons.add),
+      backgroundColor: Color(0xFFff0000),
     );
   }  
 
@@ -183,14 +185,17 @@ class _TabServicosPrestadorState extends State<TabServicosPrestador> {
           // permite adicionar servicos para o prestado
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => TelaCadastroPrestadorServico()),
+              MaterialPageRoute(builder: (context) => TelaCadastroServico()),
             );
           // senao, permite a pessoa agendar servicos com este prestador
-          else
+          else{
+            print("Printando o cdgServico"+ snapshot.data["Custom"][index]["cdgServico"]);
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador()),
+              MaterialPageRoute(builder: (context) => TelaAgendamentoPrestador(cdgPessoa, snapshot.data["Custom"][index]["cdgServico"], snapshot.data["Custom"][index]["ser_nome"], snapshot.data["Custom"][index]["serp_preco"].toString())),
             );
+          }
+
         },
         child: SizedBox(
           height: 90.0,

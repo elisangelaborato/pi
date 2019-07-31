@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pi/view/tab_avaliacao_cliente.dart';
+import 'package:pi/view/tab_avaliacao_prestador.dart';
 import 'package:pi/view/tela_cadastro_servico.dart';
 import 'package:pi/view/tela_login.dart';
 import 'view/tela_principal_cliente.dart';
@@ -10,6 +12,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:pi/model/pessoa_model.dart';
 import 'package:pi/view/drawer.dart';
 import 'package:pi/model/servicos_model.dart';
+import 'package:pi/view/tela_perfil_prestador.dart';
 
 void main(){
   runApp(
@@ -20,15 +23,15 @@ void main(){
           return ScopedModel<ServicosModel>(
               model: ServicosModel(),
               child: MaterialApp(
+                theme: ThemeData(primaryColor: Color(0xFF000080)),
                 debugShowCheckedModeBanner: false,
                 onGenerateRoute: generateRoute,
                 initialRoute: '/',
               ));
         })),
-
-
   );
 }
+
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case '/':
@@ -55,6 +58,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case '/telaCadastroServico':
       return MaterialPageRoute(builder: (_) => TelaCadastroServico());
       break;
+    case '/telaPerfilPrestador':
+      return MaterialPageRoute(builder: (_) => TelaPerfilPrestador());
+//    case '/tabAvaliacaoCliente':
+//      return MaterialPageRoute(builder: (_) => TabAvaliacaoCliente());
+//      break;
+//    case '/tabAvaliacaoPrestador':
+//      return MaterialPageRoute(builder: (_) => TabAvaliacaoPrestador());
+//      break;
     default:
       return MaterialPageRoute(
           builder: (_) => Scaffold(

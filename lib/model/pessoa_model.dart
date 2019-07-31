@@ -1,7 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PessoaModel extends Model {
   static PessoaModel of(BuildContext context) =>
@@ -33,6 +39,11 @@ class PessoaModel extends Model {
   bool _logadoComoCliente = false;
   bool _logadoComoPrestadorServicos = false;
 
+  getModo(){
+    return _logadoComoPrestadorServicos;
+
+  }
+
   void logadoComoCliente(bool valor){
     _logadoComoCliente = valor;
     _logadoComoPrestadorServicos = !valor;
@@ -57,6 +68,7 @@ class PessoaModel extends Model {
 
   FromMap(Map dados) {
     //dados da tabela de pessoa
+    uid = dados['Custom'][0]['uid'];
     cdgPessoa = dados['Custom'][0]['cdgPessoa'];
     nome = dados['Custom'][0]['nome'];
     email = dados['Custom'][0]['email'];
@@ -95,6 +107,7 @@ class PessoaModel extends Model {
     };
 
     _launchURL(map, "pessoa", this.cdgPessoa, "cdgPessoa");
+    notifyListeners();
   }
 
   void salvaCliente(
@@ -126,27 +139,37 @@ class PessoaModel extends Model {
     if (telefonePrestador == null) telefonePrestador = this.telefonePrestador;
     if (ativoPrestador == null) ativoPrestador = this.ativoPrestador;
 
+    print("Ativo prestador"+ativoPrestador.toString());
+
     Map<String, dynamic> map = {
       "sobreMimPrestador": sobreMimPrestador,
       "notaPrestador": notaPrestador,
       "telefonePrestador": telefonePrestador,
-      "ativoPrestador": ativoPrestador
+      "ativoPrestador": ativoPrestador.toString()
     };
     _launchURL(map, "prestador", this.cdgPessoa, "cdgPessoa");
   }
 
    _launchURL(Map<String, dynamic> dados, String tabela, String codigo, String idTabela) async {
-    String url = "http://alguz1.gearhostpreview.com/atualiza.php?codigo=${codigo}&tabela=${tabela}&idTabela=${idTabela}";
+    String url = "http://alguz1.gearhostpreview.com/atualiza.php?tabela=${tabela}&idTabela=${idTabela}&codigo=${codigo}";
     print(url);
-    print(dados['imagem']);
     var response = await http.post(url, body: dados);
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);
-      var itemCount = jsonResponse['totalItems'];
-      print("Number of books about http: $itemCount.");
       print(jsonResponse);
     } else {
       print("Falha com status: ${response.statusCode}.");
     }
+  }
+
+  Future salvarFoto (File imgFile) async {
+
+    StorageUploadTask task = FirebaseStorage.instance.ref().child(uid).putFile(imgFile);
+    StorageTaskSnapshot taskSnapshot = await task.onComplete;
+    String url = await taskSnapshot.ref.getDownloadURL();
+
+    salvaPessoa(imagem: url);
+    imagem = url;
+    notifyListeners();
   }
 }

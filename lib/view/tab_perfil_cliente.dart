@@ -15,55 +15,56 @@ class _TabPerfilClienteState extends State<TabPerfilCliente> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-//      floatingActionButton: FloatingActionButton(
-//        onPressed: () {
-//          //Navigator.of(context).pushNamed('/telaCadastroCliente');
-//          Navigator.push(
-//            context,
-//            MaterialPageRoute(
-//              builder: (context) => TelaCadastro(),
-//            ),
-//          );
-//        },
-//        child: Icon(Icons.edit),
-//      ),
-      body: Container(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(16,16,5,16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                "Sobre mim",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              Text(
-                PessoaModel.of(context).sobreMimCliente ??
-                    "Adicione um texto falando um pouco sobre você.",
-                style: TextStyle(fontSize: 14.0, fontStyle: FontStyle.italic),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 16.0),
-              ),
-              Text(
-                "Telefone",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              Text(
-                PessoaModel.of(context).telefoneCliente,
-                style: TextStyle(fontSize: 14.0),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 16.0),
-              ),
-              Text(
-                "Email",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              Text(
-                PessoaModel.of(context).email,
-                style: TextStyle(fontSize: 14.0),
-              ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          //Navigator.of(context).pushNamed('/telaCadastroCliente');
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => TelaCadastro(),
+            ),
+          );
+        },
+        child: Icon(Icons.edit),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(16,16,5,16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Sobre mim",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                Text(
+                  PessoaModel.of(context).sobreMimCliente ??
+                      "Adicione um texto falando um pouco sobre você.",
+                  style: TextStyle(fontSize: 14.0, fontStyle: FontStyle.italic),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 16.0),
+                ),
+                Text(
+                  "Telefone",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                Text(
+                  PessoaModel.of(context).telefoneCliente,
+                  style: TextStyle(fontSize: 14.0),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 16.0),
+                ),
+                Text(
+                  "Email",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                Text(
+                  PessoaModel.of(context).email,
+                  style: TextStyle(fontSize: 14.0),
+                ),
 //              ListTile(
 //                leading: GestureDetector(
 //                  child: Hero(
@@ -97,10 +98,13 @@ class _TabPerfilClienteState extends State<TabPerfilCliente> {
 //                  },
 //                ),
 //              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
+
+
     );
   }
 

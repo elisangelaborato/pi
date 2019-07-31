@@ -39,6 +39,7 @@ class _TabPerfilPrestadorState extends State<TabPerfilPrestador> {
           );
         },
         child: Icon(Icons.edit),
+        backgroundColor: Color(0xFFff0000),
       )
           : null,
       body: SingleChildScrollView(

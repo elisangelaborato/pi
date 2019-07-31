@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
@@ -5,6 +7,8 @@ import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:pi/services/autenticacao_firebase.dart';
+import 'package:pi/model/pessoa_model.dart';
+import 'package:pi/view/tela_principal_cliente.dart';
 
 class TelaCadastro extends StatefulWidget {
   @override
@@ -24,6 +28,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
   final _telefoneControllerMascara =
       MaskedTextController(mask: '(00) 0 0000-0000');
 
+
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   //para ativar o autovalidade apenas apos clicar no botao submmit
@@ -36,7 +41,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
   @override
   void initState() {
     super.initState();
-
+    setTextUpdate(context);
     //trocar mascara para qdo cpf ou cnpj
     _cpfControllerMascara.beforeChange = (String previous, String next) {
 //      print("before previous $previous");
@@ -101,6 +106,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
                 }),
             TextFormField(
                 controller: _emailController,
+                enabled: PessoaModel.of(context).logado == false ? true: false,
                 decoration: const InputDecoration(
                   icon: const Icon(Icons.email),
                   hintText: 'Entre com seu endereço de email',
@@ -204,31 +210,41 @@ class _TelaCadastroState extends State<TelaCadastro> {
                   if (_formKey.currentState.validate()) {
 
                     //////////*******CRIANDO USUARIO NO FIREBASE  ********/////////////////////
-                    auth
-                        .signUp(_emailController.text, _senhaController.text)
-                        .then((value) {
-                      //montando o Map para interacao com a API
-                      dados = {
-                        "nome": _nomeController.text,
-                        "email": _emailController.text,
-                        "cpfcnpj": _cpfControllerMascara.text,
-                        "telefone": _telefoneControllerMascara.text,
-                        "uid": value
-                      };
-                      //Cria um registro com todos os dados no banco de dados no gearhost
-                      _launchURL(dados).then((a) {
-                        //se tiver sucesso ao cadastrar ir para a tela principal cliente
-                        Navigator.of(context)
-                            .pushReplacementNamed('/telaPrincipalCliente');
+                    if(PessoaModel.of(context).logado ==  true){
+                      PessoaModel.of(context).salvaPessoa(nome: _nomeController.text, cpfcnpj: _cpfControllerMascara.text);
+                      PessoaModel.of(context).salvaCliente(telefoneCliente: _telefoneControllerMascara.text);
+                    }else{
+                      auth
+                          .signUp(_emailController.text, _senhaController.text)
+                          .then((uid) {
+                        //montando o Map para interacao com a API
+                        dados = {
+                          "nome": _nomeController.text,
+                          "email": _emailController.text,
+                          "cpfcnpj": _cpfControllerMascara.text,
+                          "telefone": _telefoneControllerMascara.text,
+                          "uid": uid
+                        };
+                        //Cria um registro com todos os dados no banco de dados no gearhost
+                        _launchURL(dados).then((a) {
+                          PessoaModel.of(context).getDados(uid);
+                          PessoaModel.of(context).Logar(true);
+                          PessoaModel.of(context).logadoComoCliente(true);
+                          PessoaModel.of(context).logadoComoPrestadorServicos(false);
+                          //se tiver sucesso ao cadastrar ir para a tela principal cliente
+                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>TelaPrincipalCliente()));
+//                          Navigator.of(context).pushReplacementNamed('/telaPrincipalCliente');
+                        });
+                      }).catchError((e) {
+                        print("DENTRO DO CATCH ERROR ${e.toString()}");
+                        _scaffoldKey.currentState.showSnackBar(SnackBar(
+                          content: Text("E-mail ou senha invalidos"),
+                          backgroundColor: Colors.redAccent,
+                          duration: Duration(seconds: 3),
+                        ));
                       });
-                    }).catchError((e) {
-                      print("DENTRO DO CATCH ERROR ${e.toString()}");
-                      _scaffoldKey.currentState.showSnackBar(SnackBar(
-                        content: Text("E-mail ou senha invalidos"),
-                        backgroundColor: Colors.redAccent,
-                        duration: Duration(seconds: 3),
-                      ));
-                    });
+                    }
+
                     /////////******************************////////////////////
 
                     //ToDo: salvar dados para tabela prestador
@@ -243,17 +259,26 @@ class _TelaCadastroState extends State<TelaCadastro> {
           ],
         ));
   }
+  void setTextUpdate(BuildContext context){
+    if(PessoaModel.of(context).logado==true){
+        _nomeController.text = PessoaModel.of(context).nome;
+        _emailController.text = PessoaModel.of(context).email;
+        _cpfControllerMascara.text = PessoaModel.of(context).cpfcnpj;
+        _telefoneControllerMascara.text = PessoaModel.of(context).telefoneCliente;
+    }
+  }
 }
+
+
 
 //Metodo para criacao de registro de usuario no banco de dados da gearhost
 Future<Null> _launchURL(Map<String, dynamic> dados) async {
   String url = "http://alguz1.gearhostpreview.com/cadastra_pessoa.php";
   var response = await http.post(url, body: dados);
   if (response.statusCode == 200) {
-    var jsonResponse = convert.jsonDecode(response.body);
-    var itemCount = jsonResponse['totalItems'];
-    print("Number of books about http: $itemCount.");
+    print("200");
   } else {
     print("Request failed with status: ${response.statusCode}.");
+    print("Request failed with body: ${response.body}.");
   }
 }

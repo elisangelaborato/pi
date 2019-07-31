@@ -1,15 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
+import 'package:intl/intl.dart';
+import 'package:pi/model/servicos_model.dart';
+import 'package:pi/model/pessoa_model.dart';
 
 class TelaAgendamentoPrestador extends StatefulWidget {
+  String cdgPessoa;
+  String cdgServico;
+  String nomeServico;
+  String preco;
+  TelaAgendamentoPrestador(this.cdgPessoa, this.cdgServico, this.nomeServico, this.preco);
   @override
   _TelaAgendamentoPrestadorState createState() =>
-      _TelaAgendamentoPrestadorState();
+      _TelaAgendamentoPrestadorState(cdgPessoa, cdgServico, nomeServico, preco);
 }
 
 class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+String cdgPessoa;
+String cdgServico;
+String nomeServico;
+String preco;
+  _TelaAgendamentoPrestadorState(this.cdgPessoa, this.cdgServico, this.nomeServico, this.preco);
 
   final _textEditingControllerData = TextEditingController();
   final _textEditingControllerHora = TextEditingController();
@@ -21,6 +34,9 @@ class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
     'Benedito',
     'Joana',
   ];
+
+
+
   String _prestador = '';
   List<String> _servicos = <String>['', 'Lavar Carro', 'Podar Arvore', 'Outro'];
   String _servico = '';
@@ -55,17 +71,20 @@ class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
 
   @override
   Widget build(BuildContext context) {
+    print("Printando o cdgPessoa desse prestador "+cdgPessoa);
+    print("Printando o cdgServico desse prestador "+cdgServico);
+    DateFormat('yyy-mm-dd');
     return Scaffold(
         appBar: GradientAppBar(
           title: Text("Agendar"),
           centerTitle: true,
           gradient: LinearGradient(colors: [
-            Color(0xFF000033),
-            Color(0xFF000066),
-            Color(0xFF000080),
-            Color(0xFF0000b3),
-            Color(0xFF0000e6),
-            Color(0xFF0000ff),
+            Color(0xFFb30000),
+            Color(0xFFcc0000),
+            Color(0xFFe60000),
+            Color(0xFFe60000),
+            Color(0xFFff0000),
+            Color(0xFFff0000),
           ]),
         ),
 //      body: SingleChildScrollView(
@@ -82,7 +101,7 @@ class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           children: <Widget>[
-            FormField(
+            /*FormField(
               builder: (FormFieldState state) {
                 return InputDecorator(
                   decoration: InputDecoration(
@@ -111,8 +130,8 @@ class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
                   ),
                 );
               },
-            ),
-            FormField(
+            ),*/
+  /*          FormField(
               builder: (FormFieldState state) {
                 return InputDecorator(
                   decoration: InputDecoration(
@@ -141,7 +160,9 @@ class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
                   ),
                 );
               },
-            ),
+            ),*/
+  Text("Servico: "+nomeServico, style: TextStyle(fontSize: 25),),
+            Text("Preco: "+preco, style: TextStyle(fontSize: 25),),
             InkWell(
               onTap: () {
                 _selectDate(context);
@@ -179,12 +200,12 @@ class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
               child:GradientButton(
               gradient: LinearGradient(
                 colors: [
-                  Color(0xFF000033),
-                  Color(0xFF000066),
-                  Color(0xFF0000ff),
-                  Color(0xFF0000ff),
-                  Color(0xFF000066),
-                  Color(0xFF000066),
+                  Color(0xFFb30000),
+                  Color(0xFFcc0000),
+                  Color(0xFFe60000),
+                  Color(0xFFff1a1a),
+                  Color(0xFFff1a1a),
+                  Color(0xFFe60000),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -192,6 +213,10 @@ class _TelaAgendamentoPrestadorState extends State<TelaAgendamentoPrestador> {
               child: Text("CONFIRMAR", style: TextStyle(fontSize: 20.0),),
               callback: () {
 
+
+                ServicosModel.of(context).salvaAgendamento(PessoaModel.of(context).cdgPessoa, cdgPessoa, cdgServico, _textEditingControllerData.text
+                    , _textEditingControllerHora.text, "AGENDADO", int.parse(preco));
+                Navigator.of(context).pop();
               },
               increaseWidthBy: 160.0,
             ),

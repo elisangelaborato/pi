@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:pi/view/tab_agenda_prestador.dart';
@@ -75,6 +77,44 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
 //    );
   }
 
+  File _image;
+
+  void getImage(bool isCamera) async {
+    File image;
+    if (isCamera) {
+      image =
+      await ImagePicker.pickImage(source: ImageSource.camera).then((file) {
+        if (file == null)
+          return;
+        else {
+          setState(() {
+            //ToDo: persistir dados da imagem (upload imagem, etc)
+            PessoaModel.of(context).salvarFoto(file);
+            //PessoaModel.of(context).imagem = retornoUrl.toString();
+          });
+        }
+      });
+    } else {
+      image = await ImagePicker.pickImage(source: ImageSource.gallery).then((file) {
+        if (file == null) {
+          return;
+        } else {
+          setState(() {
+            //ToDo: persistir dados da imagem (upload imagem, etc)
+            // PessoaModel.of(context).imagem = retornoUrl.toString();
+            PessoaModel.of(context).salvarFoto(file);
+            print("HSVDUHSADVBAOILK");
+          });
+        }
+      });
+    }
+    setState(() {
+      print("HAHAHAHAHA");
+      print(image);
+      _image = image;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -138,7 +178,7 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
                   print(
                       "${prestador["prestador"]}"); //pessoa["pessoa"][0]["nome"]
                   print("${prestador["prestador"][0]}");
-                  print("${prestador["prestador"][0]["nota"]}");
+                  print("${prestador["prestador"][0]["notaPrestador"]}");
                   print("${pessoa["pessoa"][0]["imagem"]}");
 
                   return DefaultTabController(
@@ -146,12 +186,12 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
                     child: Scaffold(
                       appBar: GradientAppBar(
                         gradient: LinearGradient(colors: [
-                          Color(0xFF000033),
-                          Color(0xFF000066),
-                          Color(0xFF000080),
-                          Color(0xFF0000b3),
-                          Color(0xFF0000e6),
-                          Color(0xFF0000ff),
+                          Color(0xFFb30000),
+                          Color(0xFFcc0000),
+                          Color(0xFFe60000),
+                          Color(0xFFe60000),
+                          Color(0xFFff0000),
+                          Color(0xFFff0000),
                         ]),
                         flexibleSpace: FlexibleSpaceBar(
                           centerTitle: true,
@@ -198,6 +238,7 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
       TabAvaliacaoPrestador(pessoa["pessoa"][0]["cdgPessoa"]),
     ]);
   }
+
 
   Widget getTop() {
     return Stack(
@@ -276,26 +317,26 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
                       bottom: 0,
                       child: PessoaModel.of(context).cdgPessoa ==
                               pessoa["pessoa"][0]["cdgPessoa"]
-                          ? FloatingActionButton(
+                          ? FlatButton(
                               child: Icon(
                                 Icons.edit,
-                                color: Colors.white,
+                                color: Colors.red[800],
                               ),
-                              mini: true,
                               onPressed: () {
-                                ImagePicker.pickImage(
-                                        source: ImageSource.camera)
-                                    .then((file) {
-                                  if (file == null)
-                                    return;
-                                  else {
-                                    setState(() {
-                                      //ToDo: persistir dados da imagem (upload imagem, etc)
-                                      return PessoaModel.of(context).imagem =
-                                          file.path;
-                                    });
-                                  }
-                                });
+                                _mostraOpcoes(context);
+//                                ImagePicker.pickImage(
+//                                        source: ImageSource.camera)
+//                                    .then((file) {
+//                                  if (file == null)
+//                                    return;
+//                                  else {
+//                                    setState(() {
+//                                      //ToDo: persistir dados da imagem (upload imagem, etc)
+//                                      return PessoaModel.of(context).imagem =
+//                                          file.path;
+//                                    });
+//                                  }
+//                                });
                               },
                             )
                           : Container(color: Colors.transparent,),
@@ -315,7 +356,7 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
                   style: TextStyle(fontSize: 14.0),
                 ),
                 Text(
-                  prestador["prestador"][0]["nota"] ?? "0",
+                  prestador["prestador"][0]["notaPrestador"] ?? "0",
                   style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w500),
                 ),
               ],
@@ -324,5 +365,55 @@ class _TelaPerfilPrestadorState extends State<TelaPerfilPrestador> {
         ),
       ],
     );
+  }
+
+
+  _mostraOpcoes(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return BottomSheet(
+              onClosing: () {},
+              builder: (context) {
+                return Container(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: FlatButton(
+                              onPressed: () {
+                                setState(() {
+                                  getImage(false);
+                                  Navigator.pop(context);
+                                });
+
+                              },
+                              child: Text(
+                                "Galeria",
+                                style: TextStyle(
+                                    color: Color(0xFFcc0000), fontSize: 20.0),
+                              )),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: FlatButton(
+                              onPressed: () {
+                                setState(() {
+                                  getImage(true);
+                                  Navigator.pop(context);
+                                });
+                              },
+                              child: Text(
+                                "Camera",
+                                style: TextStyle(
+                                    color: Color(0xFFcc0000), fontSize: 20.0),
+                              )),
+                        ),
+                      ]),
+                );
+              });
+        });
   }
 }
