@@ -101,10 +101,23 @@ class _TelaLoginState extends State<TelaLogin> {
                       });
                     },
                   ),
-                  Padding(
-                    child: Text("Salvar senha"),
-                    padding: EdgeInsets.only(right: 20),
+                  GestureDetector(
+                    child: Padding(
+                      child: Text("Salvar senha"),
+                      padding: EdgeInsets.only(right: 20),
+                    ),
+                    onTap: (){
+                      setState(() {
+                        if(isSwitched == true){
+                          isSwitched = false;
+                        }
+                        else{
+                          isSwitched = true;
+                        }
+                      });
+                    },
                   ),
+
                 ],
               ),
               Row(
@@ -118,12 +131,20 @@ class _TelaLoginState extends State<TelaLogin> {
                       setSelectedRadio(val);
                     },
                   ),
-                  Text(
-                    "Cliente",
-                    style: TextStyle(
-                      fontSize: 15,
+                  GestureDetector(
+                    child: Text(
+                      "Cliente",
+                      style: TextStyle(
+                        fontSize: 15,
+                      ),
                     ),
+                    onTap: () {
+                      setState(() {
+                        setSelectedRadio(1);
+                      });
+                    }
                   ),
+
                   Radio(
                     value: 2,
                     groupValue: selectedRadio,
@@ -132,12 +153,20 @@ class _TelaLoginState extends State<TelaLogin> {
                       setSelectedRadio(val);
                     },
                   ),
-                  Text(
-                    "Prestador Serviço",
-                    style: TextStyle(
-                      fontSize: 15,
+                  GestureDetector(
+                    child: Text(
+                      "Prestador Serviço",
+                      style: TextStyle(
+                        fontSize: 15,
+                      ),
                     ),
-                  )
+                    onTap: (){
+                      setState(() {
+                        setSelectedRadio(2);
+                      });
+                    },
+                  ),
+
                 ],
               ),
 
