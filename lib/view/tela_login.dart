@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 import 'package:pi/services/autenticacao_firebase.dart';
@@ -252,10 +253,14 @@ class _TelaLoginState extends State<TelaLogin> {
     );
   }
 
-  void _onPressedButtonEntrar(){
+  void _onPressedButtonEntrar() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+
     Auth auth = Auth();
     //Login com o Firebase
-    auth.signIn(_email, _senha).then((String uid){
+    auth.signIn(_email, _senha).then((String uid) {
       PessoaModel.of(context).getDados(uid);
       PessoaModel.of(context).Logar(true);
       PessoaModel.of(context).logadoComoCliente(true);
@@ -271,10 +276,18 @@ class _TelaLoginState extends State<TelaLogin> {
           Navigator.of(context).pushReplacementNamed('/telaPrincipalEmpresa');
           break;
       }
-    }).catchError((e){
+    }).catchError((e) {
       print("DENTRO DO CATCH ERROR ${e.toString()}");
-      _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("E-mail ou senha invalidos"),
-        backgroundColor: Colors.redAccent, duration: Duration(seconds: 3),));
+      _scaffoldKey.currentState.showSnackBar(
+          SnackBar(content: Text("E-mail ou senha invalidos"),
+            backgroundColor: Colors.redAccent,
+            duration: Duration(seconds: 3),));
     });
+  }else{
+      _scaffoldKey.currentState.showSnackBar(
+          SnackBar(content: Text("Não há conexão com a internet"),
+            backgroundColor: Colors.redAccent,
+            duration: Duration(seconds: 3),));
+    }
   }
 }

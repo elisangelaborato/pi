@@ -38,6 +38,7 @@ dependencies:
   gradient_app_bar: ^0.1.3
   gradient_widgets: ^0.3.0
   font_awesome_flutter: ^8.5.0
+  connectivity: ^0.4.3+7        #Pacote para verificar conexão
 
 dev_dependencies:
   flutter_test:

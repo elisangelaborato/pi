@@ -270,7 +270,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
             PessoaModel.of(context).logado = false;
             PessoaModel.of(context).logadoComoCliente(false);
             PessoaModel.of(context).logadoComoPrestadorServicos(false);
-            Navigator.of(context).pushNamed('/');
+            Navigator.of(context).pushReplacementNamed('/');
           },
         )
       ]),
