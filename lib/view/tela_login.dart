@@ -12,7 +12,7 @@ class TelaLogin extends StatefulWidget {
 
 class _TelaLoginState extends State<TelaLogin> {
   bool isSwitched = true;
-
+  bool _ocultarSenha = true;
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   String _email;
@@ -73,7 +73,7 @@ class _TelaLoginState extends State<TelaLogin> {
                 },
                 decoration: const InputDecoration(
 
-                  //icon: const Icon(Icons.person),
+                 // icon: const Icon(Icons.person),
                   hintText: 'Digite seu login',
                   labelText: 'Login',
                 ),
@@ -84,12 +84,23 @@ class _TelaLoginState extends State<TelaLogin> {
                 onChanged: (text){
                   _senha = text;
                 },
-                decoration: const InputDecoration(
+                decoration:  InputDecoration(
                   //icon: const Icon(Icons.person),
                   hintText: 'Digite sua senha',
                   labelText: 'Senha',
+                  suffixIcon: IconButton(
+                     icon:  _ocultarSenha ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
+                    onPressed: (){
+                      setState(() {
+                        if(_ocultarSenha == false)
+                          _ocultarSenha = true;
+                        else
+                          _ocultarSenha = false;
+                      });
+                    },
+                  ),
                 ),
-                obscureText: true,
+                obscureText: _ocultarSenha,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
