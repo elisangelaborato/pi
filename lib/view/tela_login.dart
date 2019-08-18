@@ -265,38 +265,46 @@ class _TelaLoginState extends State<TelaLogin> {
   }
 
   void _onPressedButtonEntrar() async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
-    if (connectivityResult == ConnectivityResult.mobile ||
-        connectivityResult == ConnectivityResult.wifi) {
-
-    Auth auth = Auth();
-    //Login com o Firebase
-    auth.signIn(_email, _senha).then((String uid) {
-      PessoaModel.of(context).getDados(uid);
-      PessoaModel.of(context).Logar(true);
-      PessoaModel.of(context).logadoComoCliente(true);
-      PessoaModel.of(context).logadoComoPrestadorServicos(false);
-
-      switch (selectedRadio) {
-        case 1:
+    if (_email.contains('@')) {
+      var connectivityResult = await (Connectivity().checkConnectivity());
+      if (connectivityResult == ConnectivityResult.mobile ||
+          connectivityResult == ConnectivityResult.wifi) {
+        Auth auth = Auth();
+        //Login com o Firebase
+        auth.signIn(_email, _senha).then((String uid) {
+          PessoaModel.of(context).getDados(uid);
+          PessoaModel.of(context).Logar(true);
           PessoaModel.of(context).logadoComoCliente(true);
-          Navigator.of(context).pushReplacementNamed('/telaPrincipalCliente');
-          break;
-        case 2:
-          PessoaModel.of(context).logadoComoPrestadorServicos(true);
-          Navigator.of(context).pushReplacementNamed('/telaPrincipalEmpresa');
-          break;
+          PessoaModel.of(context).logadoComoPrestadorServicos(false);
+
+          switch (selectedRadio) {
+            case 1:
+              PessoaModel.of(context).logadoComoCliente(true);
+              Navigator.of(context).pushReplacementNamed(
+                  '/telaPrincipalCliente');
+              break;
+            case 2:
+              PessoaModel.of(context).logadoComoPrestadorServicos(true);
+              Navigator.of(context).pushReplacementNamed(
+                  '/telaPrincipalEmpresa');
+              break;
+          }
+        }).catchError((e) {
+          _scaffoldKey.currentState.showSnackBar(
+              SnackBar(content: Text("E-mail ou senha invalidos"),
+                backgroundColor: Colors.redAccent,
+                duration: Duration(seconds: 3),));
+        });
+      } else {
+        _scaffoldKey.currentState.showSnackBar(
+            SnackBar(content: Text("Não há conexão com a internet"),
+              backgroundColor: Colors.redAccent,
+              duration: Duration(seconds: 3),));
       }
-    }).catchError((e) {
-      print("DENTRO DO CATCH ERROR ${e.toString()}");
+    }
+    else{
       _scaffoldKey.currentState.showSnackBar(
-          SnackBar(content: Text("E-mail ou senha invalidos"),
-            backgroundColor: Colors.redAccent,
-            duration: Duration(seconds: 3),));
-    });
-  }else{
-      _scaffoldKey.currentState.showSnackBar(
-          SnackBar(content: Text("Não há conexão com a internet"),
+          SnackBar(content: Text("E-mail invalido"),
             backgroundColor: Colors.redAccent,
             duration: Duration(seconds: 3),));
     }
